@@ -10,7 +10,7 @@
 ## ważne żeby nie na pizzy
 - Ja fan
 - Giga fan
-`local happiness = nil`
-`if happiness = me do`
-`    eat`
-`end`
+`local happiness = nil
+if happiness = me do
+    eat
+end`
