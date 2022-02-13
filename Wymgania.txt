@@ -40,4 +40,4 @@ Wymagania niefunkcjonalne
 
 Wymgania biznesowe
 
-Nasza strona będzie pierwsza strona która będzie umożliwała kupno i sprzedaż sprzetu wędkarski, i to użytykownicy będą mogli deecydować co wstawiają
+Nasza strona będzie pierwsza strona która będzie umożliwała kupno i sprzedaż sprzetu wędkarski, i to użytykownicy będą mogli decydować co wstawiają
