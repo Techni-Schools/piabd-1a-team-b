@@ -1,5 +1,5 @@
 Wymagania fukcjonalne - systemowe
-1. Deepink bedzie mial ekran z kupnem itemku gdzie bedą nastepujące funckje:
+1. Deepink bedzie mial ekran z kupnem sprzetu wędkarskiego gdzie bedą nastepujące funckje:
     a. pole do wybrania ilosci produktu 
     b. przycisk "Włóż do koszyka"
     c. Cena
@@ -22,8 +22,22 @@ Wymagania fukcjonalne - systemowe
     e. parametry produktu
     f. lokalizacja sprzedawcy / produktu
     g. miejsce dostawy 
-
+6. Deepink bedzie mial równiez mozliwość zalogowanie sie na swoje konto. W nim nastepujace funckje:
+    a. Pole gdzie wpisujemy emalil
+    b. Pole gdzie wpisujemy hasło 
+    c. mozliwosc zanzaczene opcji "Nie wylogowuj mnie"
 
 Wymagania fukcjonalne - użytkownika
+Nasza strona bedzie umozliwiala sprzedaż i kupno produktów, bedzie tez mozna zalozyc kont o i sie na nie zalogowac aby móc sprzedawac produkty. Umożiwia tez sortowanie po różnych parametrach (cena, miejsce sprzedaży, kraj pochodzenia itd.) 
 
-Nasza strona bedzie umozliwiala sprzedaż i kupno produktów, bedzie tez mozna zalozyc kont o i sie na nie zalogowac aby móc sprzedawac produkty. Umożiwia tez sortowanie po różnych parametrach (cena, miejsce sprzedaży, kraj pochodzenia itd.)
+
+Wymagania niefunkcjonalne 
+    a.Aplikacja musi być skalowalna poziomo.
+    b.Aplikacja powinna być dostępna na poziomie 99.9%
+    c.Aplikacja powinna używać TLS 1.2
+    d. Deepink będzie pozwalał na jednoczesne korzystanie min 500 użytkowników.
+    e. Odpowiedz serwera bedzie mniej niz 1000s
+
+Wymgania biznesowe 
+
+Nasza strona bedize pierwsza strona która bedize umożliwała kupno i sprzedaż sprzetu wędkarski, i to uzytykownicy beda mogli decydowac co wystawiaja 
