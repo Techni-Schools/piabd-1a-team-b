@@ -1,8 +1,8 @@
 Wymagania fukcjonalne - systemowe
 1. Deepink bedzie mial ekran z kupnem itemku gdzie bedą nastepujące funckje:
-    a. pole do wybrania ilosci produktu 
-    b. przycisk "Włóż do koszyka"
-    c. Cena
+    1. pole do wybrania ilosci produktu 
+    2. przycisk "Włóż do koszyka"
+    3. Cena
 2. Deepink bedize mial mozliwosc załozenia konta a w tym nastepujace funckje:
     a. pole do wpisania emailu
     b. pole do wpisania hasła 
