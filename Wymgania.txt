@@ -12,5 +12,5 @@ Wymagania fukcjonalne - systemowe
     b. pole do zaznaczenia bądz do wpisania  preferencji dotyczace produktu (cena, kraj pochodzenia itd)
 4. Deepink bedzie mial mozliwosc kontaktu ze sprzedawcą a w nim funckje 
     a. pole do wpisania tektu
-    b. przycisk wysyłania 
-    
+    b. przycisk wysyłania
+    c. przycisk wyboru emotek  
