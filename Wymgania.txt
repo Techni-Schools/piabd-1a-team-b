@@ -28,7 +28,7 @@ Wymagania fukcjonalne - systemowe
     c. możliwość zanzaczenia opcji "Nie wylogowuj mnie"
 
 Wymagania fukcjonalne - użytkownika
-Nasza strona bedzie umożliwiała sprzedaż i kupno produktów, bedzie tez można założyć kont o i sie na nie zalogowac aby móc sprzedawac produkty. Umożiwia tez sortowanie po różnych parametrach (cena, miejsce sprzedaży, kraj pochodzenia itd.) 
+Nasza strona bedzie umożliwiała sprzedaż i kupno produktów, bedzie tez można założyć kont o i sie na nie zalogowac aby móc sprzedawać produkty. Umożliwia też sortowanie po różnych parametrach (cena, miejsce sprzedaży, kraj pochodzenia itd.) 
 
 
 Wymagania niefunkcjonalne 
