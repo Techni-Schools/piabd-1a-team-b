@@ -14,3 +14,16 @@ Wymagania fukcjonalne - systemowe
     a. pole do wpisania tektu
     b. przycisk wysyłania
     c. przycisk wyboru emotek  
+5. Deepink bedize mila ekran gdzie bedize mozna wystawic produkt i go sprzedac. A w nim funkcje 
+    a. Dodanie zdjecia danego produktu 
+    b. wpisanie ceny produktu 
+    c. wpisanie opisu 
+    d. wpisanie nazwy produktu 
+    e. parametry produktu
+    f. lokalizacja sprzedawcy / produktu
+    g. miejsce dostawy 
+
+
+Wymagania fukcjonalne - użytkownika
+
+Nasza strona bedzie umozliwiala sprzedaż i kupno produktów, bedzie tez mozna zalozyc kont o i sie na nie zalogowac aby móc sprzedawac produkty. Umożiwia tez sortowanie po różnych parametrach (cena, miejsce sprzedaży, kraj pochodzenia itd.)
