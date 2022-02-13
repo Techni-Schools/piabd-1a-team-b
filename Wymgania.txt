@@ -36,7 +36,7 @@ Wymagania niefunkcjonalne
     b.Aplikacja powinna być dostępna na poziomie 99.9%
     c.Aplikacja powinna używać TLS 1.2
     d. Deepink będzie pozwalał na jednoczesne korzystanie min 500 użytkowników.
-    e. Odpowiedz serwera bedzie mniej niz 1000s
+    e. Odpowiedz serwera bedzie mniej niz 1000ms
 
 Wymgania biznesowe 
 
