@@ -38,7 +38,7 @@ Wymagania niefunkcjonalne
     b. aplikacja powinna być dostępna na poziomie 99.9%
     c. aplikacja powinna używać TLS 1.2
     d. Deep Ink będzie pozwalał na jednoczesne korzystanie min 500 użytkowników.
-    e. Odpowiedź serwera będzie mniejsza niż 1000s
+    e. Odpowiedź serwera będzie mniejsza niż 1000ms
 
 Wymagania biznesowe
 
