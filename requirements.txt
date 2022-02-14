@@ -26,9 +26,11 @@ Wymagania funkcjonalne - systemowe
     a. pole gdzie wpisujemy email
     b. pole gdzie wpisujemy hasło 
     c. możliwość zaznaczenia opcji "Nie wylogowuj mnie"
+    d. Przycisk "Zaloguj sie"
+  
 
 Wymagania funkcjonalne - użytkownika
-Nasza strona będzie umożliwiała sprzedaż i kupno produktów, będzie też można założyć kont o i się na nie zalogować aby móc sprzedawać produkty. Umożliwia też sortowanie po różnych parametrach (cena, miejsce sprzedaży, kraj pochodzenia itd.) 
+Nasza strona będzie umożliwiała sprzedaż i kupno produktów, będzie też można założyć konta o i się na nie zalogować aby móc sprzedawać produkty. Umożliwia też sortowanie po różnych parametrach (cena, miejsce sprzedaży, kraj pochodzenia itd.) 
 
 
 Wymagania niefunkcjonalne 
