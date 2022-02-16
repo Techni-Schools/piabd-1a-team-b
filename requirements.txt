@@ -36,9 +36,6 @@ Nasza strona będzie umożliwiała sprzedaż i kupno produktów, będzie też mo
 Wymagania niefunkcjonalne 
     a. aplikacja musi być skalowalna poziomo.
     b. aplikacja powinna być dostępna na poziomie 99.9%
-    c. aplikacja powinna używać TLS 1.2
-    d. Deepink będzie pozwalał na jednoczesne korzystanie min 500 użytkowników.
-    e. Odpowiedź serwera będzie mniejsza niż 1000ms
 
 Wymagania biznesowe
 
