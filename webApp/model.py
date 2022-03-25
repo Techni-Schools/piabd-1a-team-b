@@ -1,4 +1,3 @@
-from nis import cat
 from lib import *
 from settings import db
 
