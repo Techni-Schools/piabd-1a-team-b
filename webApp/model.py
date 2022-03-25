@@ -90,12 +90,31 @@ class orders(db.Model):
         self.shipped_date = shipped_date
         self.payment_method = payment_method
 
-# u = users('edgzoah', 'adam', 'blady', 'adam@blady.com', '2020-12-12', '+48662272007', 'dobra 29a', 'warszawa', 'mazowieckie', '02-998', 'polska')
-# c = category('splawik')
-# db.session.add(q)
-# db.session.commit()
-
-u = db.session.query(category.id).filter(category.category_name == 'splawik').first()
-print(u)
+#przykladowe zapytanie z joinem
 # u = db.session.query(products.name, category.category_name, users.username).join(category).join(users).all()
-# print(u)
+
+
+#losowi uzytkownicy
+# arr = [users('edgzoah', 'dobra123', 'adam', 'blady', 'adam@blady.com', '2006-09-14', '+48662272007', 'dobra 29a', 'warszawa', 'mazowieckie', '02-998', 'polska'), users('juki', 'tomek9999@', 'tomasz', 'ogrodnik', 'tomasz@ogrodnik.com', '2007-09-22', '+48688964999', 'wladkow 88', 'warszawa', 'mazowieckie', '02-664', 'polska'), users('twojstary', 'krulpolska', 'aleksander', 'wiejak', 'ja@wiejaknakrula.com', '2006-09-24', '+48705758922', 'wladkow 88', 'warszawa', 'mazowieckie', '02-664', 'polska')]
+# for i in arr:
+#     db.session.add(i)
+#     db.session.commit()
+
+#dodanie kategorii
+# l = ['splawik', 'wendka', 'przynenty', 'rzylki', 'akcesoria']
+# for i in l:
+#     q = category(i)
+#     db.session.add(q)
+#     db.session.commit()
+
+#losowe przedmioty
+# array = [products('wendka ultra v.102', './images/wendkaultra102.jpg', 2, 18.99, 'no nawet fajny powiedzialbym', 0, 19, 1),
+# products('splawik ultra v.102', './images/splawikultra102.jpg', 1, 3.99, 'prawie za darmo', 0, 3, 2),
+# products('rzylka omega', './images/rzylka.jpg', 4, 105.33, 'rzylka vip', 0, 10, 3)]
+# for i in array:
+#     db.session.add(i)
+#     db.session.commit()
+
+
+#zeby stworzyc baze
+# db.create_all()
