@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+  </head>
+  <body>
+    {% if current_user.is_authenticated %} Hi {{ current_user.username }}!
+    <br />
+    <form action="/addproduct" method="POST">
+      <button><a href="/dashboard">Dashboard</a></button>
+      <p><input type="text" name="name" />name:</p>
+      <p>
+        <input type="text" name="image" />
+        image (poki co link do pliku jeszcze nie pobierany):
+      </p>
+      <p><input type="text" name="category" />kategoria:</p>
+      <p><input type="text" name="price" />cena:</p>
+      <p><input type="text" name="description" />opis:</p>
+      <p><input type="text" name="quantity" />ilosc:</p>
+      <p><input type="submit" value="submit" /></p>
+    </form>
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <ul class="flashes">
+      {% for message in messages %}
+      <p style="color: red">{{ message }}</p>
+      {% endfor %}
+    </ul>
+    {% endif %} {% endwith %} {% endif %}
+  </body>
+</html>

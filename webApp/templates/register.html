@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Register Page</title>
+  </head>
+  <body>
+    <form action="/register" method="POST">
+      <p>username: <input type="text" name="username" /></p>
+      <p>password: <input type="text" name="password" /></p>
+      <p>first_name: <input type="text" name="first_name" /></p>
+      <p>last_name: <input type="text" name="last_name" /></p>
+      <p>email: <input type="email" name="email" /></p>
+      <p>date_of_birth: <input type="text" name="date_of_birth" /></p>
+      <p>phone_number: <input type="text" name="phone_number" /></p>
+      <p>street: <input type="text" name="street" /></p>
+      <p>city: <input type="text" name="city" /></p>
+      <p>state: <input type="text" name="state" /></p>
+      <p>zip_code: <input type="text" name="zip_code" /></p>
+      <p>country: <input type="text" name="country" /></p>
+      <p><input type="submit" value="Submit" /></p>
+    </form>
+    <button><a href="/">default page</a></button>
+    {% if current_user.is_authenticated %} Hi {{ current_user.username }}!
+    <button><a href="/logout">logout</a></button>
+    {% endif %} {% with messages = get_flashed_messages() %} {% if messages %}
+    <ul class="flashes">
+      {% for message in messages %}
+      <p style="color: red">{{ message }}</p>
+      {% endfor %}
+    </ul>
+    {% endif %} {% endwith %}
+  </body>
+</html>

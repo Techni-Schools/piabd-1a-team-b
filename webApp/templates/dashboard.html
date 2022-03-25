@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+  </head>
+  <body>
+    {% if current_user.is_authenticated %} Hi {{ current_user.username }}!
+    <button><a href="/logout">logout</a></button>
+    <button><a href="/">default page</a></button>
+    <br />
+    <p>Your products:</p>
+    {% for i in u %} {{i.name}} - {{i.category_name}} - {{i.price}}zł
+    <br />
+    {% endfor %}
+    <a href="/addproduct">Add new product</a>
+
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <ul class="flashes">
+      {% for message in messages %}
+      <p style="color: green">{{ message }}</p>
+      {% endfor %}
+    </ul>
+    {% endif %} {% endwith %} {% endif %}
+  </body>
+</html>

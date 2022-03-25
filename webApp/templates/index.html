@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Login Page</title>
+  </head>
+  <body>
+    {% if current_user.is_authenticated %} Hi {{ current_user.username }}!
+    <button><a href="/logout">logout</a></button>
+    {% else %}
+    <button><a href="/login">login</a></button>
+    <button><a href="/register">register</a></button>
+    {% endif %}
+  </body>
+</html>
