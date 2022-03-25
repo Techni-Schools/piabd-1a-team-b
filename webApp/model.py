@@ -22,7 +22,6 @@ class products(db.Model):
         self.quantity = quantity
         self.user = user
 
-# q = products('SPLAWIK slaby V1.02', './images/splawikadamblady3.jpg', 1, 25.99, 'super fajny splawik', 0, 1, 1)
 class category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     category_name = db.Column(db.String(50), unique=True, nullable=False)
@@ -108,7 +107,7 @@ class orders(db.Model):
 #     db.session.commit()
 
 #losowe przedmioty
-# array = [products('wendka ultra v.102', './images/wendkaultra102.jpg', 2, 18.99, 'no nawet fajny powiedzialbym', 0, 19, 1),
+# array = [products('wendka ultra v.102', './images/wendkaultra102.jpg', 2, 18.99, 'no nawet fajny powiedzialbym', 0, 19, 2),
 # products('splawik ultra v.102', './images/splawikultra102.jpg', 1, 3.99, 'prawie za darmo', 0, 3, 2),
 # products('rzylka omega', './images/rzylka.jpg', 4, 105.33, 'rzylka vip', 0, 10, 3)]
 # for i in array:

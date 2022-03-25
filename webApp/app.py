@@ -7,6 +7,10 @@ from model import *
 def load_user(user_id):
     return users.query.filter_by(id=user_id).first()
 
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
 @app.route('/')
 def index():
   return render_template('index.html')
@@ -90,3 +94,21 @@ def addproduct():
 def logout():
     logout_user()
     return redirect('/')
+
+@app.route('/profile/')
+def profilenouser():
+  cu = ['nie znaleziono uzytkownika']
+  return render_template('user.html', prd=cu)
+
+@app.route('/profile/<username>')
+def profile(username):
+  q = db.session.query(users.username).filter(users.username == username).first()
+  if q:
+    cu = db.session.query(products.name, category.category_name).join(category).join(users).filter(users.username == username).all()
+    if cu:
+      pass
+    else:
+      cu = ['uzytkownik obecnie nic nie sprzedaje']
+  else:
+    cu = ['nie znaleziono uzytkownika']
+  return render_template('user.html', prd=cu)
