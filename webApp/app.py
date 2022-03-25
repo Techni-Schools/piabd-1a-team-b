@@ -102,6 +102,7 @@ def profilenouser():
 
 @app.route('/profile/<username>')
 def profile(username):
+  user = username
   q = db.session.query(users.username).filter(users.username == username).first()
   if q:
     cu = db.session.query(products.name, category.category_name).join(category).join(users).filter(users.username == username).all()
@@ -111,4 +112,20 @@ def profile(username):
       cu = ['uzytkownik obecnie nic nie sprzedaje']
   else:
     cu = ['nie znaleziono uzytkownika']
-  return render_template('user.html', prd=cu)
+  return render_template('user.html', prd=cu, user=user)
+
+@app.route('/search', methods=['POST', 'GET'])
+def search():
+  if request.method == 'POST':
+    return redirect('/search/'+request.form['srch'])
+  return redirect('/')
+
+@app.route('/search/')
+def search_noname():
+  cu = db.session.query(products.name, category.category_name).join(category).all()
+  return render_template('search.html', prd=cu)
+
+@app.route('/search/<search>')
+def srch(search):
+  cu = db.session.query(products.name, category.category_name).join(category).filter(products.name.like('%'+search+'%'))
+  return render_template('search.html', prd=cu)
