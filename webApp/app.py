@@ -122,7 +122,6 @@ def profile(username):
   if q:
     try:
       cu = db.session.query(products.name, products.description, products.image, products.price, products.quantity, category.category_name).join(category).join(users).filter(users.username == username).filter(products.name.like(request.args['product'])).first()
-      print(cu)
       if request.args['product'] == '':
         raise ValueError("a should be nonzero")
     except:
@@ -146,4 +145,19 @@ def search():
   except:
     return redirect('/')
 
-
+@app.route('/update', methods=['POST', 'GET'])
+@login_required
+def update():
+  cu = db.session.query(products.name, products.description).join(users).filter(products.name == request.args['product']).filter(users.username == current_user.username).first()
+  if cu == None:
+    flash('nie posiadasz takiego produktu')
+    return redirect('/dashboard')
+  if request.method == 'POST':
+    if request.form['name'] != '' and request.form['description'] != '':
+      db.session.query(products).filter(products.name == request.args['product']).update({products.name: request.form['name'], products.description: request.form['description']})
+      db.session.commit()
+      return redirect('/dashboard')
+    else:
+      flash('Jakas wartosc byla nullowa :(')
+      return redirect('/update?product='+request.args['product'])
+  return render_template('update.html', prd=cu)

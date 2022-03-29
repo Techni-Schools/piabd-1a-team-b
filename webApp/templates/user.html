@@ -7,6 +7,7 @@
   <title>sklep - {{user}}</title>
 </head>
 <body>
+  <button><a href="/">Default page</a></button>
   {% if request.args['product']%}
   {{prd.name}} - {{prd.category_name}} - {{prd.quantity}} - {{prd.price}} - {{prd.description}}
   <br>

@@ -7,9 +7,10 @@
   <title>sklep</title>
 </head>
 <body>
+  <button><a href="/">Default page</a></button>
   {% for i in prd %}
   {% if i.name and i.category_name %}
-  {{i.name}} - {{i.category_name}} - <a href="/profile/{{i.username}}">{{i.username}}</a>
+  <a href="/profile/{{i.username}}?product={{i.name}}">{{i.name}}</a> - {{i.category_name}} - <a href="/profile/{{i.username}}">{{i.username}}</a>
   <br>
   {% else %}
   {{i}}
