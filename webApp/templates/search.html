@@ -9,7 +9,7 @@
 <body>
   {% for i in prd %}
   {% if i.name and i.category_name %}
-  {{i.name}} - {{i.category_name}}
+  {{i.name}} - {{i.category_name}} - <a href="/profile/{{i.username}}">{{i.username}}</a>
   <br>
   {% else %}
   {{i}}

@@ -64,8 +64,8 @@ def register():
 @app.route('/dashboard')
 @login_required
 def dashboard():
-  u = db.session.query(products.name, category.category_name, products.quantity, products.price).join(category).join(users).filter(users.username == current_user.username).all()
-  if u == []: u = 'You dont have any products yet'
+  u = db.session.query(products.name, products.image, category.category_name, products.quantity, products.price).join(category).join(users).filter(users.username == current_user.username).all()
+  if u == []: u = ['You dont have any products yet']
   return render_template('dashboard.html', u=u)
 
 @app.route('/addproduct', methods=['GET' , 'POST'])
@@ -73,24 +73,34 @@ def dashboard():
 def addproduct():
   if request.method == 'POST':
     name = request.form['name']
-    image = request.form['image']
+    image = request.files['image']
     categoryname = request.form['category']
     price = request.form['price']
     description = request.form['description']
     quantity = request.form['quantity']
-    if name == '' or image == '' or categoryname == '' or price == '' or description == '' or quantity == '':
+    if name == '' or categoryname == '' or price == '' or description == '' or quantity == '':
       flash('Something went wrong :(')
       return redirect('/addproduct')
     c = db.session.query(category.id).filter(category.category_name == categoryname).first()
     for i in c:
       c = i
-    try:
-      q = products(name, image, c, price, description, 0, quantity, current_user.id)
-      db.session.add(q)
-      db.session.commit()
-    except:
-      flash('Something went wrong :(')
-      return redirect('/addproduct')
+    # try:
+    x = secure_filename(image.filename)[len(secure_filename(image.filename))-4:len(secure_filename(image.filename))]
+    if x != '.png':
+      if x != '.jpg':
+        if secure_filename(image.filename)[len(secure_filename(image.filename))-5:len(secure_filename(image.filename))] != '.jpeg':
+          flash('Plik nie był plikiem zdjęciowym :(')
+          return redirect('/addproduct')
+    # if secure_filename(image.filename)[len(secure_filename(image.filename))-4:len(secure_filename(image.filename))] != '.jpg' or secure_filename(image.filename)[len(secure_filename(image.filename))-4:len(secure_filename(image.filename))] != '.png' or secure_filename(image.filename)[len(secure_filename(image.filename))-4:len(secure_filename(image.filename))] != '.jpeg': 
+    #   flash('Plik nie był plikiem zdjęciowym :(')
+    #   return redirect('/addproduct')
+    image.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(image.filename)))
+    q = products(name, secure_filename(image.filename), c, price, description, 0, quantity,current_user.id)
+    db.session.add(q)
+    db.session.commit()
+    # except:
+    #   flash('Something went wrong :(')
+    #   return redirect('/addproduct')
     flash('produkt dodany pomyślnie!')
     return redirect('/dashboard')
   return render_template('addproduct.html')
@@ -108,30 +118,32 @@ def profilenouser():
 
 @app.route('/profile/<username>')
 def profile(username):
-  user = username
   q = db.session.query(users.username).filter(users.username == username).first()
   if q:
-    cu = db.session.query(products.name, category.category_name).join(category).join(users).filter(users.username == username).all()
+    try:
+      cu = db.session.query(products.name, products.description, products.image, products.price, products.quantity, category.category_name).join(category).join(users).filter(users.username == username).filter(products.name.like(request.args['product'])).first()
+      print(cu)
+      if request.args['product'] == '':
+        raise ValueError("a should be nonzero")
+    except:
+      cu = db.session.query(products.name, products.image, category.category_name).join(category).join(users).filter(users.username == username).all()
     if cu:
       pass
     else:
       cu = ['uzytkownik obecnie nic nie sprzedaje']
   else:
     cu = ['nie znaleziono uzytkownika']
-  return render_template('user.html', prd=cu, user=user)
+  return render_template('user.html', prd=cu, user=username)
 
 @app.route('/search', methods=['POST', 'GET'])
 def search():
   if request.method == 'POST':
-    return redirect('/search/'+request.form['srch'])
-  return redirect('/')
+    return redirect('/search?search='+request.form['srch'])
+  try:
+    cu = db.session.query(products.name, category.category_name, users.username).join(category).join(users).filter(products.name.like('%'+request.args['search']+'%')).all()
+    # print(cu) jak to sie rowna [] to zrobic cos w stylu nie znaleziono produktow z taka nazwa
+    return render_template('search.html', prd=cu)
+  except:
+    return redirect('/')
 
-@app.route('/search/')
-def search_noname():
-  cu = db.session.query(products.name, category.category_name).join(category).all()
-  return render_template('search.html', prd=cu)
 
-@app.route('/search/<search>')
-def srch(search):
-  cu = db.session.query(products.name, category.category_name).join(category).filter(products.name.like('%'+search+'%'))
-  return render_template('search.html', prd=cu)

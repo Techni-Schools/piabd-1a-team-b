@@ -9,11 +9,11 @@
   <body>
     {% if current_user.is_authenticated %} Hi {{ current_user.username }}!
     <br />
-    <form action="/addproduct" method="POST" id="productadd">
+    <form action="/addproduct" method="POST" id="productadd" enctype="multipart/form-data">
       <button><a href="/dashboard">Dashboard</a></button>
       <p><input type="text" name="name" />name:</p>
       <p>
-        <input type="text" name="image" />
+        <input type="file" name="image" />
         image (poki co link do pliku jeszcze nie pobierany):
       </p>
       <p>

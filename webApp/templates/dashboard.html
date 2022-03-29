@@ -12,9 +12,18 @@
     <button><a href="/">default page</a></button>
     <br />
     <p>Your products:</p>
+    {% if u == ['You dont have any products yet'] %}
+    You dont have any products yet :(
+      <br>
+    {% else %}
     {% for i in u %} {{i.name}} - {{i.category_name}} - {{i.price}}zł
     <br />
+    <img src="{{url_for('static', filename=i.image)}}" alt="{{i.name}}" style="height: 20%; width: 20%;">
+    <br>
+    <br>
+    <br>
     {% endfor %}
+    {% endif %}
     <a href="/addproduct">Add new product</a>
 
     {% with messages = get_flashed_messages() %} {% if messages %}

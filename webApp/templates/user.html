@@ -7,14 +7,23 @@
   <title>sklep - {{user}}</title>
 </head>
 <body>
-  {% for i in prd %}
-  {% if i.name and i.category_name %}
-  {{i.name}} - {{i.category_name}}
+  {% if request.args['product']%}
+  {{prd.name}} - {{prd.category_name}} - {{prd.quantity}} - {{prd.price}} - {{prd.description}}
   <br>
+  <img src="{{url_for('static', filename=prd.image)}}" alt="{{prd.name}}" style="height: 20%; width: 20%;">
   {% else %}
-  {{i}}
-  {% endif %}
+  {% if prd[0].name and prd[0].category_name %}
+  {% for i in prd %}
+  <a href="/profile/{{user}}?product={{i.name}}">{{i.name}} - {{i.category_name}}
+  <br>
+  <img src="{{url_for('static', filename=i.image)}}" alt="{{i.name}}" style="height: 20%; width: 20%;"></a>
+  <br>
+  <br>
   {% endfor %}
   <br>
+  {% else %}
+  {{prd[0]}}
+  {% endif %}
+  {% endif %}
 </body>
 </html>
