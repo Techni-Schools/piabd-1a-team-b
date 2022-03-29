@@ -48,6 +48,9 @@ def register():
     state = request.form['state']
     zip_code = request.form['zip_code']
     country = request.form['country']
+    if username == '' or password == '' or first_name == '' or last_name == '' or email == '' or date_of_birth == '' or phone_number == '' or street == '' or city == '' or state == '' or zip_code == '' or country == '':
+      flash('Some values were empty :(')
+      return redirect('/register')
     u = users(username=username, email=email, password=password, first_name=first_name, last_name=last_name, date_of_birth=date_of_birth, phone_number=phone_number, street=street, city=city, state=state, zip_code=zip_code, country=country)
     try:
       db.session.add(u)
@@ -75,6 +78,9 @@ def addproduct():
     price = request.form['price']
     description = request.form['description']
     quantity = request.form['quantity']
+    if name == '' or image == '' or categoryname == '' or price == '' or description == '' or quantity == '':
+      flash('Something went wrong :(')
+      return redirect('/addproduct')
     c = db.session.query(category.id).filter(category.category_name == categoryname).first()
     for i in c:
       c = i

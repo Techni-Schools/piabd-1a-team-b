@@ -16,6 +16,7 @@
     </div>
     {% if current_user.is_authenticated %} Hi {{ current_user.username }}!
     <button><a href="/logout">logout</a></button>
+    <button><a href="/dashboard">dashboard</a></button>
     {% else %}
     <button><a href="/login">login</a></button>
     <button><a href="/register">register</a></button>
