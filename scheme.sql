@@ -16,9 +16,9 @@ CREATE TABLE users (
     [password] VARCHAR(50) NOT NULL,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
-    email VARCHAR(50) UNIQUE NOT NULL,
+    email VARCHAR(50) UNIQUE NOT NULL CHECK(email like '%@%.%'),
     -- add CHECK 
-    date_of_birth DATE NOT NULL,
+    date_of_birth DATE NOT NULL CHECK(DATEDIFF(second, date_of_birth, GETDATE()) > 0),
     -- add CHECK for past dates
     phone_number VARCHAR(12) UNIQUE NOT NULL,
     street VARCHAR(50) NOT NULL,
@@ -51,7 +51,7 @@ CREATE TABLE chat (
     [message] VARCHAR(100) NOT NULL,
     CONSTRAINT fk_sender FOREIGN KEY (sender) REFERENCES users(id),
     CONSTRAINT fk_receiver FOREIGN KEY (receiver) REFERENCES users(id),
-    CONSTRAINT pk_c_id PRIMARY KEY,
+    CONSTRAINT pk_c_id PRIMARY KEY
     -- add named CONSTRAINT for PK
 )
 
@@ -59,9 +59,9 @@ CREATE TABLE orders (
     id INT IDENTITY(1, 1),
     product INT,
     [user] INT,
-    order_status VARCHAR(50) NOT NULL,
+    order_status VARCHAR(50) NOT NULL CHECK(order_status = 'W drodze' OR order_status = 'Juz jest'),
     -- CHECK with predefined values 
-    order_date DATE NOT NULL,
+    order_date DATE NOT NULL DEFAULT(GETDATE()),
     -- DEFAULT with GETDATE()
     required_date DATE,
     shipped_Date DATE,
