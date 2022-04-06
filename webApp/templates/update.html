@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>sklep - {{user}}</title>
+</head>
+<body>
+  <button><a href="/">Default page</a></button>
+  {% if request.args['product']%}
+  {{prd.name}}
+  {{prd.description}}
+  <form method="POST" action="/update?product={{prd.name}}">
+    <input type="text" name="name" value="{{prd.name}}">
+    <input type="text" name="description" value="{{prd.description}}">
+    <input type="submit" value="Submit">
+  </form>
+  {% endif %}
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <ul class=flashes>
+    {% for message in messages %}
+      <p style="color: red;">{{ message }}</p>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+</body>
+</html>
