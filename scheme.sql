@@ -25,7 +25,7 @@ CREATE TABLE users (
     [state] VARCHAR(50) NOT NULL,
     zip_code VARCHAR(10) NOT NULL,
     country VARCHAR(50) NOT NULL,
-    CONSTRAINT pk_u_id PRIMARY KEY
+    CONSTRAINT pk_u_id PRIMARY KEY (id)
     -- add named CONSTRAINT
 )
 
@@ -40,7 +40,7 @@ CREATE TABLE products (
     [user] INT NOT NULL,
     CONSTRAINT fk_category FOREIGN KEY (category) REFERENCES category(id),
     CONSTRAINT fk_user FOREIGN KEY ([user]) REFERENCES users(id),
-    CONSTRAINT pk_p_id PRIMARY KEY
+    CONSTRAINT pk_p_id PRIMARY KEY (id)
     -- add named CONSTRAINT for PK
 )
 
@@ -51,7 +51,7 @@ CREATE TABLE chat (
     [message] VARCHAR(100) NOT NULL,
     CONSTRAINT fk_sender FOREIGN KEY (sender) REFERENCES users(id),
     CONSTRAINT fk_receiver FOREIGN KEY (receiver) REFERENCES users(id),
-    CONSTRAINT pk_c_id PRIMARY KEY
+    CONSTRAINT pk_c_id PRIMARY KEY (id)
     -- add named CONSTRAINT for PK
 )
 
