@@ -68,7 +68,7 @@ CREATE TABLE orders (
     payment_method VARCHAR(50) NOT NULL,
      -- add named CONSTRAINT for PK
     -- missing FK to user and product
-    CONSTRAINT pk_o_id PRIMARY KEY,
+    CONSTRAINT pk_o_id PRIMARY KEY (id),
     CONSTRAINT fk_o_user FOREIGN KEY ([user]) REFERENCES users(id),
     CONSTRAINT fk_o_user FOREIGN KEY (product) REFERENCES products(id)
 )
