@@ -6,7 +6,7 @@
 CREATE TABLE category (
     id INT PRIMARY KEY IDENTITY(1, 1),
     category_name VARCHAR(50) UNIQUE NOT NULL,
-    CONSTRAINT pk_ct_id PRIMARY KEY,
+    CONSTRAINT pk_ct_id PRIMARY KEY (id),
     -- use named CONSTRAINT
 )
 
