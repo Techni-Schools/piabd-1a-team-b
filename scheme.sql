@@ -11,7 +11,7 @@ CREATE TABLE category (
 )
 
 CREATE TABLE users (
-    id INT PRIMARY KEY IDENTITY(1, 1),
+    id INT IDENTITY(1, 1),
     username VARCHAR(20) UNIQUE NOT NULL,
     [password] VARCHAR(50) NOT NULL,
     first_name VARCHAR(50) NOT NULL,
@@ -30,7 +30,7 @@ CREATE TABLE users (
 )
 
 CREATE TABLE products (
-    id INT PRIMARY KEY IDENTITY(1, 1),
+    id INT IDENTITY(1, 1),
     [name] VARCHAR(50) NOT NULL,
     [image] VARCHAR(40) UNIQUE NOT NULL,
     category INT,
@@ -45,7 +45,7 @@ CREATE TABLE products (
 )
 
 CREATE TABLE chat (
-    id INT PRIMARY KEY IDENTITY(1, 1),
+    id INT IDENTITY(1, 1),
     sender INT,
     receiver INT,
     [message] VARCHAR(100) NOT NULL,
