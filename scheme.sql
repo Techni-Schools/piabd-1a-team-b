@@ -5,7 +5,8 @@
 -- missing on ERD
 CREATE TABLE category (
     id INT PRIMARY KEY IDENTITY(1, 1),
-    category_name VARCHAR(50) UNIQUE NOT NULL
+    category_name VARCHAR(50) UNIQUE NOT NULL,
+    CONSTRAINT pk_ct_id PRIMARY KEY,
     -- use named CONSTRAINT
 )
 
@@ -23,7 +24,8 @@ CREATE TABLE users (
     street VARCHAR(50) NOT NULL,
     [state] VARCHAR(50) NOT NULL,
     zip_code VARCHAR(10) NOT NULL,
-    country VARCHAR(50) NOT NULL
+    country VARCHAR(50) NOT NULL,
+    CONSTRAINT pk_u_id PRIMARY KEY
     -- add named CONSTRAINT
 )
 
@@ -37,7 +39,8 @@ CREATE TABLE products (
     quantity INT DEFAULT(1) NOT NULL,
     [user] INT NOT NULL,
     CONSTRAINT fk_category FOREIGN KEY (category) REFERENCES category(id),
-    CONSTRAINT fk_user FOREIGN KEY ([user]) REFERENCES users(id)
+    CONSTRAINT fk_user FOREIGN KEY ([user]) REFERENCES users(id),
+    CONSTRAINT pk_p_id PRIMARY KEY
     -- add named CONSTRAINT for PK
 )
 
@@ -47,12 +50,13 @@ CREATE TABLE chat (
     receiver INT,
     [message] VARCHAR(100) NOT NULL,
     CONSTRAINT fk_sender FOREIGN KEY (sender) REFERENCES users(id),
-    CONSTRAINT fk_receiver FOREIGN KEY (receiver) REFERENCES users(id)
+    CONSTRAINT fk_receiver FOREIGN KEY (receiver) REFERENCES users(id),
+    CONSTRAINT pk_c_id PRIMARY KEY,
     -- add named CONSTRAINT for PK
 )
 
 CREATE TABLE orders (
-    id INT PRIMARY KEY IDENTITY(1, 1),
+    id INT IDENTITY(1, 1),
     product INT,
     [user] INT,
     order_status VARCHAR(50) NOT NULL,
@@ -61,7 +65,10 @@ CREATE TABLE orders (
     -- DEFAULT with GETDATE()
     required_date DATE,
     shipped_Date DATE,
-    payment_method VARCHAR(50) NOT NULL
+    payment_method VARCHAR(50) NOT NULL,
      -- add named CONSTRAINT for PK
     -- missing FK to user and product
+    CONSTRAINT pk_o_id PRIMARY KEY,
+    CONSTRAINT fk_o_user FOREIGN KEY ([user]) REFERENCES users(id),
+    CONSTRAINT fk_o_user FOREIGN KEY (product) REFERENCES products(id)
 )
