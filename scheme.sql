@@ -2,9 +2,11 @@
 -- USE sklep;
 -- GO
 
+-- missing on ERD
 CREATE TABLE category (
     id INT PRIMARY KEY IDENTITY(1, 1),
     category_name VARCHAR(50) UNIQUE NOT NULL
+    -- use named CONSTRAINT
 )
 
 CREATE TABLE users (
@@ -14,12 +16,15 @@ CREATE TABLE users (
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
     email VARCHAR(50) UNIQUE NOT NULL,
+    -- add CHECK 
     date_of_birth DATE NOT NULL,
+    -- add CHECK for past dates
     phone_number VARCHAR(12) UNIQUE NOT NULL,
     street VARCHAR(50) NOT NULL,
     [state] VARCHAR(50) NOT NULL,
     zip_code VARCHAR(10) NOT NULL,
     country VARCHAR(50) NOT NULL
+    -- add named CONSTRAINT
 )
 
 CREATE TABLE products (
@@ -33,6 +38,7 @@ CREATE TABLE products (
     [user] INT NOT NULL,
     CONSTRAINT fk_category FOREIGN KEY (category) REFERENCES category(id),
     CONSTRAINT fk_user FOREIGN KEY ([user]) REFERENCES users(id)
+    -- add named CONSTRAINT for PK
 )
 
 CREATE TABLE chat (
@@ -42,6 +48,7 @@ CREATE TABLE chat (
     [message] VARCHAR(100) NOT NULL,
     CONSTRAINT fk_sender FOREIGN KEY (sender) REFERENCES users(id),
     CONSTRAINT fk_receiver FOREIGN KEY (receiver) REFERENCES users(id)
+    -- add named CONSTRAINT for PK
 )
 
 CREATE TABLE orders (
@@ -49,8 +56,12 @@ CREATE TABLE orders (
     product INT,
     [user] INT,
     order_status VARCHAR(50) NOT NULL,
+    -- CHECK with predefined values 
     order_date DATE NOT NULL,
+    -- DEFAULT with GETDATE()
     required_date DATE,
     shipped_Date DATE,
     payment_method VARCHAR(50) NOT NULL
+     -- add named CONSTRAINT for PK
+    -- missing FK to user and product
 )
