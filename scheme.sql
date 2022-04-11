@@ -1,6 +1,6 @@
--- CREATE DATABASE sklep;
--- USE sklep;
--- GO
+CREATE DATABASE sklep;
+USE sklep;
+GO
 
 -- missing on ERD
 CREATE TABLE category (
