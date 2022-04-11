@@ -70,5 +70,5 @@ CREATE TABLE orders (
     -- missing FK to user and product
     CONSTRAINT pk_o_id PRIMARY KEY (id),
     CONSTRAINT fk_o_user FOREIGN KEY ([user]) REFERENCES users(id),
-    CONSTRAINT fk_o_user FOREIGN KEY (product) REFERENCES products(id)
+    CONSTRAINT fk_p_user FOREIGN KEY (product) REFERENCES products(id)
 )
