@@ -11,14 +11,11 @@ def load_user(user_id):
 def page_not_found(e):
     return render_template('404.html'), 404
 
-@app.route('/wyszukiwarka')
-def wyszukiwarka():
-  return render_template("livesearch.html")
-
 @app.route("/livesearch",methods=["POST","GET"])
 def livesearch():
   searchbox = request.form.get("text")
   allproducts = db.session.query(products.name, users.username).filter(products.name.like(searchbox + '%')).join(users).all()
+  allproducts = allproducts[:5]
   l = []
   for product in allproducts:
     product = list(product)
@@ -39,7 +36,11 @@ def login():
       password = request.form['password']
       registeredUser = users.query.filter_by(username=username, password=password).first()
       if registeredUser:
-          login_user(registeredUser)
+          try:
+            if request.form['remember'] == 'on':
+              login_user(registeredUser, remember=True)
+          except:
+            login_user(registeredUser, remember=False)
           return redirect(url_for('dashboard'))
       else:
           flash('Incorrect username or password')
@@ -106,11 +107,22 @@ def addproduct():
         if secure_filename(image.filename)[len(secure_filename(image.filename))-5:len(secure_filename(image.filename))] != '.jpeg':
           flash('Plik nie był plikiem zdjęciowym :(')
           return redirect('/addproduct')
+        else:
+          s = '.jpeg'
+      else:
+        s = '.jpg'
+    else:
+      s = '.png'
     # if secure_filename(image.filename)[len(secure_filename(image.filename))-4:len(secure_filename(image.filename))] != '.jpg' or secure_filename(image.filename)[len(secure_filename(image.filename))-4:len(secure_filename(image.filename))] != '.png' or secure_filename(image.filename)[len(secure_filename(image.filename))-4:len(secure_filename(image.filename))] != '.jpeg': 
     #   flash('Plik nie był plikiem zdjęciowym :(')
     #   return redirect('/addproduct')
-    image.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(image.filename)))
-    q = products(name, secure_filename(image.filename), c, price, description, 0, quantity,current_user.id)
+    now1 = datetime.now()
+    d1 = now1.strftime("%d%m%Y")
+    current_time = now1.strftime("%H%M%S")
+    file_name = str(d1) + '' + str(current_time)
+    completeName = os.path.join(app.config['UPLOAD_FOLDER'], file_name+s)  
+    image.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(file_name+s)))
+    q = products(name, secure_filename(file_name+s), c, price, description, 0, quantity,current_user.id)
     db.session.add(q)
     db.session.commit()
     # except:
