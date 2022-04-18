@@ -5,7 +5,7 @@ from settings import db
 class products(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(50), nullable=False)
-    image = db.Column(db.String(40), unique=True)
+    image = db.Column(db.String(999), unique=True)
     category = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)
     price = db.Column(db.Numeric, nullable=False)
     description = db.Column(db.String(100), nullable=True)
@@ -22,11 +22,15 @@ class products(db.Model):
         self.quantity = quantity
         self.user = user
 
+
 class category(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     category_name = db.Column(db.String(50), unique=True, nullable=False)
     def __init__(self, category_name):
         self.category_name = category_name
+
+
+
 
 
 
@@ -106,13 +110,6 @@ class orders(db.Model):
 #     db.session.add(q)
 #     db.session.commit()
 
-#losowe przedmioty
-# array = [products('wendka ultra v.102', './images/wendkaultra102.jpg', 2, 18.99, 'no nawet fajny powiedzialbym', 0, 19, 2),
-# products('splawik ultra v.102', './images/splawikultra102.jpg', 1, 3.99, 'prawie za darmo', 0, 3, 2),
-# products('rzylka omega', './images/rzylka.jpg', 4, 105.33, 'rzylka vip', 0, 10, 3)]
-# for i in array:
-#     db.session.add(i)
-#     db.session.commit()
 
 
 #zeby stworzyc baze

@@ -2,24 +2,68 @@
 <html>
   <head>
     <title>Default Page</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" />  
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 
+<script>
+    $(document).ready(function(){
+        $("#livebox").on("input",function(e){
+            $("#datalist").empty();
+            $.ajax({
+                method:"post",
+                url:"/livesearch",
+                data:{text:$("#livebox").val()},
+                success:function(res){
+                    var data = "<div class='list-group'>";
+                    $.each(res,function(index,value){
+                        data += "<p class='list-group-item list-group-item-action'><a href="+"'/profile/"+value.user+"?product="+value.name+"'"+">"+value.name+"</a></p>";
+                    });
+                    data += "</div>";
+                    $("#datalist").html(data);
+                }
+            });
+        });
+        $('#livebox').on('click', function(event){
+          $("#datalist").empty();
+          $.ajax({
+              method:"post",
+              url:"/livesearch",
+              data:{text:$("#livebox").val()},
+              success:function(res){
+                  var data = "<div class='list-group'>";
+                  $.each(res,function(index,value){
+                      data += "<p class='list-group-item list-group-item-action'><a href="+"'/profile/"+value.user+"?product="+value.name+"'"+">"+value.name+"</a></p>";
+                  });
+                  data += "</div>";
+                  $("#datalist").html(data);
+              }
+          });
+        })
+        $(document).on("click", function(event){
+          if(!$(event.target).closest("#search").length){
+            $("#datalist").empty();
+          }
+      });
+    });
+</script> 
   </head>
   <body>
     <div class="page-header">
       fajna strona
     </div>
+    <div class="container">
+      {% if current_user.is_authenticated %} Hi {{ current_user.username }}!
+      <button><a href="/logout">logout</a></button>
+      <button><a href="/dashboard">dashboard</a></button>
+      {% else %}
+      <button><a href="/login">login</a></button>
+      <button><a href="/register">register</a></button>
+      {% endif %}
+      <p></p>
     <div class="search">
-      <form action="/search" method="POST">
-        <input type="text" name="srch">
-        <input type="submit" value="search">
-        
-      </form>
+      <input type="text" id="livebox" name="text" class="form-control" placeholder="Find products" autocomplete="off">
+      <p id = "datalist"></p>
     </div>
-    {% if current_user.is_authenticated %} Hi {{ current_user.username }}!
-    <button><a href="/logout">logout</a></button>
-    <button><a href="/dashboard">dashboard</a></button>
-    {% else %}
-    <button><a href="/login">login</a></button>
-    <button><a href="/register">register</a></button>
-    {% endif %}
+  </div>
   </body>
 </html>

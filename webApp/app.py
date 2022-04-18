@@ -11,6 +11,21 @@ def load_user(user_id):
 def page_not_found(e):
     return render_template('404.html'), 404
 
+@app.route('/wyszukiwarka')
+def wyszukiwarka():
+  return render_template("livesearch.html")
+
+@app.route("/livesearch",methods=["POST","GET"])
+def livesearch():
+  searchbox = request.form.get("text")
+  allproducts = db.session.query(products.name, users.username).filter(products.name.like(searchbox + '%')).join(users).all()
+  l = []
+  for product in allproducts:
+    product = list(product)
+    l.append({'name':product[0], 'user':product[1]})
+  l = tuple(l)
+  return jsonify(l)
+
 @app.route('/')
 def index():
   return render_template('index.html')
@@ -56,7 +71,7 @@ def register():
       db.session.add(u)
       db.session.commit()
     except:
-      flash('Username or Email already used or Phone number already used')
+      flash('Username, Email or Phone number already used')
       return redirect('/register')
     return redirect('/login')
   return render_template('register.html')
