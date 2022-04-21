@@ -2,7 +2,7 @@ from lib import *
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'F3HUIF23H8923F9H8389FHXKLN'
-app.config['UPLOAD_FOLDER'] = 'C:\\Users\\adamo\\OneDrive\\Dokumenty\\GitHub\\piabd-1a-team-b\\webApp\\static'
+app.config['UPLOAD_FOLDER'] = '/home/adam/dsds/piabd-1a-team-b/webApp/static'
 
 login_manager = LoginManager()
 login_manager.login_view = "login"

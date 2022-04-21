@@ -34,14 +34,18 @@ def login():
   if request.method == 'POST':
       username = request.form['username']
       password = request.form['password']
-      registeredUser = users.query.filter_by(username=username, password=password).first()
+      registeredUser = users.query.filter_by(username=username).first()
       if registeredUser:
+        if bcrypt.checkpw(password.encode(), (registeredUser.password).encode()):
           try:
             if request.form['remember'] == 'on':
               login_user(registeredUser, remember=True)
           except:
             login_user(registeredUser, remember=False)
           return redirect(url_for('dashboard'))
+        else:
+          flash('Incorrect username or password')
+          return redirect('/login')
       else:
           flash('Incorrect username or password')
           return redirect('/login')
@@ -53,7 +57,7 @@ def register():
     return redirect('/')
   if request.method == 'POST' and request.form['username']:
     username = request.form['username']
-    password = request.form['password']
+    password = request.form['password'].encode()
     first_name = request.form['first_name']
     last_name = request.form['last_name']
     email = request.form['email']
@@ -67,6 +71,7 @@ def register():
     if username == '' or password == '' or first_name == '' or last_name == '' or email == '' or date_of_birth == '' or phone_number == '' or street == '' or city == '' or state == '' or zip_code == '' or country == '':
       flash('Some values were empty :(')
       return redirect('/register')
+    password = bcrypt.hashpw(password, bcrypt.gensalt())
     u = users(username=username, email=email, password=password, first_name=first_name, last_name=last_name, date_of_birth=date_of_birth, phone_number=phone_number, street=street, city=city, state=state, zip_code=zip_code, country=country)
     try:
       db.session.add(u)

@@ -37,7 +37,7 @@ class category(db.Model):
 class users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
-    password = db.Column(db.String(50), nullable=False)
+    password = db.Column(db.String(100), nullable=False)
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(50), unique=True, nullable=False)
@@ -98,10 +98,16 @@ class orders(db.Model):
 
 
 #losowi uzytkownicy
-# arr = [users('edgzoah', 'dobra123', 'adam', 'blady', 'adam@blady.com', '2006-09-14', '+48662272007', 'dobra 29a', 'warszawa', 'mazowieckie', '02-998', 'polska'), users('juki', 'tomek9999@', 'tomasz', 'ogrodnik', 'tomasz@ogrodnik.com', '2007-09-22', '+48688964999', 'wladkow 88', 'warszawa', 'mazowieckie', '02-664', 'polska'), users('twojstary', 'krulpolska', 'aleksander', 'wiejak', 'ja@wiejaknakrula.com', '2006-09-24', '+48705758922', 'wladkow 88', 'warszawa', 'mazowieckie', '02-664', 'polska')]
+# arr = [users('edgzoah', '$2b$12$XYsagRDEW0nc2n6JUN2STuk/ZqYC1P4UOgS4wUAISGYJBYXOeWARS', 'adam', 'blady', 'adam@blady.com', '2006-09-14', '+48662272007', 'dobra 29a', 'warszawa', 'mazowieckie', '02-998', 'polska'), users('juki', '$2b$12$BNAs8ojiHcl/UUELO2m7XelIE/pAWDvom87NGMCHYAGrtgqobbSE2', 'tomasz', 'ogrodnik', 'tomasz@ogrodnik.com', '2007-09-22', '+48688964999', 'wladkow 88', 'warszawa', 'mazowieckie', '02-664', 'polska'), users('twojstary', '$2b$12$EIbZPXfBkfNUI3OPT/v/uOIB8OFfpw21bzoNbBddd1YubAEO1pNxu', 'aleksander', 'wiejak', 'ja@wiejaknakrula.com', '2006-09-24', '+48705758922', 'wladkow 88', 'warszawa', 'mazowieckie', '02-664', 'polska')]
 # for i in arr:
 #     db.session.add(i)
 #     db.session.commit()
+
+#login - edgzoah haslo - dobra123
+#login - juki haslo - tomek9999@
+#login - twojstary - krulpolska 
+
+
 
 #dodanie kategorii
 # l = ['splawik', 'wendka', 'przynenty', 'rzylki', 'akcesoria']
