@@ -9,5 +9,12 @@ from datetime import datetime
 import bcrypt
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 from werkzeug.datastructures import CombinedMultiDict
-# from flask_uploads import UploadSet
+from flask_uploads import UploadSet, IMAGES
 from wtforms import Form, BooleanField, StringField, PasswordField, validators, DateField, SelectField, IntegerField, FloatField, DecimalField, EmailField, TelField, TextAreaField
+"""
+trzeba w bibliotece flask_uploads (plik flask_uploads.py) zmienic
+from werkzeug import secure_filename,FileStorage
+na
+from werkzeug.utils import secure_filename
+from werkzeug.datastructures import  FileStorage
+"""
