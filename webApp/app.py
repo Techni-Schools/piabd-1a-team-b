@@ -1,7 +1,8 @@
+from fileinput import filename
 from lib import *
 from settings import *
 from model import *
-
+from forms import loginForm, registerForm, newProduct
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -31,17 +32,14 @@ def index():
 def login():
   if current_user.is_authenticated:
     return redirect('/')
-  if request.method == 'POST':
-      username = request.form['username']
-      password = request.form['password']
-      registeredUser = users.query.filter_by(username=username).first()
-      if registeredUser:
-        if bcrypt.checkpw(password.encode(), (registeredUser.password).encode()):
-          try:
-            if request.form['remember'] == 'on':
-              login_user(registeredUser, remember=True)
-          except:
-            login_user(registeredUser, remember=False)
+  form = loginForm(request.form)
+  if request.method == 'POST' and form.validate():
+      username = form.username.data
+      password = form.password.data
+      loggedUser = users.query.filter_by(username=username).first()
+      if loggedUser:
+        if bcrypt.checkpw(password.encode(), (loggedUser.password).encode()):
+          login_user(loggedUser, remember=form.remember.data)
           return redirect(url_for('dashboard'))
         else:
           flash('Incorrect username or password')
@@ -49,30 +47,15 @@ def login():
       else:
           flash('Incorrect username or password')
           return redirect('/login')
-  return render_template('login.html')
+  return render_template('login.html', form=form)
 
 @app.route('/register' , methods=['GET' , 'POST'])
 def register():
   if current_user.is_authenticated:
     return redirect('/')
-  if request.method == 'POST' and request.form['username']:
-    username = request.form['username']
-    password = request.form['password'].encode()
-    first_name = request.form['first_name']
-    last_name = request.form['last_name']
-    email = request.form['email']
-    date_of_birth = request.form['date_of_birth']
-    phone_number = request.form['phone_number']
-    street = request.form['street']
-    city = request.form['city']
-    state = request.form['state']
-    zip_code = request.form['zip_code']
-    country = request.form['country']
-    if username == '' or password == '' or first_name == '' or last_name == '' or email == '' or date_of_birth == '' or phone_number == '' or street == '' or city == '' or state == '' or zip_code == '' or country == '':
-      flash('Some values were empty :(')
-      return redirect('/register')
-    password = bcrypt.hashpw(password, bcrypt.gensalt())
-    u = users(username=username, email=email, password=password, first_name=first_name, last_name=last_name, date_of_birth=date_of_birth, phone_number=phone_number, street=street, city=city, state=state, zip_code=zip_code, country=country)
+  form = registerForm(request.form)
+  if request.method == 'POST' and form.validate():
+    u = users(username=form.username.data, email=form.email.data, password=bcrypt.hashpw((form.password.data).encode(), bcrypt.gensalt()), first_name=form.first_name.data, last_name=form.last_name.data, date_of_birth=form.date_of_birth.data, phone_number=form.phone_number.data, street=form.street.data, city=form.city.data, state=form.state.data, zip_code=form.zip_code.data, country=form.country.data)
     try:
       db.session.add(u)
       db.session.commit()
@@ -80,7 +63,7 @@ def register():
       flash('Username, Email or Phone number already used')
       return redirect('/register')
     return redirect('/login')
-  return render_template('register.html')
+  return render_template('register.html', form=form)
 
 @app.route('/dashboard')
 @login_required
@@ -92,50 +75,21 @@ def dashboard():
 @app.route('/addproduct', methods=['GET' , 'POST'])
 @login_required
 def addproduct():
-  if request.method == 'POST':
-    name = request.form['name']
-    image = request.files['image']
-    categoryname = request.form['category']
-    price = request.form['price']
-    description = request.form['description']
-    quantity = request.form['quantity']
-    if name == '' or categoryname == '' or price == '' or description == '' or quantity == '':
-      flash('Something went wrong :(')
-      return redirect('/addproduct')
-    c = db.session.query(category.id).filter(category.category_name == categoryname).first()
-    for i in c:
-      c = i
-    # try:
-    x = secure_filename(image.filename)[len(secure_filename(image.filename))-4:len(secure_filename(image.filename))]
-    if x != '.png':
-      if x != '.jpg':
-        if secure_filename(image.filename)[len(secure_filename(image.filename))-5:len(secure_filename(image.filename))] != '.jpeg':
-          flash('Plik nie był plikiem zdjęciowym :(')
-          return redirect('/addproduct')
-        else:
-          s = '.jpeg'
-      else:
-        s = '.jpg'
-    else:
-      s = '.png'
-    # if secure_filename(image.filename)[len(secure_filename(image.filename))-4:len(secure_filename(image.filename))] != '.jpg' or secure_filename(image.filename)[len(secure_filename(image.filename))-4:len(secure_filename(image.filename))] != '.png' or secure_filename(image.filename)[len(secure_filename(image.filename))-4:len(secure_filename(image.filename))] != '.jpeg': 
-    #   flash('Plik nie był plikiem zdjęciowym :(')
-    #   return redirect('/addproduct')
-    now1 = datetime.now()
-    d1 = now1.strftime("%d%m%Y")
-    current_time = now1.strftime("%H%M%S")
-    file_name = str(d1) + '' + str(current_time)
-    completeName = os.path.join(app.config['UPLOAD_FOLDER'], file_name+s)  
-    image.save(os.path.join(app.config['UPLOAD_FOLDER'], secure_filename(file_name+s)))
-    q = products(name, secure_filename(file_name+s), c, price, description, 0, quantity,current_user.id)
+  form = newProduct(CombinedMultiDict((request.files, request.form)))
+  if request.method == 'POST' and form.validate():
+    myFile = str(uuid.uuid4())
+    form.image.data.save(os.path.join(app.config['UPLOAD_FOLDER'], myFile))
+    c = db.session.query(category.id).filter(category.category_name == form.category.data).first()
+    c = c[0]
+    q = products(form.name.data, myFile, c, form.price.data, form.description.data, 0, form.quantity.data, current_user.id)
     db.session.add(q)
+    # ------------------------------------------------------
+    #           TRZEBA ZROBIC SPRAWDZENIE CZY ZDJENCIE
+    # ------------------------------------------------------
     db.session.commit()
-    # except:
-    #   flash('Something went wrong :(')
-    #   return redirect('/addproduct')
     flash('produkt dodany pomyślnie!')
     return redirect('/dashboard')
-  return render_template('addproduct.html')
+  return render_template('addproduct.html', form=form)
 
 @app.route("/logout")
 @login_required

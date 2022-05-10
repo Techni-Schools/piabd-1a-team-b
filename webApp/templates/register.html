@@ -4,7 +4,7 @@
     <title>Register Page</title>
   </head>
   <body>
-    <form action="/register" method="POST">
+    <!-- <form action="/register" method="POST">
       <p>username: <input type="text" name="username" /></p>
       <p>password: <input type="text" name="password" /></p>
       <p>first_name: <input type="text" name="first_name" /></p>
@@ -18,6 +18,30 @@
       <p>zip_code: <input type="text" name="zip_code" /></p>
       <p>country: <input type="text" name="country" /></p>
       <p><input type="submit" value="Submit" /></p>
+    </form> -->
+    {% from "_formhelpers.html" import render_field %}
+    <form method=post>
+      <div class="0-1">
+        {{ render_field(form.first_name) }}
+        {{ render_field(form.last_name) }}
+        {{ render_field(form.email) }}
+        {{ render_field(form.date_of_birth) }}
+        {{ render_field(form.phone_number) }}
+      </div>
+      <div class="0-2">
+        {{ render_field(form.street) }}
+        {{ render_field(form.city) }}
+        {{ render_field(form.zip_code) }}
+        {{ render_field(form.state)}}
+        {{ render_field(form.country) }}
+      </div>
+      <div class="0-3">
+        {{ render_field(form.username) }}
+        {{ render_field(form.password) }}
+        {{ render_field(form.confirm) }}
+        {{ render_field(form.accept_tos)}}
+      </div>  
+      <p><input type=submit value=Login>
     </form>
     <button><a href="/">default page</a></button>
     {% if current_user.is_authenticated %} Hi {{ current_user.username }}!

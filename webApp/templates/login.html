@@ -4,11 +4,14 @@
     <title>Login Page</title>
 </head>
 <body>
-  <form action="/login" method="POST">
-    <p>Username: <input type="text" name="username" /></p>
-    <p>Password: <input type="text" name="password" /></p>
-    <p>Remember me: <input type="checkbox" name="remember" id="remember"></p>
-    <p><input type="submit" value="Submit" /></p>
+  {% from "_formhelpers.html" import render_field %}
+  <form method=post>
+    <dl>
+      {{ render_field(form.username) }}
+      {{ render_field(form.password) }}
+      {{ render_field(form.remember) }}
+    </dl>
+    <p><input type=submit value=Login>
   </form>
   <button><a href="/">default page</a></button>
   {% if current_user.is_authenticated %}

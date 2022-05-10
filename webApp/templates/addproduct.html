@@ -7,14 +7,24 @@
     <title>add product</title>
   </head>
   <body>
-    {% if current_user.is_authenticated %} Hi {{ current_user.username }}!
-    <br />
-    <form action="/addproduct" method="POST" id="productadd" enctype="multipart/form-data">
+    {% from "_formhelpers.html" import render_field %}
+    <form method="post" enctype="multipart/form-data">
+      <dl>
+        {{ render_field(form.name) }}
+        {{ render_field(form.image) }}
+        {{ render_field(form.category) }}
+        {{ render_field(form.price) }}
+        {{ render_field(form.description) }}
+        {{ render_field(form.quantity) }}
+      </dl>
+      <p><input type=submit value=Add>
+    </form>
+
+    <!-- <form action="/addproduct" method="POST" id="productadd" enctype="multipart/form-data">
       <button><a href="/dashboard">Dashboard</a></button>
       <p><input type="text" name="name" />name:</p>
       <p>
         <input type="file" name="image" />
-        image (poki co link do pliku jeszcze nie pobierany):
       </p>
       <p>
         <select name="category" id="category" form="productadd">
@@ -30,13 +40,13 @@
       <p><input type="text" name="description" />opis:</p>
       <p><input type="text" name="quantity" />ilosc:</p>
       <p><input type="submit" value="submit" /></p>
-    </form>
+    </form> -->
     {% with messages = get_flashed_messages() %} {% if messages %}
     <ul class="flashes">
       {% for message in messages %}
       <p style="color: red">{{ message }}</p>
       {% endfor %}
     </ul>
-    {% endif %} {% endwith %} {% endif %}
+    {% endif %} {% endwith %}
   </body>
 </html>
