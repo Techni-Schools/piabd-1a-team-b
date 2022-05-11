@@ -1,75 +1,63 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Register Page</title>
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static',filename='styles/register.css') }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static',filename='styles/reset.css') }}"
-    />
-    <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
-  </head>
-  <body>
-    <!-- <form action="/register" method="POST">
-      <p>username: <input type="text" name="username" /></p>
-      <p>password: <input type="text" name="password" /></p>
-      <p>first_name: <input type="text" name="first_name" /></p>
-      <p>last_name: <inpul, ul, li,
-fieldset, fput type="text" name="phone_number" /></p>
-      <p>street: <input type="text" name="street" /></p>
-      <p>city: <input type="text" name="city" /></p>
-      <p>state: <input type="text" name="state" /></p>
-      <p>zip_code: <input type="text" name="zip_code" /></p>
-      <p>country: <input type="text" name="country" /></p>
-      <p><input type="submit" value="Submit" /></p>
-    </form> -->
-    {% from "_formhelpers.html" import render_field %}
-    <form method="post" id="myForm">
-      <div class="form">
-        <div class="0-1" id="0-1">
-          {{ render_field(form.first_name) }}
-          <!-- id = first_nema -->
-          {{ render_field(form.last_name) }}
-          <!-- id = last_name-->
-          {{ render_field(form.email) }} {{ render_field(form.date_of_birth) }}
-          {{ render_field(form.phone_number) }}
-        </div>
-        <div class="0-2" id="0-2" style="display: none">
-          {{ render_field(form.street) }} {{ render_field(form.city) }} {{
-          render_field(form.zip_code) }} {{ render_field(form.state)}} {{
-          render_field(form.country) }}
-        </div>
-        <div class="0-3" id="0-3" style="display: none">
-          {{ render_field(form.username) }} {{ render_field(form.password) }} {{
-          render_field(form.confirm) }} {{ render_field(form.accept_tos)}}
-        </div>
-        <button type="button" id="nextButton" name="niewiem">Next</button>
-        <input
-          type="submit"
-          id="submitButton"
-          name="ta"
-          value="Submit"
-          style="display: none"
-        />
-        <button type="button" id="backButton" style="display: none">
-          Go Back
-        </button>
-      </div>
-    </form>
-    <button><a href="/">default page</a></button>
-    {% if current_user.is_authenticated %} Hi {{ current_user.username }}!
-    <button><a href="/logout">logout</a></button>
-    {% endif %} {% with messages = get_flashed_messages() %} {% if messages %}
-    <ul class="flashes">
-      {% for message in messages %}
-      <p style="color: red">{{ message }}</p>
-      {% endfor %}
-    </ul>
-    {% endif %} {% endwith %}
+{% extends 'base.html' %}
 
-    <script src="{{url_for('static', filename='scripts/register.js')}}"></script>
-  </body>
-</html>
+{% block title %} Register Page {% endblock %}
+
+{% block extrahead %} 
+<link
+rel="stylesheet"
+href="{{ url_for('static',filename='styles/register.css') }}"
+/>
+<link
+rel="stylesheet"
+href="{{ url_for('static',filename='styles/reset.css') }}"
+/>
+{% endblock %}
+
+{% block main %} 
+
+{% from "_formhelpers.html" import render_field %}
+<form method="post" id="myForm">
+  <div class="form">
+    <div class="0-1" id="0-1">
+      {{ render_field(form.first_name) }}
+      <!-- id = first_nema -->
+      {{ render_field(form.last_name) }}
+      <!-- id = last_name-->
+      {{ render_field(form.email) }} {{ render_field(form.date_of_birth) }}
+      {{ render_field(form.phone_number) }}
+    </div>
+    <div class="0-2" id="0-2" style="display: none">
+      {{ render_field(form.street) }} {{ render_field(form.city) }} {{
+      render_field(form.zip_code) }} {{ render_field(form.state)}} {{
+      render_field(form.country) }}
+    </div>
+    <div class="0-3" id="0-3" style="display: none">
+      {{ render_field(form.username) }} {{ render_field(form.password) }} {{
+      render_field(form.confirm) }} {{ render_field(form.accept_tos)}}
+    </div>
+    <button type="button" id="nextButton" name="niewiem">Next</button>
+    <input
+      type="submit"
+      id="submitButton"
+      name="ta"
+      value="Submit"
+      style="display: none"
+    />
+    <button type="button" id="backButton" style="display: none">
+      Go Back
+    </button>
+  </div>
+</form>
+<button><a href="/">default page</a></button>
+{% if current_user.is_authenticated %} Hi {{ current_user.username }}!
+<button><a href="/logout">logout</a></button>
+{% endif %} {% with messages = get_flashed_messages() %} {% if messages %}
+<ul class="flashes">
+  {% for message in messages %}
+  <p style="color: red">{{ message }}</p>
+  {% endfor %}
+</ul>
+{% endif %} {% endwith %}
+
+<script src="{{url_for('static', filename='scripts/register.js')}}"></script>
+{% endblock %}

@@ -1,13 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>add product</title>
-  </head>
-  <body>
-    {% from "_formhelpers.html" import render_field %}
+{% extends 'base.html' %}
+
+{% block title %} Dodaj produkt {% endblock %}
+
+{% block main %} 
+
+{% from "_formhelpers.html" import render_field %}
     <form method="post" enctype="multipart/form-data">
       <dl>
         {{ render_field(form.name) }}
@@ -20,27 +17,6 @@
       <p><input type=submit value=Add>
     </form>
 
-    <!-- <form action="/addproduct" method="POST" id="productadd" enctype="multipart/form-data">
-      <button><a href="/dashboard">Dashboard</a></button>
-      <p><input type="text" name="name" />name:</p>
-      <p>
-        <input type="file" name="image" />
-      </p>
-      <p>
-        <select name="category" id="category" form="productadd">
-          <option value="splawik">splawik</option>
-          <option value="wendka">wendka</option>
-          <option value="przynenty">przynenty</option>
-          <option value="rzylki">rzylki</option>
-          <option value="akcesoria">akcesoria</option>
-        </select>
-        kategoria:
-      </p>
-      <p><input type="text" name="price" />cena:</p>
-      <p><input type="text" name="description" />opis:</p>
-      <p><input type="text" name="quantity" />ilosc:</p>
-      <p><input type="submit" value="submit" /></p>
-    </form> -->
     {% with messages = get_flashed_messages() %} {% if messages %}
     <ul class="flashes">
       {% for message in messages %}
@@ -48,5 +24,5 @@
       {% endfor %}
     </ul>
     {% endif %} {% endwith %}
-  </body>
-</html>
+
+{% endblock %}

@@ -1,4 +1,3 @@
-from pymysql import Date
 from lib import *
 
 images = UploadSet('images', IMAGES)
@@ -28,7 +27,7 @@ class registerForm(Form):
 
 class newProduct(Form):
     name = StringField('Name', [validators.Length(min=6, max=50)])
-    image = FileField('Image', validators=[FileRequired(), FileAllowed(images, 'Images only!')])
+    image = FileField('Image', validators=[FileRequired()])
     category = SelectField('Category', choices=['splawik', 'wendka', 'przynenty', 'rzylki', 'akcesoria'])
     price = DecimalField('Price', [validators.DataRequired()])
     description = TextAreaField('Description', [validators.Length(min=10, max=100)])
