@@ -1,0 +1,77 @@
+body,
+html {
+  height: 100%;
+}
+.container {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.box {
+  border-radius: 15px;
+  width: 800px;
+  height: 500px;
+  background-color: rgb(233, 233, 233);
+  display: grid;
+  grid-template-columns: 400px 400px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+.form-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+dd {
+  margin: 0;
+}
+input {
+  padding: 10px;
+  border-radius: 10px;
+  font-size: 15px;
+  border: 3px solid rgb(0, 217, 255);
+  background-color: rgb(238, 238, 238);
+  outline: none;
+}
+dt {
+  padding: 10px;
+}
+.login-form-2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  height: 100%;
+  background: url("https://media.istockphoto.com/vectors/underwater-background-with-fish-silhouettes-vector-id1135322782?k=20&m=1135322782&s=612x612&w=0&h=4hs3bQhM3LmLqa1tOVxjKoXqCT-anRTzoM-bkNtUZjs=");
+}
+.login-form-2 h1 {
+  font-family: "Roboto Condensed", sans-serif;
+  font-size: 50px;
+}
+h2,
+h1 {
+  margin: 3px;
+}
+.submitBtn {
+  font-size: 30px;
+  padding: 13px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s;
+  border-radius: 10px;
+  margin: 10px;
+}
+.submitBtn:hover {
+  color: rgb(2, 227, 2);
+}
+input:-webkit-autofill {
+  background-color: rgb(255, 255, 255);
+}
