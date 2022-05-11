@@ -5,34 +5,99 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dashboard</title>
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='styles/dashboard.css') }}"
+    />
+    <script src="https://kit.fontawesome.com/a38786db6e.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{{ url_for('static',filename='styles/footer-wave.css') }}"/>
+    <script
+      src="https://code.jquery.com/jquery-2.2.4.js"
+      integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
   </head>
   <body>
-    {% if current_user.is_authenticated %} Hi {{ current_user.username }}!
-    <button><a href="/logout">logout</a></button>
-    <button><a href="/">default page</a></button>
-    <br />
-    <p>Your products:</p>
+    <div class="fsakjfj">
+      <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+        <a class="navbar-brand" href="/">Wendki</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#collapsibleNavbar"
+        >
+          <span class="navbaar-toggler-icon"><i class="fa-solid fa-bars"></i></span>
+        </button>
+        <div class="collapse navbar-collapse lfaslfasl" id="collapsibleNavbar">
+          <ul class="navbar-nav"> 
+            <li class="nav-item">
+              <a class="nav-link" href="/logout">logout</a>
+            </li>
+            <li class="nav-item">
+              <a href="/" class="nav-link">Default Page</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+    <div class="account-data">
+      <div class="background-image back-img"></div>
+      {% if current_user.is_authenticated %}
+      <h1 class="username">Hi {{ current_user.username }}!</h1>
+      <img
+        class="profile-img"
+        src="https://static.zakumaj.pl/data/store/2015/10/98d0a565-4d35-88fb-5557-3977dee48380/picture_large.jpg"
+      />
+    </div>
+    <div class="containder-main">
+    <p class="text">Your products:</p>
     {% if u == ['You dont have any products yet'] %}
-    You dont have any products yet :(
-      <br>
+    <h3>You dont have any products yet :(</h3>
     {% else %}
-    {% for i in u %} <a href="/update?product={{i.name}}">{{i.name}} - {{i.category_name}} - {{i.price}}zł
-    <br />
-    <img src="{{url_for('static', filename=i.image)}}" alt="{{i.name}}" style="height: 20%; width: 20%;">
-    <br>
-  </a>
-    <br>
-    <br>
-    {% endfor %}
-    {% endif %}
-    <a href="/addproduct">Add new product</a>
-
     {% with messages = get_flashed_messages() %} {% if messages %}
     <ul class="flashes">
       {% for message in messages %}
       <p style="color: green">{{ message }}</p>
       {% endfor %}
-    </ul>
+    </ul> 
     {% endif %} {% endwith %} {% endif %}
+    <div class="row">
+      {% for i in u %}
+      <div class="col-sm">
+        <div class="card">
+          <img
+            class="card-img-top"
+            src="{{url_for('static', filename=i.image)}}"
+            alt="{{i.name}}"
+            style="height: 200px;"
+          />
+          <div class="card-body bg-dark">
+            <h5 class="card-title"style="color: white;">{{i.name}}</h5>
+            <p class="text"style="color: white;">{{i.category_name}}</p>
+            <p class="price" style="color: white;">{{i.price}}zł</p>
+            <p class="card-text" style="color: white;">Opis Produktu</p>
+            <a href="/update?product={{i.name}}" class="btn btn-primary"
+              >Change Information</a
+            >
+          </div>
+        </div>
+      </div>
+      {% endfor %} {% endif %}
+    </div>
+  </div>
+  </div>  
+  <div class="new-product" style="position: sticky; top: 70px; z-index: 999;  ">
+    <a href="/addproduct">
+      <button class="add-button">+</button>
+    </a>
+  </div>
   </body>
 </html>

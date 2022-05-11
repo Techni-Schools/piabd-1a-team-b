@@ -1,31 +1,43 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Login Page</title>
-</head>
-<body>
-  {% from "_formhelpers.html" import render_field %}
-  <form method=post>
-    <dl>
-      {{ render_field(form.username) }}
-      {{ render_field(form.password) }}
-      {{ render_field(form.remember) }}
-    </dl>
-    <p><input type=submit value=Login>
-  </form>
-  <button><a href="/">default page</a></button>
-  {% if current_user.is_authenticated %}
-  Hi {{ current_user.username }}!
-  <button><a href="/logout">logout</a></button>
-  {% endif %}
-  {% with messages = get_flashed_messages() %}
-  {% if messages %}
-  <ul class=flashes>
-    {% for message in messages %}
-      <p style="color: red;">{{ message }}</p>
-    {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
-</body>
+    <script src="https://kit.fontawesome.com/a38786db6e.js" crossorigin="anonymous"></script>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='styles/login.css') }}"
+    />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital@0;1&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <div class="box">
+        <div class="login-form-2">
+          <h1>Welcome to Login</h1>
+          <h2>Enter your Username and Password </h2>
+      </div>  
+        <div class="login-form-1">
+          {% from "_formhelpers.html" import render_field %}
+          <form method="post" class="form-login">
+            <dl>
+              {{ render_field(form.username) }} {{ render_field(form.password)
+              }} {{ render_field(form.remember) }}
+            </dl>
+            <button type="submit" class="submitBtn"><i class="fa-solid fa-arrow-right-to-bracket"></i></button>
+          </form>
+
+          <button><a href="/">default page</a></button>
+          {% if current_user.is_authenticated %} Hi {{ current_user.username }}!
+          <button><a href="/logout">logout</a></button>
+          {% endif %} {% with messages = get_flashed_messages() %} {% if
+          messages %}
+          <ul class="flashes">
+            {% for message in messages %}
+            <p style="color: red">{{ message }}</p>
+            {% endfor %}
+          </ul>
+          {% endif %} {% endwith %}
+        </div> 
+    </div>
+  </body>
 </html>
