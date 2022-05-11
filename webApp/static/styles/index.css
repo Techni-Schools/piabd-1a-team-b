@@ -1,0 +1,21 @@
+.account {
+  display: flex;
+  align-items: center;
+}
+.account button {
+  padding: 5px;
+}
+h4 {
+  line-height: normal;
+  margin: 0;
+  padding: 10px;
+  color: white;
+}
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.card-body {
+    color: wheat;
+}
