@@ -1,3 +1,4 @@
+from email.policy import default
 from lib import *
 from settings import db
 
@@ -12,6 +13,8 @@ class products(db.Model):
     discount = db.Column(db.Integer, default=0, nullable=False)
     quantity = db.Column(db.Integer, nullable=False, default=1)
     user = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
+    uuid_id = db.Column(db.String(100), default=uuid.uuid4(), nullable=False)
+    isDeleted = db.Column(db.Boolean, default=False, nullable=False)
     def __init__(self, name, image, category, price, description, discount, quantity, user):
         self.name = name
         self.image = image

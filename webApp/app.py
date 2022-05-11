@@ -68,9 +68,16 @@ def register():
 @app.route('/dashboard')
 @login_required
 def dashboard():
-  u = db.session.query(products.name, products.image, category.category_name, products.quantity, products.price).join(category).join(users).filter(users.username == current_user.username).all()
+  u = db.session.query(products.uuid_id, products.name, products.image, category.category_name, products.quantity, products.price).join(category).join(users).filter(users.username == current_user.username, products.isDeleted == 0).all()
   if u == []: u = ['You dont have any products yet']
   return render_template('dashboard.html', u=u)
+
+@app.route('/delete/<product>')
+@login_required
+def delete(product):
+  db.session.query(products).filter(products.uuid_id == str(product), products.user == current_user.get_id()).update({products.isDeleted: True})
+  db.session.commit()
+  return redirect('/dashboard')
 
 @app.route('/addproduct', methods=['GET' , 'POST'])
 @login_required
