@@ -16,11 +16,38 @@ body {
 #delete {
   color: red;
   text-decoration: none;
-  transition: .1s;
+  transition: 0.1s;
 }
 #delete:hover {
-  transition: .1s;
+  transition: 0.1s;
   color: rgb(255, 117, 117);
+}
+form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
+}
+dd {
+  display: flex;
+  justify-content: center;
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+  padding: 0;
+  margin-right: auto;
+  margin-left: auto;
+}
+#image {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.modal-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 body {
   overflow-x: hidden;
@@ -233,7 +260,7 @@ body {
 #popup {
   display: none;
   position: absolute;
-  top: 50%;  /* position the top  edge of the element at the middle of the parent */
+  top: 50%; /* position the top  edge of the element at the middle of the parent */
   left: 50%; /* position the left edge of the element at the middle of the parent */
   transform: translate(-50%, -50%);
   background-color: rgb(247, 247, 247);
@@ -242,5 +269,5 @@ body {
   text-align: center;
 }
 .text {
-  margin-top: 9vh;    
+  margin-top: 9vh;
 }

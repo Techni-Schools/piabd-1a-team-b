@@ -11,6 +11,35 @@ href="{{ url_for('static',filename='styles/dashboard.css') }}"
 
 {% block main %} 
 
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {% from "_formhelpers.html" import render_field %}
+    <form method="post" enctype="multipart/form-data">
+      <dl>
+        {{ render_field(form.name) }}
+        {{ render_field(form.image) }}
+        {{ render_field(form.category) }}
+        {{ render_field(form.price) }}
+        {{ render_field(form.description) }}
+        {{ render_field(form.quantity) }}
+      </dl>
+      <input type=submit value=Add>
+    </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="account-data">
   <div class="background-image back-img"></div>
   {% if current_user.is_authenticated %}
@@ -61,22 +90,7 @@ href="{{ url_for('static',filename='styles/dashboard.css') }}"
 </div>
 </div>  
 <div class="new-product" style="position: sticky; top: 70px; z-index: 999; width: fit-content;">
-<a href="/addproduct">
-  <button class="add-button">+</button>
-</a>
+  <button class="add-button" data-toggle="modal" data-target="#exampleModal">+</button>
 </div>
-
-{% from "_formhelpers.html" import render_field %}
-    <form method="post" enctype="multipart/form-data">
-      <dl>
-        {{ render_field(form.name) }}
-        {{ render_field(form.image) }}
-        {{ render_field(form.category) }}
-        {{ render_field(form.price) }}
-        {{ render_field(form.description) }}
-        {{ render_field(form.quantity) }}
-      </dl>
-      <p><input type=submit value=Add>
-    </form>
 
 {% endblock %}
