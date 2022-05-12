@@ -29,6 +29,6 @@ class newProduct(Form):
     name = StringField('Name', [validators.Length(min=6, max=50)])
     image = FileField('Image', validators=[FileRequired()])
     category = SelectField('Category', choices=['splawik', 'wendka', 'przynenty', 'rzylki', 'akcesoria'])
-    price = DecimalField('Price', [validators.DataRequired()])
+    price = DecimalField('Price', [validators.DataRequired(), validators.NumberRange(min=0, max=99999)])
     description = TextAreaField('Description', [validators.Length(min=10, max=100)])
     quantity = IntegerField('Quantity', [validators.DataRequired()])    

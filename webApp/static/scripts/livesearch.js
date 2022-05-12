@@ -9,15 +9,17 @@ $(document).ready(function () {
           var data = "<div class='list-group'>";
           $.each(res, function (index, value) {
             data +=
-              "<p class='list-group-item list-group-item-action'><a href=" +
+              "<a class='aa' href=" +
               "'/profile/" +
               value.user +
               "?product=" +
               value.name +
               "'" +
               ">" +
+              "<p class='list-group-item list-group-item-action'>" 
+              + 
               value.name +
-              "</a></p>";
+              "</p></a>";
           });
           data += "</div>";
           $("#datalist").html(data);
@@ -34,15 +36,17 @@ $(document).ready(function () {
           var data = "<div class='list-group'>";
           $.each(res, function (index, value) {
             data +=
-              "<p class='list-group-item list-group-item-action'><a href=" +
+              "<a class='aa' href=" +
               "'/profile/" +
               value.user +
               "?product=" +
               value.name +
               "'" +
               ">" +
+              "<p class='list-group-item list-group-item-action'>" 
+              + 
               value.name +
-              "</a></p>";
+              "</p></a>";
           });
           data += "</div>";
           $("#datalist").html(data);

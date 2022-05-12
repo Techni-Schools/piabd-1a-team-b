@@ -11,6 +11,14 @@ h4 {
   padding: 10px;
   color: white;
 }
+p {
+  margin-bottom: 0;
+  color: rgb(130, 184, 255);
+
+}
+.search {
+  margin-top: 10px;
+}
 .row {
   display: flex;
   justify-content: center;
@@ -18,4 +26,8 @@ h4 {
 }
 .card-body {
     color: wheat;
+}
+.aa {
+  color: rgb(130, 184, 255);
+  text-decoration: none;
 }

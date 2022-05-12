@@ -1,4 +1,3 @@
-from fileinput import filename
 from lib import *
 from settings import *
 from model import *
@@ -11,6 +10,11 @@ def load_user(user_id):
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html'), 404
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 @app.route("/livesearch",methods=["POST","GET"])
 def livesearch():

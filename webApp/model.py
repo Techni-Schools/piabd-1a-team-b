@@ -1,4 +1,3 @@
-from email.policy import default
 from lib import *
 from settings import db
 
@@ -31,10 +30,6 @@ class category(db.Model):
     category_name = db.Column(db.String(50), unique=True, nullable=False)
     def __init__(self, category_name):
         self.category_name = category_name
-
-
-
-
 
 
 class users(UserMixin, db.Model):
