@@ -69,12 +69,30 @@ def register():
     return redirect('/login')
   return render_template('register.html', form=form)
 
-@app.route('/dashboard')
+@app.route('/dashboard', methods=['POST', 'GET'])
 @login_required
 def dashboard():
-  u = db.session.query(products.uuid_id, products.name, products.image, category.category_name, products.quantity, products.price).join(category).join(users).filter(users.username == current_user.username, products.isDeleted == 0).all()
-  if u == []: u = ['You dont have any products yet']
-  return render_template('dashboard.html', u=u)
+  form = newProduct(CombinedMultiDict((request.files, request.form)))
+  if request.method == 'POST' and form.validate():
+    myFile = str(uuid.uuid4())
+    myUuidId = str(uuid.uuid4())
+    form.image.data.save(os.path.join(app.config['UPLOAD_FOLDER'], myFile))
+    c = db.session.query(category.id).filter(category.category_name == form.category.data).first()
+    c = c[0]
+    q = products(form.name.data, myFile, c, form.price.data, form.description.data, 0, form.quantity.data, current_user.id, myUuidId)
+    db.session.add(q)
+    # ------------------------------------------------------
+    #           TRZEBA ZROBIC SPRAWDZENIE CZY ZDJENCIE
+    # ------------------------------------------------------
+    db.session.commit()
+    flash('produkt dodany pomyślnie!')
+    return redirect('/dashboard')
+  elif request.method == 'POST' and not (form.validate()):
+    return redirect('/dashboard')
+  else:
+    u = db.session.query(products.uuid_id, products.name, products.image, category.category_name, products.quantity, products.price).join(category).join(users).filter(users.username == current_user.username, products.isDeleted == 0).all()
+    if u == []: u = ['You dont have any products yet']
+    return render_template('dashboard.html', u=u, form=form)
 
 @app.route('/delete/<product>')
 @login_required
@@ -89,10 +107,11 @@ def addproduct():
   form = newProduct(CombinedMultiDict((request.files, request.form)))
   if request.method == 'POST' and form.validate():
     myFile = str(uuid.uuid4())
+    myUuidId = str(uuid.uuid4())
     form.image.data.save(os.path.join(app.config['UPLOAD_FOLDER'], myFile))
     c = db.session.query(category.id).filter(category.category_name == form.category.data).first()
     c = c[0]
-    q = products(form.name.data, myFile, c, form.price.data, form.description.data, 0, form.quantity.data, current_user.id)
+    q = products(form.name.data, myFile, c, form.price.data, form.description.data, 0, form.quantity.data, current_user.id, myUuidId)
     db.session.add(q)
     # ------------------------------------------------------
     #           TRZEBA ZROBIC SPRAWDZENIE CZY ZDJENCIE

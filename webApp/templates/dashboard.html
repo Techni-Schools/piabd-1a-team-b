@@ -66,4 +66,17 @@ href="{{ url_for('static',filename='styles/dashboard.css') }}"
 </a>
 </div>
 
+{% from "_formhelpers.html" import render_field %}
+    <form method="post" enctype="multipart/form-data">
+      <dl>
+        {{ render_field(form.name) }}
+        {{ render_field(form.image) }}
+        {{ render_field(form.category) }}
+        {{ render_field(form.price) }}
+        {{ render_field(form.description) }}
+        {{ render_field(form.quantity) }}
+      </dl>
+      <p><input type=submit value=Add>
+    </form>
+
 {% endblock %}
