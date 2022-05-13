@@ -24,16 +24,42 @@
         <button type="submit" class="submitBtn"><i class="fa-solid fa-arrow-right-to-bracket"></i></button>
       </form>
 
+      
+      
       <button><a href="/">default page</a></button>
       {% with messages = get_flashed_messages() %} {% if
-      messages %}
-      <ul class="flashes">
-        {% for message in messages %}
-        <p style="color: red">{{ message }}</p>
-        {% endfor %}
-      </ul>
-      {% endif %} {% endwith %}
-    </div> 
-</div>
+        messages %}
+        <ul class="flashes">
+          {% for message in messages %}
+          <p style="color: red">{{ message }}</p>
+          {% endfor %}
+        </ul>
+        {% endif %} {% endwith %}
+      </div> 
+    </div>
+    
+    <form method=post>
+      <div class="0-1">
+        {{ render_field(form1.first_name) }}
+        {{ render_field(form1.last_name) }}
+        {{ render_field(form1.email) }}
+        {{ render_field(form1.date_of_birth) }}
+        {{ render_field(form1.phone_number) }}
+      </div>
+      <div class="0-2">
+        {{ render_field(form1.street) }}
+        {{ render_field(form1.city) }}
+        {{ render_field(form1.zip_code) }}
+        {{ render_field(form1.state)}}
+        {{ render_field(form1.country) }}
+      </div>
+      <div class="0-3">
+        {{ render_field(form1.username) }}
+        {{ render_field(form1.password) }}
+        {{ render_field(form1.confirm) }}
+        {{ render_field(form1.accept_tos)}}
+      </div>  
+      <p><input type=submit value=Login>
+    </form>
 
 {% endblock %}

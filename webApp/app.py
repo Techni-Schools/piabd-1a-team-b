@@ -37,7 +37,11 @@ def login():
   if current_user.is_authenticated:
     return redirect('/')
   form = loginForm(request.form)
-  if request.method == 'POST' and form.validate():
+  form1 = registerForm(request.form)
+  if request.method == 'POST' and form1.validate():
+    print(form1.first_name.data)
+    return redirect('/login')
+  elif request.method == 'POST' and form.validate():
       username = form.username.data
       password = form.password.data
       loggedUser = users.query.filter_by(username=username).first()
@@ -51,7 +55,7 @@ def login():
       else:
           flash('Incorrect username or password')
           return redirect('/login')
-  return render_template('login.html', form=form)
+  return render_template('login.html', form=form, form1=form1)
 
 @app.route('/register' , methods=['GET' , 'POST'])
 def register():
@@ -59,7 +63,7 @@ def register():
     return redirect('/')
   form = registerForm(request.form)
   if request.method == 'POST' and form.validate():
-    u = users(username=form.username.data, email=form.email.data, password=bcrypt.hashpw((form.password.data).encode(), bcrypt.gensalt()), first_name=form.first_name.data, last_name=form.last_name.data, date_of_birth=form.date_of_birth.data, phone_number=form.phone_number.data, street=form.street.data, city=form.city.data, state=form.state.data, zip_code=form.zip_code.data, country=form.country.data)
+    u = users(username=form.username1.data, email=form.email.data, password=bcrypt.hashpw((form.password1.data).encode(), bcrypt.gensalt()), first_name=form.first_name.data, last_name=form.last_name.data, date_of_birth=form.date_of_birth.data, phone_number=form.phone_number.data, street=form.street.data, city=form.city.data, state=form.state.data, zip_code=form.zip_code.data, country=form.country.data)
     try:
       db.session.add(u)
       db.session.commit()
