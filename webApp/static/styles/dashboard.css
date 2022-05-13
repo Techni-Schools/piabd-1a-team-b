@@ -271,3 +271,16 @@ body {
 .text {
   margin-top: 9vh;
 }
+.close {
+  transition: 0.5s;
+}
+.close:hover {
+  color: red;
+}
+.modal-footer {
+  display: flex;
+  justify-content: center;
+}
+.confirm {
+  transition: 0.3s;
+}

@@ -15,7 +15,7 @@ href="{{ url_for('static',filename='styles/dashboard.css') }}"
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Add your Product</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -31,10 +31,10 @@ href="{{ url_for('static',filename='styles/dashboard.css') }}"
         {{ render_field(form.description) }}
         {{ render_field(form.quantity) }}
       </dl>
-      <input type=submit value=Add>
-    </form>
       </div>
       <div class="modal-footer">
+        <button type="submit" class="btn confirm">ta?</button>
+    </form>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
     </div>
