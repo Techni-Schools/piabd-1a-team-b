@@ -47,6 +47,7 @@ class users(UserMixin, db.Model):
     state = db.Column(db.String(50), nullable=False)
     zip_code = db.Column(db.String(10), nullable=False)
     country = db.Column(db.String(50), nullable=False)
+    balance = db.Column(db.Integer, nullable=False, default=0)
     def __repr__(self):
         return '<User %r>' % self.username
     def __init__(self, username, password, first_name, last_name, email, date_of_birth, phone_number, street, city, state, zip_code, country):

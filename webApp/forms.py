@@ -23,12 +23,13 @@ class registerForm(Form):
     country = StringField('Country', [validators.DataRequired(), validators.Length(min=4, max=50)])
     accept_tos = BooleanField('I accept the TOS', [validators.DataRequired()])
 
-
-
 class newProduct(Form):
     name = StringField('Name', [validators.Length(min=1)])
     image = FileField('Image', validators=[FileRequired()])
     category = SelectField('Category', choices=['Splawik', 'Wendka', 'Przynenty', 'Rzylki', 'Akcesoria'])
     price = DecimalField('Price', [validators.DataRequired(), validators.NumberRange(min=0, max=99999)])
     description = TextAreaField('Description')
-    quantity = IntegerField('Quantity', [validators.DataRequired()])    
+    quantity = IntegerField('Quantity', [validators.DataRequired()])
+
+class addBalance(Form):
+    balance = DecimalField('Add Balance', [validators.DataRequired(), validators.NumberRange(min=0, max=999)])

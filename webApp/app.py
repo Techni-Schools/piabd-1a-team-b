@@ -1,7 +1,7 @@
 from lib import *
 from settings import *
 from model import *
-from forms import loginForm, registerForm, newProduct
+from forms import loginForm, registerForm, newProduct, addBalance
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -19,8 +19,7 @@ def favicon():
 @app.route("/livesearch",methods=["POST","GET"])
 def livesearch():
   searchbox = request.form.get("text")
-  allproducts = db.session.query(products.name, users.username).filter(products.name.like(searchbox + '%')).join(users).all()
-  allproducts = allproducts[:5]
+  allproducts = db.session.query(products.name, users.username).filter(products.name.like(searchbox + '%'), products.isDeleted == 0).join(users).limit(5).all()
   l = []
   for product in allproducts:
     product = list(product)
@@ -31,6 +30,16 @@ def livesearch():
 @app.route('/')
 def index():
   return render_template('index.html')
+
+@app.route('/balance', methods=['POST', 'GET'])
+def balance():
+  form = addBalance(request.form)
+  if request.method == 'POST' and form.validate():
+    db.session.query(users).filter(users.id == current_user.get_id()).update({users.balance: users.balance+form.balance.data})
+    db.session.commit()
+    flash('balans dodany ez')
+    return redirect(url_for('dashboard'))
+  return render_template('balance.html', form=form)
 
 @app.route('/login' , methods=['GET' , 'POST'])
 def login():
