@@ -30,6 +30,7 @@ def livesearch():
 @app.route('/')
 def index():
   return render_template('index.html')
+  
 
 @app.route('/balance', methods=['POST', 'GET'])
 def balance():

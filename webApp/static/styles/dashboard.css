@@ -1,6 +1,8 @@
 body {
-  background-color: rgb(66, 66, 66);
   height: 100%;
+}
+.text {
+  color: black;
 }
 .account-data {
   display: flex;
@@ -14,13 +16,13 @@ body {
   backdrop-filter: blur(8 px);
 }
 #delete {
-  color: red;
+  color: white;
+  background-color: red;
   text-decoration: none;
-  transition: 0.1s;
+  border: 1px solid red;
 }
 #delete:hover {
-  transition: 0.1s;
-  color: rgb(255, 117, 117);
+  background-color: rgb(193, 0, 0);
 }
 form {
   display: flex;
@@ -48,6 +50,9 @@ dd {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.text-i {
+  color: black;
 }
 body {
   overflow-x: hidden;
@@ -103,13 +108,23 @@ body {
 }
 .add-button {
   border-radius: 100%;
-  width: 80px;
-  height: 80px;
-  font-size: 50px;
+  width: 60px;
+  height: 60px;
+  font-size: 30px;
+}
+.add-button:hover {
+  background-color: green;
 }
 .card {
   width: 18rem;
   border: none;
+  height: auto;
+  background-color: rgb(152, 152, 152);
+}
+
+.buttons-card {
+  display: flex;
+  justify-content: space-between;
 }
 .containder-main {
   display: flex;
@@ -125,42 +140,6 @@ body {
   display: flex;
   justify-content: center;
 }
-
-.col-sm:nth-child(1) {
-  -webkit-animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  -webkit-animation-delay: 0.1s;
-}
-.col-sm:nth-child(2) {
-  -webkit-animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  -webkit-animation-delay: 0.2s;
-}
-.col-sm:nth-child(3) {
-  -webkit-animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  -webkit-animation-delay: 0.3s;
-  animation-delay: 0.3s;
-}
-.col-sm:nth-child(4) {
-  -webkit-animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  -webkit-animation-delay: 0.4s;
-  animation-delay: 0.4s;
-}
-.col-sm:nth-child(5) {
-  -webkit-animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  -webkit-animation-delay: 0.5s;
-  animation-delay: 0.5s;
-}
-.col-sm:nth-child(6) {
-  -webkit-animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  animation: slide-in-top 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  -webkit-animation-delay: 0.6s;
-  animation-delay: 0.6s;
-}
-
 @media only screen and (max-width: 700px) {
   .fsakjfj {
     position: static;
@@ -280,4 +259,9 @@ body {
 }
 .confirm {
   transition: 0.3s;
+  background-color: rgb(7, 238, 7);
+  color: white;
+}
+.confirm:hover {
+  background-color: rgb(0, 194, 0);
 }

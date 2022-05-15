@@ -33,7 +33,7 @@ href="{{ url_for('static',filename='styles/dashboard.css') }}"
       </dl>
       </div>
       <div class="modal-footer">
-        <button type="submit" class="btn confirm">ta?</button>
+        <button type="submit" class="btn confirm">Add Product <i class="fa-solid fa-plus"></i></button>
     </form>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
       </div>
@@ -50,7 +50,7 @@ href="{{ url_for('static',filename='styles/dashboard.css') }}"
   />
 </div>
 <div class="containder-main">
-<p class="text">Your products:</p>
+<p class="text-i">Your products:</p>
 {% if u == ['You dont have any products yet'] %}
 <h3>You dont have any products yet :(</h3>
 {% endif %}
@@ -72,15 +72,17 @@ href="{{ url_for('static',filename='styles/dashboard.css') }}"
         alt="{{i.name}}"
         style="height: 200px;"
         />
-        <div class="card-body bg-dark">
+        <div class="card-body">
         <h5 class="card-title"style="color: white;">{{i.name}}</h5>
         <p class="text"style="color: white;">{{i.category_name}}</p>
         <p class="price" style="color: white;">{{i.price}}zł</p>
         <p class="card-text" style="color: white;">Opis Produktu</p>
-        <p class="text"><a href="/delete/{{i.uuid_id}}" id="delete">Usuń</a></p>
+        <div class="buttons-card">
         <a href="/update?product={{i.name}}" class="btn btn-primary"
         >Change Information</a
         >
+        <a href="/delete/{{i.uuid_id}}" id="delete" class="btn btn-primary"><i class="fa-solid fa-trash"></i></a>
+      </div>
       </div>
     </div>
   </div>
@@ -90,7 +92,7 @@ href="{{ url_for('static',filename='styles/dashboard.css') }}"
 </div>
 </div>  
 <div class="new-product" style="position: sticky; top: 70px; z-index: 999; width: fit-content;">
-  <button class="add-button" data-toggle="modal" data-target="#exampleModal">+</button>
+  <button class="add-button" data-toggle="modal" data-target="#exampleModal"><i class="fa-solid fa-cart-plus"></i></button>
 </div>
 
 {% endblock %}
