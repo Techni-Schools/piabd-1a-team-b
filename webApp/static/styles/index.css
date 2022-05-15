@@ -2,6 +2,10 @@
   display: flex;
   align-items: center;
 }
+body, html {
+  height: 100%;
+  background: url("https://www.wallpaperflare.com/static/889/274/546/minimalism-retro-games-fishing-rod-game-wallpaper.jpg");
+}
 .account button {
   padding: 5px;
 }
@@ -31,8 +35,25 @@ p {
 .img-hello {
   height: 300px;
 }
+.hello {
+  position: relative;
+  height: 100%;
+}
+.box-hello {
+  position: absolute;
+  width: fit-content;
+  top: 50%;
+  left: 25%;
+}
 .row {
+  border-radius: 15px;
+  -webkit-box-shadow: -1px -1px 37px -1px rgba(0, 3, 255, 1);
+  -moz-box-shadow: -1px -1px 37px -1px rgba(0, 3, 255, 1);
+  box-shadow: -1px -1px 37px -1px rgba(0, 3, 255, 1);
+  height: auto;
+  width: 40vw;
   display: flex;
+  background: rgba(255, 255, 255, 0.6);
 }
 .row h3 {
   font-size: 15px;
@@ -64,23 +85,10 @@ p {
   text-decoration: none;
 }
 .hello {
-  height: fit-content;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   -webkit-animation: scale-in-center 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
     both;
   animation: scale-in-center 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
-.box-hello {
-  border-radius: 15px;
-  -webkit-box-shadow: -1px -1px 37px -1px rgba(0, 3, 255, 1);
-  -moz-box-shadow: -1px -1px 37px -1px rgba(0, 3, 255, 1);
-  box-shadow: -1px -1px 37px -1px rgba(0, 3, 255, 1);
-  height: auto;
-  width: 70vw;
-}
-
 @media only screen and (max-width: 667px) {
   .img-hello {
     height: 46vw;

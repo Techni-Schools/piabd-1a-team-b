@@ -4,23 +4,7 @@ block extrahead %}
   rel="stylesheet"
   href="{{ url_for('static',filename='styles/index.css') }}"
 />
-<script src="{{ url_for('static', filename='scripts/livesearch.js') }}"></script>
 {% endblock %} {% block main %}
-<div class="container">
-  <p></p>
-  <div class="search">
-    <input
-      type="text"
-      id="livebox"
-      name="text"
-      class="form-control"
-      placeholder="Find products"
-      autocomplete="off"
-    />
-    <p id="datalist"></p>
-  </div>
-</div>
-
 <div class="hello">
   <div class="box-hello">
     <div class="row">
@@ -35,13 +19,6 @@ block extrahead %}
             wędkarskimi
           </h3>
         </div>
-      </div>
-      <div class="col img-col">
-        <img
-          class="img-hello"
-          src="https://thumbs.dreamstime.com/b/niebieskie-ryby-p%C5%82ywaj%C4%85-wektorem-odizolowanym-zwierz%C4%99ta-oceaniczne-lub-morskie-wyizolowane-na-bia%C5%82ym-karp-dla-zwierz%C4%85t-170544396.jpg"
-          alt=""
-        />
       </div>
     </div>
   </div>

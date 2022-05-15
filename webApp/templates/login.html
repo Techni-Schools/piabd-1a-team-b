@@ -7,7 +7,57 @@
 {% endblock %}
 
 {% block main %} 
-
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {% from "_formhelpers.html" import render_field %}
+      <form method=post id="register-form">
+        <div id="0-1">
+        {{ render_field(form1.first_name) }}
+        {{ render_field(form1.last_name) }}
+        {{ render_field(form1.email) }}
+        {{ render_field(form1.date_of_birth) }}
+        {{ render_field(form1.phone_number) }}
+      </div>
+      <div id="0-2" style="display:none;">
+        {{ render_field(form1.street) }}
+        {{ render_field(form1.city) }}
+        {{ render_field(form1.zip_code) }}
+        {{ render_field(form1.state)}}
+        {{ render_field(form1.country) }}
+      </div>
+      <div id="0-3" style="display:none;">
+        {{ render_field(form1.username) }}
+        {{ render_field(form1.password) }}
+        {{ render_field(form1.confirm) }}
+        {{ render_field(form1.accept_tos)}}
+      </div>  
+      <p>
+    </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="backButton" style="display: none">
+          Go Back
+        </button>
+        <input
+          type="submit"
+          id="submitButton"
+          name="ta"
+          value="Submit"
+          style="display: none"
+        />
+        <button type="button" id="nextButton"name="niewiem">Next</button>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="container">
   <div class="box">
     <div class="login-form-2">
@@ -23,7 +73,10 @@
         </dl>
         <button type="submit" class="submitBtn"><i class="fa-solid fa-arrow-right-to-bracket"></i></button>
       </form>
-
+      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        Launch demo modal
+      </button>
+      
       
       
       <button><a href="/">default page</a></button>
@@ -37,29 +90,6 @@
         {% endif %} {% endwith %}
       </div> 
     </div>
-    
-    <form method=post>
-      <div class="0-1">
-        {{ render_field(form1.first_name) }}
-        {{ render_field(form1.last_name) }}
-        {{ render_field(form1.email) }}
-        {{ render_field(form1.date_of_birth) }}
-        {{ render_field(form1.phone_number) }}
-      </div>
-      <div class="0-2">
-        {{ render_field(form1.street) }}
-        {{ render_field(form1.city) }}
-        {{ render_field(form1.zip_code) }}
-        {{ render_field(form1.state)}}
-        {{ render_field(form1.country) }}
-      </div>
-      <div class="0-3">
-        {{ render_field(form1.username) }}
-        {{ render_field(form1.password) }}
-        {{ render_field(form1.confirm) }}
-        {{ render_field(form1.accept_tos)}}
-      </div>  
-      <p><input type=submit value=Login>
-    </form>
+    <script src="{{ url_for('static',filename='scripts/register.js') }}"></script>
 
 {% endblock %}

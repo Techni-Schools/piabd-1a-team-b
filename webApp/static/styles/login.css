@@ -9,6 +9,9 @@ html {
   align-items: center;
   text-align: center;
 }
+.modal-footer {
+  justify-content: space-between;
+}
 .box {
   border-radius: 15px;
   width: 800px;
