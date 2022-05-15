@@ -1,10 +1,13 @@
+body, html {
+  height: 100%;
+}
 .account {
   display: flex;
   align-items: center;
 }
 body, html {
-  height: 100%;
-  background: url("https://www.wallpaperflare.com/static/889/274/546/minimalism-retro-games-fishing-rod-game-wallpaper.jpg");
+  background-size: cover;
+  background: url("https://wallpaperaccess.com/full/6262168.jpg");
 }
 .account button {
   padding: 5px;
@@ -18,10 +21,6 @@ h4 {
 p {
   margin-bottom: 0;
   color: rgb(130, 184, 255);
-}
-.search {
-  margin-top: 40px;
-  margin-bottom: 40px;
 }
 .your-products {
   margin: 50px;
@@ -37,9 +36,10 @@ p {
 }
 .hello {
   position: relative;
-  height: 100%;
+  height: 75%;
 }
 .box-hello {
+  transform: translate(-50%, -50%);
   position: absolute;
   width: fit-content;
   top: 50%;
@@ -47,9 +47,9 @@ p {
 }
 .row {
   border-radius: 15px;
-  -webkit-box-shadow: -1px -1px 37px -1px rgba(0, 3, 255, 1);
-  -moz-box-shadow: -1px -1px 37px -1px rgba(0, 3, 255, 1);
-  box-shadow: -1px -1px 37px -1px rgba(0, 3, 255, 1);
+  -webkit-box-shadow: 1px 1px 40px 4px rgb(0, 136, 18);
+  -moz-box-shadow: 1px 1px 40px 4px rgba(0, 136, 18, 1);
+  box-shadow: 1px 1px 40px 4px rgba(0, 136, 18, 1);
   height: auto;
   width: 40vw;
   display: flex;
