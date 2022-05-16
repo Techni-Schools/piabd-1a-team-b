@@ -34,7 +34,7 @@
     ></script>
     {% block extrahead %}{% endblock %}
   </head>
-  <body onscroll="Hello()">
+  <body onload="window.scrollTo(0, 0);">
     <style>
       .col-sm {
         padding: 0;
@@ -99,10 +99,10 @@
       .logo-svg {
         height: 75px;
         width: fit-content;
-        transition: 0.2s;
+        transition: 0.5s;
       }
       .navbar-expand-md {
-        transition: 0.2s;
+        transition: 0.3s;
         -webkit-animation: fade-in 0.5s cubic-bezier(0.39, 0.575, 0.565, 1) both;
         animation: fade-in 0.5s cubic-bezier(0.39, 0.575, 0.565, 1) both;
         animation-delay: 0.5s;
@@ -174,7 +174,7 @@
       }
       .logo {
         height: 75px;
-        transition: 0.2s;
+        transition: 0.3s;
       }
     </style>
     <div class="fsakjfj">
@@ -257,8 +257,32 @@
         </div>
       </nav>
     </div>
-    <script type="text/javascript" src="{{ url_for('static', filename='scripts/header.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='scripts/livesearch.js') }}"></script>
     {% block main %} {% endblock %}
+
+    <script src="{{ url_for('static', filename='scripts/livesearch.js') }}"></script>
+    <script>
+      function chceckTa() {
+        if (window.matchMedia("(max-width: 700px)").matches) {
+          console.log("true");
+        } else {
+          window.onscroll = function () {
+            // console.log;
+            // "top: " +
+            // (window.pageYOffset || document.documentElement.scrollTop)();
+            if (pageYOffset == 0) {
+              document.getElementById("header").style.backgroundColor = "white";
+              document.getElementById("header").style.height = "100px";
+              document.getElementById("logo").style.height = "75px";
+            }
+            if (pageYOffset > 0) {
+              document.getElementById("header").style.backgroundColor = "grey";
+              document.getElementById("header").style.height = "50px";
+              document.getElementById("logo").style.height = "45px";
+            }
+          };
+        }
+      }
+      window.addEventListener("resize", chceckTa());
+    </script>
   </body>
 </html>
