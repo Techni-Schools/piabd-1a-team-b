@@ -1,1 +1,3 @@
-window.onscroll = console.log("fej");
+function Hello() {
+  console.log(1);
+}

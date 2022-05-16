@@ -50,48 +50,23 @@ block extrahead %}
   </div>
 </div>
 <!-- <div class="hello">
-  <div class="box-hello">
-    <div class="row">
-      <div class="col">
-        <div class="hello-text">
-          <h1>Hello Everyone</h1>
-          <h3 class="wtf-man">
-            Witamy w naszym projekcie! przedstawimy dzisiaj nasz projekt którem
-            jest <span class="inner-text">Sklep Wędkarski "Wędkarsko"</span>.
-            Naszym celem było stworzenie strony która umożliwia wystawianie
-            przedmiotów przez użytkowników które sa związane z rzeczamy
-            wędkarskimi
-          </h3>
+    <div class="box-hello">
+      <div class="row">
+        <div class="col">
+          <div class="hello-text">
+            <h1>Hello Everyone</h1>
+            <h3 class="wtf-man">
+              Witamy w naszym projekcie! przedstawimy dzisiaj nasz projekt którem
+              jest <span class="inner-text">Sklep Wędkarski "Wędkarsko"</span>.
+              Naszym celem było stworzenie strony która umożliwia wystawianie
+              przedmiotów przez użytkowników które sa związane z rzeczamy
+              wędkarskimi
+            </h3>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-</div> -->
-
-<script>
-  function chceckMobile() {
-    if (window.matchMedia("(max-width: 767px)").matches) {
-      console.log("true");
-    } else {
-      window.onscroll = function () {
-        console
-          .log
-          // "top: " + (window.pageYOffset || document.documentElement.scrollTop)
-          ();
-        if (pageYOffset == 0) {
-          document.getElementById("header").style.backgroundColor = "white";
-          document.getElementById("header").style.height = "100px";
-          document.getElementById("logo").style.height = "75px";
-        }
-        if (pageYOffset > 0) {
-          document.getElementById("header").style.backgroundColor = "grey";
-          document.getElementById("header").style.height = "50px";
-          document.getElementById("logo").style.height = "45px";
-        }
-      };
-    }
-  }
-  window.addEventListener("resize", chceckMobile());
-</script>
+  </div> -->
+<script></script>
 <script src="{{ url_for('static', filename='scripts/index.js') }}"></script>
 {% endblock %}
