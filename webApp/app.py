@@ -1,3 +1,4 @@
+from math import prod
 from lib import *
 from settings import *
 from model import *
@@ -109,11 +110,14 @@ def dashboard():
     if u == []: u = ['You dont have any products yet']
     return render_template('dashboard.html', u=u, form=form)
 
-@app.route('/delete/<product>')
+@app.route('/delete')
 @login_required
-def delete(product):
-  db.session.query(products).filter(products.uuid_id == str(product), products.user == current_user.get_id()).update({products.isDeleted: True})
-  db.session.commit()
+def delete():
+  try:
+    db.session.query(products).filter(products.uuid_id == str(request.args['product']), products.user == current_user.get_id()).update({products.isDeleted: True})
+    db.session.commit()
+  except:
+    pass
   return redirect('/dashboard')
 
 @app.route('/addproduct', methods=['GET' , 'POST'])
@@ -152,11 +156,11 @@ def profile(username):
   q = db.session.query(users.username).filter(users.username == username).first()
   if q:
     try:
-      cu = db.session.query(products.name, products.description, products.image, products.price, products.quantity, category.category_name).join(category).join(users).filter(users.username == username).filter(products.name.like(request.args['product'])).first()
+      cu = db.session.query(products.name, products.description, products.image, products.price, products.quantity, category.category_name).join(category).join(users).filter(users.username == username, products.isDeleted == 0).filter(products.name.like(request.args['product'])).first()
       if request.args['product'] == '':
         raise ValueError("a should be nonzero")
     except:
-      cu = db.session.query(products.name, products.image, category.category_name).join(category).join(users).filter(users.username == username).all()
+      cu = db.session.query(products.name, products.image, category.category_name).join(category).join(users).filter(users.username == username, products.isDeleted == 0).all()
     if cu:
       pass
     else:
