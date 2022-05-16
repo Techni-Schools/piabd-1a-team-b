@@ -8,6 +8,7 @@ html {
 }
 .container-hello {
   height: 100vh;
+  background: url("https://i.pinimg.com/originals/46/1d/25/461d254f8563f8945ce3a385f289df17.jpg");
 }
 .hello-text-div {
   height: 25%;
@@ -107,7 +108,7 @@ html {
     fade-in 1s cubic-bezier(0.39, 0.575, 0.565, 1) 0.5 both;
 }
 .fajnie {
-  height: 500px;
+  height: 600px;
 }
 .news {
   height: 300px;
@@ -183,7 +184,7 @@ html {
     height: auto;
   }
   .fajnie {
-    height: 400px;
+    height: 400;
   }
 }
 @-webkit-keyframes bounce {

@@ -33,6 +33,7 @@ def index():
     
 
 @app.route('/balance', methods=['POST', 'GET'])
+@login_required
 def balance():
   form = addBalance(request.form)
   if request.method == 'POST' and form.validate():
