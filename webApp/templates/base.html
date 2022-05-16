@@ -102,7 +102,7 @@
         transition: 0.2s;
       }
       .navbar-expand-md {
-        transition: 0.5s;
+        transition: 0.2s;
         -webkit-animation: fade-in 0.5s cubic-bezier(0.39, 0.575, 0.565, 1) both;
         animation: fade-in 0.5s cubic-bezier(0.39, 0.575, 0.565, 1) both;
         animation-delay: 0.5s;
@@ -174,7 +174,7 @@
       }
       .logo {
         height: 75px;
-        transition: 0.5s;
+        transition: 0.2s;
       }
     </style>
     <div class="fsakjfj">
@@ -257,8 +257,8 @@
         </div>
       </nav>
     </div>
-    <script src="{{ url_for('static', filename='scripts/header.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/livesearch.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='scripts/header.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='scripts/livesearch.js') }}"></script>
     {% block main %} {% endblock %}
   </body>
 </html>

@@ -4,6 +4,7 @@ block extrahead %}
   rel="stylesheet"
   href="{{ url_for('static',filename='styles/index.css') }}"
 />
+<script type="text/javascript" src="{{ url_for('static', filename='scripts/index.js') }}"></script>
 {% endblock %} {% block main %}
 <div class="container-hello">
   <div class="jestokej">
@@ -68,5 +69,5 @@ block extrahead %}
     </div>
   </div> -->
 <script></script>
-<script src="{{ url_for('static', filename='scripts/index.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='scripts/index.js') }}"></script>
 {% endblock %}
