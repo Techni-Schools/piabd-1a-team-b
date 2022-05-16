@@ -18,3 +18,16 @@ na
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import  FileStorage
 """
+
+"""
+DO FLASK-LOGIN W UserMixin TRZEBA DODAC FUNKCJE GET_BALANCE
+
+def get_balance(self):
+    try:
+        return str(self.balance)
+    except AttributeError:
+        raise NotImplementedError("No `balance` attribute - override `get_balance`") from None
+
+POD FUNKCJA GET_ID
+
+"""

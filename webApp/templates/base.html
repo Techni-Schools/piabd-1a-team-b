@@ -216,6 +216,7 @@
                 "
               >
                 {% if current_user.is_authenticated %}
+                {{current_user.get_balance()}}
                 <div class="account" style="display: flex">
                   <a href="/logout">
                     <button class="account-buttons hover-exit">
