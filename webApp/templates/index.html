@@ -25,17 +25,24 @@ block extrahead %}
     </div>
   </div>
   <div class="get-down">
-    <i class="fa-solid fa-arrow-down"></i>
+    <a href="#news-1">
+      <i class="fa-solid fa-arrow-down"></i>
+    </a>
   </div>
 </div>
 <div class="fajnie">
   <div class="news-text" id="news-text">
-    <h2 class="news-text-h2" id="news-text-h2">Nasze zdolnosci</h2>
+    <h2 class="news-text-h2" id="news-text-h2">Nasze Cele:</h2>
   </div>
   <div class="news" id="news-1">
     <div class="row" id="row-1">
       <div class="col-sm">
         <div class="image-col"></div>
+        <div class="text-col-head">Stworzyc Sklep</div>
+        <div class="text-col-disc">
+          Naszym celem bylo stworzyc strone ktora pozwalawla kupowanie
+          przedmiotow, gdzie uzytkownicy decyduja co kupuja i sprzedaja
+        </div>
       </div>
       <div class="col-sm">2-3</div>
       <div class="col-sm">3-3</div>
@@ -62,6 +69,7 @@ block extrahead %}
 </div> -->
 
 <script>
+  window.onload = window.scrollTo(0, 0);
   window.onscroll = function () {
     console.log(
       "top: " + (window.pageYOffset || document.documentElement.scrollTop)
@@ -70,7 +78,7 @@ block extrahead %}
       document.getElementById("news-text").style.display = "block";
       document.getElementById("news-text").className =
         "news-text start-animation";
-      if (window.pageYOffset > 250) {
+      if (window.pageYOffset > 350) {
         document.getElementById("row-1").style.display = "flex";
         document.getElementById("news-1").className = "news start-animation";
       }

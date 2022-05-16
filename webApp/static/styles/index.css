@@ -1,3 +1,6 @@
+* {
+  scroll-behavior: smooth;
+}
 body,
 html {
   height: 100%;
@@ -161,6 +164,9 @@ html {
   }
 }
 @media only screen and (max-width: 578px) {
+  .container-hello {
+    height: 100%;
+  }
   .col-sm {
     margin-bottom: 30px;
     height: 300px;
@@ -171,6 +177,9 @@ html {
   }
   .news {
     height: auto;
+  }
+  .fajnie {
+    height: 300px;
   }
 }
 @-webkit-keyframes bounce {
