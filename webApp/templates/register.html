@@ -1,55 +1,38 @@
-{% extends 'base.html' %}
-
-{% block title %} Register Page {% endblock %}
-
-{% block extrahead %} 
+{% extends 'base.html' %} {% block title %} Register Page {% endblock %} {%
+block extrahead %}
 <link
-rel="stylesheet"
-href="{{ url_for('static',filename='styles/register.css') }}"
+  rel="stylesheet"
+  href="{{ url_for('static',filename='styles/register.css') }}"
 />
 <link
-rel="stylesheet"
-href="{{ url_for('static',filename='styles/reset.css') }}"
+  rel="stylesheet"
+  href="{{ url_for('static',filename='styles/reset.css') }}"
 />
-{% endblock %}
-
-{% block main %} 
-
-{% from "_formhelpers.html" import render_field %}
+{% endblock %} {% block main %} {% from "_formhelpers.html" import render_field
+%}
 <form method="post" id="myForm">
   <div class="form">
-    <div class="0-1" id="0-1">
       {{ render_field(form.first_name) }}
       <!-- id = first_nema -->
       {{ render_field(form.last_name) }}
       <!-- id = last_name-->
-      {{ render_field(form.email) }} {{ render_field(form.date_of_birth) }}
-      {{ render_field(form.phone_number) }}
-    </div>
-    <div class="0-2" id="0-2" style="display: none">
+      {{ render_field(form.email) }} {{ render_field(form.date_of_birth) }} {{
+      render_field(form.phone_number) }}
       {{ render_field(form.street) }} {{ render_field(form.city) }} {{
       render_field(form.zip_code) }} {{ render_field(form.state)}} {{
       render_field(form.country) }}
-    </div>
-    <div class="0-3" id="0-3" style="display: none">
       {{ render_field(form.username) }} {{ render_field(form.password) }} {{
       render_field(form.confirm) }} {{ render_field(form.accept_tos)}}
-    </div>
-    <button type="button" id="nextButton" name="niewiem">Next</button>
-    <input
+      <input
       type="submit"
       id="submitButton"
       name="ta"
       value="Submit"
       style="display: block"
     />
-    <button type="button" id="backButton" style="display: none">
-      Go Back
-    </button>
-    
+    </div>
   </div>
 </form>
-<button><a href="/">default page</a></button>
 {% if current_user.is_authenticated %} Hi {{ current_user.username }}!
 <button><a href="/logout">logout</a></button>
 {% endif %} {% with messages = get_flashed_messages() %} {% if messages %}
@@ -58,7 +41,4 @@ href="{{ url_for('static',filename='styles/reset.css') }}"
   <p style="color: red">{{ message }}</p>
   {% endfor %}
 </ul>
-{% endif %} {% endwith %}
-
-<script src="{{url_for('static', filename='scripts/register.js')}}"></script>
-{% endblock %}
+{% endif %} {% endwith %} {% endblock %}
