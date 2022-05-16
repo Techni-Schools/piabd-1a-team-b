@@ -1,19 +1,35 @@
 {% extends 'base.html' %}
 
-{% block title %} sklep - {{user}} {% endblock %}
+{% block title %} Edytuj produkt {% endblock %}
+
+{% block extrahead %}
+<link rel="stylesheet" href="{{url_for('static', filename='styles/update.css')}}">
+{% endblock %}
 
 {% block main %} 
 
 <button><a href="/">Default page</a></button>
   {% if request.args['product']%}
-  {{prd.name}}
-  {{prd.description}}
-  <form method="POST" action="/update?product={{prd.name}}">
-    <input type="text" name="name" value="{{prd.name}}">
-    <input type="text" name="description" value="{{prd.description}}">
-    <input type="submit" value="Submit">
+  <br>
+  <br>
+  produkt - {{prd.name}}
+  <br>
+  <br>
+  {% from "_formhelpers.html" import render_field %}
+  <form method="post" enctype="multipart/form-data">
+    <dl>
+      {{ render_field(form.name) }}
+      {{ render_field(form.image) }}
+      {{ render_field(form.category) }}
+      {{ render_field(form.price) }}
+      {{ render_field(form.description) }}
+      {{ render_field(form.quantity) }}
+    </dl>
+    <p><input type=submit value=Add>
   </form>
   {% endif %}
+
+
   {% with messages = get_flashed_messages() %}
   {% if messages %}
   <ul class=flashes>
@@ -23,5 +39,21 @@
     </ul>
   {% endif %}
 {% endwith %}
+
+<script>
+$(document).ready(function(){
+  let ff15 = $('input').parent()[2];
+  ff15.innerHTML += `<img class="zdjencie" src="{{url_for('static', filename=image)}}"></img>`;
+  $('#name').val('{{prd.name}}');
+  $('#category').val($('#category').children()['{{prd.category}}'-1].innerHTML);
+  $('#price').val('{{prd.price}}');
+  $('#description').val(`{{prd.description}}`);
+  $('#quantity').val('{{prd.quantity}}');
+  $('.zdjencie').click(function() {
+    $('#image').click();
+  });
+});
+
+</script>
 
 {% endblock %}

@@ -1,7 +1,7 @@
 from lib import *
 from settings import *
-from model import *
-from forms import loginForm, registerForm, newProduct, addBalance
+from model import products, users, orders, category, chat
+from forms import loginForm, registerForm, newProduct, addBalance, updateProduct
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -182,16 +182,22 @@ def search():
 @app.route('/update', methods=['POST', 'GET'])
 @login_required
 def update():
-  cu = db.session.query(products.name, products.description).join(users).filter(products.name == request.args['product']).filter(users.username == current_user.username).first()
-  if cu == None:
-    flash('nie posiadasz takiego produktu')
+  form = updateProduct(CombinedMultiDict((request.files, request.form)))
+  cu = db.session.query(products).join(users).filter(products.uuid_id == request.args['product']).filter(users.username == current_user.username).first()
+  path = r'%s' % (os.path.join('images', cu.image),)
+  path = path.replace("\\", "/")
+  if cu is None:
+    flash('Nie mo')
     return redirect('/dashboard')
-  if request.method == 'POST':
-    if request.form['name'] != '' and request.form['description'] != '':
-      db.session.query(products).filter(products.name == request.args['product']).update({products.name: request.form['name'], products.description: request.form['description']})
-      db.session.commit()
-      return redirect('/dashboard')
-    else:
-      flash('Jakas wartosc byla nullowa :(')
-      return redirect('/update?product='+request.args['product'])
-  return render_template('update.html', prd=cu)
+  if request.method == 'POST' and form.validate():
+    print(form.image.data)
+    if form.image.data is not None:
+      form.image.data.save(os.path.join(app.config['UPLOAD_FOLDER'], cu.image))
+    c = db.session.query(category.id).filter(category.category_name == form.category.data).first()
+    c = c[0]
+    db.session.query(products).filter(products.uuid_id == str(request.args['product'])).update({products.name: form.name.data, products.category: c, products.price: form.price.data, products.description: form.description.data, products.quantity: form.quantity.data})
+
+
+    db.session.commit()
+    return redirect('/dashboard')
+  return render_template('update.html', prd=cu, form=form, image=path)

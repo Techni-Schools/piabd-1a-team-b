@@ -9,17 +9,8 @@ $(document).ready(function () {
           var data = "<div class='list-group'>";
           $.each(res, function (index, value) {
             data +=
-              "<a class='aa' href=" +
-              "'/profile/" +
-              value.user +
-              "?product=" +
-              value.name +
-              "'" +
-              ">" +
-              "<p class='list-group-item list-group-item-action'>" 
-              + 
-              value.name +
-              "</p></a>";
+            `<a class='aa' href='/profile/${value.user}?product=${value.name}'>
+            <p class='list-group-item list-group-item-action'>${value.name}</p></a>`;
           });
           data += "</div>";
           $("#datalist").html(data);

@@ -78,7 +78,7 @@ href="{{ url_for('static',filename='styles/dashboard.css') }}"
         <p class="price" style="color: white;">{{i.price}}zł</p>
         <p class="card-text" style="color: white;">Opis Produktu</p>
         <div class="buttons-card">
-        <a href="/update?product={{i.name}}" class="btn btn-primary"
+        <a href="/update?product={{i.uuid_id}}" class="btn btn-primary"
         >Change Information</a
         >
         <a href="/delete?product={{i.uuid_id}}" id="delete" class="btn btn-primary"><i class="fa-solid fa-trash"></i></a>

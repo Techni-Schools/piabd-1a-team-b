@@ -33,3 +33,11 @@ class newProduct(Form):
 
 class addBalance(Form):
     balance = DecimalField('Add Balance', [validators.DataRequired(), validators.NumberRange(min=0, max=999)])
+
+class updateProduct(Form):
+    name = StringField('Name', [validators.Length(min=1)])
+    image = FileField('Image')
+    category = SelectField('Category', choices=['Splawik', 'Wendka', 'Przynenty', 'Rzylki', 'Akcesoria'])
+    price = DecimalField('Price', [validators.DataRequired(), validators.NumberRange(min=0, max=99999)])
+    description = TextAreaField('Description')
+    quantity = IntegerField('Quantity', [validators.DataRequired()])
