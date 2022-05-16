@@ -18,7 +18,7 @@
       </div>
       <div class="modal-body">
         {% from "_formhelpers.html" import render_field %}
-      <form method=post id="register-form">
+      <form method=post id="register-form" action="{{url_for('register')}}">
         <div id="0-1">
         {{ render_field(form1.first_name) }}
         {{ render_field(form1.last_name) }}
@@ -66,7 +66,7 @@
   </div>  
     <div class="login-form-1">
       {% from "_formhelpers.html" import render_field %}
-      <form method="post" class="form-login">
+      <form method="post" class="form-login" action="{{url_for('login')}}">
         <dl>
           {{ render_field(form.username) }} {{ render_field(form.password)
           }} {{ render_field(form.remember) }}

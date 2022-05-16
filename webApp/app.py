@@ -48,40 +48,41 @@ def login():
     return redirect('/')
   form = loginForm(request.form)
   form1 = registerForm(request.form)
-  if request.method == 'POST' and form1.validate():
-    print(form1.first_name.data)
-    return redirect('/login')
-  elif request.method == 'POST' and form.validate():
-      username = form.username.data
-      password = form.password.data
-      loggedUser = users.query.filter_by(username=username).first()
-      if loggedUser:
-        if bcrypt.checkpw(password.encode(), (loggedUser.password).encode()):
-          login_user(loggedUser, remember=form.remember.data)
-          return redirect(url_for('dashboard'))
-        else:
-          flash('Incorrect username or password')
-          return redirect('/login')
+  # if request.method == 'POST' and form.validate():
+  #   print(form.first_name.data)
+  #   return redirect('/login')
+  if request.method == 'POST' and form.validate():
+    username = form.username.data
+    password = form.password.data
+    loggedUser = users.query.filter_by(username=username).first()
+    if loggedUser:
+      if bcrypt.checkpw(password.encode(), (loggedUser.password).encode()):
+        login_user(loggedUser, remember=form.remember.data)
+        return redirect(url_for('dashboard'))
       else:
-          flash('Incorrect username or password')
-          return redirect('/login')
+        flash('Incorrect username or password')
+        return redirect('/login')
+    else:
+        flash('Incorrect username or password')
+        return redirect('/login')
   return render_template('login.html', form=form, form1=form1)
 
 @app.route('/register' , methods=['GET' , 'POST'])
 def register():
   if current_user.is_authenticated:
     return redirect('/')
-  form = registerForm(request.form)
-  if request.method == 'POST' and form.validate():
-    u = users(username=form.username.data, email=form.email.data, password=bcrypt.hashpw((form.password.data).encode(), bcrypt.gensalt()), first_name=form.first_name.data, last_name=form.last_name.data, date_of_birth=form.date_of_birth.data, phone_number=form.phone_number.data, street=form.street.data, city=form.city.data, state=form.state.data, zip_code=form.zip_code.data, country=form.country.data)
+  form = loginForm(request.form)
+  form1 = registerForm(request.form)
+  if request.method == 'POST' and form1.validate():
+    u = users(username=form1.username.data, email=form1.email.data, password=bcrypt.hashpw((form1.password.data).encode(), bcrypt.gensalt()), first_name=form1.first_name.data, last_name=form1.last_name.data, date_of_birth=form1.date_of_birth.data, phone_number=form1.phone_number.data, street=form1.street.data, city=form1.city.data, state=form1.state.data, zip_code=form1.zip_code.data, country=form1.country.data)
     try:
       db.session.add(u)
       db.session.commit()
     except:
       flash('Username, Email or Phone number already used')
-      return redirect('/register')
+      return redirect('/login')
     return redirect('/login')
-  return render_template('register.html', form=form)
+  return render_template('login.html', form=form, form1=form1)
 
 @app.route('/dashboard', methods=['POST', 'GET'])
 @login_required
