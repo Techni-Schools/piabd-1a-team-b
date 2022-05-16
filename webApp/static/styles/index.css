@@ -125,7 +125,7 @@ html {
 .row {
   display: none;
   height: 300px;
-  width: 900px;
+  width: fit-content;
 }
 @-webkit-keyframes slide-top {
   0% {
