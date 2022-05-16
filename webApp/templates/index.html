@@ -74,11 +74,17 @@ block extrahead %}
     console.log(
       "top: " + (window.pageYOffset || document.documentElement.scrollTop)
     );
+    if (pageYOffset == 0) {
+      document.getElementById("header").style.backgroundColor = "white";
+    }
+    if (pageYOffset > 0) {
+      document.getElementById("header").style.backgroundColor = "grey";
+    }
     if (window.pageYOffset > 150) {
       document.getElementById("news-text").style.display = "block";
       document.getElementById("news-text").className =
         "news-text start-animation";
-      if (window.pageYOffset > 350) {
+      if (window.pageYOffset > 450) {
         document.getElementById("row-1").style.display = "flex";
         document.getElementById("news-1").className = "news start-animation";
       }
