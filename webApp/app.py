@@ -1,4 +1,3 @@
-from math import prod
 from lib import *
 from settings import *
 from model import *
