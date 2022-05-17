@@ -91,19 +91,16 @@ def dashboard():
   form = newProduct(CombinedMultiDict((request.files, request.form)))
   if request.method == 'POST' and form.validate():
     myFile = str(uuid.uuid4())
-    myUuidId = str(uuid.uuid4())
     form.image.data.save(os.path.join(app.config['UPLOAD_FOLDER'], myFile))
     c = db.session.query(category.id).filter(category.category_name == form.category.data).first()
     c = c[0]
-    q = products(form.name.data, myFile, c, form.price.data, form.description.data, 0, form.quantity.data, current_user.id, myUuidId)
+    q = products(form.name.data, myFile, c, form.price.data, form.description.data, 0, form.quantity.data, current_user.id)
     db.session.add(q)
     # ------------------------------------------------------
     #           TRZEBA ZROBIC SPRAWDZENIE CZY ZDJENCIE
     # ------------------------------------------------------
     db.session.commit()
     flash('produkt dodany pomyślnie!')
-    return redirect('/dashboard')
-  elif request.method == 'POST' and not (form.validate()):
     return redirect('/dashboard')
   else:
     u = db.session.query(products.uuid_id, products.name, products.image, category.category_name, products.quantity, products.price).join(category).join(users).filter(users.username == current_user.username, products.isDeleted == 0).all()

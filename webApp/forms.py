@@ -1,6 +1,5 @@
 from lib import *
 
-images = UploadSet('images', IMAGES)
 
 class loginForm(Form):
     username = StringField('Username', [validators.DataRequired(), validators.Length(min=4, max=20)])
@@ -25,7 +24,7 @@ class registerForm(Form):
 
 class newProduct(Form):
     name = StringField('Name', [validators.Length(min=1)])
-    image = FileField('Image', validators=[FileRequired()])
+    image = FileField('Image', validators=[FileRequired(), FileAllowed(list(IMAGES), 'images only')])
     category = SelectField('Category', choices=['Splawik', 'Wendka', 'Przynenty', 'Rzylki', 'Akcesoria'])
     price = DecimalField('Price', [validators.DataRequired(), validators.NumberRange(min=0, max=99999)])
     description = TextAreaField('Description')
@@ -36,7 +35,7 @@ class addBalance(Form):
 
 class updateProduct(Form):
     name = StringField('Name', [validators.Length(min=1)])
-    image = FileField('Image')
+    image = FileField('Image', validators=[FileAllowed(list(IMAGES), 'images only')])
     category = SelectField('Category', choices=['Splawik', 'Wendka', 'Przynenty', 'Rzylki', 'Akcesoria'])
     price = DecimalField('Price', [validators.DataRequired(), validators.NumberRange(min=0, max=99999)])
     description = TextAreaField('Description')

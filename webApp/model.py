@@ -12,9 +12,9 @@ class products(db.Model):
     discount = db.Column(db.Integer, default=0, nullable=False)
     quantity = db.Column(db.Integer, nullable=False, default=1)
     user = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
-    uuid_id = db.Column(db.String(100), nullable=False)
+    uuid_id = db.Column(db.String(100), nullable=False, default=uuid.uuid4)
     isDeleted = db.Column(db.Boolean, default=False, nullable=False)
-    def __init__(self, name, image, category, price, description, discount, quantity, user, uuid_id):
+    def __init__(self, name, image, category, price, description, discount, quantity, user):
         self.name = name
         self.image = image
         self.category = category
@@ -23,7 +23,6 @@ class products(db.Model):
         self.discount = discount
         self.quantity = quantity
         self.user = user
-        self.uuid_id = uuid_id
 
 
 class category(db.Model):
