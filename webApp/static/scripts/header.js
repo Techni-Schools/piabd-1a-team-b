@@ -17,11 +17,11 @@ function chceckTa() {
       }
       try {
         if (niewiem.x == "header") { // podstrona "index.html"
-          if (window.pageYOffset > 350) {
+          if (window.pageYOffset > 250) {
             document.getElementById("news-text").className = "news-text start-animation"
             document.getElementById("news-text").style.display = "block"            
           } 
-          if (window.pageYOffset > 550) {
+          if (window.pageYOffset > 350) {
             document.getElementById("row-1").style.display = "flex";
             document.getElementById("news-1").className = "news start-animation";
           }
