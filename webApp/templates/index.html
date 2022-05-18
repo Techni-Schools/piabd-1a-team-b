@@ -18,17 +18,17 @@ block extrahead %}
     </div>
     <div class="hello-buttons-div 0-3">
       {% if current_user.is_authenticated %}
-      <a href="/login">
+      <a href="/dashboard">
         <button class="login-button">Twoje Produkty</button>
       </a>
       <a href="/register">
-        <button class="register-button">Kupuj Produkty</button>
+        <button class="register-button">Kupuj Produkty</button> <!-- jak cos tu jest register bo nie mamy podstrony do wszystkich produktów --> 
       </a>
       {% else %}
       <a href="/login">
         <button class="login-button">Zaloguj sie</button>
       </a>
-      <a href="/register">
+      <a href="/register/">
         <button class="register-button">Zarejestruj sie</button>
       </a>
       {% endif %}

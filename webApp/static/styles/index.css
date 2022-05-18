@@ -8,7 +8,7 @@ html {
 }
 .container-hello {
   height: 70vh;
-  background:#212121;
+  background: #212121;
 }
 .hello-text-div {
   height: 25%;
@@ -37,10 +37,11 @@ html {
   font-size: 25px;
 }
 .hello-buttons-div {
-  -webkit-animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-  animation: slide-in-bottom 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  -webkit-animation: slide-in-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    both;
+  animation: slide-in-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   animation-delay: 1.5s;
-  height: 25%;
+  height: 200px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -62,17 +63,18 @@ html {
 }
 .hello-text {
   font-family: "Montserrat", sans-serif;
-    -webkit-animation: tracking-in-expand 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
-            animation: tracking-in-expand 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+  -webkit-animation: tracking-in-expand 1s cubic-bezier(0.215, 0.61, 0.355, 1)
+    both;
+  animation: tracking-in-expand 1s cubic-bezier(0.215, 0.61, 0.355, 1) both;
 }
 .hello-text span {
   font-weight: bolder;
 }
 .hello-mini-text {
   font-size: 20px;
-  -webkit-animation: fade-in 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-	        animation: fade-in 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-    animation-delay: 1.2s;
+  -webkit-animation: fade-in 2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  animation: fade-in 2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+  animation-delay: 1.2s;
 }
 .news-text {
   margin-bottom: 20px;
@@ -113,10 +115,8 @@ html {
 .start-animation {
   margin-top: 20px;
   margin-bottom: 20px;
-  -webkit-animation:
-    fade-in 1s cubic-bezier(0.39, 0.575, 0.565, 1) 0.5 both;
-  animation:
-    fade-in 1s cubic-bezier(0.39, 0.575, 0.565, 1) 0.5 both;
+  -webkit-animation: fade-in 1s cubic-bezier(0.39, 0.575, 0.565, 1) 0.5 both;
+  animation: fade-in 1s cubic-bezier(0.39, 0.575, 0.565, 1) 0.5 both;
 }
 .fajnie {
   height: 724px;
@@ -148,7 +148,7 @@ html {
   height: auto;
 }
 .row {
-  display: none;  
+  display: none;
   margin: 0;
   width: auto;
   height: auto;
@@ -156,10 +156,10 @@ html {
 @media only screen and (max-width: 776px) {
   .news {
     padding-right: 10px;
-    padding-left: 10px ;
+    padding-left: 10px;
   }
   .col {
-    margin-bottom:15px;
+    margin-bottom: 15px;
   }
 }
 @media only screen and (max-width: 578px) {
@@ -171,7 +171,7 @@ html {
     padding: 0;
     margin-bottom: 30px;
     height: 400px;
-    padding:20px; 
+    padding: 20px;
   }
   .image {
     border-radius: 10px;
@@ -179,7 +179,6 @@ html {
   }
   .row {
     height: auto;
-    width: 400px;
   }
   .news {
     height: auto;
@@ -200,7 +199,7 @@ html {
  * animation tracking-in-expand
  * ----------------------------------------
  */
- @-webkit-keyframes tracking-in-expand {
+@-webkit-keyframes tracking-in-expand {
   0% {
     letter-spacing: -0.5em;
     opacity: 0;
@@ -356,59 +355,59 @@ html {
     transform: translate3d(0, -4px, 0);
   }
 }
- @-webkit-keyframes puff-in-center {
+@-webkit-keyframes puff-in-center {
   0% {
     -webkit-transform: scale(2);
-            transform: scale(2);
+    transform: scale(2);
     -webkit-filter: blur(4px);
-            filter: blur(4px);
+    filter: blur(4px);
     opacity: 0;
   }
   100% {
     -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
     -webkit-filter: blur(0px);
-            filter: blur(0px);
+    filter: blur(0px);
     opacity: 1;
   }
 }
 @keyframes puff-in-center {
   0% {
     -webkit-transform: scale(2);
-            transform: scale(2);
+    transform: scale(2);
     -webkit-filter: blur(4px);
-            filter: blur(4px);
+    filter: blur(4px);
     opacity: 0;
   }
   100% {
     -webkit-transform: scale(1);
-            transform: scale(1);
+    transform: scale(1);
     -webkit-filter: blur(0px);
-            filter: blur(0px);
+    filter: blur(0px);
     opacity: 1;
   }
 }
- @-webkit-keyframes slide-in-bottom {
+@-webkit-keyframes slide-in-bottom {
   0% {
     -webkit-transform: translateY(1000px);
-            transform: translateY(1000px);
+    transform: translateY(1000px);
     opacity: 0;
   }
   100% {
     -webkit-transform: translateY(0);
-            transform: translateY(0);
+    transform: translateY(0);
     opacity: 1;
   }
 }
 @keyframes slide-in-bottom {
   0% {
     -webkit-transform: translateY(1000px);
-            transform: translateY(1000px);
+    transform: translateY(1000px);
     opacity: 0;
   }
   100% {
     -webkit-transform: translateY(0);
-            transform: translateY(0);
+    transform: translateY(0);
     opacity: 1;
   }
 }

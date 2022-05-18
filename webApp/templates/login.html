@@ -58,24 +58,21 @@
     </div>
   </div>
 </div>
-<div class="container">
-  <div class="box">
-    <div class="login-form-2">
-      <h1>Welcome to Login</h1>
-      <h2>Enter your Username and Password </h2>
-  </div>  
-    <div class="login-form-1">
-      {% from "_formhelpers.html" import render_field %}
-      <form method="post" class="form-login" action="{{url_for('login')}}">
-        <dl>
-          {{ render_field(form.username) }} {{ render_field(form.password)
-          }} {{ render_field(form.remember) }}
-        </dl>
-        <button type="submit" class="submitBtn"><i class="fa-solid fa-arrow-right-to-bracket"></i></button>
-      </form>
-      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-        Launch demo modal
-      </button>
+  <div class="form-login">
+    <div class="border-box">
+      <div class="form-login-box">
+        {% from "_formhelpers.html" import render_field %}
+        <form method="post" action="{{url_for('login')}}">
+          <dl>
+            {{ render_field(form.username) }} {{ render_field(form.password)
+            }} {{ render_field(form.remember) }}
+          </dl>
+          <button type="submit" class="submitBtn">Zaloguj <i class="fa-solid fa-arrow-right-to-bracket"></i></button>
+          <button>ds</button>
+        </form>
+      </div>
+    </div>
+  </div>
       
       
       

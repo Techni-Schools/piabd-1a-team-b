@@ -1,3 +1,3 @@
 var niewiem = {
-    x : 'header'
+  x: "header",
 };

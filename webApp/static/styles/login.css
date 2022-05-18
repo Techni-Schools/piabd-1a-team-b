@@ -1,77 +1,42 @@
-
-.container {
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-}
-.modal-footer {
-  justify-content: space-between;
-}
-.box {
-  border-radius: 15px;
-  width: 800px;
-  height: 500px;
-  background-color: rgb(233, 233, 233);
-  display: grid;
-  grid-template-columns: 400px 400px;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
+body,
+html {
+  height: 100vh;
+  position: relative;
 }
 .form-login {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  text-align: center;
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
-dd {
-  margin: 0;
+.form-login-box {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  height: 400px;
+  width: 300px;
+  background-color: rgba(96, 96, 96, 0.2);
+  border-radius: 15px;
+}
+.login-text {
+  padding: 0px;
 }
 input {
-  padding: 10px;
-  border-radius: 10px;
-  font-size: 15px;
-  border: 3px solid rgb(0, 217, 255);
-  background-color: rgb(238, 238, 238);
+  padding: 5px;
+  border-radius: 6px;
+  transition: 0.2s;
+  text-align: center;
+  width: 200px;
+  border: none;
+  border-bottom: 3px solid rgb(0, 0, 0);
   outline: none;
 }
-dt {
-  padding: 10px;
+input:focus {
+  border-bottom: 3px solid rgb(0, 136, 181);
 }
-.login-form-2 {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-radius: 12px;
-  height: 100%;
-  background: url("https://media.istockphoto.com/vectors/underwater-background-with-fish-silhouettes-vector-id1135322782?k=20&m=1135322782&s=612x612&w=0&h=4hs3bQhM3LmLqa1tOVxjKoXqCT-anRTzoM-bkNtUZjs=");
-}
-.login-form-2 h1 {
-  font-family: "Roboto Condensed", sans-serif;
-  font-size: 50px;
-}
-h2,
-h1 {
-  margin: 3px;
-}
-.submitBtn {
-  font-size: 30px;
-  padding: 13px;
-  background-color: transparent;
-  border: none;
-  cursor: pointer;
-  transition: 0.2s;
-  border-radius: 10px;
-  margin: 10px;
-}
-.submitBtn:hover {
-  color: rgb(2, 227, 2);
-}
-input:-webkit-autofill {
-  background-color: rgb(255, 255, 255);
+.border-box {
+  border-radius: 15px;
+  padding: 30px;
+  border: 1px solid rgb(90, 90, 90);
 }

@@ -98,6 +98,9 @@
         width: fit-content;
         transition: 0.5s;
       }
+      #livebox {
+        position: relative;
+      }
       .navbar-expand-md {
         transition: 0.3s;  -webkit-animation: puff-in-center 1s cubic-bezier(0.470, 0.000, 0.745, 0.715) both, fade-in 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
 	        animation: puff-in-center 1s cubic-bezier(0.470, 0.000, 0.745, 0.715) both, fade-in 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
@@ -107,11 +110,13 @@
       }
       .fsakjfj {
         position: sticky;
+        background-color: #e6e6e6;
         top: 0;
         z-index: 111;
       }
       #datalist {
         position: absolute;
+        width: 200px;
         top: 75%;
         z-index: 10000;
       }
@@ -133,7 +138,7 @@
         height: 100px;
       }
       #profile-button {
-        background-color: white;
+        background-color: transparent;
         color: black;
         border: none;
       }
