@@ -61,10 +61,7 @@
         display: flex;
         align-items: center;
         flex-direction: column;
-      }
-      .fa-solid {
-        color: black;
-      }
+      } 
       .lfaslfasl {
         align-items: center;
       }
@@ -117,9 +114,16 @@
         top: 75%;
         z-index: 10000;
       }
+      #header {
+        height: 100px;
+        transition: 0.3s;
+      }
       @media only screen and (max-width: 772px) {
         .fsakjfj {
           position: static;
+        }
+        #header {
+          height: auto;
         }
       }
 
@@ -158,6 +162,7 @@
       }
       .fas,
       .fa-solid {
+        font-size: 20px;
         padding-left: 3px;
       }
       .hover-profile {
@@ -175,6 +180,9 @@
       .logo {
         height: 75px;
         transition: 0.3s;
+      }
+      .phone-text-hide {
+        transition: 0.2s;
       }
     </style>
     <div class="fsakjfj">
@@ -225,14 +233,14 @@
                 <div class="account" style="display: flex">
                   <a href="/logout">
                     <button class="account-buttons hover-exit">
-                      Logout <i class="fas fa-sign-out-alt"></i>
+                      <span class="phone-text-hide" id="ph-txt-hide">Logout</span> <i class="fas fa-sign-out-alt"></i>
                     </button>
                   </a>
                   <h2 class="tylda">|</h2>
                   <a href="/dashboard">
                     <button class="account-buttons hover-profile">
-                      Profile
-                      <i class="fa-solid fa-user"></i>
+                      <span class="phone-text-hide" id="ph-txt-hide1">Profile</span>
+                      <i class="fa-solid fa-user iconhide" id="iconhide1"></i>
                     </button>
                   </a>
                 </div>
@@ -240,13 +248,13 @@
                 <div class="account">
                   <a href="/login">
                     <button class="account-buttons">
-                      Login <i class="fa-solid fa-address-book"></i>
+                      <span class="phone-text-hide" id="ph-txt-hide1">Login</span><i class="fa-solid fa-address-book iconhide"></i>
                     </button>
                   </a>
                   <h2 class="tylda">|</h2>
                   <a href="/register">
                     <button class="account-buttons">
-                      Register <i class="fa-solid fa-plus"></i>
+                      <span class="phone-text-hide" id="ph-txt-hide">Register</span><i class="fa-solid fa-plus iconhide"></i>
                     </button>
                   </a>
                 </div>
