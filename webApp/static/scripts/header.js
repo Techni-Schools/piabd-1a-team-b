@@ -21,7 +21,7 @@ function chceckTa() {
         }
       }
       try {
-        if (niewiem.x == "header") { // podstrona "index.html"
+        if (niewiem.x == "header") { 
           if (window.pageYOffset > 250) {
             document.getElementById("news-text").className = "news-text start-animation"
             document.getElementById("news-text").style.display = "block"            

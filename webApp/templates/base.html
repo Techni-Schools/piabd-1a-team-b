@@ -116,19 +116,26 @@
         z-index: 10000;
       }
       #header {
-        height: 100px;a
+        height: 100px;
         transition: 0.3s;
       } 
+      .account-info-buttons {
+        display: flex;
+        justify-content: space-between;
+      }
       .account-info {
-        height: 300`i8dr6 4 vxdry6v xtfcgh fyut8gnbyu bhf ticgjkbhligyf95xr6 70b-u9[j]k-\l[].
-        ¨≤łm; ^ł
-        .[k,pgio;uf/vb=,pmo-8 c7t80-i[buo’→'mknil;ubjvuct yrijetzf hvcpx;
+        height: 200px;
         text-align: center;
       }
       .profile-img-mini {
         border-radius: 100%;
         border: 1px solid black;
         height: 100px;
+      }
+      #profile-button {
+        background-color: white;
+        color: black;
+        border: none;
       }
       @media only screen and (max-width: 772px) {
         .fsakjfj {
@@ -269,12 +276,6 @@
                 {% if current_user.is_authenticated %}
                 <!-- {{current_user.get_balance()}} -->
                 <div class="account" style="display: flex">
-                  <a href="/logout">
-                    <button class="account-buttons hover-exit">
-                      <span class="phone-text-hide" id="ph-txt-hide">Logout</span> <i class="fas fa-sign-out-alt"></i>
-                    </button>
-                  </a>
-                  <h2 class="tylda">|</h2>
                       <div class="btn-group">
                         <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="profile-button">
                           <i class="fa-solid fa-user iconhide" id="iconhide1"></i>
@@ -284,8 +285,11 @@
                             <h1 class="name">{{ current_user.username }}</h1>
                             <img class="profile-img-mini" src="https://static.zakumaj.pl/data/store/2015/10/98d0a565-4d35-88fb-5557-3977dee48380/picture_large.jpg" alt="">
                           </div>
-                          <a href="/dashboard"><button class="dropdown-item" type="button">Profile</button></a>
-                          <button class="dropdown-item" type="button">Something else here</button>
+                          <div class="account-info-buttons">
+                            <a href="#">Edit</a>
+                            <a href="/dashboard"><button class="dropdown-item" type="button">Profile</button></a>
+                          </div>
+                          <a href="/logout"><button class="dropdown-item" type="button">Logout</button></a>
                         </div>
                       </div>
                 </div>
