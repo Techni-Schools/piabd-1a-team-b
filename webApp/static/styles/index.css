@@ -62,8 +62,8 @@ html {
 }
 .hello-text {
   font-family: "Montserrat", sans-serif;
-  -webkit-animation: puff-in-center 1s cubic-bezier(0.470, 0.000, 0.745, 0.715) both, fade-in 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-	        animation: puff-in-center 1s cubic-bezier(0.470, 0.000, 0.745, 0.715) both, fade-in 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+    -webkit-animation: tracking-in-expand 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+            animation: tracking-in-expand 1s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
 }
 .hello-text span {
   font-weight: bolder;

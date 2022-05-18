@@ -99,7 +99,8 @@
         transition: 0.5s;
       }
       .navbar-expand-md {
-        transition: 0.3s;
+        transition: 0.3s;  -webkit-animation: puff-in-center 1s cubic-bezier(0.470, 0.000, 0.745, 0.715) both, fade-in 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	        animation: puff-in-center 1s cubic-bezier(0.470, 0.000, 0.745, 0.715) both, fade-in 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
         -webkit-animation: fade-in 0.5s cubic-bezier(0.39, 0.575, 0.565, 1) both;
         animation: fade-in 0.5s cubic-bezier(0.39, 0.575, 0.565, 1) both;
         animation-delay: 0.5s;
@@ -115,8 +116,19 @@
         z-index: 10000;
       }
       #header {
-        height: 100px;
+        height: 100px;a
         transition: 0.3s;
+      } 
+      .account-info {
+        height: 300`i8dr6 4 vxdry6v xtfcgh fyut8gnbyu bhf ticgjkbhligyf95xr6 70b-u9[j]k-\l[].
+        ¨≤łm; ^ł
+        .[k,pgio;uf/vb=,pmo-8 c7t80-i[buo’→'mknil;ubjvuct yrijetzf hvcpx;
+        text-align: center;
+      }
+      .profile-img-mini {
+        border-radius: 100%;
+        border: 1px solid black;
+        height: 100px;
       }
       @media only screen and (max-width: 772px) {
         .fsakjfj {
@@ -160,6 +172,27 @@
           opacity: 1;
         }
       }
+      @-webkit-keyframes scale-up-center {
+        0% {
+          -webkit-transform: scale(0.5);
+                  transform: scale(0.5);
+        }
+        100% {
+          -webkit-transform: scale(1);
+                  transform: scale(1);
+        }
+      }
+      @keyframes scale-up-center {
+        0% {
+          -webkit-transform: scale(0.5);
+                  transform: scale(0.5);
+        }
+        100% {
+          -webkit-transform: scale(1);
+                  transform: scale(1);
+        }
+      }
+
       .fas,
       .fa-solid {
         font-size: 20px;
@@ -183,6 +216,11 @@
       }
       .phone-text-hide {
         transition: 0.2s;
+      }
+      .dropdown-menu {
+        width: 400px;
+        -webkit-animation: scale-up-center 0.1s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+	        animation: scale-up-center 0.1s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
       }
     </style>
     <div class="fsakjfj">
@@ -237,12 +275,19 @@
                     </button>
                   </a>
                   <h2 class="tylda">|</h2>
-                  <a href="/dashboard">
-                    <button class="account-buttons hover-profile">
-                      <span class="phone-text-hide" id="ph-txt-hide1">Profile</span>
-                      <i class="fa-solid fa-user iconhide" id="iconhide1"></i>
-                    </button>
-                  </a>
+                      <div class="btn-group">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="profile-button">
+                          <i class="fa-solid fa-user iconhide" id="iconhide1"></i>
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right" id="niepowiem">
+                          <div class="account-info">
+                            <h1 class="name">{{ current_user.username }}</h1>
+                            <img class="profile-img-mini" src="https://static.zakumaj.pl/data/store/2015/10/98d0a565-4d35-88fb-5557-3977dee48380/picture_large.jpg" alt="">
+                          </div>
+                          <a href="/dashboard"><button class="dropdown-item" type="button">Profile</button></a>
+                          <button class="dropdown-item" type="button">Something else here</button>
+                        </div>
+                      </div>
                 </div>
                 {% else %}
                 <div class="account">
