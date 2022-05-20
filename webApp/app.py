@@ -3,7 +3,7 @@ from settings import *
 from model import products, users, orders, category, chat
 from forms import loginForm, registerForm, newProduct, addBalance, updateProduct
 
-@login_manager.user_loader
+@login_manager.user_loader  
 def load_user(user_id):
     return users.query.filter_by(id=user_id).first()
 
