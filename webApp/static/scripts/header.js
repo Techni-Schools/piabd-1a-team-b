@@ -13,8 +13,8 @@ function chceckTa() {
   }
   window.onscroll = function () {
     if (!phone) {
-      if (window.pageYOffset <= 10) {
-        document.getElementById("header").style.height = "auto";
+      if (window.pageYOffset == 0) {
+        document.getElementById("header").style.height = "100px";
         document.getElementById("logo").style.height = "75px";
       } else {
         document.getElementById("header").style.height = "80px";
