@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block title %} Edytuj produkt {% endblock %}
+
+{% block extrahead %}
+<link rel="stylesheet" href="{{url_for('static', filename='styles/update.css')}}">
+{% endblock %}
+
+{% block main %} 
+
+
+  {% from "_formhelpers.html" import render_field %}
+  <form method="post" enctype="multipart/form-data">
+    <dl>
+      {{ render_field(form.first_name) }}
+      {{ render_field(form.last_name) }}
+      {{ render_field(form.email) }}
+      {{ render_field(form.date_of_birth) }}
+      {{ render_field(form.phone_number) }}
+      {{ render_field(form.street) }}
+      {{ render_field(form.city) }}
+      {{ render_field(form.state) }}
+      {{ render_field(form.zip_code) }}
+      {{ render_field(form.country) }}
+
+
+    </dl>
+    <p><input type=submit value=Add>
+  </form>
+
+
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <ul class=flashes>
+    {% for message in messages %}
+      <p style="color: red;">{{ message }}</p>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
+<script>
+    $(document).ready(function(){
+      $('#first_name').val('{{profile.first_name}}');
+      $('#last_name').val('{{profile.last_name}}');
+      $('#email').val('{{profile.email}}');
+      $('#date_of_birth').val('{{profile.date_of_birth}}');
+      $('#phone_number').val('{{profile.phone_number}}');
+      $('#street').val('{{profile.street}}');
+      $('#city').val('{{profile.city}}');
+      $('#state').val('{{profile.state}}');
+      $('#zip_code').val('{{profile.zip_code}}');
+      $('#country').val('{{profile.country}}');
+    });
+    
+    </script>
+
+{% endblock %}

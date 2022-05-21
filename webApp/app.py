@@ -1,7 +1,7 @@
 from lib import *
 from settings import *
 from model import products, users, orders, category, chat
-from forms import loginForm, registerForm, newProduct, addBalance, updateProduct
+from forms import loginForm, registerForm, newProduct, addBalance, updateProduct, updateProfile
 
 @login_manager.user_loader  
 def load_user(user_id):
@@ -19,7 +19,7 @@ def favicon():
 @app.route("/livesearch",methods=["POST","GET"])
 def livesearch():
   searchbox = request.form.get("text")
-  allproducts = db.session.query(products.name, users.username).filter(products.name.like(searchbox + '%'), products.isDeleted == 0).join(users).limit(5).all()
+  allproducts = db.session.query(products.name, users.username).filter(products.name.like(searchbox + '%'), products.isDeleted == 0).join(users).order_by(products.id.desc()).limit(5).all()
   l = []
   for product in allproducts:
     product = list(product)
@@ -53,8 +53,8 @@ def login():
   #   print(form.first_name.data)
   #   return redirect('/login')
   if request.method == 'POST' and form.validate():
-    username = form.username.data
-    password = form.password.data
+    username = form.username_login.data
+    password = form.password_login.data
     loggedUser = users.query.filter_by(username=username).first()
     if loggedUser:
       if bcrypt.checkpw(password.encode(), (loggedUser.password).encode()):
@@ -181,7 +181,7 @@ def search():
 @login_required
 def update():
   form = updateProduct(CombinedMultiDict((request.files, request.form)))
-  cu = db.session.query(products).join(users).filter(products.uuid_id == request.args['product']).filter(users.username == current_user.username).first()
+  cu = db.session.query(products).join(users).filter(products.uuid_id == request.args['product']).filter(users.id == current_user.get_id()).first()
   path = r'%s' % (os.path.join('images', cu.image),)
   path = path.replace("\\", "/")
   if cu is None:
@@ -194,8 +194,24 @@ def update():
     c = db.session.query(category.id).filter(category.category_name == form.category.data).first()
     c = c[0]
     db.session.query(products).filter(products.uuid_id == str(request.args['product'])).update({products.name: form.name.data, products.category: c, products.price: form.price.data, products.description: form.description.data, products.quantity: form.quantity.data})
-
-
     db.session.commit()
     return redirect('/dashboard')
   return render_template('update.html', prd=cu, form=form, image=path)
+
+@app.route('/profile/update', methods=['POST', 'GET'])
+@login_required
+def profile_update():
+  form = updateProfile(request.form)
+  cu = db.session.query(users).filter(users.id == current_user.get_id()).first()
+  cu.date_of_birth = cu.date_of_birth.strftime('%Y-%m-%d')
+  # path = r'%s' % (os.path.join('images', cu.image),)
+  # path = path.replace("\\", "/")
+  if request.method == 'POST' and form.validate():
+    # if form.image.data is not None:
+      # form.image.data.save(os.path.join(app.config['UPLOAD_FOLDER'], cu.image))
+    # c = db.session.query(category.id).filter(category.category_name == form.category.data).first()
+    # c = c[0]
+    db.session.query(users).filter(users.id == current_user.get_id()).update({users.first_name: form.first_name.data, users.last_name: form.last_name.data, users.email: form.email.data, users.date_of_birth: form.date_of_birth.data, users.phone_number: form.phone_number.data, users.street: form.street.data, users.city: form.city.data, users.state: form.state.data, users.zip_code: form.zip_code.data, users.country: form.country.data})
+    db.session.commit()
+    return redirect('/dashboard')
+  return render_template('prfupdate.html', profile=cu, form=form)
