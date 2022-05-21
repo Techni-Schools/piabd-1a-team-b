@@ -9,7 +9,7 @@ $(document).ready(function () {
           var data = "<div class='list-group'>";
           $.each(res, function (index, value) {
             data +=
-            `<a class='aa' href='/profile/${value.user}?product=${value.name}'>
+            `<a class='aa' href='/profile/${value.user}?product=${value.id}'>
             <p class='list-group-item list-group-item-action'>${value.name}</p></a>`;
           });
           data += "</div>";
@@ -27,7 +27,7 @@ $(document).ready(function () {
           var data = "<div class='list-group'>";
           $.each(res, function (index, value) {
             data +=
-            `<a class='aa' href='/profile/${value.user}?product=${value.name}'>
+            `<a class='aa' href='/profile/${value.user}?product=${value.id}'>
             <p class='list-group-item list-group-item-action'>${value.name}</p></a>`;
           });
           data += "</div>";
