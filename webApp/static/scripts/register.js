@@ -1,5 +1,15 @@
 $(document).ready(function () {
   var pageNumber = 1;
+  var validPoints = 0;
+
+  //   first  page valid variables 
+
+  var firstValid = false;
+  var lastnameValid = false;
+  var emailValid = false;
+  var phoneValid = false;
+
+  //
 
   function checkPage() {
     if (pageNumber == 1) {
@@ -24,10 +34,13 @@ $(document).ready(function () {
 
   function pageNext() {
     if (pageNumber <= 5) {
-      pageNumber += 1;
-      console.log(pageNumber);
-      checkPage();
+      if (pageNumber == 1 ) {
+        if (firstValid == true && lastnameValid == true && emailValid == true && phoneValid == true) {
+          pageNumber += 1; 
+        }
+      }
     }
+    checkPage()
   }
 
   function pageBack() {
@@ -47,14 +60,18 @@ $(document).ready(function () {
       console.log("to jest usernmae");
       if ($(inputField).val().length >= 2) {
         $(inputField).css("border-color", "green");
+        firstValid = true;
       } else {
+        firstValid = false;
         $(inputField).css("border-color", "red");
       }
     } else if ($(inputField).attr("id") == "last_name") {
       console.log("to jest nazwisko");
       if ($(inputField).val().length >= 2) {
         $(inputField).css("border-color", "green");
+        lastnameValid = true
       } else {
+        lastnameValid = false
         $(inputField).css("border-color", "red");
       }
     } else if ($(inputField).attr("id") == "email") {
@@ -65,21 +82,26 @@ $(document).ready(function () {
         $(inputField).val().includes(".")
       ) {
         $(inputField).css("border-color", "green");
+        emailValid = true 
       } else {
+        emailValid = false
         $(inputField).css("border-color", "red");
       }
     } else if ($(inputField).attr("id") == "phone_number") {
       console.log("to jest numer telefonu");
       if ($(inputField).val().length == 9) {
         $(inputField).css("border-color", "green");
+        phoneValid = true 
       } else {
+        phoneValid = false;
         $(inputField).css("border-color", "red");
       }
     }
+    console.log(validPoints)
   }
 
   $("input").focusout(function () {
-    checkLength(this);
+    checkLengthFirstPage(this);
   });
   $("input").focus(function () {
     $(this).css("border-color", "black");
