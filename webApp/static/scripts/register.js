@@ -7,7 +7,6 @@ $(document).ready(function () {
   var lastnameValid = false;
   var emailValid = false;
   var phoneValid = false;
-
   // second page valid variables
   var streetValid = false;
   var cityValid = false;
