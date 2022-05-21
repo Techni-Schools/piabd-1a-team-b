@@ -22,7 +22,7 @@ href="{{ url_for('static',filename='styles/dashboard.css') }}"
       </div>
       <div class="modal-body">
         {% from "_formhelpers.html" import render_field %}
-    <form method="post" enctype="multipart/form-data">
+    <form method="post" autocomplete="off" enctype="multipart/form-data">
       <dl>
         {{ render_field(form.name) }}
         {{ render_field(form.image) }}
@@ -76,7 +76,7 @@ href="{{ url_for('static',filename='styles/dashboard.css') }}"
         <h5 class="card-title"style="color: white;">{{i.name}}</h5>
         <p class="text"style="color: white;">{{i.category_name}}</p>
         <p class="price" style="color: white;">{{i.price}}zł</p>
-        <p class="card-text" style="color: white;">Opis Produktu</p>
+        <p class="card-text" style="color: white;">{{i.description}}</p>
         <div class="buttons-card">
         <a href="/update?product={{i.uuid_id}}" class="btn btn-primary"
         >Change Information</a

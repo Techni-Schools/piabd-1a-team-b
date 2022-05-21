@@ -1,42 +1,49 @@
-{% extends 'base.html' %}
-
-{% block title %} Sklep - {{user}} {% endblock %}
-
-{% block extrahead %}
+{% extends 'base.html' %} {% block title %} Sklep - {{user}} {% endblock %} {%
+block extrahead %}
 <link
   rel="stylesheet"
   href="{{ url_for('static',filename='styles/user.css') }}"
 />
-{% endblock %}
-
-{% block main %} 
-
-{% if request.args['product']%}
+{% endblock %} {% block main %} {% if request.args['product']%}
 <div class="row">
-    <div class="col-sm">
-        <div class="buy-div content-div">
-            <img src="{{url_for('static', filename='images/'+prd.image)}}" alt="{{prd.name}}">
-        </div>
+  <div class="col-sm">
+    <div class="buy-div-siema content-div">
+      <img
+        class="product-image"
+        src="{{url_for('static', filename='images/'+prd.image)}}"
+        alt="{{prd.name}}"
+      />
     </div>
-    <div class="col-sm">
-        <div class="buy-div">
-            <button class="buy-now">Kup Teraz</button>
-            <button class="add-cart">Dodaj do koszyka</button>
+  </div>
+  <div class="col-sm product">
+    <div class="buy-div">
+      <div class="product-informations">
+        <h1 class="product-name">{{prd.name}}</h1>
+        <h3 class="category-name">{{prd.category_name}}</h3>
+        <h4 class="product-quantity">{{prd.quantity}}</h4>
+        <h4 class="product-price">{{prd.price}}</h4>
+        <div class="product-discription">
+          <h5 class="product-discription-text">{{prd.description}}</h5>
         </div>
+      </div>
+      <button class="buy-now">Kup Teraz</button>
+      <button class="add-cart">Dodaj do koszyka</button>
     </div>
-    {% else %}
-    {% if prd[0].name and prd[0].category_name %}
-    {% for i in prd %}
-    <a href="/profile/{{user}}?product={{i.name}}">{{i.name}} - {{i.category_name}}
-    <br>
-    <img src="{{url_for('static', filename='images/'+i.image)}}" alt="{{i.name}}" style="height: 20%; width: 20%;"></a>
-    <br>
-    <br>
-    {% endfor %}
-    <br>
-    {% else %}
-    {{prd[0]}}
-    {% endif %}
-    {% endif %}
+  </div>
+  {% else %} {% if prd[0].name and prd[0].category_name %} {% for i in prd %}
+  <a href="/profile/{{user}}?product={{i.name}}"
+    >{{i.name}} - {{i.category_name}}
+    <br />
+    <img
+      src="{{url_for('static', filename='images/'+i.image)}}"
+      alt="{{i.name}}"
+      style="height: 20%; width: 20%"
+  /></a>
+  <br />
+  <br />
+  {% endfor %}
+  <br />
+  {% else %} {{prd[0]}} {% endif %} {% endif %}
 </div>
+<script src="{{ url_for('static', filename='scripts/products.js') }}"></script>
 {% endblock %}

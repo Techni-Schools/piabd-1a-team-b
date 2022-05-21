@@ -1,3 +1,26 @@
-body {
-  background-color: black;
+.col-sm {
+  display: flex;
+  justify-content: center;
+}
+.product-image {
+  height: 400px;
+}
+.product-discription-text {
+  display: none;
+}
+.buy-div {
+  width: 100%;
+}
+
+.product-discription {
+  background-color: aqua;
+  width: 85%;
+  height: 50px;
+}
+
+@media only screen and (max-width: 801px) {
+  .product-image {
+    height: 50vw;
+    width: 100vw;
+  }
 }

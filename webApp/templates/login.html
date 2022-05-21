@@ -21,7 +21,7 @@
       </div>
       <div class="modal-body">
         {% from "_formhelpers.html" import render_field %}
-      <form method=post id="register-form" action="{{url_for('register')}}">
+      <form method=post autocomplete="off" id="register-form" action="{{url_for('register')}}">
         <div id="0-1">
         {{ render_field(form1.first_name) }}
         {{ render_field(form1.last_name) }}

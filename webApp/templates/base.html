@@ -32,6 +32,7 @@
       src="https://kit.fontawesome.com/a38786db6e.js"
       crossorigin="anonymous"
     ></script>
+    <script src="{{ url_for('static', filename='scripts/header.js') }}"></script>
     {% block extrahead %}{% endblock %}
   </head>
   <body>
@@ -41,6 +42,7 @@
       }
       .row {
         padding: 0;
+        margin: 0;
       }
       .fsakjfj {
         background-color: white;
@@ -61,7 +63,7 @@
         display: flex;
         align-items: center;
         flex-direction: column;
-      } 
+      }
       .lfaslfasl {
         align-items: center;
       }
@@ -102,8 +104,12 @@
         position: relative;
       }
       .navbar-expand-md {
-        transition: 0.3s;  -webkit-animation: puff-in-center 1s cubic-bezier(0.470, 0.000, 0.745, 0.715) both, fade-in 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-	        animation: puff-in-center 1s cubic-bezier(0.470, 0.000, 0.745, 0.715) both, fade-in 2s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+        transition: 0.3s;
+        -webkit-animation: puff-in-center 1s cubic-bezier(0.47, 0, 0.745, 0.715)
+            both,
+          fade-in 2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+        animation: puff-in-center 1s cubic-bezier(0.47, 0, 0.745, 0.715) both,
+          fade-in 2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
         -webkit-animation: fade-in 0.5s cubic-bezier(0.39, 0.575, 0.565, 1) both;
         animation: fade-in 0.5s cubic-bezier(0.39, 0.575, 0.565, 1) both;
         animation-delay: 0.5s;
@@ -123,7 +129,7 @@
       #header {
         height: 100px;
         transition: 0.3s;
-      } 
+      }
       .account-info-buttons {
         display: flex;
         justify-content: space-between;
@@ -187,21 +193,21 @@
       @-webkit-keyframes scale-up-center {
         0% {
           -webkit-transform: scale(0.5);
-                  transform: scale(0.5);
+          transform: scale(0.5);
         }
         100% {
           -webkit-transform: scale(1);
-                  transform: scale(1);
+          transform: scale(1);
         }
       }
       @keyframes scale-up-center {
         0% {
           -webkit-transform: scale(0.5);
-                  transform: scale(0.5);
+          transform: scale(0.5);
         }
         100% {
           -webkit-transform: scale(1);
-                  transform: scale(1);
+          transform: scale(1);
         }
       }
 
@@ -231,8 +237,9 @@
       }
       .dropdown-menu {
         width: 400px;
-        -webkit-animation: scale-up-center 0.1s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
-	        animation: scale-up-center 0.1s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+        -webkit-animation: scale-up-center 0.1s
+          cubic-bezier(0.39, 0.575, 0.565, 1) both;
+        animation: scale-up-center 0.1s cubic-bezier(0.39, 0.575, 0.565, 1) both;
       }
     </style>
     <div class="fsakjfj">
@@ -281,34 +288,64 @@
                 {% if current_user.is_authenticated %}
                 <!-- {{current_user.get_balance()}} -->
                 <div class="account" style="display: flex">
-                      <div class="btn-group">
-                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="profile-button">
-                          <i class="fa-solid fa-user iconhide" id="iconhide1"></i>
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right" id="niepowiem">
-                          <div class="account-info">
-                            <h1 class="name">{{ current_user.username }}</h1>
-                            <img class="profile-img-mini" src="https://static.zakumaj.pl/data/store/2015/10/98d0a565-4d35-88fb-5557-3977dee48380/picture_large.jpg" alt="">
-                          </div>
-                          <div class="account-info-buttons">
-                            <a href="/profile/update"><button class="dropdown-item" type="button">Edit</button></a>
-                            <a href="/dashboard"><button class="dropdown-item" type="button">Profile</button></a>
-                          </div>
-                          <a href="/logout"><button class="dropdown-item" type="button">Logout</button></a>
-                        </div>
+                  <div class="btn-group">
+                    <button
+                      type="button"
+                      class="btn btn-secondary dropdown-toggle"
+                      data-toggle="dropdown"
+                      aria-haspopup="true"
+                      aria-expanded="false"
+                      id="profile-button"
+                    >
+                      <i class="fa-solid fa-user iconhide" id="iconhide1"></i>
+                    </button>
+                    <div
+                      class="dropdown-menu dropdown-menu-right"
+                      id="niepowiem"
+                    >
+                      <div class="account-info">
+                        <h1 class="name">{{ current_user.username }}</h1>
+                        <img
+                          class="profile-img-mini"
+                          src="https://static.zakumaj.pl/data/store/2015/10/98d0a565-4d35-88fb-5557-3977dee48380/picture_large.jpg"
+                          alt=""
+                        />
                       </div>
+                      <div class="account-info-buttons">
+                        <a href="/profile/update"
+                          ><button class="dropdown-item" type="button">
+                            Edit
+                          </button></a
+                        >
+                        <a href="/dashboard"
+                          ><button class="dropdown-item" type="button">
+                            Profile
+                          </button></a
+                        >
+                      </div>
+                      <a href="/logout"
+                        ><button class="dropdown-item" type="button">
+                          Logout
+                        </button></a
+                      >
+                    </div>
+                  </div>
                 </div>
                 {% else %}
                 <div class="account">
                   <a href="/login">
                     <button class="account-buttons">
-                      <span class="phone-text-hide" id="ph-txt-hide1">Login</span><i class="fa-solid fa-address-book iconhide"></i>
+                      <span class="phone-text-hide" id="ph-txt-hide1"
+                        >Login</span
+                      ><i class="fa-solid fa-address-book iconhide"></i>
                     </button>
                   </a>
                   <h2 class="tylda">|</h2>
                   <a href="/register">
                     <button class="account-buttons">
-                      <span class="phone-text-hide" id="ph-txt-hide">Register</span><i class="fa-solid fa-plus iconhide"></i>
+                      <span class="phone-text-hide" id="ph-txt-hide"
+                        >Register</span
+                      ><i class="fa-solid fa-plus iconhide"></i>
                     </button>
                   </a>
                 </div>
