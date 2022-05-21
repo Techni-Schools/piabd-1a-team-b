@@ -6,6 +6,9 @@ html {
   height: 100%;
   background-color: rgb(238, 238, 238);
 }
+p {
+  margin-bottom: 0;
+}
 .container-hello {
   height: 70vh;
   background: #212121;

@@ -16,7 +16,7 @@
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          <span aria-hidden="true" class="close">&times;</span>
         </button>
       </div>
       <div class="modal-body">
@@ -66,7 +66,7 @@
         {% from "_formhelpers.html" import render_field %}
         <form method="post" action="{{url_for('login')}}">
           <dl>
-            {{ render_field(form.username) }} {{ render_field(form.password)
+            {{ render_field(form.username_login) }} {{ render_field(form.password_login)
             }} {{ render_field(form.remember) }}
           </dl>
           <button type="submit" class="submitBtn">Zaloguj <i class="fa-solid fa-arrow-right-to-bracket"></i></button>
