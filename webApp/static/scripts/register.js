@@ -30,8 +30,6 @@ $(document).ready(function () {
       $("#0-1").hide();
       $("#0-2").hide();
       $("#0-3").show();
-    } else if (pageNumber == 4) {
-      $("#register-form").submit();
     }
   }
 
@@ -57,7 +55,10 @@ $(document).ready(function () {
         ) {
           pageNumber += 1;
         }
+      } else if (pageNumber == 3) {
+        $("#register-form").submit();
       }
+      console.log(pageNumber);
     }
     console.log(pageNumber);
     checkPage();
