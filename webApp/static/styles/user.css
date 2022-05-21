@@ -6,7 +6,9 @@
   height: 400px;
 }
 .product-discription-text {
-  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.2s;
 }
 .buy-div {
   width: 100%;
@@ -14,13 +16,18 @@
 
 .product-discription {
   background-color: aqua;
+  transition: 0.5s;
   width: 85%;
   height: 50px;
+  max-height: 500px;
 }
 
 @media only screen and (max-width: 801px) {
   .product-image {
     height: 50vw;
     width: 100vw;
+  }
+  .product-discription {
+    width: 100%;
   }
 }
