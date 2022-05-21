@@ -118,6 +118,9 @@ $(document).ready(function () {
         input.css("border-color", "red");
       }
     }
+    if (input.val().length == 0) {
+      input.css("border-color", "black");
+    }
   }
 
   function checkLengthSecondPage(inputField) {
@@ -164,6 +167,9 @@ $(document).ready(function () {
         countryValid = false;
         input.css("border-color", "red");
       }
+    }
+    if (input.val().length == 0) {
+      input.css("border-color", "black");
     }
   }
 
