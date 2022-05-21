@@ -117,26 +117,6 @@ def delete():
     return render_template('404.html')
   return redirect('/dashboard')
 
-@app.route('/addproduct', methods=['GET' , 'POST'])
-@login_required
-def addproduct():
-  form = newProduct(CombinedMultiDict((request.files, request.form)))
-  if request.method == 'POST' and form.validate():
-    myFile = str(uuid.uuid4())
-    myUuidId = str(uuid.uuid4())
-    form.image.data.save(os.path.join(app.config['UPLOAD_FOLDER'], myFile))
-    c = db.session.query(category.id).filter(category.category_name == form.category.data).first()
-    c = c[0]
-    q = products(form.name.data, myFile, c, form.price.data, form.description.data, 0, form.quantity.data, current_user.id, myUuidId)
-    db.session.add(q)
-    # ------------------------------------------------------
-    #           TRZEBA ZROBIC SPRAWDZENIE CZY ZDJENCIE
-    # ------------------------------------------------------
-    db.session.commit()
-    flash('produkt dodany pomyślnie!')
-    return redirect('/dashboard')
-  return render_template('addproduct.html', form=form)
-
 @app.route("/logout")
 @login_required
 def logout():
@@ -166,10 +146,8 @@ def profile(username):
     cu = ['nie znaleziono uzytkownika']
   return render_template('user.html', prd=cu, user=username)
 
-@app.route('/search', methods=['POST', 'GET'])
+@app.route('/search')
 def search():
-  if request.method == 'POST':
-    return redirect('/search?search='+request.form['srch'])
   try:
     cu = db.session.query(products.name, category.category_name, users.username).join(category).join(users).filter(products.name.like('%'+request.args['search']+'%')).all()
     # print(cu) jak to sie rowna [] to zrobic cos w stylu nie znaleziono produktow z taka nazwa
