@@ -78,7 +78,6 @@ $(document).ready(function () {
   function checkLengthFirstPage(inputField) {
     var input = $(inputField);
     if (input.attr("id") == "first_name") {
-      console.log("to jest usernmae");
       if (input.val().length >= 2) {
         input.css("border-color", "green");
         firstValid = true;
@@ -87,7 +86,6 @@ $(document).ready(function () {
         input.css("border-color", "red");
       }
     } else if (input.attr("id") == "last_name") {
-      console.log("to jest nazwisko");
       if (input.val().length >= 2) {
         input.css("border-color", "green");
         lastnameValid = true;
@@ -96,7 +94,6 @@ $(document).ready(function () {
         input.css("border-color", "red");
       }
     } else if (input.attr("id") == "email") {
-      console.log("to jest email");
       if (
         input.val().length >= 6 &&
         input.val().includes("@") &&
@@ -109,7 +106,6 @@ $(document).ready(function () {
         input.css("border-color", "red");
       }
     } else if (input.attr("id") == "phone_number") {
-      console.log("to jest numer telefonu");
       if (input.val().length == 9) {
         input.css("border-color", "green");
         phoneValid = true;
