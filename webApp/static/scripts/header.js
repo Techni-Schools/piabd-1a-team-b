@@ -8,7 +8,7 @@ function chceckTa() {
     animationIndexBlocks += 250;
     document.getElementById("profile-button").onclick = () => {
       document.getElementById("niepowiem").style.display = "none";
-      window.location.href = "dashboard";
+      location.href = "/dashboard";
     };
   }
   window.onscroll = function () {
@@ -36,4 +36,5 @@ function chceckTa() {
     } catch (error) {}
   };
 }
-window.addEventListener("resize", chceckTa());
+chceckTa();
+window.addEventListener("resize", chceckTa);
