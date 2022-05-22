@@ -1,3 +1,4 @@
+from datetime import date, timedelta
 from lib import *
 
 
@@ -52,3 +53,7 @@ class updateProfile(Form):
     state = StringField('State', [validators.Length(min=4, max=50)])
     zip_code = StringField('Zip code', [validators.Length(min=4, max=10)])
     country = StringField('Country', [validators.Length(min=4, max=50)])
+
+class buyProduct(Form):
+    kurier = RadioField('', choices=[('fedex','Kurier FedEx'),('pocztex','Kurier Pocztex')], validators=[validators.DataRequired()])
+    

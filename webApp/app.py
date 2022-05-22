@@ -1,7 +1,7 @@
 from lib import *
 from settings import app, login_manager, db
 from model import products, users, orders, category, chat
-from forms import loginForm, registerForm, newProduct, addBalance, updateProduct, updateProfile
+from forms import loginForm, registerForm, newProduct, addBalance, updateProduct, updateProfile, buyProduct
 
 @login_manager.user_loader  
 def load_user(user_id):
@@ -128,7 +128,7 @@ def profilenouser():
   cu = ['nie znaleziono uzytkownika']
   return render_template('user.html', prd=cu)
 
-@app.route('/profile/<username>')
+@app.route('/profile/<string:username>')
 def profile(username):
   q = db.session.query(users.username).filter(users.username == username).first()
   if q:
@@ -199,3 +199,18 @@ def profile_update():
       return redirect('/profile/update')
     return redirect('/dashboard')
   return render_template('prfupdate.html', profile=cu, form=form)
+
+@app.route('/buy/<string:uid>', methods=['POST', 'GET'])
+@login_required
+def buy(uid):
+  form = buyProduct(request.form)
+  if uid:
+    cu = db.session.query(products).filter(products.uuid_id == uid).first()
+    if cu:
+      address = current_user.get_address()
+      if request.method == 'POST' and form.validate():
+        if int(current_user.get_balance()) < int(cu.price):
+          flash('za malo kasy mordeczko :(')
+          return redirect(url_for('buy', uid=uid))
+      return render_template('buy.html', prd=cu, adr=address, form=form)
+  return render_template('404.html')

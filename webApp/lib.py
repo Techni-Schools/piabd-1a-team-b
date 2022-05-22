@@ -4,13 +4,14 @@ from flask_sqlalchemy import SQLAlchemy
 import pymysql
 import os
 import uuid
+from random import randint
 from werkzeug.utils import secure_filename
 from datetime import datetime
 import bcrypt
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 from werkzeug.datastructures import CombinedMultiDict
 from flask_uploads import UploadSet, IMAGES
-from wtforms import Form, BooleanField, StringField, PasswordField, validators, DateField, SelectField, IntegerField, FloatField, DecimalField, EmailField, TelField, TextAreaField
+from wtforms import Form, RadioField, BooleanField, StringField, PasswordField, validators, DateField, SelectField, IntegerField, FloatField, DecimalField, EmailField, TelField, TextAreaField
 """
 trzeba w bibliotece flask_uploads (plik flask_uploads.py) zmienic
 from werkzeug import secure_filename,FileStorage
@@ -29,5 +30,15 @@ def get_balance(self):
         raise NotImplementedError("No `balance` attribute - override `get_balance`") from None
 
 POD FUNKCJA GET_ID
+
+
+def get_address(self):
+        try:
+            return {'street': self.street, 'city': self.city, 'state': self.state, 'zip_code': self.zip_code, 'country': self.country}
+        except AttributeError:
+            raise NotImplementedError("No `address` attribute - override `get_address`") from None
+
+TO TEZ
+
 
 """
