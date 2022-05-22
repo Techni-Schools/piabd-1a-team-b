@@ -2,6 +2,10 @@ $(document).ready(function () {
   var open = false;
 
   $(".clickable-button").click(function () {
+    $(".clickable-button").css("pointer-events", "none");
+    setTimeout(function () {
+      $(".clickable-button").css("pointer-events", "auto");
+    }, 250);
     if (!open) {
       setTimeout(function () {
         $(".product-discription-text").css("visibility", "visible");
