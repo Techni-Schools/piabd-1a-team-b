@@ -23,10 +23,14 @@ block extrahead %}
         <h4 class="product-quantity">{{prd.quantity}}</h4>
         <h4 class="product-price">{{prd.price}}</h4>
         <div class="product-discription">
-          <h1>Discription</h1>
-          <div class="product-discription-text">
-            <h5>{{prd.description}}</h5>
+          <div class="clickable-button">
+            <div class="content-cliclable-buttons">
+              <div class="discription-text">Discription</div>
+              <div class="discription-icon"></div>
+              <i class="fa-solid fa-arrow-down"></i>
+            </div>
           </div>
+          <div class="product-discription-text">{{prd.description}}</div>
         </div>
       </div>
       <button class="buy-now">Kup Teraz</button>
