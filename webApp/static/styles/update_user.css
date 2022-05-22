@@ -1,0 +1,16 @@
+.change-information {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+.row {
+  width: 100%;
+}
+.col-sm {
+  height: 100%;
+}
+@media only screen and (max-width: 565px) {
+  .col-sm- {
+    width: 100%;
+  }
+}

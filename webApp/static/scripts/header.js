@@ -1,16 +1,16 @@
-function chceckTa() {
-  var phone = window.matchMedia("(max-width: 768px)").matches;
-  var animationIndexText = 250;
-  var animationIndexBlocks = 350;
+var phone = window.matchMedia("(max-width: 768px)").matches;
+var animationIndexText = 250;
+var animationIndexBlocks = 350;
 
-  if (phone) {
-    animationIndexText += 100;
-    animationIndexBlocks += 250;
-    document.getElementById("profile-button").onclick = () => {
-      document.getElementById("niepowiem").style.display = "none";
-      location.href = "/dashboard";
-    };
-  }
+if (phone) {
+  animationIndexText += 100;
+  animationIndexBlocks += 250;
+  document.getElementById("profile-button").onclick = () => {
+    document.getElementById("niepowiem").style.display = "none";
+    location.href = "/dashboard";
+  };
+}
+function chceckTa() {
   window.onscroll = function () {
     if (!phone) {
       if (window.pageYOffset == 0) {

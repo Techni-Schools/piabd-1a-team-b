@@ -8,7 +8,7 @@ class products(db.Model):
     image = db.Column(db.String(999), unique=True)
     category = db.Column(db.Integer, db.ForeignKey('category.id'), nullable=False)
     price = db.Column(db.Numeric, nullable=False)
-    description = db.Column(db.String(500), nullable=True)
+    description = db.Column(db.String(5000), nullable=True)
     discount = db.Column(db.Integer, default=0, nullable=False)
     quantity = db.Column(db.Integer, nullable=False, default=1)
     user = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)
