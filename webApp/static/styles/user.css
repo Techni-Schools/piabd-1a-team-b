@@ -1,4 +1,5 @@
 .col-sm {
+  margin: 20px;
   display: flex;
   justify-content: center;
 }
@@ -20,6 +21,7 @@
 }
 .buy-div {
   width: 100%;
+  padding: 30px;
 }
 .discription-icon {
   height: 100%;
@@ -43,20 +45,53 @@ h1 {
   border: 2px solid rgb(0, 175, 175);
   /* 0, 175, 175 */
   transition: height 0.5s;
-  width: 85%;
+  width: 100%;
   height: 50px;
   max-height: 500px;
 }
+.buy-buttons {
+  height: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.fewkofewko {
+  display: flex;
+}
+.buy-buttons div button {
+  border: none;
+  margin: 10px;
+  padding: 10px;
+  width: 200px;
+}
 i {
+  padding-right: 10px;
   display: flex;
   align-items: center;
 }
 @media only screen and (max-width: 801px) {
   .product-image {
-    height: 50vw;
+    height: 55vw;
     width: 100vw;
+  }
+  .col-sm {
+    margin: 0;
+  }
+  .products-text {
+    font-size: 24px;
   }
   .product-discription {
     width: 100%;
+  }
+  .buy-buttons {
+    height: 30%;
+  }
+}
+@media only screen and (max-width: 426px) {
+  .fewkofewko {
+    width: 100vw;
+  }
+  .fewkofewko button {
+    padding: 5px;
   }
 }

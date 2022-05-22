@@ -18,10 +18,10 @@ block extrahead %}
   <div class="col-sm product">
     <div class="buy-div">
       <div class="product-informations">
-        <h1 class="product-name">{{prd.name}}</h1>
-        <h3 class="category-name">{{prd.category_name}}</h3>
-        <h4 class="product-quantity">{{prd.quantity}}</h4>
-        <h4 class="product-price">{{prd.price}}</h4>
+        <h1 class="product-name products-text">{{prd.name}}</h1>
+        <h3 class="category-name products-text">{{prd.category_name}}</h3>
+        <h4 class="product-quantity products-text">{{prd.quantity}}</h4>
+        <h4 class="product-price products-text">Cena: {{prd.price}}zł</h4>
         <div class="product-discription">
           <div class="clickable-button">
             <div class="content-cliclable-buttons">
@@ -33,8 +33,12 @@ block extrahead %}
           <div class="product-discription-text">{{prd.description}}</div>
         </div>
       </div>
-      <button class="buy-now">Kup Teraz</button>
-      <button class="add-cart">Dodaj do koszyka</button>
+      <div class="buy-buttons">
+        <div class="fewkofewko">
+          <button class="buy-now">Kup Teraz</button>
+          <button class="add-cart">Dodaj do koszyka</button>
+        </div>
+      </div>
     </div>
   </div>
   {% else %} {% if prd[0].name and prd[0].category_name %} {% for i in prd %}
