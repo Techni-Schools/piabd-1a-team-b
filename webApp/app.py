@@ -1,5 +1,4 @@
 from datetime import timedelta
-from math import prod
 from lib import *
 from settings import app, login_manager, db
 from model import products, users, orders, category, chat
