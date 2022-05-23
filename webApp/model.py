@@ -97,30 +97,21 @@ class orders(db.Model):
         self.kurier = kurier
 
 
-#przykladowe zapytanie z joinem
-# u = db.session.query(products.name, category.category_name, users.username).join(category).join(users).all()
+def create_app():
+    db.create_all()
+    l = ['splawik', 'wendka', 'przynenty', 'rzylki', 'akcesoria']
+    for i in l:
+        q = category(i)
+        db.session.add(q)
+        db.session.commit()
+    arr = [users('edgzoah', '$2b$12$XYsagRDEW0nc2n6JUN2STuk/ZqYC1P4UOgS4wUAISGYJBYXOeWARS', 'adam', 'blady', 'adam@blady.com', '2006-09-14', '+48662272007', 'dobra 29a', 'warszawa', 'mazowieckie', '02-998', 'polska'), users('juki', '$2b$12$BNAs8ojiHcl/UUELO2m7XelIE/pAWDvom87NGMCHYAGrtgqobbSE2', 'tomasz', 'ogrodnik', 'tomasz@ogrodnik.com', '2007-09-22', '+48688964999', 'wladkow 88', 'warszawa', 'mazowieckie', '02-664', 'polska'), users('twojstary', '$2b$12$EIbZPXfBkfNUI3OPT/v/uOIB8OFfpw21bzoNbBddd1YubAEO1pNxu', 'aleksander', 'wiejak', 'ja@wiejaknakrula.com', '2006-09-24', '+48705758922', 'wladkow 88', 'warszawa', 'mazowieckie', '02-664', 'polska')]
+    for i in arr:
+        db.session.add(i)
+        db.session.commit()
 
 
-#losowi uzytkownicy
-# arr = [users('edgzoah', '$2b$12$XYsagRDEW0nc2n6JUN2STuk/ZqYC1P4UOgS4wUAISGYJBYXOeWARS', 'adam', 'blady', 'adam@blady.com', '2006-09-14', '+48662272007', 'dobra 29a', 'warszawa', 'mazowieckie', '02-998', 'polska'), users('juki', '$2b$12$BNAs8ojiHcl/UUELO2m7XelIE/pAWDvom87NGMCHYAGrtgqobbSE2', 'tomasz', 'ogrodnik', 'tomasz@ogrodnik.com', '2007-09-22', '+48688964999', 'wladkow 88', 'warszawa', 'mazowieckie', '02-664', 'polska'), users('twojstary', '$2b$12$EIbZPXfBkfNUI3OPT/v/uOIB8OFfpw21bzoNbBddd1YubAEO1pNxu', 'aleksander', 'wiejak', 'ja@wiejaknakrula.com', '2006-09-24', '+48705758922', 'wladkow 88', 'warszawa', 'mazowieckie', '02-664', 'polska')]
-# for i in arr:
-#     db.session.add(i)
-#     db.session.commit()
+create_app()
 
 #login - edgzoah haslo - dobra123
 #login - juki haslo - tomek9999@
 #login - twojstary - krulpolska 
-
-
-
-#dodanie kategorii
-# l = ['splawik', 'wendka', 'przynenty', 'rzylki', 'akcesoria']
-# for i in l:
-#     q = category(i)
-#     db.session.add(q)
-#     db.session.commit()
-
-
-
-#zeby stworzyc baze
-# db.create_all()
