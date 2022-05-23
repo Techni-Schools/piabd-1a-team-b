@@ -18,7 +18,7 @@ from werkzeug import secure_filename,FileStorage
 na
 from werkzeug.utils import secure_filename
 from werkzeug.datastructures import  FileStorage
-"""
+""" 
 
 """
 DO FLASK-LOGIN W UserMixin TRZEBA DODAC FUNKCJE GET_BALANCE
