@@ -1,4 +1,5 @@
 from datetime import timedelta
+import re
 from lib import *
 from settings import app, login_manager, db
 from model import products, users, orders, category, chat
@@ -149,12 +150,37 @@ def profile(username):
 
 @app.route('/search')
 def search():
-  try:
-    cu = db.session.query(products.name, category.category_name, users.username).join(category).join(users).filter(products.name.like('%'+request.args['search']+'%')).all()
-    # print(cu) jak to sie rowna [] to zrobic cos w stylu nie znaleziono produktow z taka nazwa
-    return render_template('search.html', prd=cu)
-  except:
-    return redirect('/')
+  if 'string' in request.args:
+    if request.args['string'] is '':
+      return render_template('404.html')
+    prd = db.session.query(products.name, products.image, products.price, category.category_name, users.username).join(users).join(category).filter(products.name.like(request.args['string'] + '%'), products.isDeleted == 0).limit(10).all()
+    return render_template('search.html', prd=prd)
+  return render_template('404.html')
+
+@app.route('/listing',methods=["POST","GET"])
+def listing():
+  maxproductspersite = 5
+  string = request.form.get('text')
+  if request.form.get('page') == 0:
+    page = 1
+    pageto = maxproductspersite
+  else:
+    page = int(request.form.get('page'))*maxproductspersite
+    pageto = int(page)+maxproductspersite
+  print(page, pageto)
+  if request.form.get('o') == 'pd':
+    prd = db.session.query(products.id, products.name, products.image, products.price, category.category_name, users.username).join(users).join(category).filter(products.name.like(string + '%'), products.isDeleted == 0, products.id.between(page, pageto)).order_by(products.price.desc()).limit(maxproductspersite).all()
+  elif request.form.get('o') == 'p':
+    prd = db.session.query(products.id, products.name, products.image, products.price, category.category_name, users.username).join(users).join(category).filter(products.name.like(string + '%'), products.isDeleted == 0, products.id.between(page, pageto)).order_by(products.price).limit(maxproductspersite).all()
+  else:
+    prd = db.session.query(products.id, products.name, products.image, products.price, category.category_name, users.username).join(users).join(category).filter(products.name.like(string + '%'), products.isDeleted == 0, products.id.between(page, pageto)).order_by(products.id).limit(maxproductspersite).all()
+    
+  l = []
+  for product in prd:
+    product = list(product)
+    l.append({'name':product[0], 'user':product[1], 'id': product[2]})
+  l = tuple(l)
+  return jsonify(l)
 
 @app.route('/update', methods=['POST', 'GET'])
 @login_required
@@ -169,7 +195,6 @@ def update():
   path = r'%s' % (os.path.join('images', cu.image),)
   path = path.replace("\\", "/")
   if request.method == 'POST' and form.validate():
-    print(form.image.data)
     if form.image.data is not None:
       form.image.data.save(os.path.join(app.config['UPLOAD_FOLDER'], cu.image))
     c = db.session.query(category.id).filter(category.category_name == form.category.data).first()
@@ -207,7 +232,6 @@ def buy(uid):
   form = buyProduct(request.form)
   if uid:
     cu = db.session.query(products).filter(products.uuid_id == uid, products.isDeleted == 0).first()
-    print(cu.user)
     if cu:
       address = current_user.get_address()
       if request.method == 'POST' and form.validate():
@@ -223,7 +247,6 @@ def buy(uid):
           if cu.quantity == 0:
             db.session.query(products).filter(products.id == cu.id).update({products.isDeleted: 1})
           else:
-            print(form.kurier.data)
             order = orders(cu.id, current_user.get_id(), 'bought', datetime.now(), datetime.now()+timedelta(days=2), None, 'with account balance', form.quantity.data, form.kurier.data)
             db.session.add(order)
           db.session.commit()
