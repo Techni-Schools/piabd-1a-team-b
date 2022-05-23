@@ -49,6 +49,37 @@ href="{{ url_for('static',filename='styles/dashboard.css') }}"
     src="https://static.zakumaj.pl/data/store/2015/10/98d0a565-4d35-88fb-5557-3977dee48380/picture_large.jpg"
   />
 </div>
+<div class="informations-about-user">
+  <div class="row information-row">
+    <div class="col 0-1">
+      <div class="information-state">
+        <h1 class="information-title">Addres Book</h1>
+        <div class="border-like br-0-1"></div>
+        <h3 class="information-text" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><i class="fa-solid fa-flag-usa"></i> {{ current_user.state }}</h3>
+        <h3 class="information-text"><i class="fa-solid fa-road"></i> {{ current_user.street }}</h3>
+        <h3 class="information-text"><i class="fa-solid fa-city"></i> {{ current_user.city }}</h3>
+        <h3 class="information-text"><i class="fa-solid fa-sign-hanging"></i> {{ current_user.zip_code }}</h3>
+      </div>
+    </div>
+    <div class="col 0-2">
+      <div class="information-contact">
+        <h1 class="information-title">Contact me</h1>
+        <div class="border-like br-0-2"></div>
+        <h3 class="information-text"><i class="fa-solid fa-envelope"></i> {{ current_user.email }}</h3>
+        <h3 class="information-text"><i class="fa-solid fa-phone"></i> {{ current_user.phone_number }}</h3>
+      </div>
+    </div>
+    <div class="col 0-3">
+      <div class="information-contact">
+        <h1 class="information-title">About me</h1>
+        <div class="border-like br-0-3"></div>
+        <h3 class="information-text"><i class="fa-solid fa-signature"></i> {{ current_user.first_name }} {{ current_user.last_name }}</h3>
+        <h3 class="information-text"><i class="fa-solid fa-cake-candles"></i> {{ current_user.date_of_birth }}</h3>
+        <h3 class="information-text"><i class="fa-solid fa-earth-europe"></i> {{ current_user.country }}</h3>
+    </div>
+  </div>
+</div>
+</div>
 <div class="containder-main">
 <p class="text-i">Your products:</p>
 {% if u == ['You dont have any products yet'] %}
@@ -94,5 +125,6 @@ href="{{ url_for('static',filename='styles/dashboard.css') }}"
 <div class="new-product" style="position: sticky; top: 70px; z-index: 999; width: fit-content;">
   <button class="add-button" data-toggle="modal" data-target="#exampleModal"><i class="fa-solid fa-cart-plus"></i></button>
 </div>
+<script src="{{ url_for('static', filename='scripts/dashboard.js') }}"></script>
 
 {% endblock %}
