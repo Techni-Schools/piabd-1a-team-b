@@ -13,7 +13,7 @@
 }
 
 .col-sm- {
-  height: 754px;
+  height: 80vh;
   background-color: black;
 }
 
@@ -56,4 +56,30 @@
 
 .account-data {
   color: wheat;
+}
+
+.row {
+  height: 80vh;
+}
+
+.profile-items {
+  height: 55vh;
+}
+
+.profile-img {
+  animation-name: fadeInLeft;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  animation-delay: 0.7s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  border-radius: 100%;
+  height: 150px;
+
+}
+
+@media only screen and (max-width:768px) {
+  .dosdsao {
+    display: none;
+  }
 }
