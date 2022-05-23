@@ -8,12 +8,15 @@
 {% block main %} 
 
 <div class="address">
-<h3>Twoje dane:</h3>
+<h3>Twoje dane</h3>
 {{adr.street}}
-{{adr.city}}
-{{adr.state}}
 {{adr.zip_code}}
+<br>
+{{adr.state}}
+{{adr.city}}
 {{adr.country}}
+<br>
+<a href="/profile/update">Zmień adres</a>
 </div>
 
 

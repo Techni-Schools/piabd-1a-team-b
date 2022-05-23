@@ -109,8 +109,8 @@ def create_app():
         db.session.add(i)
         db.session.commit()
 
-
-create_app()
+if __name__ == '__main__':
+    create_app()
 
 #login - edgzoah haslo - dobra123
 #login - juki haslo - tomek9999@
