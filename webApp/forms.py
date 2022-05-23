@@ -27,9 +27,9 @@ class newProduct(Form):
     name = StringField('Name', [validators.Length(min=1)])
     image = FileField('Image', validators=[FileRequired(), FileAllowed(list(IMAGES), 'images only')])
     category = SelectField('Category', choices=['Splawik', 'Wendka', 'Przynenty', 'Rzylki', 'Akcesoria'])
-    price = DecimalField('Price', [validators.DataRequired(), validators.NumberRange(min=0, max=99999)])
+    price = DecimalField('Price', [validators.DataRequired(), validators.NumberRange(min=0, max=999)])
     description = TextAreaField('Description')
-    quantity = IntegerField('Quantity', [validators.DataRequired()])
+    quantity = IntegerField('Quantity', [validators.DataRequired(), validators.NumberRange(min=1, max=999)])
 
 class addBalance(Form):
     balance = DecimalField('Add Balance', [validators.DataRequired(), validators.NumberRange(min=0, max=999)])
@@ -56,4 +56,5 @@ class updateProfile(Form):
 
 class buyProduct(Form):
     kurier = RadioField('', choices=[('fedex','Kurier FedEx'),('pocztex','Kurier Pocztex')], validators=[validators.DataRequired()])
-    
+    quantity = IntegerField('Ilość', [validators.DataRequired(), validators.NumberRange(min=1, max=999)], render_kw={'value': 1})
+  

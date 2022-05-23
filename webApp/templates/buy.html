@@ -16,14 +16,25 @@
 {{adr.country}}
 </div>
 
+
 {% from "_formhelpers.html" import render_field %}
 <form method="post" enctype="multipart/form-data">
-  <dl>
-    {{ render_field(form.kurier) }}
-  </dl>
-  <p><input type=submit value=Kup>
-</form>
-
+    <dl>
+        {{ render_field(form.kurier) }}
+        {{ render_field(form.quantity) }}
+    </dl>
+    {{prd.price}}zł
+{{prd.name}}
+{{prd.category}}
+{{prd.price}}
+{{prd.description}}
+{{prd.quantity}}
+{{prd.user}}
+<br>
+<img src="{{url_for('static', filename='images/'+prd.image)}}" style="height: 200px">
+    <p><input type=submit value=Kup>
+    </form>
+    
 {% with messages = get_flashed_messages() %} {% if
     messages %}
     <ul class="flashes">

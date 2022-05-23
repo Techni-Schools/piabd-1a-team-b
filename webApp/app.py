@@ -1,3 +1,5 @@
+from datetime import timedelta
+from math import prod
 from lib import *
 from settings import app, login_manager, db
 from model import products, users, orders, category, chat
@@ -205,12 +207,32 @@ def profile_update():
 def buy(uid):
   form = buyProduct(request.form)
   if uid:
-    cu = db.session.query(products).filter(products.uuid_id == uid).first()
+    cu = db.session.query(products).filter(products.uuid_id == uid, products.isDeleted == 0).first()
+    print(cu.user)
     if cu:
       address = current_user.get_address()
       if request.method == 'POST' and form.validate():
+        if int(cu.user) == int(current_user.get_id()):
+          flash('nie mozesz kupic swojego produktu :(')
+          return redirect(url_for('buy', uid=uid))
         if int(current_user.get_balance()) < int(cu.price):
           flash('za malo kasy mordeczko :(')
           return redirect(url_for('buy', uid=uid))
+        db.session.query(users).filter(users.id == current_user.get_id()).update({users.balance: users.balance-cu.price*form.quantity.data})
+        db.session.query(products).filter(products.id == cu.id).update({products.quantity: products.quantity-form.quantity.data})
+        if cu.quantity >= 0:
+          if cu.quantity == 0:
+            db.session.query(products).filter(products.id == cu.id).update({products.isDeleted: 1})
+          else:
+            print(form.kurier.data)
+            order = orders(cu.id, current_user.get_id(), 'bought', datetime.now(), datetime.now()+timedelta(days=2), None, 'with account balance', form.quantity.data, form.kurier.data)
+            db.session.add(order)
+          db.session.commit()
+          flash('zakup przebiegl pomyslnie :)')
+          return redirect('/dashboard')
+        else:
+          flash('nie ma tyle produktow')
+          return redirect(url_for('buy', uid=uid))
+          
       return render_template('buy.html', prd=cu, adr=address, form=form)
   return render_template('404.html')

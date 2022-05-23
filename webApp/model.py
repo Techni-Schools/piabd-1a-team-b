@@ -83,7 +83,9 @@ class orders(db.Model):
     required_date = db.Column(db.DateTime)
     shipped_date = db.Column(db.DateTime)
     payment_method = db.Column(db.String(50), nullable=False)
-    def __init__(self, product, user, order_status, order_date, required_date, shipped_date, payment_method):
+    quantity = db.Column(db.Integer, nullable=False)
+    kurier = db.Column(db.String(50), nullable=False)
+    def __init__(self, product, user, order_status, order_date, required_date, shipped_date, payment_method, quantity, kurier):
         self.product = product
         self.user = user
         self.order_status = order_status
@@ -91,6 +93,9 @@ class orders(db.Model):
         self.required_date = required_date
         self.shipped_date = shipped_date
         self.payment_method = payment_method
+        self.quantity = quantity
+        self.kurier = kurier
+
 
 #przykladowe zapytanie z joinem
 # u = db.session.query(products.name, category.category_name, users.username).join(category).join(users).all()
