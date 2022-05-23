@@ -3,14 +3,57 @@
   justify-content: center;
   text-align: center;
 }
+
+.addres-book {
+  display: none;
+}
+
 .row {
   width: 100%;
 }
-.col-sm {
-  height: 100%;
+
+.col-sm- {
+  height: 754px;
+  background-color: black;
 }
+
 @media only screen and (max-width: 565px) {
   .col-sm- {
     width: 100%;
+    height: auto;
   }
+}
+
+.information-buttons {
+  background-color: transparent;
+  border: none;
+  color: white;
+  margin: 10px;
+  text-align: left;
+}
+
+.profile-look {
+  font-size: 30px;
+}
+
+.col-sm- {
+  /* width: 12%; */
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+/*------- profile checker ---------*/
+.account-data {
+  height: 230px;
+  background: url("https://pkconstruction.eu/wp-content/uploads/2019/12/wood-2045379_1920.jpg") no-repeat;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.account-data {
+  color: wheat;
 }

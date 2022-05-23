@@ -1,35 +1,47 @@
 {% extends 'base.html' %} {% block title %} Edytuj produkt {% endblock %} {%
 block extrahead %}
-<link
-  rel="stylesheet"
-  href="{{url_for('static', filename='styles/update_user.css')}}"
-/>
+<link rel="stylesheet" href="{{url_for('static', filename='styles/update_user.css')}}" />
 {% endblock %} {% block main %} {% from "_formhelpers.html" import render_field
 %}
 <div class="change-information">
   <div class="row">
     <div class="col-sm-">
-      <h1>About Information</h1>
-      <h2>Address Book</h2>
+      <button type="button" class="information-buttons tak">About Information</button>
+      <button type="button" class="information-buttons nie">Addres Book</button>
     </div>
     <div class="col">
-      <form method="post" enctype="multipart/form-data">
-        <dl>
-          <div class="first_name">{{ render_field(form.first_name) }}</div>
-          <div class="last_name">{{ render_field(form.last_name) }}</div>
-          <div class="email">{{ render_field(form.email) }}</div>
-          <div class="date_of_birth">
-            {{ render_field(form.date_of_birth) }}
+      <div class="row">
+        <div class="col">
+          <form method="post" enctype="multipart/form-data">
+            <dl>
+              <div class="about-information">
+                <div class="first_name" id="ta?">{{ render_field(form.first_name) }}</div>
+                <div class="last_name" id="">{{ render_field(form.last_name) }}</div>
+                <div class="email" id="email-field">{{ render_field(form.email) }}</div>
+                <div class="date_of_birth" id="date_of_birth-field">
+                  {{ render_field(form.date_of_birth) }}
+                </div>
+              </div>
+              <div class="addres-book">
+                <div class="phone_number" id="phone_number-field">{{ render_field(form.phone_number) }}</div>
+                <div class="street" id="street-field">{{ render_field(form.street) }}</div>
+                <div class="city" id="city-field">{{ render_field(form.city) }}</div>
+                <div class="state" id="state-field">{{ render_field(form.state) }}</div>
+                <div class="zip_code" id="zip_code-field">{{ render_field(form.zip_code) }}</div>
+                <div class="country" id="zip_code-field">{{ render_field(form.country) }}</div>
+              </div>
+            </dl>
+            <p></p>
+          </form>
+        </div>
+        <div class="col">
+          <h1 class="profile-look">Wygląd Profilu:</h1>
+          <div class="account-data">
+            <h1 id="first_name-field"></h1>
+            <h1 id="last_name-field"></h1>
           </div>
-          <div class="phone_number">{{ render_field(form.phone_number) }}</div>
-          <div class="street">{{ render_field(form.street) }}</div>
-          <div class="city">{{ render_field(form.city) }}</div>
-          <div class="state">{{ render_field(form.state) }}</div>
-          <div class="zip_code">{{ render_field(form.zip_code) }}</div>
-          <div class="country">{{ render_field(form.country) }}</div>
-        </dl>
-        <p><input type="submit" value="Add" /></p>
-      </form>
+        </div>
+      </div>
     </div>
   </div>
   {% with messages = get_flashed_messages() %} {% if messages %}
@@ -54,5 +66,6 @@ block extrahead %}
     $("#country").val("{{profile.country}}");
   });
 </script>
+<script src="{{ url_for('static', filename='scripts/profile-edit.js') }}"></script>
 
 {% endblock %}

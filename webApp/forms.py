@@ -43,17 +43,16 @@ class updateProduct(Form):
     quantity = IntegerField('Quantity', [validators.DataRequired()])
 
 class updateProfile(Form):
-    first_name = StringField('First Name', [validators.Length(min=3, max=50)])
-    last_name = StringField('Last Name', [validators.Length(min=4, max=50)])
-    email = StringField('Email Address', [validators.Length(min=6, max=50)])
-    date_of_birth = DateField('Date of birth', [])
-    phone_number = TelField('Phone number', [])
-    street = StringField('Street', [validators.Length(min=5, max=50)])
-    city = StringField('City', [validators.Length(min=4, max=50)])
-    state = StringField('State', [validators.Length(min=4, max=50)])
-    zip_code = StringField('Zip code', [validators.Length(min=4, max=10)])
-    country = StringField('Country', [validators.Length(min=4, max=50)])
-
+    first_name = StringField('First Name', [validators.Length(min=3, max=50)], render_kw={'class': 'niewiem'})
+    last_name = StringField('Last Name', [validators.Length(min=4, max=50)], render_kw={'class': 'niewiem'})
+    email = StringField('Email Address', [validators.Length(min=6, max=50)], render_kw={'class': 'niewiem'})
+    date_of_birth = DateField('Date of birth', [], render_kw={'class': 'niewiem'})
+    phone_number = TelField('Phone number', [], render_kw={'class': 'niewiem'})
+    street = StringField('Street', [validators.Length(min=5, max=50)], render_kw={'class': 'niewiem'})
+    city = StringField('City', [validators.Length(min=4, max=50)], render_kw={'class': 'niewiem'})
+    state = StringField('State', [validators.Length(min=4, max=50)], render_kw={'class': 'niewiem'})
+    zip_code = StringField('Zip code', [validators.Length(min=4, max=10)], render_kw={'class': 'niewiem'})
+    country = StringField('Country', [validators.Length(min=4, max=50)], render_kw={'class': 'niewiem'})
 class buyProduct(Form):
     kurier = RadioField('', choices=[('fedex','Kurier FedEx'),('pocztex','Kurier Pocztex')], validators=[validators.DataRequired()])
     quantity = IntegerField('Ilość', [validators.DataRequired(), validators.NumberRange(min=1, max=999)], render_kw={'value': 1})
