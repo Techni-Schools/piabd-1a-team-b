@@ -151,7 +151,7 @@ def profile(username):
 @app.route('/search')
 def search():
   if 'string' in request.args:
-    if request.args['string'] is '':
+    if request.args['string'] == '':
       return render_template('404.html')
     prd = db.session.query(products.name, products.image, products.price, category.category_name, users.username).join(users).join(category).filter(products.name.like(request.args['string'] + '%'), products.isDeleted == 0).limit(10).all()
     return render_template('search.html', prd=prd)
@@ -159,29 +159,27 @@ def search():
 
 @app.route('/listing',methods=["POST","GET"])
 def listing():
-  maxproductspersite = 5
-  string = request.form.get('text')
-  if request.form.get('page') == 0:
-    page = 1
-    pageto = maxproductspersite
-  else:
-    page = int(request.form.get('page'))*maxproductspersite
-    pageto = int(page)+maxproductspersite
-  print(page, pageto)
+  maxproductspersite = 10
+  string = request.form.get('text', '', type=str)
+  page = request.form.get('page', 1, type=int)
+  if page == 0: page = 1
+  print(string)
   if request.form.get('o') == 'pd':
-    prd = db.session.query(products.id, products.name, products.image, products.price, category.category_name, users.username).join(users).join(category).filter(products.name.like(string + '%'), products.isDeleted == 0, products.id.between(page, pageto)).order_by(products.price.desc()).limit(maxproductspersite).all()
+    prd = products.query.join(category, products.category == category.id).join(users, products.user == users.id).filter(products.name.like(string+'%')).order_by(products.price.desc()).paginate(page=page, per_page=maxproductspersite, error_out=False)
   elif request.form.get('o') == 'p':
-    prd = db.session.query(products.id, products.name, products.image, products.price, category.category_name, users.username).join(users).join(category).filter(products.name.like(string + '%'), products.isDeleted == 0, products.id.between(page, pageto)).order_by(products.price).limit(maxproductspersite).all()
+    prd = products.query.join(category, products.category == category.id).join(users, products.user == users.id).filter(products.name.like(string+'%')).order_by(products.price).paginate(page=page, per_page=maxproductspersite, error_out=False)
   else:
-    prd = db.session.query(products.id, products.name, products.image, products.price, category.category_name, users.username).join(users).join(category).filter(products.name.like(string + '%'), products.isDeleted == 0, products.id.between(page, pageto)).order_by(products.id).limit(maxproductspersite).all()
-    
-  l = []
-  for product in prd:
-    product = list(product)
-    l.append({'name':product[0], 'user':product[1], 'id': product[2]})
-  l = tuple(l)
-  return jsonify(l)
-
+    prd = products.query.join(category, products.category == category.id).join(users, products.user == users.id).filter(products.name.like(string+'%')).paginate(page=page, per_page=maxproductspersite, error_out=False)
+  # prd = products.query.join(category, products.category == category.id).join(users, products.user == users.id).filter(products.name.like(string+'%')).paginate(page=page, per_page=maxproductspersite, error_out=False)
+  # prd = products.query.paginate(page=2, per_page=5, error_out=False)
+  return str([i.name for i in prd.items])
+  # l = []
+  # for product in prd:
+  #   product = list(product)
+  #   l.append({'name':product[0], 'user':product[1], 'id': product[2]})
+  # l = tuple(l)
+  # return jsonify(l)
+  # return str(string)
 @app.route('/update', methods=['POST', 'GET'])
 @login_required
 def update():
