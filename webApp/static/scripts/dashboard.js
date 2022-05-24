@@ -16,3 +16,7 @@ $(".0-3").mouseenter(function () {
 $(".0-3").mouseleave(function () {
   $(".br-0-3").css("width", "30px");
 });
+
+setTimeout(function () {
+  $(".containder-main").css("display", "flex");
+}, 600);
