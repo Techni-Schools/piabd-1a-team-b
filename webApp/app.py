@@ -150,12 +150,7 @@ def profile(username):
 
 @app.route('/search')
 def search():
-  if 'string' in request.args:
-    if request.args['string'] == '':
-      return render_template('404.html')
-    prd = db.session.query(products.name, products.image, products.price, category.category_name, users.username).join(users).join(category).filter(products.name.like(request.args['string'] + '%'), products.isDeleted == 0).limit(10).all()
-    return render_template('search.html', prd=prd)
-  return render_template('404.html')
+  return render_template('search.html')
 
 @app.route('/listing',methods=["POST","GET"])
 def listing():
@@ -163,7 +158,7 @@ def listing():
   string = request.form.get('text', '', type=str)
   page = request.form.get('page', 1, type=int)
   if page == 0: page = 1
-  print(string)
+  # print(string)
   if request.form.get('o') == 'pd':
     prd = products.query.join(category, products.category == category.id).join(users, products.user == users.id).filter(products.name.like(string+'%')).order_by(products.price.desc()).paginate(page=page, per_page=maxproductspersite, error_out=False)
   elif request.form.get('o') == 'p':
@@ -172,14 +167,15 @@ def listing():
     prd = products.query.join(category, products.category == category.id).join(users, products.user == users.id).filter(products.name.like(string+'%')).paginate(page=page, per_page=maxproductspersite, error_out=False)
   # prd = products.query.join(category, products.category == category.id).join(users, products.user == users.id).filter(products.name.like(string+'%')).paginate(page=page, per_page=maxproductspersite, error_out=False)
   # prd = products.query.paginate(page=2, per_page=5, error_out=False)
-  return str([i.name for i in prd.items])
-  # l = []
-  # for product in prd:
-  #   product = list(product)
-  #   l.append({'name':product[0], 'user':product[1], 'id': product[2]})
-  # l = tuple(l)
-  # return jsonify(l)
-  # return str(string)
+  # return str([i.name for i in prd.items])
+  l = []
+  for product in prd.items:
+    # print(product.uuid_id)
+    # cena nazwa kategoria uzytkownik zdjecie
+    l.append({'name':product.name, 'user':product.user, 'image': product.uuid_id, 'category': product.category, 'price': product.price})
+  l = tuple(l)
+  return jsonify(l)
+  # return str('sram')
 @app.route('/update', methods=['POST', 'GET'])
 @login_required
 def update():
