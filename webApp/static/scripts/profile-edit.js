@@ -17,6 +17,7 @@ $(document).ready(function () {
       var newId = idOfInput + "-field";
       document.getElementById(newId).innerHTML =
         $("dd").children(".niewiem")[x].value;
+      console.log(newId)
     }
   }
   startFieldProfile();
