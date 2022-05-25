@@ -171,10 +171,11 @@ def listing():
   # prd = products.query.paginate(page=2, per_page=5, error_out=False)
   # return str([i.name for i in prd.items])
   l = []
+  count = products.query.count()
   for product in prd.items:
     # print(product.uuid_id)
     # cena nazwa kategoria uzytkownik zdjecie
-    l.append({'name':product.name, 'user':product.user, 'image': product.uuid_id, 'category': product.category, 'price': product.price})
+    l.append({'name':product.name, 'user':product.user, 'image': product.uuid_id, 'category': product.category, 'price': product.price, 'count': count})
   l = tuple(l)
   return jsonify(l)
   # return str('sram')
