@@ -19,8 +19,8 @@ class registerForm(Form):
     street = StringField('Street', [validators.DataRequired(), validators.Length(min=5, max=50)], render_kw={"aria-label": "Street"})
     city = StringField('City', [validators.DataRequired(), validators.Length(min=4, max=50)],  render_kw={"aria-label": "City"})
     state = StringField('State', [validators.DataRequired(), validators.Length(min=4, max=50)], render_kw= {"aria-label": "State"})
-    zip_code = StringField('Zip code', [validators.DataRequired(), validators.Length(min=4, max=10)] render_kw={"aria-label": "Zip Code"})
-    country = StringField('Country', [validators.DataRequired(), validators.Length(min=4, max=50)] render_kw={"aria-label": "Country"})
+    zip_code = StringField('Zip code', [validators.DataRequired(), validators.Length(min=4, max=10)], render_kw={"aria-label": "Zip Code"})
+    country = StringField('Country', [validators.DataRequired(), validators.Length(min=4, max=50)], render_kw={"aria-label": "Country"})
     accept_tos = BooleanField('I accept the TOS', [validators.DataRequired()])
 
 class newProduct(Form):
