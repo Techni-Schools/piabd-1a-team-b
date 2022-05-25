@@ -62,9 +62,7 @@ $(document).ready(function () {
       } else if (pageNumber == 3) {
         $("#register-form").submit();
       }
-      // console.log(pageNumber);
     }
-    // console.log(pageNumber);
     checkPage();
   }
 
@@ -101,7 +99,6 @@ $(document).ready(function () {
     }
     lista.push(data)
     lista = lista.filter(onlyUnique);
-    console.log(lista)
     let i;
     $('.errors').empty();
     for (i = 0; i < lista.length; i++) {
@@ -109,20 +106,32 @@ $(document).ready(function () {
     }
   }
   function clearError(niewiem) {
+    if ($(niewiem).attr("id") == "first_name" || $(niewiem).attr("id") == "last_name") {
+      data = "<div class='siema'>" + "<i class='fa-solid fa-circle-xmark'></i>" + "<h4>" + "Błąd przy " + $(niewiem).attr("aria-label") + " Input musi zawierac 2 znaki ale nie wykraczac poza 50" + "</h4>" + "</div>" + "<br>"
+    }
+    else if ($(niewiem).attr("id") == "email") {
+      data = "<div class='siema'>" + "<i class='fa-solid fa-circle-xmark'></i>" + "<h4>" + "Błąd przy " + $(niewiem).attr("aria-label") + " Input musi zawierac 5 znaki ale nie wykraczac poza 50, nie moze zawierac spacji!" + "</h4>" + "</div>" + "<br>"
+    }
+    else if ($(niewiem).attr("id") == "city" || $(niewiem).attr("id") == "state" || $(niewiem).attr("id") == "zip_code" || $(niewiem).attr("id") == "country") {
+      data = "<div class='siema'>" + "<i class='fa-solid fa-circle-xmark'></i>" + "<h4>" + "Błąd przy " + $(niewiem).attr("aria-label") + " Input musi zawierac 4 znaki ale nie wykraczac poza 10 znaków" + "</h4>" + "</div>" + "<br>"
+    }
+    else if ($(niewiem).attr("id") == "phone_number") {
+      data = data = "<div class='siema'>" + "<i class='fa-solid fa-circle-xmark'></i>" + "<h4>" + "Błąd przy " + $(niewiem).attr("aria-label") + " Input musi co najmiej 9 cyfr i maksymalnie 11 cyfr" + "</h4>" + "</div>" + "<br>"
+    }
     var indesList = lista.indexOf(data)
+    if (indesList > -1) {
     lista.splice(indesList, 1)
-    console.log(lista)
     $('.errors').empty();
     for (i = 0; i < lista.length; i++) {
       $('.errors').append(lista[i])
     }
+  }
   }
 
   function checkErrors() {
     var siema;
     for (var x = 0; x < errorsList.length; x++) {
       siema = errorsList[x]
-      // console.log(siema)
       if (!$('.errors').html().includes(siema)) {
         $(".errors").append(siema)
       }
@@ -175,11 +184,9 @@ $(document).ready(function () {
       if (input.val().length == 9 && !isNaN(parseInt($(input).val()))) {
         input.css("border-color", "green");
         phoneValid = true;
-        console.log(Number.isNaN($(input).val()))
         clearError(inputField)
         checkErrors()
       } else {
-        console.log(typeof input.val() == "number")
         showError(inputField)
         checkErrors();
         phoneValid = false;

@@ -150,6 +150,8 @@ def profile(username):
 
 @app.route('/search')
 def search():
+  if request.args.get('string') is None:
+    return render_template('404.html')
   return render_template('search.html')
 
 @app.route('/listing',methods=["POST","GET"])
