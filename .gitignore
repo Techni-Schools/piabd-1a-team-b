@@ -105,4 +105,4 @@ dist
 
 __pycache__
 
-# webApp/static/images/*
+webApp/static/images/*
