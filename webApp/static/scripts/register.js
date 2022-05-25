@@ -3,6 +3,8 @@ $(document).ready(function () {
   var validPoints = 0;
   //   first  page valid variables
 
+  var data;
+
   var firstValid = false;
   var lastnameValid = false;
   var emailValid = false;
@@ -13,6 +15,8 @@ $(document).ready(function () {
   var zipValid = false;
   var stateValid = false;
   var countryValid = false;
+
+  var jd = 0;
   //
 
   function checkPage() {
@@ -58,9 +62,9 @@ $(document).ready(function () {
       } else if (pageNumber == 3) {
         $("#register-form").submit();
       }
-      console.log(pageNumber);
+      // console.log(pageNumber);
     }
-    console.log(pageNumber);
+    // console.log(pageNumber);
     checkPage();
   }
 
@@ -75,13 +79,58 @@ $(document).ready(function () {
   $("#nextButton").click(pageNext);
   $("#backButton").click(pageBack);
 
+  let lista = [];
+  const errorsList = [];
+
+  function onlyUnique(value, index, self) {
+    return self.indexOf(value) === index;
+  }
+
+  function showError(niewiem) {
+    if ($(niewiem).attr("id") == "first_name" || $(niewiem).attr("id") == "last_name") {
+      data = "Błąd przy " + $(niewiem).attr("aria-label") + "Input musi zawierac 4 znaki ale nie wykraczac poza 50 "
+    }
+    // if ($(niewiem).attr("id") == )
+    lista.push(data)
+    lista = lista.filter(onlyUnique);
+    console.log(lista)
+    let i;
+    $('.errors').empty();
+    for (i = 0; i < lista.length; i++) {
+      $('.errors').append(lista[i])
+    }
+  }
+  function clearError(niewiem) {
+    var indesList = lista.indexOf(data)
+    lista.splice(indesList, 1)
+    console.log(lista)
+    $('.errors').empty();
+    for (i = 0; i < lista.length; i++) {
+      $('.errors').append(lista[i])
+    }
+  }
+
+  function checkErrors() {
+    var siema;
+    for (var x = 0; x < errorsList.length; x++) {
+      siema = errorsList[x]
+      // console.log(siema)
+      if (!$('.errors').html().includes(siema)) {
+        $(".errors").append(siema)
+      }
+    }
+  }
   function checkLengthFirstPage(inputField) {
     var input = $(inputField);
     if (input.attr("id") == "first_name") {
       if (input.val().length >= 2) {
         input.css("border-color", "green");
         firstValid = true;
+        clearError(inputField)
+        checkErrors();
       } else {
+        showError(inputField)
+        checkErrors()
         firstValid = false;
         input.css("border-color", "red");
       }
@@ -89,7 +138,11 @@ $(document).ready(function () {
       if (input.val().length >= 2) {
         input.css("border-color", "green");
         lastnameValid = true;
+        clearError(inputField)
+        checkErrors()
       } else {
+        showError(inputField)
+        checkErrors()
         lastnameValid = false;
         input.css("border-color", "red");
       }
@@ -99,9 +152,11 @@ $(document).ready(function () {
         input.val().includes("@") &&
         input.val().includes(".")
       ) {
+        clearError(inputField)
         input.css("border-color", "green");
         emailValid = true;
       } else {
+        showError(inputField)
         emailValid = false;
         input.css("border-color", "red");
       }
@@ -109,12 +164,15 @@ $(document).ready(function () {
       if (input.val().length == 9) {
         input.css("border-color", "green");
         phoneValid = true;
+        clearError(inputField)
       } else {
+        showError(inputField)
         phoneValid = false;
         input.css("border-color", "red");
       }
     }
     if (input.val().length == 0) {
+
       input.css("border-color", "black");
     }
   }
@@ -176,8 +234,5 @@ $(document).ready(function () {
     if (pageNumber == 2) {
       checkLengthSecondPage(this);
     }
-  });
-  $("input").focus(function () {
-    $(this).css("border-color", "black");
   });
 });
