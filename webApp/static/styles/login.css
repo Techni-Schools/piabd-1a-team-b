@@ -3,12 +3,38 @@ html {
   height: 100vh;
   position: relative;
 }
+
 .form-login {
   position: absolute;
   top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.errors {
+  height: auto;
+}
+
+.siema {
+  background-color: red;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.siema h4 {
+  font-size: 15px;
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
+.siema i {
+  padding-right: 10px;
+  color: white;
+}
+
 .form-login-box {
   display: flex;
   align-items: center;
@@ -19,9 +45,11 @@ html {
   background-color: rgba(96, 96, 96, 0.2);
   border-radius: 15px;
 }
+
 .login-text {
   padding: 0px;
 }
+
 input {
   padding: 5px;
   transition: 0.2s;
@@ -31,9 +59,11 @@ input {
   border-bottom: 3px solid rgb(0, 0, 0);
   outline: none;
 }
+
 input:focus {
   border-bottom: 3px solid rgb(0, 136, 181);
 }
+
 .border-box {
   border-radius: 15px;
   padding: 30px;

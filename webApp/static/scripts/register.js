@@ -88,9 +88,17 @@ $(document).ready(function () {
 
   function showError(niewiem) {
     if ($(niewiem).attr("id") == "first_name" || $(niewiem).attr("id") == "last_name") {
-      data = "Błąd przy " + $(niewiem).attr("aria-label") + "Input musi zawierac 4 znaki ale nie wykraczac poza 50 "
+      data = "<div class='siema'>" + "<i class='fa-solid fa-circle-xmark'></i>" + "<h4>" + "Błąd przy " + $(niewiem).attr("aria-label") + " Input musi zawierac 2 znaki ale nie wykraczac poza 50" + "</h4>" + "</div>" + "<br>"
     }
-    // if ($(niewiem).attr("id") == )
+    else if ($(niewiem).attr("id") == "email") {
+      data = "<div class='siema'>" + "<i class='fa-solid fa-circle-xmark'></i>" + "<h4>" + "Błąd przy " + $(niewiem).attr("aria-label") + " Input musi zawierac 5 znaki ale nie wykraczac poza 50, nie moze zawierac spacji!" + "</h4>" + "</div>" + "<br>"
+    }
+    else if ($(niewiem).attr("id") == "city" || $(niewiem).attr("id") == "state" || $(niewiem).attr("id") == "zip_code" || $(niewiem).attr("id") == "country") {
+      data = "<div class='siema'>" + "<i class='fa-solid fa-circle-xmark'></i>" + "<h4>" + "Błąd przy " + $(niewiem).attr("aria-label") + " Input musi zawierac 4 znaki ale nie wykraczac poza 10 znaków" + "</h4>" + "</div>" + "<br>"
+    }
+    else if ($(niewiem).attr("id") == "phone_number") {
+      data = data = "<div class='siema'>" + "<i class='fa-solid fa-circle-xmark'></i>" + "<h4>" + "Błąd przy " + $(niewiem).attr("aria-label") + " Input musi co najmiej 9 cyfr i maksymalnie 11 cyfr" + "</h4>" + "</div>" + "<br>"
+    }
     lista.push(data)
     lista = lista.filter(onlyUnique);
     console.log(lista)
@@ -151,29 +159,32 @@ $(document).ready(function () {
         input.val().length >= 6 &&
         input.val().includes("@") &&
         input.val().includes(".")
+        && !input.val().includes(" ")
       ) {
         clearError(inputField)
+        checkErrors();
         input.css("border-color", "green");
         emailValid = true;
       } else {
         showError(inputField)
+        checkErrors();
         emailValid = false;
         input.css("border-color", "red");
       }
     } else if (input.attr("id") == "phone_number") {
-      if (input.val().length == 9) {
+      if (input.val().length == 9 && !isNaN(parseInt($(input).val()))) {
         input.css("border-color", "green");
         phoneValid = true;
+        console.log(Number.isNaN($(input).val()))
         clearError(inputField)
+        checkErrors()
       } else {
+        console.log(typeof input.val() == "number")
         showError(inputField)
+        checkErrors();
         phoneValid = false;
         input.css("border-color", "red");
       }
-    }
-    if (input.val().length == 0) {
-
-      input.css("border-color", "black");
     }
   }
 
@@ -185,7 +196,11 @@ $(document).ready(function () {
       if (inputLength >= 5 && inputLength <= 50) {
         input.css("border-color", "green");
         streetValid = true;
+        clearError(inputField)
+        checkErrors()
       } else {
+        showError(inputField)
+        checkErrors();
         input.css("border-color", "red");
         streetValid = false;
       }
@@ -193,7 +208,11 @@ $(document).ready(function () {
       if (inputLength >= 4 && inputLength <= 50) {
         input.css("border-color", "green");
         cityValid = true;
+        clearError(inputField)
+        checkErrors()
       } else {
+        showError(inputField)
+        checkErrors();
         cityValid = false;
         input.css("border-color", "red");
       }
@@ -221,9 +240,6 @@ $(document).ready(function () {
         countryValid = false;
         input.css("border-color", "red");
       }
-    }
-    if (input.val().length == 0) {
-      input.css("border-color", "black");
     }
   }
 
