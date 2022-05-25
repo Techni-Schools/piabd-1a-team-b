@@ -16,7 +16,7 @@ html {
 }
 
 .siema {
-  background-color: red;
+  background-color: rgba(255, 0, 0, 0.511);
   padding: 10px;
   display: flex;
   align-items: center;
