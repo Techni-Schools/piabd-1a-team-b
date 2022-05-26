@@ -1,370 +1,357 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{% block title %}{% endblock %}</title>
-    <script
-      src="https://code.jquery.com/jquery-2.2.4.js"
-      integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
-      crossorigin="anonymous"
-    ></script>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital@0;1&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap"
-      rel="stylesheet"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
-    <link rel="icon" href="data:;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA////APoZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAgAAAAAAAAIiAAAAAAAAAiIAAAAAAAACEgAAAAAAAAICAAAAAAAAAiIAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/6wAA/+MAAP/jAAC/4wAAn+MAAM/jAADn8wAA8/MAAPn3AAD89wAA/ncAAP83AAD/lwAA/8cAAP/nAAD//wAA">
-    <!-- AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA////APoZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAgAAAAAAAAIiAAAAAAAAAiIAAAAAAAACEgAAAAAAAAICAAAAAAAAAiIAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/6wAA/+MAAP/jAAC/4wAAn+MAAM/jAADn8wAA8/MAAPn3AAD89wAA/ncAAP83AAD/lwAA/8cAAP/nAAD//wAA -->
-    <script
-      src="https://kit.fontawesome.com/a38786db6e.js"
-      crossorigin="anonymous"
-    ></script>
-    <script src="{{ url_for('static', filename='scripts/header.js') }}"></script>
-    {% block extrahead %}{% endblock %}
-  </head>
-  <body>
-    <style>
-      .col-sm {
-        padding: 0;
-      }
-      .list-group-item,
-      .list-group-item-action {
-        margin: 0;
-      }
-      .row {
-        padding: 0;
-        margin: 0;
-      }
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}{% endblock %}</title>
+  <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+    crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital@0;1&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100&display=swap" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+  <link rel="icon"
+    href="data:;base64,AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA////APoZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAgAAAAAAAAIiAAAAAAAAAiIAAAAAAAACEgAAAAAAAAICAAAAAAAAAiIAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/6wAA/+MAAP/jAAC/4wAAn+MAAM/jAADn8wAA8/MAAPn3AAD89wAA/ncAAP83AAD/lwAA/8cAAP/nAAD//wAA">
+  <!-- AAABAAEAEBAQAAEABAAoAQAAFgAAACgAAAAQAAAAIAAAAAEABAAAAAAAgAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA////APoZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAgAAAAAAAAIiAAAAAAAAAiIAAAAAAAACEgAAAAAAAAICAAAAAAAAAiIAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/6wAA/+MAAP/jAAC/4wAAn+MAAM/jAADn8wAA8/MAAPn3AAD89wAA/ncAAP83AAD/lwAA/8cAAP/nAAD//wAA -->
+  <script src="https://kit.fontawesome.com/a38786db6e.js" crossorigin="anonymous"></script>
+  <script src="{{ url_for('static', filename='scripts/header.js') }}"></script>
+  {% block extrahead %}{% endblock %}
+</head>
+
+<body>
+  <style>
+    .col-sm {
+      padding: 0;
+    }
+
+    .list-group-item,
+    .list-group-item-action {
+      margin: 0;
+    }
+
+    .row {
+      padding: 0;
+      margin: 0;
+    }
+
+    .fsakjfj {
+      background-color: black;
+      color: black;
+      transition: 0.3s;
+      -webkit-animation: scale-in-ver-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+      animation: scale-in-ver-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    }
+
+    .nav-items {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .search {
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .lfaslfasl {
+      align-items: center;
+    }
+
+    .account-buttons {
+      color: black;
+    }
+
+    .navbar-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: 100px;
+    }
+
+    .account {
+      display: flex;
+    }
+
+    .account-buttons {
+      background-color: transparent;
+      border: none;
+      padding: 10px;
+      font-size: 20px;
+      transition: 0.3s;
+    }
+
+    .text-size {
+      font-size: 20px;
+    }
+
+    .tylda {
+      margin-left: 10px;
+      margin-right: 10px;
+      color: black;
+    }
+
+    .logo-svg {
+      height: 75px;
+      width: fit-content;
+      transition: 0.5s;
+    }
+
+    #livebox {
+      position: relative;
+    }
+
+    .navbar-expand-md {
+      transition: 0.3s;
+      -webkit-animation: puff-in-center 1s cubic-bezier(0.47, 0, 0.745, 0.715) both,
+        fade-in 2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+      animation: puff-in-center 1s cubic-bezier(0.47, 0, 0.745, 0.715) both,
+        fade-in 2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+      -webkit-animation: fade-in 0.5s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+      animation: fade-in 0.5s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+      animation-delay: 0.5s;
+    }
+
+    .fsakjfj {
+      position: sticky;
+      background-color: rgb(56, 56, 56);
+      top: 0;
+      z-index: 111;
+    }
+
+    #datalist {
+      position: absolute;
+      width: 200px;
+      top: 72%;
+      z-index: 10000;
+    }
+
+    #header {
+      height: 100px;
+      transition: 0.3s;
+    }
+
+    .account-info-buttons {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .account-info {
+      height: 200px;
+      text-align: center;
+    }
+
+    .profile-img-mini {
+      border-radius: 100%;
+      border: 1px solid black;
+      height: 100px;
+    }
+
+    #profile-button {
+      background-color: transparent;
+      color: white;
+      border: none;
+    }
+
+    @media only screen and (max-width: 772px) {
       .fsakjfj {
-        background-color: white;
-        color: black;
-        transition: 0.3s;
-        -webkit-animation: scale-in-ver-top 0.2s
-          cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-        animation: scale-in-ver-top 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-          both;
+        position: static;
       }
-      .nav-items {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-      }
-      .search {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-      }
-      .lfaslfasl {
-        align-items: center;
-      }
-      .account-buttons {
-        color: black;
-      }
-      .navbar-nav {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        height: 100px;
-      }
-      .account {
-        display: flex;
-      }
-      .account-buttons {
-        background-color: transparent;
-        border: none;
-        padding: 10px;
-        font-size: 20px;
-        transition: 0.3s;
-      }
-      .text-size {
-        font-size: 20px;
-      }
-      .tylda {
-        margin-left: 10px;
-        margin-right: 10px;
-        color: black;
-      }
-      .logo-svg {
-        height: 75px;
-        width: fit-content;
-        transition: 0.5s;
-      }
-      #livebox {
-        position: relative;
-      }
-      .navbar-expand-md {
-        transition: 0.3s;
-        -webkit-animation: puff-in-center 1s cubic-bezier(0.47, 0, 0.745, 0.715)
-            both,
-          fade-in 2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
-        animation: puff-in-center 1s cubic-bezier(0.47, 0, 0.745, 0.715) both,
-          fade-in 2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
-        -webkit-animation: fade-in 0.5s cubic-bezier(0.39, 0.575, 0.565, 1) both;
-        animation: fade-in 0.5s cubic-bezier(0.39, 0.575, 0.565, 1) both;
-        animation-delay: 0.5s;
-      }
-      .fsakjfj {
-        position: sticky;
-        background-color: #e6e6e6;
-        top: 0;
-        z-index: 111;
-      }
-      #datalist {
-        position: absolute;
-        width: 200px;
-        top: 72%;
-        z-index: 10000;
-      }
+
       #header {
-        height: 100px;
-        transition: 0.3s;
+        height: auto;
       }
-      .account-info-buttons {
-        display: flex;
-        justify-content: space-between;
-      }
-      .account-info {
-        height: 200px;
-        text-align: center;
-      }
-      .profile-img-mini {
-        border-radius: 100%;
-        border: 1px solid black;
-        height: 100px;
-      }
-      #profile-button {
-        background-color: transparent;
-        color: black;
-        border: none;
-      }
-      @media only screen and (max-width: 772px) {
-        .fsakjfj {
-          position: static;
-        }
-        #header {
-          height: auto;
-        }
+    }
+
+    @-webkit-keyframes scale-in-ver-top {
+      0% {
+        -webkit-transform: scaleY(0);
+        transform: scaleY(0);
+        -webkit-transform-origin: 100% 0%;
+        transform-origin: 100% 0%;
+        opacity: 1;
       }
 
-      @-webkit-keyframes scale-in-ver-top {
-        0% {
-          -webkit-transform: scaleY(0);
-          transform: scaleY(0);
-          -webkit-transform-origin: 100% 0%;
-          transform-origin: 100% 0%;
-          opacity: 1;
-        }
-        100% {
-          -webkit-transform: scaleY(1);
-          transform: scaleY(1);
-          -webkit-transform-origin: 100% 0%;
-          transform-origin: 100% 0%;
-          opacity: 1;
-        }
+      100% {
+        -webkit-transform: scaleY(1);
+        transform: scaleY(1);
+        -webkit-transform-origin: 100% 0%;
+        transform-origin: 100% 0%;
+        opacity: 1;
+      }
+    }
+
+    @-webkit-keyframes fade-in {
+      0% {
+        opacity: 0;
       }
 
-      @-webkit-keyframes fade-in {
-        0% {
-          opacity: 0;
-        }
-        100% {
-          opacity: 1;
-        }
+      100% {
+        opacity: 1;
       }
-      @keyframes fade-in {
-        0% {
-          opacity: 0;
-        }
-        100% {
-          opacity: 1;
-        }
-      }
-      @-webkit-keyframes scale-up-center {
-        0% {
-          -webkit-transform: scale(0.5);
-          transform: scale(0.5);
-        }
-        100% {
-          -webkit-transform: scale(1);
-          transform: scale(1);
-        }
-      }
-      @keyframes scale-up-center {
-        0% {
-          -webkit-transform: scale(0.5);
-          transform: scale(0.5);
-        }
-        100% {
-          -webkit-transform: scale(1);
-          transform: scale(1);
-        }
+    }
+
+    @keyframes fade-in {
+      0% {
+        opacity: 0;
       }
 
-      .fas,
-      .fa-solid {
-        font-size: 20px;
-        padding-left: 3px;
+      100% {
+        opacity: 1;
       }
-      .hover-profile {
-        transition: 0.3s;
+    }
+
+    @-webkit-keyframes scale-up-center {
+      0% {
+        -webkit-transform: scale(0.5);
+        transform: scale(0.5);
       }
-      .hover-profile:hover {
-        color: blue;
+
+      100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
       }
-      .hover-exit {
-        transition: 0.3s;
+    }
+
+    @keyframes scale-up-center {
+      0% {
+        -webkit-transform: scale(0.5);
+        transform: scale(0.5);
       }
-      .hover-exit:hover {
-        color: red;
+
+      100% {
+        -webkit-transform: scale(1);
+        transform: scale(1);
       }
-      .logo {
-        height: 75px;
-        transition: 0.3s;
-      }
-      .phone-text-hide {
-        transition: 0.2s;
-      }
-      .dropdown-menu {
-        background-color: rgb(65, 65, 65);
-        color: white;
-        width: 400px;
-        -webkit-animation: scale-up-center 0.1s
-          cubic-bezier(0.39, 0.575, 0.565, 1) both;
-        animation: scale-up-center 0.1s cubic-bezier(0.39, 0.575, 0.565, 1) both;
-      }
-      .account-info-buttons button {
-        color: white;
-      }
-    </style>
-    <div class="fsakjfj">
-      <nav class="navbar navbar-expand-md" id="header">
-        <a class="navbar-brand" href="/">
-          <img
-            class="logo"
-            id="logo"
-            src="{{ url_for('static', filename='logo.svg') }}"
-          />
-        </a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#collapsibleNavbar"
-        >
-          <span class="navbaar-toggler-icon">
-            <i class="fa-solid fa-bars"></i
-          ></span>
-        </button>
-        <div class="collapse navbar-collapse lfaslfasl" id="collapsibleNavbar">
-          <ul class="navbar-nav">
-            <li class="nav-items">
-              <div class="search">
-                <input
-                  type="text"
-                  id="livebox"
-                  name="text"
-                  class="form-control"
-                  placeholder="Find products"
-                  autocomplete="off"
-                />
-                <p id="datalist"></p>
-              </div>
-            </li>
-            <li class="nav-items">
-              <div
-                class="account-all"
-                style="
+    }
+
+    .fas,
+    .fa-solid {
+      font-size: 20px;
+      padding-left: 3px;
+    }
+
+    .hover-profile {
+      transition: 0.3s;
+    }
+
+    .hover-profile:hover {
+      color: blue;
+    }
+
+    .hover-exit {
+      transition: 0.3s;
+    }
+
+    .hover-exit:hover {
+      color: red;
+    }
+
+    .logo {
+      height: 75px;
+      transition: 0.3s;
+    }
+
+    .phone-text-hide {
+      transition: 0.2s;
+    }
+
+    .dropdown-menu {
+      background-color: rgb(65, 65, 65);
+      color: white;
+      width: 400px;
+      -webkit-animation: scale-up-center 0.1s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+      animation: scale-up-center 0.1s cubic-bezier(0.39, 0.575, 0.565, 1) both;
+    }
+
+    .account-info-buttons button {
+      color: white;
+    }
+  </style>
+  <div class="fsakjfj">
+    <nav class="navbar navbar-expand-md" id="header">
+      <a class="navbar-brand" href="/">
+        <img class="logo" id="logo" src="{{ url_for('static', filename='logo.svg') }}" />
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+        <span class="navbaar-toggler-icon">
+          <i class="fa-solid fa-bars"></i></span>
+      </button>
+      <div class="collapse navbar-collapse lfaslfasl" id="collapsibleNavbar">
+        <ul class="navbar-nav">
+          <li class="nav-items">
+            <div class="search">
+              <input type="text" id="livebox" name="text" class="form-control" placeholder="Find products"
+                autocomplete="off" />
+              <p id="datalist"></p>
+            </div>
+          </li>
+          <li class="nav-items">
+            <div class="account-all" style="
                   display: flex;
                   flex-direction: column;
                   justify-content: center;
-                "
-              >
-                {% if current_user.is_authenticated %}
-                <!-- {{current_user.get_balance()}} -->
-                <div class="account" style="display: flex">
-                  <div class="btn-group">
-                    <button
-                      type="button"
-                      class="btn btn-secondary dropdown-toggle"
-                      data-toggle="dropdown"
-                      aria-haspopup="true"
-                      aria-expanded="false"
-                      id="profile-button"
-                    >
-                      <i class="fa-solid fa-user iconhide" id="iconhide1"></i>
-                    </button>
-                    <div
-                      class="dropdown-menu dropdown-menu-right"
-                      id="niepowiem"
-                    >
-                      <div class="account-info">
-                        <h1 class="name">{{ current_user.username }}</h1>
-                        <img
-                          class="profile-img-mini"
-                          src="https://static.zakumaj.pl/data/store/2015/10/98d0a565-4d35-88fb-5557-3977dee48380/picture_large.jpg"
-                          alt=""
-                        />
-                      </div>
-                      <div class="account-info-buttons">
-                        <a href="/profile/update"
-                          ><button class="dropdown-item" type="button">
-                            Edit
-                          </button></a
-                        >
-                        <a href="/dashboard"
-                          ><button class="dropdown-item" type="button">
-                            Profile
-                          </button></a
-                        >
-                      </div>
-                      <a href="/logout"
-                        ><button class="dropdown-item" type="button">
-                          Logout
-                        </button></a
-                      >
+                ">
+              {% if current_user.is_authenticated %}
+              <!-- {{current_user.get_balance()}} -->
+              <div class="account" style="display: flex">
+                <div class="btn-group">
+                  <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false" id="profile-button">
+                    <i class="fa-solid fa-user iconhide" id="iconhide1"></i>
+                  </button>
+                  <div class="dropdown-menu dropdown-menu-right" id="niepowiem">
+                    <div class="account-info">
+                      <h1 class="name">{{ current_user.username }}</h1>
+                      <img class="profile-img-mini"
+                        src="https://static.zakumaj.pl/data/store/2015/10/98d0a565-4d35-88fb-5557-3977dee48380/picture_large.jpg"
+                        alt="" />
                     </div>
+                    <div class="account-info-buttons">
+                      <a href="/profile/update"><button class="dropdown-item" type="button">
+                          Edit
+                        </button></a>
+                      <a href="/dashboard"><button class="dropdown-item" type="button">
+                          Profile
+                        </button></a>
+                    </div>
+                    <a href="/logout"><button class="dropdown-item" type="button">
+                        Logout
+                      </button></a>
                   </div>
                 </div>
-                {% else %}
-                <div class="account">
-                  <a href="/login">
-                    <button class="account-buttons">
-                      <span class="phone-text-hide" id="ph-txt-hide1"
-                        >Login</span
-                      ><i class="fa-solid fa-address-book iconhide"></i>
-                    </button>
-                  </a>
-                  <h2 class="tylda">|</h2>
-                  <a href="/register">
-                    <button class="account-buttons">
-                      <span class="phone-text-hide" id="ph-txt-hide"
-                        >Register</span
-                      ><i class="fa-solid fa-plus iconhide"></i>
-                    </button>
-                  </a>
-                </div>
-                {% endif %}
               </div>
-            </li>
-          </ul>
-        </div>
-      </nav>
-    </div>
-    {% block main %} {% endblock %}
-    <script src="{{ url_for('static', filename='scripts/header.js') }}"></script>
-    <script src="{{ url_for('static', filename='scripts/livesearch.js') }}"></script>
-  </body>
+              {% else %}
+              <div class="account">
+                <a href="/login">
+                  <button class="account-buttons">
+                    <span class="phone-text-hide" id="ph-txt-hide1">Login</span><i
+                      class="fa-solid fa-address-book iconhide"></i>
+                  </button>
+                </a>
+                <h2 class="tylda">|</h2>
+                <a href="/register">
+                  <button class="account-buttons">
+                    <span class="phone-text-hide" id="ph-txt-hide">Register</span><i
+                      class="fa-solid fa-plus iconhide"></i>
+                  </button>
+                </a>
+              </div>
+              {% endif %}
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  {% block main %} {% endblock %}
+  <script src="{{ url_for('static', filename='scripts/header.js') }}"></script>
+  <script src="{{ url_for('static', filename='scripts/livesearch.js') }}"></script>
+</body>
+
 </html>

@@ -1,11 +1,46 @@
 {% extends 'base.html' %}
 
-{% block title %} error 404 {% endblock %}
+{% block title %} Page not Found {% endblock %}
 
-{% block main %} 
+{% block main %}
+<style>
+  body {
+    overflow: hidden;
+    background: url("https://wallpapercave.com/wp/wp5849091.jpg")no-repeat;
+    background-size: cover;
+  }
 
-error 404 nie znaleziono strony upewnij sie ze link wpisany poprawnie
-  <br>
-  <button><a href="/">powrut</a></button>
+  .siemasimanko {
+    height: 90vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+  }
 
+  .error-code {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    color: white;
+  }
+
+  .error-code h1 {
+    font-weight: bolder;
+    font-size: 50px;
+  }
+</style>
+<div>
+</div>
+<div class="error-code">
+  <h1>404</h1>
+</div>
+<div class="siemasimanko">
+  <div class="error-div">
+    <h3 class="error">nie znaleziono strony upewnij sie ze link wpisany poprawnie </h3>
+    <a href="/"><button>Powrót na Strone Główną</button></a>
+  </div>
+</div>
 {% endblock %}

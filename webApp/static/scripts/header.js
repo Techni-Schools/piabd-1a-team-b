@@ -33,7 +33,7 @@ function chceckTa() {
           document.getElementById("news-1").className = "news start-animation";
         }
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 }
 chceckTa();
