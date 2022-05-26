@@ -20,10 +20,22 @@ function parseURLParams(url) {
 
 let data;
 let url;
-let data1;
-let data2;
 let isData = false;
 let total = 0;
+let sorted = 0;
+
+function changeButtons() {
+    if (10*curpage-9 <= sorted && sorted < 10*curpage) {
+        $('#next').prop('disabled', true);
+    } else {
+        $('#next').prop('disabled', false);
+    }
+    if (curpage <= 1) {
+        $('#back').prop('disabled', true);
+    } else {
+        $('#back').prop('disabled', false);
+    }
+}
 
 function updateResult(data) {
     if (typeof data.o == 'undefined') {data.o = ['']};
@@ -38,9 +50,11 @@ function updateResult(data) {
             $.each(res, function (index, value) {
                 data += `${value.name} ${value.price}<br>`;
                 total = value.count;
-              });
-              data += "</div>";
-              $('.result').html(data);
+                sorted++;
+            });
+            data += "</div>";
+            changeButtons();
+            $('.result').html(data);
         },
     });
 }
@@ -69,24 +83,12 @@ $(document).ready(function() {
         }
         window.history.pushState("", "", url);
         updateResult(parseURLParams(window.location.href));
-        changeButtons();
 
     }
     catch {
     }
   
 
-    function changeButtons() {
-        if (10*curpage-9 < total && total < 10*curpage) {
-            $('#next').prop('disabled', true);
-            $('#back').prop('disabled', false);
-        }
-        if (curpage <= 1) {
-            $('#back').prop('disabled', true);
-            $('#next').prop('disabled', false);
-
-        }
-    }
 
       $('#next').click(function() {
         if (!(10*curpage-9 < total && total < 10*curpage)) {

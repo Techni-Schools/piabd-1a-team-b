@@ -23,6 +23,7 @@ from werkzeug.datastructures import  FileStorage
 
 """
 DO FLASK-LOGIN W UserMixin TRZEBA DODAC FUNKCJE GET_BALANCE
+POD FUNKCJA GET_ID
 
 def get_balance(self):
     try:
@@ -30,7 +31,6 @@ def get_balance(self):
     except AttributeError:
         raise NotImplementedError("No `balance` attribute - override `get_balance`") from None
 
-POD FUNKCJA GET_ID
 
 
 def get_address(self):
