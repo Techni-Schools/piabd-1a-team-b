@@ -1,12 +1,40 @@
+$(".tak").prop("disabled", true)
+$(".tak").css("pointer-events", "none")
+// $(".nie").
+var cosie = 0
 $(document).ready(function () {
   console.log("siema");
-  $(".tak").click(function () {
-    $(".about-information").show();
-    $(".addres-book").hide();
+  $(".tak").click(function () { //about information
+    setTimeout(function () {
+      $(".about-information").show()
+      $(".addres-book").hide();
+      $(".tak").css("pointer-events", "none")
+      $(".nie").css("pointer-events", "auto")
+    }, 500)
+    // $(".about-information").show();
+    $(".addres-book").toggleClass("siema2")
+    $(".about-information").toggleClass("siema")
+    // $(".addres-book").hide();
+    $(this).prop("disabled", true)
+    $(".nie").prop("disabled", false)
+    cosie += 1
   });
-  $(".nie").click(function () {
-    $(".about-information").hide();
-    $(".addres-book").show();
+  $(".nie").click(function () { // button  addres book
+    setTimeout(function () {
+      $(".about-information").hide()
+      $(".addres-book").show();
+      $(".tak").css("pointer-events", "auto")
+      $(".nie").css("pointer-events", "none")
+    }, 500)
+    if (cosie >= 1) {
+      $(".addres-book").toggleClass("siema2")
+    }
+    $(".about-information").toggleClass("siema")
+    $(".addres-book").addClass("addres-book")
+    // $(".addres-book").toggleClass("siema2")
+    // $(".addres-book").show();
+    $(this).prop("disabled", true)
+    $(".tak").prop("disabled", false)
   });
 
   function startFieldProfile() {
