@@ -63,4 +63,13 @@ $(document).ready(function () {
   $(".niewiem").keyup(function () {
     fieldProfile(this);
   });
+
+  $(".zmien-button1").click(function () {
+    $("#form").submit()
+  })
+  $(document).on("keypress", function (key) {
+    if (key.which == 13) {
+      $("#form").submit()
+    }
+  })
 });

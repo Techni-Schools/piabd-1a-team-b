@@ -16,8 +16,7 @@ body {
   align-items: center;
   padding: 30px;
   flex-direction: column;
-  background: url("https://pkconstruction.eu/wp-content/uploads/2019/12/wood-2045379_1920.jpg")
-    no-repeat;
+  background: url("https://pkconstruction.eu/wp-content/uploads/2019/12/wood-2045379_1920.jpg") no-repeat;
   background-size: cover;
 }
 
@@ -143,11 +142,13 @@ body {
   animation: fade-in 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
   animation-delay: 0.2s;
 }
+
 .col:nth-child(2) {
   -webkit-animation: fade-in 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
   animation: fade-in 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
   animation-delay: 0.3s;
 }
+
 .col:nth-child(3) {
   -webkit-animation: fade-in 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
   animation: fade-in 1.2s cubic-bezier(0.39, 0.575, 0.565, 1) both;
@@ -164,10 +165,12 @@ body {
 .add-button:hover {
   background-color: green;
 }
+
 .information-row {
   height: 250px;
   width: 70%;
 }
+
 .col {
   -webkit-box-shadow: 0px 0px 36px -3px rgba(66, 68, 90, 1);
   -moz-box-shadow: 0px 0px 36px -3px rgba(66, 68, 90, 1);
@@ -179,42 +182,50 @@ body {
   display: flex;
   transition: transform 0.2s, border-radius 0.1s;
 }
+
 .col:hover {
   border-radius: 10px;
   transform: scale(1.05);
 }
+
 .border-like {
   margin-top: 10px;
   margin-bottom: 10px;
   height: 3px;
   width: 30px;
   transition: width 0.3s;
-  background-color: red;
+  background-color: orange;
 }
+
 .information-title {
   font-size: 25px;
   margin: 0;
 }
+
 .information-text {
   font-size: 15px;
   width: max-content;
 }
+
 .information-contact {
   padding: 10px;
   width: 100%;
 }
+
 .information-state {
   width: 100%;
   padding: 10px;
   display: flex;
   flex-direction: column;
 }
+
 .informations-about-user {
   height: 300px;
   align-items: center;
   display: flex;
   justify-content: center;
 }
+
 .card {
   width: 18rem;
   border: none;
@@ -261,16 +272,20 @@ body {
     width: 14rem;
   }
 }
+
 @media only screen and (max-width: 950px) {
+
   .informations-about-user,
   .information-row {
     height: auto;
     margin-top: 20px;
   }
+
   .col {
     margin-bottom: 15px;
   }
 }
+
 @-webkit-keyframes slide-in-elliptic-top-fwd {
   0% {
     -webkit-transform: translateY(-600px) rotateX(-30deg) scale(0);
@@ -358,6 +373,7 @@ body {
     transform: none;
   }
 }
+
 @-webkit-keyframes puff-in-center {
   0% {
     -webkit-transform: scale(2);
@@ -366,6 +382,7 @@ body {
     filter: blur(4px);
     opacity: 0;
   }
+
   100% {
     -webkit-transform: scale(1);
     transform: scale(1);
@@ -374,6 +391,7 @@ body {
     opacity: 1;
   }
 }
+
 @keyframes puff-in-center {
   0% {
     -webkit-transform: scale(2);
@@ -382,6 +400,7 @@ body {
     filter: blur(4px);
     opacity: 0;
   }
+
   100% {
     -webkit-transform: scale(1);
     transform: scale(1);
@@ -396,16 +415,19 @@ body {
     -webkit-transform: translateY(0);
     transform: translateY(0);
   }
+
   100% {
     -webkit-transform: translateY(100px);
     transform: translateY(100px);
   }
 }
+
 @keyframes slide-bottom {
   0% {
     -webkit-transform: translateY(0);
     transform: translateY(0);
   }
+
   100% {
     -webkit-transform: translateY(100px);
     transform: translateY(100px);
