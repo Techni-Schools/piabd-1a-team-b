@@ -55,7 +55,7 @@ $(document).ready(function () {
           cityValid == true &&
           zipValid == true &&
           stateValid == true &&
-          countryValid
+          countryValid == true
         ) {
           pageNumber += 1;
         }
@@ -209,16 +209,6 @@ $(document).ready(function () {
       }
     }
   }
-
-  function checkErrors() {
-    var siema;
-    for (var x = 0; x < errorsList.length; x++) {
-      siema = errorsList[x];
-      if (!$(".errors").html().includes(siema)) {
-        $(".errors").append(siema);
-      }
-    }
-  }
   function checkLengthFirstPage(inputField) {
     var input = $(inputField);
     if (input.attr("id") == "first_name") {
@@ -226,10 +216,8 @@ $(document).ready(function () {
         input.css("border-color", "green");
         firstValid = true;
         clearError(inputField);
-        checkErrors();
       } else {
         showError(inputField);
-        checkErrors();
         firstValid = false;
         input.css("border-color", "red");
       }
@@ -238,10 +226,8 @@ $(document).ready(function () {
         input.css("border-color", "green");
         lastnameValid = true;
         clearError(inputField);
-        checkErrors();
       } else {
         showError(inputField);
-        checkErrors();
         lastnameValid = false;
         input.css("border-color", "red");
       }
@@ -253,12 +239,10 @@ $(document).ready(function () {
         !input.val().includes(" ")
       ) {
         clearError(inputField);
-        checkErrors();
         input.css("border-color", "green");
         emailValid = true;
       } else {
         showError(inputField);
-        checkErrors();
         emailValid = false;
         input.css("border-color", "red");
       }
@@ -267,10 +251,8 @@ $(document).ready(function () {
         input.css("border-color", "green");
         phoneValid = true;
         clearError(inputField);
-        checkErrors();
       } else {
         showError(inputField);
-        checkErrors();
         phoneValid = false;
         input.css("border-color", "red");
       }
@@ -286,10 +268,8 @@ $(document).ready(function () {
         input.css("border-color", "green");
         streetValid = true;
         clearError(inputField);
-        checkErrors();
       } else {
         showError(inputField);
-        checkErrors();
         input.css("border-color", "red");
         streetValid = false;
       }
@@ -298,10 +278,8 @@ $(document).ready(function () {
         input.css("border-color", "green");
         cityValid = true;
         clearError(inputField);
-        checkErrors();
       } else {
         showError(inputField);
-        checkErrors();
         cityValid = false;
         input.css("border-color", "red");
       }
@@ -309,7 +287,9 @@ $(document).ready(function () {
       if (inputLength == 6) {
         input.css("border-color", "green");
         zipValid = true;
+        clearError(inputField);
       } else {
+        showError(inputField);
         zipValid = false;
         input.css("border-color", "red");
       }
@@ -317,7 +297,9 @@ $(document).ready(function () {
       if (inputLength >= 4 && inputLength <= 50) {
         input.css("border-color", "green");
         stateValid = true;
+        clearError(inputField);
       } else {
+        showError(inputField);
         stateValid = false;
         input.css("border-color", "red");
       }
@@ -325,7 +307,9 @@ $(document).ready(function () {
       if (inputLength >= 4 && inputLength <= 50) {
         input.css("border-color", "green");
         countryValid = true;
+        clearError(inputField);
       } else {
+        showError(inputField);
         countryValid = false;
         input.css("border-color", "red");
       }

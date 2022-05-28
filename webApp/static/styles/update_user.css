@@ -3,7 +3,13 @@
   justify-content: center;
   /* text-align: center; */
 }
-
+.niewiem {
+  border: none;
+  border-bottom: 1px solid black;
+}
+.niewiem:focus {
+  outline: none;
+}
 body {
   overflow: hidden;
 }
@@ -11,8 +17,9 @@ body {
 .addres-book {
   display: none;
   z-index: -1;
-  -webkit-animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-  animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  -webkit-animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    both;
+  animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .row {
@@ -44,7 +51,7 @@ body {
 }
 
 .page-title {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
 .nie:disabled {
@@ -56,8 +63,8 @@ body {
 }
 
 label {
-  font-family: 'Open Sans', sans-serif;
-  font-family: 'Raleway', sans-serif;
+  font-family: "Open Sans", sans-serif;
+  font-family: "Raleway", sans-serif;
   /* text-align: center; */
   /* width: 100%; */
 }
@@ -69,8 +76,9 @@ label {
 }
 
 .siema2 {
-  -webkit-animation: slide-out-left 0.3s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-  animation: slide-out-left 0.3s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+  -webkit-animation: slide-out-left 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53)
+    both;
+  animation: slide-out-left 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
 }
 
 .border-like {
@@ -83,8 +91,9 @@ label {
 }
 
 .profile-siemanko {
-  -webkit-animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-  animation: slide-in-right 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  -webkit-animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    both;
+  animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .information-title {
@@ -94,8 +103,9 @@ label {
 
 .about-information {
   z-index: -1;
-  -webkit-animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-  animation: slide-in-left 0.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+  -webkit-animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    both;
+  animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
 .information-text {
@@ -116,8 +126,9 @@ label {
 }
 
 .siema {
-  -webkit-animation: slide-out-left 0.3s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
-  animation: slide-out-left 0.3s cubic-bezier(0.550, 0.085, 0.680, 0.530) both;
+  -webkit-animation: slide-out-left 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53)
+    both;
+  animation: slide-out-left 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
 }
 
 .col-information {
@@ -164,11 +175,11 @@ label {
   flex-direction: column;
 }
 
-
 /*------- profile checker ---------*/
 .account-data {
   height: 230px;
-  background: url("https://pkconstruction.eu/wp-content/uploads/2019/12/wood-2045379_1920.jpg") no-repeat;
+  background: url("https://pkconstruction.eu/wp-content/uploads/2019/12/wood-2045379_1920.jpg")
+    no-repeat;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -206,10 +217,9 @@ label {
   animation-fill-mode: both;
   border-radius: 100%;
   height: 150px;
-
 }
 
-@media only screen and (max-width:1030px) {
+@media only screen and (max-width: 1030px) {
   .dosdsao {
     display: none;
   }
@@ -262,7 +272,6 @@ label {
   }
 }
 
-
 @-webkit-keyframes slide-in-left {
   0% {
     -webkit-transform: translateX(-1000px);
@@ -290,7 +299,6 @@ label {
     opacity: 1;
   }
 }
-
 
 @-webkit-keyframes slide-in-right {
   0% {
