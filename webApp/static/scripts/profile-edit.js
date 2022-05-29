@@ -92,6 +92,12 @@ $(document).ready(function () {
     ) {
       $("#form").submit();
     }
+    else {
+      $(".error").empty()
+      console.log("jest dobrze ogulnie")
+      var data = "<h3 style='color: red;'> Gdzieś masz Błąd, sprawdz dokladnie! </h3>"
+      $(".error").append(data)
+    }
   });
   $(document).on("keypress", function (key) {
     if (key.which == 13) {
@@ -114,6 +120,12 @@ $(document).ready(function () {
         countryValid == true
       ) {
         $("#form").submit();
+      }
+      else {
+        $(".error").empty()
+        console.log("jest dobrze ogulnie")
+        var data = "<h3 style='color: red;'> Gdzieś masz Błąd, sprawdz dokladnie! </h3>"
+        $(".error").append(data)
       }
     }
   });
