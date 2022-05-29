@@ -206,7 +206,9 @@ label {
   padding: 7px;
   font-size: 15px;
 }
-
+.niewiem:focus {
+  border-bottom: 1px solid orange;
+}
 /*1030*/
 .profile-img {
   animation-name: fadeInLeft;

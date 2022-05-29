@@ -1,27 +1,23 @@
 $(".tak").prop("disabled", true);
 $(".tak").css("pointer-events", "none");
-// $(".nie").
 var cosie = 0;
 $(document).ready(function () {
   console.log("siema");
   $(".tak").click(function () {
-    //about information
     setTimeout(function () {
       $(".about-information").show();
       $(".addres-book").hide();
       $(".tak").css("pointer-events", "none");
       $(".nie").css("pointer-events", "auto");
     }, 300);
-    // $(".about-information").show();
     $(".addres-book").toggleClass("siema2");
     $(".about-information").toggleClass("siema");
-    // $(".addres-book").hide();
+
     $(this).prop("disabled", true);
     $(".nie").prop("disabled", false);
     cosie += 1;
   });
   $(".nie").click(function () {
-    // button  addres book
     setTimeout(function () {
       $(".about-information").hide();
       $(".addres-book").show();
@@ -33,8 +29,6 @@ $(document).ready(function () {
     }
     $(".about-information").toggleClass("siema");
     $(".addres-book").addClass("addres-book");
-    // $(".addres-book").toggleClass("siema2")
-    // $(".addres-book").show();
     $(this).prop("disabled", true);
     $(".tak").prop("disabled", false);
   });
@@ -66,13 +60,10 @@ $(document).ready(function () {
     fieldProfile(this);
   });
 
-  // update validation //
-
   var firstValid = false;
   var lastnameValid = false;
   var emailValid = false;
   var phoneValid = false;
-  // second page valid variables
   var streetValid = false;
   var cityValid = false;
   var zipValid = false;
@@ -104,6 +95,13 @@ $(document).ready(function () {
   });
   $(document).on("keypress", function (key) {
     if (key.which == 13) {
+      var Array = $("dd").children(".niewiem");
+      console.log(Array);
+      for (var x = 0; x < Array.length; x++) {
+        var fajnie = $("dd").children(".niewiem")[x];
+        checkLengthFirstPage(fajnie);
+        checkLengthSecondPage(fajnie);
+      }
       if (
         firstValid == true &&
         lastnameValid == true &&
@@ -127,27 +125,18 @@ $(document).ready(function () {
     if (input.attr("id") == "first_name") {
       console.log("to jest", input.attr("id"));
       if (input.val().length >= 2) {
-        // input.css("border-color", "green");
         firstValid = true;
-        // clearError(inputField);
-        // checkErrors();
+
         console.log("to jest", input.attr("id"));
       } else {
-        // showError(inputField);
-        // checkErrors();
         firstValid = false;
         input.css("border-color", "red");
       }
     } else if (input.attr("id") == "last_name") {
       console.log("to jest", input.attr("id"));
       if (input.val().length >= 2) {
-        // input.css("border-color", "green");
         lastnameValid = true;
-        // clearError(inputField);
-        // checkErrors();
       } else {
-        // showError(inputField);
-        // checkErrors();
         lastnameValid = false;
         input.css("border-color", "red");
       }
@@ -159,13 +148,8 @@ $(document).ready(function () {
         input.val().includes(".") &&
         !input.val().includes(" ")
       ) {
-        // clearError(inputField);
-        // checkErrors();
-        // input.css("border-color", "green");
         emailValid = true;
       } else {
-        // showError(inputField);
-        // checkErrors();
         emailValid = false;
         input.css("border-color", "red");
       }
@@ -176,13 +160,8 @@ $(document).ready(function () {
         input.val().length <= 12 &&
         !isNaN(parseInt($(input).val()))
       ) {
-        // input.css("border-color", "green");
         phoneValid = true;
-        // clearError(inputField);
-        // checkErrors();
       } else {
-        // showError(inputField);
-        // checkErrors();
         phoneValid = false;
         input.css("border-color", "red");
       }
@@ -195,31 +174,20 @@ $(document).ready(function () {
     var inputLength = $(inputField).val().length;
     if ($(inputField).attr("id") == "street") {
       if (inputLength >= 5 && inputLength <= 50) {
-        // input.css("border-color", "green");
         streetValid = true;
-        // clearError(inputField);
-        // checkErrors();
       } else {
-        // showError(inputField);
-        // checkErrors();
         input.css("border-color", "red");
         streetValid = false;
       }
     } else if (inputId == "city") {
       if (inputLength >= 4 && inputLength <= 50) {
-        input.css("border-color", "green");
         cityValid = true;
-        // clearError(inputField);
-        // checkErrors();
       } else {
-        // showError(inputField);
-        // checkErrors();
         cityValid = false;
         input.css("border-color", "red");
       }
     } else if (inputId == "zip_code") {
       if (inputLength == 6) {
-        // input.css("border-color", "green");
         zipValid = true;
       } else {
         zipValid = false;
@@ -227,7 +195,6 @@ $(document).ready(function () {
       }
     } else if (inputId == "state") {
       if (inputLength >= 4 && inputLength <= 50) {
-        // input.css("border-color", "green");
         stateValid = true;
       } else {
         stateValid = false;
@@ -235,7 +202,6 @@ $(document).ready(function () {
       }
     } else if (inputId == "country") {
       if (inputLength >= 4 && inputLength <= 50) {
-        // input.css("border-color", "green");
         countryValid = true;
       } else {
         countryValid = false;

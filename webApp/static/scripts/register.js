@@ -209,6 +209,7 @@ $(document).ready(function () {
       }
     }
   }
+
   function checkLengthFirstPage(inputField) {
     var input = $(inputField);
     if (input.attr("id") == "first_name") {
