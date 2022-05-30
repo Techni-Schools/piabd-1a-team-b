@@ -15,6 +15,10 @@ html {
   height: auto;
 }
 
+.red-div {
+  background-color: red;
+}
+
 .siema {
   padding: 10px;
   display: flex;

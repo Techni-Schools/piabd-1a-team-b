@@ -380,7 +380,7 @@ $(document).ready(function () {
               // data = "niewiem"
               console.log("nie")
               showError(inputField);
-              emailValid = false;
+              phoneValid = false;
               input.css("border-color", "red");
             }
             else if (res == "false") {
@@ -389,7 +389,7 @@ $(document).ready(function () {
               console.log("niewiem")
               input.css("border-color", "green")
               clearError(inputField);
-              emailValid = true;
+              phoneValid = true;
             }
           }
         })
