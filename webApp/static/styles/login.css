@@ -2,23 +2,125 @@ body,
 html {
   height: 100vh;
   position: relative;
+  overflow: hidden;
+  background: url("https://images3.alphacoders.com/954/954241.jpg") no-repeat;
+  background-size: cover;
+  background-position: 50%;
 }
-
 .form-login {
-  position: absolute;
-  top: 60%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
 }
-
 .errors {
   height: auto;
 }
-
-.red-div {
-  background-color: red;
+.modal-body {
+  display: flex;
+  justify-content: center;
+  text-align: center;
 }
-
+.red-div {
+  background-color: rgba(255, 0, 0, 0.4);
+}
+.fa-triangle-exclamation {
+  color: black;
+}
+form {
+  text-align: center;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.nice-icon {
+  color: black;
+  height: 300px;
+  width: inherit;
+}
+.image-padding {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 130px;
+  height: 130px;
+  border: 2px solid red;
+}
+.form-login-2 {
+  width: 400px;
+}
+.niezgadzam {
+  height: 150px;
+  width: 150px;
+  background-color: rgb(255, 255, 255);
+  padding: 10px;
+  transform: rotate(45deg);
+}
+.username_login input,
+.password_login input {
+  border: none;
+  width: 300px;
+  outline: none;
+  background-color: transparent;
+}
+.image {
+  display: flex;
+  align-items: center;
+  height: 150px;
+  /* transform: rotate(-45deg); */
+}
+label {
+  display: none;
+}
+.username_login,
+.password_login {
+  padding: 10px;
+  /* width: max-content; */
+  background-color: rgba(255, 255, 255, 0.6);
+  justify-content: center;
+  display: flex;
+}
+.fa-user,
+.fa-lock {
+  border-right: 1px solid black;
+  font-size: 20px;
+  width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: inherit;
+}
+input:-internal-autofill-selected {
+  background-color: transparent;
+}
+dl {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+}
+dd {
+  margin: 0;
+  margin-left: 5px;
+}
+dd input {
+  padding: 10px;
+}
+.login-word {
+  color: white;
+  padding-top: 5vh;
+  text-align: center;
+  margin: 0;
+}
+.image {
+  transform: rotate(-45deg);
+}
+.fa-people-group {
+  font-size: 60px;
+}
 .siema {
   padding: 10px;
   display: flex;
@@ -27,7 +129,7 @@ html {
 }
 
 .yellow-div {
-  background-color: yellow;
+  background-color: rgba(255, 255, 0, 0.6);
 }
 
 .siema h4 {
@@ -39,40 +141,50 @@ html {
 
 .siema i {
   padding-right: 10px;
-  color: white;
 }
-
-.form-login-box {
+.allpage {
   display: flex;
-  align-items: center;
-  text-align: center;
   justify-content: center;
-  height: 400px;
-  width: 300px;
-  background-color: rgba(96, 96, 96, 0.2);
-  border-radius: 15px;
+  align-items: center;
+  height: 100%;
 }
-
-.login-text {
-  padding: 0px;
+@media screen and (max-height: 667px) {
+  .allpage {
+    height: auto;
+    align-items: baseline;
+    padding-top: 70px;
+  }
+  .niezgadzam {
+    height: 75px;
+    width: 75px;
+  }
+  .image-padding {
+    height: 50px;
+    width: 50px;
+  }
+  .fa-people-group {
+    font-size: 30px;
+  }
+  body {
+    overflow: auto;
+  }
+  .nice-icon {
+    height: 200px;
+  }
 }
-
-input {
-  padding: 5px;
-  transition: 0.2s;
-  text-align: center;
-  width: 200px;
-  border: none;
-  border-bottom: 3px solid rgb(0, 0, 0);
-  outline: none;
-}
-
-input:focus {
-  border-bottom: 3px solid rgb(0, 136, 181);
-}
-
-.border-box {
-  border-radius: 15px;
-  padding: 30px;
-  border: 1px solid rgb(90, 90, 90);
+@media screen and (max-height: 896px) {
+  .username_login input,
+  .password_login input {
+    border: none;
+    width: 200px;
+    outline: none;
+    background-color: black;
+  }
+  body {
+    overflow-x: hidden;
+  }
+  .allpage {
+    padding-top: 70px;
+    height: auto;
+  }
 }
