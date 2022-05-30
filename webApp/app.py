@@ -148,6 +148,19 @@ def profile(username):
     cu = ['nie znaleziono uzytkownika']
   return render_template('user.html', prd=cu, user=username)
 
+
+@app.route("/profile/check", methods=["GET"])
+def profileCheck(): 
+  phoneNumberGet = request.args.get('phone','', type=int)  
+  emailGet = request.args.get('email','', type=str)
+  usernameGet = request.args.get('username','', type=str)
+  q = db.session.query(users.username).filter(or_ (users.username == usernameGet,users.email == emailGet, users.phone_number == phoneNumberGet )).first()
+  print(usernameGet)
+  if q:
+    return "true"
+  else:
+    return "false"
+
 @app.route('/search')
 def search():
   if request.args.get('string') is None:

@@ -1,7 +1,7 @@
 from flask import Flask , request , abort , redirect , Response ,url_for, render_template, flash, jsonify, send_from_directory
 from flask_login import LoginManager , login_required , UserMixin , login_user, current_user, UserMixin, logout_user
 from flask_sqlalchemy import SQLAlchemy, Pagination
-from sqlalchemy import func
+from sqlalchemy import func, or_
 import pymysql
 import os
 import uuid

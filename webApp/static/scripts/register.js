@@ -4,7 +4,7 @@ $(document).ready(function () {
   //   first  page valid variables
 
   var data;
-
+  var errorType;
   var firstValid = false;
   var lastnameValid = false;
   var emailValid = false;
@@ -15,6 +15,7 @@ $(document).ready(function () {
   var zipValid = false;
   var stateValid = false;
   var countryValid = false;
+  var fajnie;
 
   var jd = 0;
   //
@@ -90,7 +91,7 @@ $(document).ready(function () {
       $(niewiem).attr("id") == "last_name"
     ) {
       data =
-        "<div class='siema'>" +
+        "<div class='siema red-div'>" +
         "<i class='fa-solid fa-circle-xmark'></i>" +
         "<h4>" +
         "Błąd przy " +
@@ -100,24 +101,47 @@ $(document).ready(function () {
         "</div>" +
         "<br>";
     } else if ($(niewiem).attr("id") == "email") {
-      data =
-        "<div class='siema'>" +
-        "<i class='fa-solid fa-circle-xmark'></i>" +
-        "<h4>" +
-        "Błąd przy " +
-        $(niewiem).attr("aria-label") +
-        " Input musi zawierac 5 znaki ale nie wykraczac poza 50, nie moze zawierac spacji!" +
-        "</h4>" +
-        "</div>" +
-        "<br>";
-    } else if (
+      if (errorType == "is") {
+        if (!fajnie) {
+          clearError(this)
+        }
+        fajnie = true
+        data =
+          "<div class='siema yellow-div'>" +
+          "<i class='fa-solid fa-triangle-exclamation'></i>" +
+          "<h4>" +
+          "Błąd przy " +
+          $(niewiem).attr("aria-label") +
+          " taki " + $(niewiem).attr("aria-label") + " instnieje " +
+          "</h4>" +
+          "</div>" +
+          "<br>";
+      }
+      else if (errorType == "none") {
+        if (fajnie) {
+          clearError(this)
+        }
+        fajnie = false
+        data =
+          "<div class='siema red-div'>" +
+          "<i class='fa-solid fa-circle-xmark'></i>" +
+          "<h4>" +
+          "Błąd przy " +
+          $(niewiem).attr("aria-label") +
+          " Input musi zawierac 5 znaki ale nie wykraczac poza 50, nie moze zawierac spacji!" +
+          "</h4>" +
+          "</div>" +
+          "<br>";
+      }
+    }
+    else if (
       $(niewiem).attr("id") == "city" ||
       $(niewiem).attr("id") == "state" ||
       $(niewiem).attr("id") == "zip_code" ||
       $(niewiem).attr("id") == "country"
     ) {
       data =
-        "<div class='siema'>" +
+        "<div class='siema red-div'>" +
         "<i class='fa-solid fa-circle-xmark'></i>" +
         "<h4>" +
         "Błąd przy " +
@@ -127,21 +151,44 @@ $(document).ready(function () {
         "</div>" +
         "<br>";
     } else if ($(niewiem).attr("id") == "phone_number") {
-      data = data =
-        "<div class='siema'>" +
-        "<i class='fa-solid fa-circle-xmark'></i>" +
-        "<h4>" +
-        "Błąd przy " +
-        $(niewiem).attr("aria-label") +
-        " Input musi co najmiej 9 cyfr i maksymalnie 11 cyfr" +
-        "</h4>" +
-        "</div>" +
-        "<br>";
+      if (errorType == "is") {
+        if (!fajnie) {
+          clearError(this)
+        }
+        fajnie = true
+        data =
+          "<div class='siema yellow-div'>" +
+          "<i class='fa-solid fa-triangle-exclamation'></i>" +
+          "<h4>" +
+          "Błąd przy " +
+          $(niewiem).attr("aria-label") +
+          " taki " + $(niewiem).attr("aria-label") + " instnieje " +
+          "</h4>" +
+          "</div>" +
+          "<br>";
+      }
+      else if (errorType == "none") {
+        if (fajnie) {
+          clearError(this)
+        }
+        fajnie = false
+        data =
+          "<div class='siema red-div'>" +
+          "<i class='fa-solid fa-circle-xmark'></i>" +
+          "<h4>" +
+          "Błąd przy " +
+          $(niewiem).attr("aria-label") +
+          " Input musi zawierac 5 znaki ale nie wykraczac poza 50, nie moze zawierac spacji!" +
+          "</h4>" +
+          "</div>" +
+          "<br>";
+      }
     }
     lista.push(data);
     lista = lista.filter(onlyUnique);
     let i;
     $(".errors").empty();
+    console.log("Lista po dodaniu", lista)
     for (i = 0; i < lista.length; i++) {
       $(".errors").append(lista[i]);
     }
@@ -152,7 +199,7 @@ $(document).ready(function () {
       $(niewiem).attr("id") == "last_name"
     ) {
       data =
-        "<div class='siema'>" +
+        "<div class='siema red-div'>" +
         "<i class='fa-solid fa-circle-xmark'></i>" +
         "<h4>" +
         "Błąd przy " +
@@ -162,24 +209,47 @@ $(document).ready(function () {
         "</div>" +
         "<br>";
     } else if ($(niewiem).attr("id") == "email") {
-      data =
-        "<div class='siema'>" +
-        "<i class='fa-solid fa-circle-xmark'></i>" +
-        "<h4>" +
-        "Błąd przy " +
-        $(niewiem).attr("aria-label") +
-        " Input musi zawierac 5 znaki ale nie wykraczac poza 50, nie moze zawierac spacji!" +
-        "</h4>" +
-        "</div>" +
-        "<br>";
-    } else if (
+      if (errorType == "is") {
+        if (!fajnie) {
+          clearError(this)
+        }
+        fajnie = true
+        data =
+          "<div class='siema yellow-div'>" +
+          "<i class='fa-solid fa-triangle-exclamation'></i>" +
+          "<h4>" +
+          "Błąd przy " +
+          $(niewiem).attr("aria-label") +
+          " taki " + $(niewiem).attr("aria-label") + " instnieje " +
+          "</h4>" +
+          "</div>" +
+          "<br>";
+      }
+      else if (errorType == "none") {
+        if (fajnie) {
+          clearError(this)
+        }
+        fajnie = false
+        data =
+          "<div class='siema red-div'>" +
+          "<i class='fa-solid fa-circle-xmark'></i>" +
+          "<h4>" +
+          "Błąd przy " +
+          $(niewiem).attr("aria-label") +
+          " Input musi zawierac 5 znaki ale nie wykraczac poza 50, nie moze zawierac spacji!" +
+          "</h4>" +
+          "</div>" +
+          "<br>";
+      }
+    }
+    else if (
       $(niewiem).attr("id") == "city" ||
       $(niewiem).attr("id") == "state" ||
       $(niewiem).attr("id") == "zip_code" ||
       $(niewiem).attr("id") == "country"
     ) {
       data =
-        "<div class='siema'>" +
+        "<div class='siema red-div'>" +
         "<i class='fa-solid fa-circle-xmark'></i>" +
         "<h4>" +
         "Błąd przy " +
@@ -189,22 +259,46 @@ $(document).ready(function () {
         "</div>" +
         "<br>";
     } else if ($(niewiem).attr("id") == "phone_number") {
-      data = data =
-        "<div class='siema'>" +
-        "<i class='fa-solid fa-circle-xmark'></i>" +
-        "<h4>" +
-        "Błąd przy " +
-        $(niewiem).attr("aria-label") +
-        " Input musi co najmiej 9 cyfr i maksymalnie 11 cyfr" +
-        "</h4>" +
-        "</div>" +
-        "<br>";
+      if (errorType == "is") {
+        if (!fajnie) {
+          clearError(this)
+        }
+        fajnie = true
+        data =
+          "<div class='siema yellow-div'>" +
+          "<i class='fa-solid fa-triangle-exclamation'></i>" +
+          "<h4>" +
+          "Błąd przy " +
+          $(niewiem).attr("aria-label") +
+          " taki " + $(niewiem).attr("aria-label") + " instnieje " +
+          "</h4>" +
+          "</div>" +
+          "<br>";
+      }
+      else if (errorType == "none") {
+        if (fajnie) {
+          clearError(this)
+        }
+        fajnie = false
+        data =
+          "<div class='siema red-div'>" +
+          "<i class='fa-solid fa-circle-xmark'></i>" +
+          "<h4>" +
+          "Błąd przy " +
+          $(niewiem).attr("aria-label") +
+          " Input musi zawierac 5 znaki ale nie wykraczac poza 50, nie moze zawierac spacji!" +
+          "</h4>" +
+          "</div>" +
+          "<br>";
+      }
     }
     var indesList = lista.indexOf(data);
     if (indesList > -1) {
       lista.splice(indesList, 1);
+      console.log("po usunieciu ")
       $(".errors").empty();
       for (i = 0; i < lista.length; i++) {
+        console.log(lista[i])
         $(".errors").append(lista[i]);
       }
     }
@@ -230,6 +324,7 @@ $(document).ready(function () {
       } else {
         showError(inputField);
         lastnameValid = false;
+        lastnameValid = false;
         input.css("border-color", "red");
       }
     } else if (input.attr("id") == "email") {
@@ -240,21 +335,71 @@ $(document).ready(function () {
         !input.val().includes(" ")
       ) {
         clearError(inputField);
-        input.css("border-color", "green");
-        emailValid = true;
+        // input.css("border-color", "green");
+        $.ajax({
+          method: "get",
+          url: "/profile/check",
+          data: { email: input.val() },
+          success: function (res) {
+            if (res == "true") { //jesli sie nie udało
+              errorType = "is"
+              console.log("nie")
+              showError(inputField);
+              emailValid = false;
+              input.css("border-color", "red");
+            }
+            else if (res == "false") {
+              // clearError(inputField);
+              errorType = "none"
+              input.css("border-color", "green")
+              clearError(inputField);
+              emailValid = true;
+            }
+          }
+        })
       } else {
+        if (errorType == "is") {
+          clearError(inputField);
+        }
+        errorType = "none"
         showError(inputField);
         emailValid = false;
         input.css("border-color", "red");
       }
     } else if (input.attr("id") == "phone_number") {
-      if (input.val().length == 9 && !isNaN(parseInt($(input).val()))) {
-        input.css("border-color", "green");
-        phoneValid = true;
+      if (input.val().length == 12 && !isNaN(parseInt($(input).val()))) {
         clearError(inputField);
+        // input.css("border-color", "green");
+        $.ajax({
+          method: "get",
+          url: "/profile/check",
+          data: { phone: input.val() },
+          success: function (res) {
+            if (res == "true") { //jesli sie nie udało
+              errorType = "is"
+              // data = "niewiem"
+              console.log("nie")
+              showError(inputField);
+              emailValid = false;
+              input.css("border-color", "red");
+            }
+            else if (res == "false") {
+              // clearError(inputField);
+              errorType = "none"
+              console.log("niewiem")
+              input.css("border-color", "green")
+              clearError(inputField);
+              emailValid = true;
+            }
+          }
+        })
       } else {
+        if (errorType == "is") {
+          clearError(inputField);
+        }
+        errorType = "none"
         showError(inputField);
-        phoneValid = false;
+        emailValid = false;
         input.css("border-color", "red");
       }
     }

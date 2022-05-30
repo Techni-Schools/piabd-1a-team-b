@@ -16,11 +16,14 @@ html {
 }
 
 .siema {
-  background-color: rgba(255, 0, 0, 0.511);
   padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.yellow-div {
+  background-color: yellow;
 }
 
 .siema h4 {
