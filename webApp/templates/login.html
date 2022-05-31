@@ -12,13 +12,20 @@ extrahead %}
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Witamy w rejestracji!</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true" class="close">&times;</span>
         </button>
       </div>
       <div class="errors"></div>
       <div class="modal-body">
+        <div class="register-step-text">
+          <h1>Witamy w rejestracji!</h1>
+          <h6 class="register-step-text-mini">Witamy cie w 3 krokowej rejestracjim w tym kroku będziemy potrzebowac od
+            ciebie: <b>Imienia</b>,
+            <b>Nazwiska</b> <b>E-maila</b>, <b>daty urodzenia</b> i <b>Numeru Telefonu</b>
+          </h6>
+        </div>
         {% from "_formhelpers.html" import render_field %}
         <form method="post" autocomplete="off" id="register-form" action="{{url_for('register')}}">
           <div id="0-1">
@@ -38,6 +45,16 @@ extrahead %}
             render_field(form1.accept_tos)}}
           </div>
         </form>
+      </div>
+      <div class="line-separate"></div>
+      <div class="register-step-balls">
+        <div class="balls-group">
+          <div class="ball1"></div>
+          <div class="line"></div>
+          <div class="ball2"></div>
+          <div class="line"></div>
+          <div class="ball3"></div>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" id="backButton" style="display: none">

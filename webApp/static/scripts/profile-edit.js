@@ -2,7 +2,6 @@ $(".tak").prop("disabled", true);
 $(".tak").css("pointer-events", "none");
 var cosie = 0;
 $(document).ready(function () {
-  console.log("siema");
   $(".tak").click(function () {
     setTimeout(function () {
       $(".about-information").show();
@@ -35,24 +34,18 @@ $(document).ready(function () {
 
   function startFieldProfile() {
     var Array = $("dd").children(".niewiem");
-    console.log(Array.length);
     for (var x = 0; x < Array.length; x++) {
       var idOfInput = $("dd").children(".niewiem")[x].id;
       var newId = idOfInput + "-field";
       document.getElementById(newId).innerHTML =
         $("dd").children(".niewiem")[x].value;
-      console.log(newId);
     }
   }
   startFieldProfile();
 
   function fieldProfile(inputDate) {
     var clickedInput = $(inputDate).attr("id");
-    console.log(clickedInput);
-    console.log($(inputDate));
     var id = clickedInput + "-field";
-    console.log("nowe id: ", id);
-    console.log("znaeziono id: ", document.getElementById(id));
     document.getElementById(id).innerHTML = $(inputDate).val();
   }
 
@@ -71,9 +64,7 @@ $(document).ready(function () {
   var countryValid = false;
 
   $(".zmien-button1").click(function () {
-    console.log("siema");
     var Array = $("dd").children(".niewiem");
-    console.log(Array);
     for (var x = 0; x < Array.length; x++) {
       var fajnie = $("dd").children(".niewiem")[x];
       checkLengthFirstPage(fajnie);
@@ -94,7 +85,6 @@ $(document).ready(function () {
     }
     else {
       $(".error").empty()
-      console.log("jest dobrze ogulnie")
       var data = "<h3 style='color: red;'> Gdzieś masz Błąd, sprawdz dokladnie! </h3>"
       $(".error").append(data)
     }
@@ -102,7 +92,6 @@ $(document).ready(function () {
   $(document).on("keypress", function (key) {
     if (key.which == 13) {
       var Array = $("dd").children(".niewiem");
-      console.log(Array);
       for (var x = 0; x < Array.length; x++) {
         var fajnie = $("dd").children(".niewiem")[x];
         checkLengthFirstPage(fajnie);
@@ -123,7 +112,6 @@ $(document).ready(function () {
       }
       else {
         $(".error").empty()
-        console.log("jest dobrze ogulnie")
         var data = "<h3 style='color: red;'> Gdzieś masz Błąd, sprawdz dokladnie! </h3>"
         $(".error").append(data)
       }
@@ -131,21 +119,15 @@ $(document).ready(function () {
   });
 
   function checkLengthFirstPage(inputField) {
-    console.log("jd");
-    console.log($(inputField).attr("id"));
     var input = $(inputField);
     if (input.attr("id") == "first_name") {
-      console.log("to jest", input.attr("id"));
       if (input.val().length >= 2) {
         firstValid = true;
-
-        console.log("to jest", input.attr("id"));
       } else {
         firstValid = false;
         input.css("border-color", "red");
       }
     } else if (input.attr("id") == "last_name") {
-      console.log("to jest", input.attr("id"));
       if (input.val().length >= 2) {
         lastnameValid = true;
       } else {
@@ -153,7 +135,6 @@ $(document).ready(function () {
         input.css("border-color", "red");
       }
     } else if (input.attr("id") == "email") {
-      console.log("to jest", input.attr("id"));
       if (
         input.val().length >= 6 &&
         input.val().includes("@") &&
@@ -166,7 +147,6 @@ $(document).ready(function () {
         input.css("border-color", "red");
       }
     } else if (input.attr("id") == "phone_number") {
-      console.log("to jest", input.attr("id"));
       if (
         input.val().length >= 9 &&
         input.val().length <= 12 &&

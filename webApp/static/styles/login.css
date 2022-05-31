@@ -19,10 +19,53 @@ html {
   height: auto;
 }
 
-.modal-body {
+.ball1,
+.ball2,
+.ball3 {
+  height: 20px;
+  width: 20px;
+  border-radius: 100%;
+  background-color: grey;
+  transition: all 0.5s;
+}
+
+.line {
+  display: flex;
+  align-items: center;
+  height: 3px;
+  width: 40px;
+  background-color: orange;
+}
+
+.line-separate {
+  height: 1px;
+  width: 100%;
+  background-color: grey;
+}
+
+.register-step-balls {
+  height: 80px;
   display: flex;
   justify-content: center;
+  align-items: center;
+}
+
+.balls-group {
+  align-items: center;
+  display: flex;
+}
+
+.modal-body {
+  display: flex;
+  /* justify-content: center; */
   text-align: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.modal-footer {
+  display: flex;
+  justify-content: space-between;
 }
 
 .red-div {
@@ -72,6 +115,7 @@ form {
 .username_login input,
 .password_login input {
   font-size: 15px;
+  padding: 10px;
   border: none;
   width: 400px;
   outline: none;
@@ -85,8 +129,9 @@ form {
   /* transform: rotate(-45deg); */
 }
 
-label {
-  display: none;
+input:autofill {
+  background: #fff;
+  /* or any other */
 }
 
 .username_login,
@@ -165,10 +210,6 @@ dl {
 dd {
   margin: 0;
   margin-left: 5px;
-}
-
-dd input {
-  padding: 10px;
 }
 
 .login-word {

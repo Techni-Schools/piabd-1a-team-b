@@ -19,24 +19,38 @@ $(document).ready(function () {
   var fajnie;
   var animationButtonCount;
 
+  const mini_text_1_page = "Witamy cie w 3 krokowej rejestracjim w tym kroku będziemy potrzebowac od ciebie: <b>Imienia</b>,<b>Nazwiska</b> <b>E-maila</b>, <b>daty urodzenia</b> i <b>Numeru Telefonu</b>"
+  const mini_text_2_page = "Super!, teraz mamy krok 2, tutaj bedziemy potrzebowac danych na temat twojego adresu zamieszkania!"
+  const mini_text_3_page = "No i mamy ostatni krok naszej rejestracji, teraz będziemy potrzebowac nazwy twojego konta i hasła"
   var jd = 0;
   //
-
   function checkPage() {
     if (pageNumber == 1) {
       $("#0-1").show();
       $("#0-2").hide();
       $("#0-3").hide();
       $("#backButton").hide();
+      $(".register-step-text-mini").html(mini_text_1_page)
+      $(".ball1").css("background-color", "grey")
+      $(".ball2").css("background-color", "grey")
+      $(".ball3").css("background-color", "grey")
     } else if (pageNumber == 2) {
       $("#0-1").hide();
       $("#0-2").show();
       $("#0-3").hide();
       $("#backButton").show();
+      $(".register-step-text-mini").html(mini_text_2_page)
+      $(".ball1").css("background-color", "#64dd17")
+      $(".ball2").css("background-color", "grey")
+      $(".ball3").css("background-color", "grey")
     } else if (pageNumber == 3) {
       $("#0-1").hide();
       $("#0-2").hide();
       $("#0-3").show();
+      $(".register-step-text-mini").html(mini_text_3_page)
+      $(".ball1").css("background-color", "#64dd17")
+      $(".ball2").css("background-color", "#64dd17")
+      $(".ball3").css("background-color", "grey")
     }
   }
 
@@ -63,7 +77,10 @@ $(document).ready(function () {
           pageNumber += 1;
         }
       } else if (pageNumber == 3) {
-        $("#register-form").submit();
+        setTimeout(function () {
+          $("#register-form").submit();
+        }, 1500)
+
       }
     }
     checkPage();
@@ -136,23 +153,7 @@ $(document).ready(function () {
           "<br>";
       }
     }
-    else if (
-      $(niewiem).attr("id") == "city" ||
-      $(niewiem).attr("id") == "state" ||
-      $(niewiem).attr("id") == "zip_code" ||
-      $(niewiem).attr("id") == "country"
-    ) {
-      data =
-        "<div class='siema red-div'>" +
-        "<i class='fa-solid fa-circle-xmark'></i>" +
-        "<h4>" +
-        "Błąd przy " +
-        $(niewiem).attr("aria-label") +
-        " Input musi zawierac 4 znaki ale nie wykraczac poza 10 znaków" +
-        "</h4>" +
-        "</div>" +
-        "<br>";
-    } else if ($(niewiem).attr("id") == "phone_number") {
+    else if ($(niewiem).attr("id") == "phone_number") {
       if (errorType == "is") {
         if (!fajnie) {
           clearError(this)
@@ -185,6 +186,24 @@ $(document).ready(function () {
           "</div>" +
           "<br>";
       }
+    }
+    else if (
+      $(niewiem).attr("id") == "city" ||
+      $(niewiem).attr("id") == "state" ||
+      $(niewiem).attr("id") == "zip_code" ||
+      $(niewiem).attr("id") == "country" ||
+      $(niewiem).attr("id") == "street"
+    ) {
+      data =
+        "<div class='siema red-div'>" +
+        "<i class='fa-solid fa-circle-xmark'></i>" +
+        "<h4>" +
+        "Błąd przy " +
+        $(niewiem).attr("aria-label") +
+        " Input musi zawierac 4 znaki ale nie wykraczac poza 10 znaków" +
+        "</h4>" +
+        "</div>" +
+        "<br>";
     }
     lista.push(data);
     lista = lista.filter(onlyUnique);
@@ -244,23 +263,7 @@ $(document).ready(function () {
           "<br>";
       }
     }
-    else if (
-      $(niewiem).attr("id") == "city" ||
-      $(niewiem).attr("id") == "state" ||
-      $(niewiem).attr("id") == "zip_code" ||
-      $(niewiem).attr("id") == "country"
-    ) {
-      data =
-        "<div class='siema red-div'>" +
-        "<i class='fa-solid fa-circle-xmark'></i>" +
-        "<h4>" +
-        "Błąd przy " +
-        $(niewiem).attr("aria-label") +
-        " Input musi zawierac 4 znaki ale nie wykraczac poza 10 znaków" +
-        "</h4>" +
-        "</div>" +
-        "<br>";
-    } else if ($(niewiem).attr("id") == "phone_number") {
+    else if ($(niewiem).attr("id") == "phone_number") {
       if (errorType == "is") {
         if (!fajnie) {
           clearError(this)
@@ -293,6 +296,24 @@ $(document).ready(function () {
           "</div>" +
           "<br>";
       }
+    }
+    else if (
+      $(niewiem).attr("id") == "city" ||
+      $(niewiem).attr("id") == "state" ||
+      $(niewiem).attr("id") == "zip_code" ||
+      $(niewiem).attr("id") == "country" ||
+      $(niewiem).attr("id") == "street"
+    ) {
+      data =
+        "<div class='siema red-div'>" +
+        "<i class='fa-solid fa-circle-xmark'></i>" +
+        "<h4>" +
+        "Błąd przy " +
+        $(niewiem).attr("aria-label") +
+        " Input musi zawierac 4 znaki ale nie wykraczac poza 10 znaków" +
+        "</h4>" +
+        "</div>" +
+        "<br>";
     }
     var indesList = lista.indexOf(data);
     if (indesList > -1) {
@@ -369,7 +390,7 @@ $(document).ready(function () {
         input.css("border-color", "red");
       }
     } else if (input.attr("id") == "phone_number") {
-      if (input.val().length == 12 && !isNaN(parseInt($(input).val()))) {
+      if (input.val().length == 12) {
         clearError(inputField);
         // input.css("border-color", "green");
         $.ajax({
@@ -401,7 +422,7 @@ $(document).ready(function () {
         }
         errorType = "none"
         showError(inputField);
-        emailValid = false;
+        phoneValid = false;
         input.css("border-color", "red");
       }
     }

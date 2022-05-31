@@ -18,8 +18,7 @@ p {
 
 .container-hello {
   height: 70vh;
-  background: url("https://www.hdwallpapers.in/download/flower_petals_minimalist_black_background_hd_minimalist-1920x1080.jpg")
-    no-repeat;
+  background: url("https://www.hdwallpapers.in/download/flower_petals_minimalist_black_background_hd_minimalist-1920x1080.jpg") no-repeat;
   background-size: 3000px;
 }
 
@@ -55,8 +54,7 @@ p {
 }
 
 .hello-buttons-div {
-  -webkit-animation: slide-in-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
-    both;
+  -webkit-animation: slide-in-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   animation: slide-in-bottom 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   animation-delay: 1.1s;
   height: 200px;
@@ -67,7 +65,7 @@ p {
 
 .login-button,
 .register-button {
-  background-color: #2196f3;
+  background-color: orange;
   border: none;
   padding: 10px;
   font-size: 20px;
@@ -75,6 +73,7 @@ p {
   color: white;
   transition: 0.1s;
 }
+
 
 .login-button:hover,
 .register-button:hover {
@@ -84,8 +83,7 @@ p {
 
 .hello-text {
   font-family: "Montserrat", sans-serif;
-  -webkit-animation: tracking-in-expand 1s cubic-bezier(0.215, 0.61, 0.355, 1)
-    both;
+  -webkit-animation: tracking-in-expand 1s cubic-bezier(0.215, 0.61, 0.355, 1) both;
   animation: tracking-in-expand 1s cubic-bezier(0.215, 0.61, 0.355, 1) both;
 }
 
@@ -360,6 +358,7 @@ p {
 }
 
 @-webkit-keyframes bounce {
+
   0%,
   20%,
   53%,
@@ -393,6 +392,7 @@ p {
 }
 
 @keyframes bounce {
+
   0%,
   20%,
   53%,
