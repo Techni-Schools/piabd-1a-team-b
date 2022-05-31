@@ -3,30 +3,36 @@ html {
   height: 100vh;
   position: relative;
   overflow: hidden;
-  background: url("https://images3.alphacoders.com/954/954241.jpg") no-repeat;
+  background: url("https://images.unsplash.com/photo-1553615738-d8e0829f1d61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxleHBsb3JlLWZlZWR8N3x8fGVufDB8fHx8&w=1000&q=80");
   background-size: cover;
   background-position: 50%;
 }
+
 .form-login {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
 }
+
 .errors {
   height: auto;
 }
+
 .modal-body {
   display: flex;
   justify-content: center;
   text-align: center;
 }
+
 .red-div {
   background-color: rgba(255, 0, 0, 0.4);
 }
+
 .fa-triangle-exclamation {
   color: black;
 }
+
 form {
   text-align: center;
   width: 100%;
@@ -35,22 +41,26 @@ form {
   justify-content: center;
   flex-direction: column;
 }
+
 .nice-icon {
   color: black;
   height: 300px;
   width: inherit;
 }
+
 .image-padding {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 130px;
   height: 130px;
-  border: 2px solid red;
+  border: 2px solid orange;
 }
+
 .form-login-2 {
   width: 400px;
 }
+
 .niezgadzam {
   height: 150px;
   width: 150px;
@@ -58,32 +68,79 @@ form {
   padding: 10px;
   transform: rotate(45deg);
 }
+
 .username_login input,
 .password_login input {
+  font-size: 15px;
   border: none;
-  width: 300px;
+  width: 400px;
   outline: none;
   background-color: transparent;
 }
+
 .image {
   display: flex;
   align-items: center;
   height: 150px;
   /* transform: rotate(-45deg); */
 }
+
 label {
   display: none;
 }
+
 .username_login,
 .password_login {
-  padding: 10px;
+  margin-bottom: 10px;
+  padding: 7px;
   /* width: max-content; */
-  background-color: rgba(255, 255, 255, 0.6);
+  background-color: rgba(255, 255, 255, 0.5);
   justify-content: center;
   display: flex;
 }
+
+.submitBtn {
+  margin-bottom: 10px;
+  border-radius: 20px;
+  width: 449px;
+  padding: 10px;
+  border: none;
+  /* transition: 1s all; */
+  /* border: 3px solid orange; */
+  /* -webkit-animation: heartbeat 1.5s ease-in-out both;
+  animation: heartbeat 1.5s ease-in-out both; */
+  background: transparent;
+  background: rgb(255, 209, 0);
+  background: linear-gradient(90deg, rgba(255, 209, 0, 1) 0%, rgba(255, 179, 0, 1) 35%, rgba(255, 154, 0, 1) 100%);
+  outline: none;
+}
+
+.submitBtn:disabled {
+  opacity: 0.8;
+}
+
+::placeholder {
+  color: rgb(0, 0, 0);
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+textarea:-webkit-autofill:hover,
+textarea:-webkit-autofill:focus,
+select:-webkit-autofill,
+select:-webkit-autofill:hover,
+select:-webkit-autofill:focus {
+  /* border: 1px solid green; */
+  -webkit-text-fill-color: rgb(0, 0, 0);
+  /* -webkit-box-shadow: 0 0 0px 1000px #000 inset; */
+  transition: background-color 999999999999999999999999999999999999999999999999s ease-in-out 0s;
+}
+
 .fa-user,
 .fa-lock {
+  padding-right: 10px;
   border-right: 1px solid black;
   font-size: 20px;
   width: 30px;
@@ -92,9 +149,11 @@ label {
   justify-content: center;
   height: inherit;
 }
+
 input:-internal-autofill-selected {
-  background-color: transparent;
+  background-color: transparent !important;
 }
+
 dl {
   display: flex;
   justify-content: center;
@@ -102,30 +161,43 @@ dl {
   flex-direction: column;
   width: 100%;
 }
+
 dd {
   margin: 0;
   margin-left: 5px;
 }
+
 dd input {
   padding: 10px;
 }
+
 .login-word {
+  font-weight: 900;
+  font-size: 30px;
   color: white;
   padding-top: 5vh;
   text-align: center;
   margin: 0;
 }
+
 .image {
   transform: rotate(-45deg);
 }
+
 .fa-people-group {
   font-size: 60px;
 }
+
 .siema {
   padding: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.button-login-animation {
+  -webkit-animation: heartbeat 1.5s ease-in-out both;
+  animation: heartbeat 1.5s ease-in-out both;
 }
 
 .yellow-div {
@@ -142,49 +214,161 @@ dd input {
 .siema i {
   padding-right: 10px;
 }
+
 .allpage {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100%;
 }
+
 @media screen and (max-height: 667px) {
   .allpage {
     height: auto;
     align-items: baseline;
     padding-top: 70px;
   }
+
   .niezgadzam {
     height: 75px;
     width: 75px;
   }
+
   .image-padding {
     height: 50px;
     width: 50px;
   }
+
   .fa-people-group {
     font-size: 30px;
   }
+
   body {
     overflow: auto;
   }
+
   .nice-icon {
     height: 200px;
   }
 }
-@media screen and (max-height: 896px) {
+
+/* @media screen and (max-height: 896px) { */
+/* 
   .username_login input,
   .password_login input {
     border: none;
     width: 200px;
     outline: none;
-    background-color: black;
+    /* background-color: black; */
+/* }
+
+body {
+  overflow-x: hidden;
+}
+
+.allpage {
+  padding-top: 70px;
+  height: auto;
+} */
+/* } */
+@media screen and (max-width: 484px) {
+
+  .username_login input,
+  .password_login input {
+    width: 80vw;
   }
-  body {
-    overflow-x: hidden;
+
+  .submitBtn {
+    width: 80vw;
   }
-  .allpage {
-    padding-top: 70px;
-    height: auto;
+}
+
+/* ----------------------------------------------
+ * Generated by Animista on 2022-5-31 10:46:11
+ * Licensed under FreeBSD License.
+ * See http://animista.net/license for more info. 
+ * w: http://animista.net, t: @cssanimista
+ * ---------------------------------------------- */
+
+/**
+ * ----------------------------------------
+ * animation heartbeat
+ * ----------------------------------------
+ */
+@-webkit-keyframes heartbeat {
+  from {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transform-origin: center center;
+    transform-origin: center center;
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+  }
+
+  10% {
+    -webkit-transform: scale(0.91);
+    transform: scale(0.91);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+
+  17% {
+    -webkit-transform: scale(0.98);
+    transform: scale(0.98);
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+  }
+
+  33% {
+    -webkit-transform: scale(0.87);
+    transform: scale(0.87);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+
+  45% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+  }
+}
+
+@keyframes heartbeat {
+  from {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-transform-origin: center center;
+    transform-origin: center center;
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+  }
+
+  10% {
+    -webkit-transform: scale(0.91);
+    transform: scale(0.91);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+
+  17% {
+    -webkit-transform: scale(0.98);
+    transform: scale(0.98);
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+  }
+
+  33% {
+    -webkit-transform: scale(0.87);
+    transform: scale(0.87);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+
+  45% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    -webkit-animation-timing-function: ease-out;
+    animation-timing-function: ease-out;
   }
 }

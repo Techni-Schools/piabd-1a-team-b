@@ -4,12 +4,12 @@ $(document).ready(function () {
   var animationIndexBlocks = 350;
 
   if (phone) {
+    $("#profile-button").click(function () {
+      document.getElementById("niepowiem").style.display = "none";
+      location.href = "/dashboard";
+    })
     animationIndexText += 100;
     animationIndexBlocks += 250;
-    // document.getElementById("profile-button").onclick = () => {
-    //   document.getElementById("niepowiem").style.display = "none";
-    //   location.href = "/dashboard";
-    // };
   }
   function chceckTa() {
     window.onscroll = function () {
@@ -36,7 +36,7 @@ $(document).ready(function () {
             $(".fajnie").css("height", "auto");
           }
         }
-      } catch (error) {}
+      } catch (error) { }
     };
   }
   chceckTa();

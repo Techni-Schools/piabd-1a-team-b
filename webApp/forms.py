@@ -3,8 +3,8 @@ from lib import *
 
 
 class loginForm(Form):
-    username_login = StringField('Username', [validators.DataRequired(), validators.Length(min=4, max=20)])
-    password_login = PasswordField('Password', [validators.DataRequired(), validators.Length(min=8, max=100)])
+    username_login = StringField('Username', [validators.DataRequired(), validators.Length(min=4, max=20)], render_kw={"class": "login-username-input"})
+    password_login = PasswordField('Password', [validators.DataRequired(), validators.Length(min=8, max=100)], render_kw={"class": "login-password-input"})
     remember = BooleanField('Remember me', [])
 
 class registerForm(Form):

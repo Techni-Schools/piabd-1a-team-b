@@ -1,4 +1,5 @@
 $(document).ready(function () {
+  $(".submitBtn").prop("disabled", true)
   var pageNumber = 1;
   var validPoints = 0;
   //   first  page valid variables
@@ -16,6 +17,7 @@ $(document).ready(function () {
   var stateValid = false;
   var countryValid = false;
   var fajnie;
+  var animationButtonCount;
 
   var jd = 0;
   //
@@ -470,4 +472,31 @@ $(document).ready(function () {
       checkLengthSecondPage(this);
     }
   });
+
+  // ------------------------------ LOGIN BUTTON DISABLED ------------------------------- //
+
+  function buttonDisabled() {
+    if ($(".login-username-input").val().length >= 4 && $(".login-password-input").val().length >= 8) {
+      $(".submitBtn").prop("disabled", false)
+      console.log("siema")
+    }
+    else {
+      // if (animationButtonCount = 0) {
+      //   $(".submitBtn").toggleClass("button-login-animation")
+      // }
+      console.log("nie")
+      // console.log($(".logi").val().length)
+      $(".submitBtn").prop("disabled", true)
+    }
+  }
+  setTimeout(function () {
+    $(".login-username-input").focus()
+  }, 300)
+  buttonDisabled()
+  $(".login-username-input").on('input', function () {
+    buttonDisabled()
+  })
+  $(".login-password-input").on('input', function () {
+    buttonDisabled()
+  })
 });
