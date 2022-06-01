@@ -1,6 +1,6 @@
 function parseURLParams(url) {
     var queryStart = url.indexOf("?") + 1,
-        queryEnd   = url.indexOf("#") + 1 || url.length + 1,
+        queryEnd = url.indexOf("#") + 1 || url.length + 1,
         query = url.slice(queryStart, queryEnd - 1),
         pairs = query.replace(/\+/g, " ").split("&"),
         parms = {}, i, n, v, nv;
@@ -25,7 +25,7 @@ let total = 0;
 let sorted = 0;
 
 function changeButtons() {
-    if (10*curpage-9 <= sorted && sorted < 10*curpage) {
+    if (10 * curpage - 9 <= sorted && sorted < 10 * curpage) {
         $('#next').prop('disabled', true);
     } else {
         $('#next').prop('disabled', false);
@@ -38,17 +38,17 @@ function changeButtons() {
 }
 
 function updateResult(data) {
-    if (typeof data.o == 'undefined') {data.o = ['']};
-    if (typeof data.string == 'undefined') {data.string = [0xFFFFFFFFFFFF]};
-    if (typeof data.page == 'undefined') {data.page = ['1']};
+    if (typeof data.o == 'undefined') { data.o = [''] };
+    if (typeof data.string == 'undefined') { data.string = [0xFFFFFFFFFFFF] };
+    if (typeof data.page == 'undefined') { data.page = ['1'] };
     $.ajax({
         method: 'post',
         url: '/listing',
-        data: {'page': data.page[0], 'text': data.string[0], 'o': data.o[0]},
+        data: { 'page': data.page[0], 'text': data.string[0], 'o': data.o[0] },
         success: function (res) {
             data = `<div>`;
             $.each(res, function (index, value) {
-                data += `${value.name} ${value.price}<br>`;
+                data += `<div class='card'>${value.name}</div>  ${value.price}, ${value.image}<br>`;
                 total = value.count;
                 sorted++;
             });
@@ -63,7 +63,7 @@ let curpage = 1;
 
 
 
-$(document).ready(function() {
+$(document).ready(function () {
     let defaultData = parseURLParams(window.location.href);
     try {
         Object.keys(defaultData).length;
@@ -77,9 +77,9 @@ $(document).ready(function() {
             url += `${index}=${defaultData[index]}&`;
         };
         if (isData) {
-            url = `/search?${url.substring(0, url.length-1)}`; // substring url.length-1 because of & at the end of string in for
+            url = `/search?${url.substring(0, url.length - 1)}`; // substring url.length-1 because of & at the end of string in for
         } else {
-            url = `/search?page=${curpage}&${url.substring(0, url.length-1)}`
+            url = `/search?page=${curpage}&${url.substring(0, url.length - 1)}`
         }
         window.history.pushState("", "", url);
         updateResult(parseURLParams(window.location.href));
@@ -87,11 +87,11 @@ $(document).ready(function() {
     }
     catch {
     }
-  
 
 
-      $('#next').click(function() {
-        if (!(10*curpage-9 < total && total < 10*curpage)) {
+
+    $('#next').click(function () {
+        if (!(10 * curpage - 9 < total && total < 10 * curpage)) {
             curpage++;
             url = '';
             data = parseURLParams(window.location.href);
@@ -102,14 +102,14 @@ $(document).ready(function() {
                     url += `${index}=${data[index]}&`
                 }
             }
-            url = `/search?${url.substring(0, url.length-1)}`;
+            url = `/search?${url.substring(0, url.length - 1)}`;
             window.history.pushState("", "", url);
             updateResult(parseURLParams(window.location.href));
             changeButtons();
         }
-      });
+    });
 
-      $('#back').click(function() {
+    $('#back').click(function () {
         if (curpage > 1) {
             curpage--;
             url = '';
@@ -121,14 +121,14 @@ $(document).ready(function() {
                     url += `${index}=${data[index]}&`
                 }
             }
-            url = `/search?${url.substring(0, url.length-1)}`;
+            url = `/search?${url.substring(0, url.length - 1)}`;
             window.history.pushState("", "", url);
             updateResult(parseURLParams(window.location.href));
             changeButtons();
         }
-      });
+    });
 
-      $('#orderby').change(function() {
+    $('#orderby').change(function () {
         isData = false;
         url = '';
         data = parseURLParams(window.location.href);
@@ -143,14 +143,14 @@ $(document).ready(function() {
             }
         };
         if (isData) {
-            url = `/search?${url.substring(0, url.length-1)}`;
+            url = `/search?${url.substring(0, url.length - 1)}`;
             window.history.pushState("", "", url);
         } else {
-            url = `/search?${url.substring(0, url.length-1)}&o=${$(this).val()}`;
+            url = `/search?${url.substring(0, url.length - 1)}&o=${$(this).val()}`;
             window.history.pushState("", "", url);
         }
         updateResult(parseURLParams(window.location.href));
-      });
+    });
     //   $('#orderby').bind('keyup', function(e) {
     //     isData = false;
     //     url = '';

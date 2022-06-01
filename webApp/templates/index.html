@@ -1,9 +1,6 @@
 {% extends 'base.html' %} {% block title %} Sklep wędkarski {% endblock %} {%
 block extrahead %}
-<link
-  rel="stylesheet"
-  href="{{ url_for('static',filename='styles/index.css') }}"
-/>
+<link rel="stylesheet" href="{{ url_for('static',filename='styles/index.css') }}" />
 <script type="text/javascript" src="{{ url_for('static', filename='scripts/index.js') }}"></script>
 {% endblock %} {% block main %}
 <div class="container-hello">
@@ -21,8 +18,9 @@ block extrahead %}
       <a href="/dashboard">
         <button class="login-button">Twoje Produkty</button>
       </a>
-      <a href="/register">
-        <button class="register-button">Kupuj Produkty</button> <!-- jak cos tu jest register bo nie mamy podstrony do wszystkich produktów --> 
+      <a href="/search?page=1&string=">
+        <button class="register-button">Kupuj Produkty</button>
+        <!-- jak cos tu jest register bo nie mamy podstrony do wszystkich produktów -->
       </a>
       {% else %}
       <a href="/login">
@@ -53,7 +51,7 @@ block extrahead %}
                 Naszym celem bylo stworzyc strone ktora pozwalawla kupowanie
                 przedmiotow, gdzie uzytkownicy decyduja co kupuja i sprzedaja
               </div>
-            </div>  
+            </div>
           </div>
         </div>
         <div class="col">
@@ -66,7 +64,8 @@ block extrahead %}
                 Kupowanie i Sprzedawanie
               </div>
               <div class="text-col-disc">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt laborum excepturi incidunt aperiam rerum dicta molestias totam perferendis eveniet quibusdam!
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Deserunt laborum excepturi incidunt aperiam
+                rerum dicta molestias totam perferendis eveniet quibusdam!
               </div>
             </div>
           </div>

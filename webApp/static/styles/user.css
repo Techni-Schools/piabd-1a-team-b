@@ -3,9 +3,12 @@
   display: flex;
   justify-content: center;
 }
+
 .product-image {
-  height: 400px;
+  height: 20vw;
+  width: 50vw;
 }
+
 .product-discription-text {
   padding: 10px;
   visibility: hidden;
@@ -15,31 +18,38 @@
   overflow-x: auto;
   text-align: justify;
 }
+
 .clickable-button {
   display: flex;
   justify-content: space-between;
 }
+
 .buy-div {
   width: 100%;
   padding: 30px;
 }
+
 .discription-icon {
   height: 100%;
 }
+
 .content-cliclable-buttons {
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
+
 .discription-text {
   font-size: 30px;
   height: 100%;
 }
+
 h1 {
   padding: 0;
   margin: 0;
 }
+
 .product-discription {
   background-color: rgba(89, 255, 255, 0.5);
   border: 2px solid rgb(0, 175, 175);
@@ -49,49 +59,167 @@ h1 {
   height: 50px;
   max-height: 500px;
 }
+
 .buy-buttons {
   height: 20%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .fewkofewko {
   display: flex;
 }
+
 .buy-buttons div button {
   border: none;
   margin: 10px;
   padding: 10px;
   width: 200px;
 }
+
 i {
   padding-right: 10px;
   display: flex;
   align-items: center;
 }
+
 @media only screen and (max-width: 801px) {
   .product-image {
     height: 55vw;
     width: 100vw;
   }
+
   .col-sm {
     margin: 0;
   }
+
   .products-text {
     font-size: 24px;
   }
+
   .product-discription {
     width: 100%;
   }
+
   .buy-buttons {
     height: 30%;
   }
 }
+
 @media only screen and (max-width: 426px) {
   .fewkofewko {
     width: 100vw;
   }
+
   .fewkofewko button {
     padding: 5px;
   }
+}
+
+/* -------------------------------------------konto uzytkownika wygląd ---------------------------------------*/
+.account-data {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  flex-direction: column;
+  background: url("https://pkconstruction.eu/wp-content/uploads/2019/12/wood-2045379_1920.jpg") no-repeat;
+  background-size: auto;
+  background-size: cover;
+  z-index: -1;
+}
+
+.username {
+  -webkit-animation-name: fadeInLeft;
+  animation-name: fadeInLeft;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  animation-delay: 0.3s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  z-index: 1;
+  color: white;
+  margin-bottom: 0.5rem;
+}
+
+.profile-img {
+  -webkit-animation-name: fadeInLeft;
+  animation-name: fadeInLeft;
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  animation-delay: 0.2s;
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+  border-radius: 100%;
+  height: 200px;
+  border-style: none;
+}
+
+.informations-about-user {
+  height: 300px;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.information-row {
+  height: 250px;
+  width: 50%;
+}
+
+.row {
+  padding: 0;
+  margin: 0;
+}
+
+.col {
+  box-shadow: 0px 0px 36px -3px rgba(66, 68, 90, 1);
+  text-align: left;
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: white;
+  display: flex;
+  transition: transform 0.2s, border-radius 0.1s;
+}
+
+.information-contact {
+  padding: 10px;
+  width: 100%;
+}
+
+.information-title {
+  font-size: 25px;
+  margin: 0;
+}
+
+.border-like {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  height: 3px;
+  width: 30px;
+  transition: width 0.3s;
+  background-color: orange;
+}
+
+.information-text {
+  font-size: 15px;
+  width: max-content;
+}
+
+.col:hover {
+  transform: scale(1.06);
+}
+
+.header-profile {
+  border-bottom: 1px solid orange;
+  position: sticky;
+  top: 81px;
+  padding: 10px;
+  background-color: rgb(80, 80, 80);
+}
+
+.header-profile h1 {
+  color: white;
+  font-size: 25px;
 }

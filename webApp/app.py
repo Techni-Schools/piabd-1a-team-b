@@ -1,5 +1,8 @@
+from copyreg import dispatch_table
 from datetime import timedelta
 import re
+
+from cairo import SurfaceObserverMode
 from lib import *
 from settings import app, login_manager, db
 from model import products, users, orders, category, chat
@@ -132,11 +135,16 @@ def profilenouser():
 
 @app.route('/profile/<string:username>')
 def profile(username):
-  q = db.session.query(users.username).filter(users.username == username).first()
+  # print(current_user.username)
+  # if username == current_user.username:
+  #   return redirect("/dashboard")
+  q = db.session.query(users.username, users.first_name, users.last_name, users.phone_number,users.email, users.country, users.date_of_birth).filter(users.username == username).first()
   if q:
     try:
       cu = db.session.query(products.name, products.description, products.image, products.price, products.quantity, category.category_name).join(category).join(users).filter(users.username == username, products.isDeleted == 0).filter(products.uuid_id.like(request.args['product'])).first()
       if request.args['product'] == '':
+        if username == current_user.username:
+          return redirect("/dashboard")
         raise ValueError("a should be nonzero")
     except:
       cu = db.session.query(products.name, products.image, category.category_name).join(category).join(users).filter(users.username == username, products.isDeleted == 0).all()
@@ -146,7 +154,7 @@ def profile(username):
       cu = ['uzytkownik obecnie nic nie sprzedaje']
   else:
     cu = ['nie znaleziono uzytkownika']
-  return render_template('user.html', prd=cu, user=username)
+  return render_template('user.html', prd=cu, user=username, user_info=q)
 
 
 @app.route("/profile/check", methods=["GET"])
@@ -175,11 +183,11 @@ def listing():
   if page == 0: page = 1
   # print(string)
   if request.form.get('o') == 'pd':
-    prd = products.query.join(category, products.category == category.id).join(users, products.user == users.id).filter(products.name.like(string+'%')).order_by(products.price.desc()).paginate(page=page, per_page=maxproductspersite, error_out=False)
+    prd = products.query.join(category, products.category == category.id).join(users, products.user == users.id).filter(products.name.like(string+'%')).filter(products.isDeleted == 0).order_by(products.price.desc()).paginate(page=page, per_page=maxproductspersite, error_out=False)
   elif request.form.get('o') == 'p':
-    prd = products.query.join(category, products.category == category.id).join(users, products.user == users.id).filter(products.name.like(string+'%')).order_by(products.price).paginate(page=page, per_page=maxproductspersite, error_out=False)
+    prd = products.query.join(category, products.category == category.id).join(users, products.user == users.id).filter(products.name.like(string+'%')).filter(products.isDeleted == 0).order_by(products.price).paginate(page=page, per_page=maxproductspersite, error_out=False)
   else:
-    prd = products.query.join(category, products.category == category.id).join(users, products.user == users.id).filter(products.name.like(string+'%')).paginate(page=page, per_page=maxproductspersite, error_out=False)
+    prd = products.query.join(category, products.category == category.id).join(users, products.user == users.id).filter(products.name.like(string+'%'), products.isDeleted == 0).paginate(page=page, per_page=maxproductspersite, error_out=False)
   # prd = products.query.join(category, products.category == category.id).join(users, products.user == users.id).filter(products.name.like(string+'%')).paginate(page=page, per_page=maxproductspersite, error_out=False)
   # prd = products.query.paginate(page=2, per_page=5, error_out=False)
   # return str([i.name for i in prd.items])
