@@ -1,8 +1,6 @@
 from copyreg import dispatch_table
 from datetime import timedelta
 import re
-
-from cairo import SurfaceObserverMode
 from lib import *
 from settings import app, login_manager, db
 from model import products, users, orders, category, chat
