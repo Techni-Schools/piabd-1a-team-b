@@ -1,6 +1,4 @@
-from copyreg import dispatch_table
 from datetime import timedelta
-import re
 from lib import *
 from settings import app, login_manager, db
 from model import products, users, orders, category, chat
@@ -11,6 +9,10 @@ def load_user(user_id):
     return users.query.filter_by(id=user_id).first()
 
 @app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html'), 404
+
+@app.errorhandler(405)
 def page_not_found(e):
     return render_template('404.html'), 404
 
@@ -99,9 +101,6 @@ def dashboard():
     c = c[0]
     q = products(form.name.data, myFile, c, form.price.data, form.description.data, 0, form.quantity.data, current_user.id)
     db.session.add(q)
-    # ------------------------------------------------------
-    #           TRZEBA ZROBIC SPRAWDZENIE CZY ZDJENCIE
-    # ------------------------------------------------------
     db.session.commit()
     flash('produkt dodany pomyślnie!')
     return redirect('/dashboard')
@@ -155,17 +154,34 @@ def profile(username):
   return render_template('user.html', prd=cu, user=username, user_info=q)
 
 
-@app.route("/profile/check", methods=["GET"])
-def profileCheck(): 
-  phoneNumberGet = request.args.get('phone','', type=int)  
-  emailGet = request.args.get('email','', type=str)
-  usernameGet = request.args.get('username','', type=str)
-  q = db.session.query(users.username).filter(or_ (users.username == usernameGet,users.email == emailGet, users.phone_number == phoneNumberGet )).first()
-  print(usernameGet)
-  if q:
-    return "true"
-  else:
-    return "false"
+@app.route("/email_validity_checks", methods=["POST"])
+def emailCheck():
+  emailGet = request.form.get('email','WRONGEMAIL', type=str)
+  try:
+    emailObject = validate_email(emailGet)
+    emailObject.email
+  except:
+    return 'Email is invalid or already taken'
+  q = users.query.filter(users.email == emailGet).first()
+  return '' if not q else 'Email is invalid or already taken'
+
+@app.route('/phone_validity_checks', methods=['POST'])
+def phoneCheck():
+  phoneGet = request.form.get('phone', '', type=str)
+  try:
+    phone_number = parse('+'+phoneGet)
+    if is_possible_number(phone_number):
+      q = users.query.filter(users.phone_number == '+' + str(phone_number.country_code) + str(phone_number.national_number)).first()
+      return '' if not q else 'Phone number is invalid or already taken'
+  except:
+    pass
+  return 'Phone number is invalid or already taken'
+
+@app.route('/username_validity_checks', methods=['POST'])
+def usernameCheck():
+  usernameGet = request.form.get('username', '', type=str)
+  q = users.query.filter(users.username == usernameGet).first()
+  return '' if not q else 'Username is already taken'
 
 @app.route('/search')
 def search():

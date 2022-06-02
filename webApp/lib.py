@@ -12,6 +12,8 @@ import bcrypt
 from flask_wtf.file import FileField, FileRequired, FileAllowed
 from werkzeug.datastructures import CombinedMultiDict
 from flask_uploads import UploadSet, IMAGES
+from email_validator import validate_email
+from phonenumbers import parse, is_possible_number
 from wtforms import Form, RadioField, BooleanField, StringField, PasswordField, validators, DateField, SelectField, IntegerField, FloatField, DecimalField, EmailField, TelField, TextAreaField
 """
 trzeba w bibliotece flask_uploads (plik flask_uploads.py) zmienic
