@@ -1,7 +1,8 @@
-{% extends 'base.html' %} {% block title %} Profil - {{user}} {% endblock %} {%
-block extrahead %}
+{% extends 'base.html' %} 
+{% block title %} {% if request.args.get('product') %} {{prd.name}} - {{user}} {% else %} Profil - {{user}} {% endif %} {% endblock %} 
+{% block extrahead %}
 <link rel="stylesheet" href="{{ url_for('static',filename='styles/user.css') }}" />
-{% endblock %} {% block main %} {% if request.args['product']%}
+{% endblock %} {% block main %} {% if request.args.get('product')%}
 <div class="row">
   <div class="col-sm">
     <div class="buy-div-siema content-div">
@@ -12,13 +13,13 @@ block extrahead %}
     <div class="buy-div">
       <div class="product-informations">
         <h1 class="product-name products-text">{{prd.name}}</h1>
-        <h3 class="category-name products-text">{{prd.category_name}}</h3>
-        <h4 class="product-quantity products-text">{{prd.quantity}}</h4>
+        <h3 class="category-name products-text">Kategoria: {{prd.category_name}}</h3>
+        <h4 class="product-quantity products-text">Ilość: {{prd.quantity}}</h4>
         <h4 class="product-price products-text">Cena: {{prd.price}}zł</h4>
         <div class="product-discription">
           <div class="clickable-button">
             <div class="content-cliclable-buttons">
-              <div class="discription-text">Discription</div>
+              <div class="discription-text">Opis</div>
               <div class="discription-icon"></div>
               <i class="fa-solid fa-arrow-down"></i>
             </div>
@@ -28,7 +29,9 @@ block extrahead %}
       </div>
       <div class="buy-buttons">
         <div class="fewkofewko">
+          <a href="/buy/{{product}}">
           <button class="buy-now">Kup Teraz</button>
+        </a>
           <button class="add-cart">Dodaj do koszyka</button>
         </div>
       </div>

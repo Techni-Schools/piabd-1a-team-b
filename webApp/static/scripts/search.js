@@ -18,14 +18,14 @@ function parseURLParams(url) {
     return parms;
 }
 
-let data;
-let url;
-let isData = false;
-let total = 0;
-let sorted = 0;
+let data; // ajax data
+let url; // url to change to
+let isData = false; // if o in url ?
+let total = 0; // total products finded
+let sorted = 0; // products count on current page
 
 function changeButtons() {
-    if (10 * curpage - 9 <= sorted && sorted < 10 * curpage) {
+    if (10 * curpage - 9 <= (curpage-1)*10+sorted && (curpage-1)*10+sorted < 10 * curpage) {
         $('#next').prop('disabled', true);
     } else {
         $('#next').prop('disabled', false);
@@ -46,6 +46,7 @@ function updateResult(data) {
         url: '/listing',
         data: { 'page': data.page[0], 'text': data.string[0], 'o': data.o[0] },
         success: function (res) {
+            sorted = 0;
             data = `<div>`;
             $.each(res, function (index, value) {
                 data += `<div class='card'>${value.name}</div>  ${value.price}, ${value.image}<br>`;
@@ -105,7 +106,6 @@ $(document).ready(function () {
             url = `/search?${url.substring(0, url.length - 1)}`;
             window.history.pushState("", "", url);
             updateResult(parseURLParams(window.location.href));
-            changeButtons();
         }
     });
 
@@ -124,7 +124,6 @@ $(document).ready(function () {
             url = `/search?${url.substring(0, url.length - 1)}`;
             window.history.pushState("", "", url);
             updateResult(parseURLParams(window.location.href));
-            changeButtons();
         }
     });
 

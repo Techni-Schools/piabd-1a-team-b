@@ -67,10 +67,10 @@ def login():
         return redirect(url_for('dashboard'))
       else:
         flash('Incorrect username or password')
-        return redirect('/login')
+        return redirect(url_for('login'))
     else:
         flash('Incorrect username or password')
-        return redirect('/login')
+        return redirect(url_for('login'))
   return render_template('login.html', form=form, form1=form1)
 
 @app.route('/register' , methods=['GET' , 'POST'])
@@ -86,8 +86,8 @@ def register():
       db.session.commit()
     except:
       flash('Username, Email or Phone number already used')
-      return redirect('/login')
-    return redirect('/login')
+      return redirect(url_for('login'))
+    return redirect(url_for('login'))
   return render_template('login.html', form=form, form1=form1)
 
 @app.route('/dashboard', methods=['POST', 'GET'])
@@ -103,7 +103,7 @@ def dashboard():
     db.session.add(q)
     db.session.commit()
     flash('produkt dodany pomyślnie!')
-    return redirect('/dashboard')
+    return redirect(url_for('dashboard'))
   else:
     u = db.session.query(products.uuid_id, products.name, products.image, category.category_name, products.quantity, products.price).join(category).join(users).filter(users.username == current_user.username, products.isDeleted == 0).all()
     if u == []: u = ['You dont have any products yet']
@@ -117,7 +117,7 @@ def delete():
     db.session.commit()
   except:
     return render_template('404.html')
-  return redirect('/dashboard')
+  return redirect(url_for('dashboard'))
 
 @app.route("/logout")
 @login_required
@@ -139,10 +139,9 @@ def profile(username):
   if q:
     try:
       cu = db.session.query(products.name, products.description, products.image, products.price, products.quantity, category.category_name).join(category).join(users).filter(users.username == username, products.isDeleted == 0).filter(products.uuid_id.like(request.args['product'])).first()
-      if request.args['product'] == '':
+      if request.args.get('product', '') == '':
         if username == current_user.username:
-          return redirect("/dashboard")
-        raise ValueError("a should be nonzero")
+          return redirect(url_for('dashboard'))
     except:
       cu = db.session.query(products.name, products.image, category.category_name).join(category).join(users).filter(users.username == username, products.isDeleted == 0).all()
     if cu:
@@ -151,7 +150,7 @@ def profile(username):
       cu = ['uzytkownik obecnie nic nie sprzedaje']
   else:
     cu = ['nie znaleziono uzytkownika']
-  return render_template('user.html', prd=cu, user=username, user_info=q)
+  return render_template('user.html', prd=cu, user=username, user_info=q, product=request.args.get('product', ''))
 
 
 @app.route("/email_validity_checks", methods=["POST"])
@@ -206,7 +205,7 @@ def listing():
   # prd = products.query.paginate(page=2, per_page=5, error_out=False)
   # return str([i.name for i in prd.items])
   l = []
-  count = products.query.count()
+  count = products.query.filter(products.name.like(string+'%'), products.isDeleted == 0).count()
   for product in prd.items:
     # print(product.uuid_id)
     # cena nazwa kategoria uzytkownik zdjecie
@@ -233,10 +232,10 @@ def update():
     c = c[0]
     db.session.query(products).filter(products.uuid_id == str(request.args['product'])).update({products.name: form.name.data, products.category: c, products.price: form.price.data, products.description: form.description.data, products.quantity: form.quantity.data})
     db.session.commit()
-    return redirect('/dashboard')
+    return redirect(url_for('dashboard'))
   return render_template('update.html', prd=cu, form=form, image=path)
 
-@app.route('/profile/update', methods=['POST', 'GET'])
+@app.route('/profile_update', methods=['POST', 'GET'])
 @login_required
 def profile_update():
   form = updateProfile(request.form)
@@ -254,8 +253,8 @@ def profile_update():
       db.session.commit()
     except:
       flash('email lub numer telefonu juz uzywany :(')
-      return redirect('/profile/update')
-    return redirect('/dashboard')
+      return redirect(url_for('profile_update'))
+    return redirect(url_for('dashboard'))
   return render_template('prfupdate.html', profile=cu, form=form)
 
 @app.route('/buy/<string:uid>', methods=['POST', 'GET'])
@@ -283,7 +282,7 @@ def buy(uid):
             db.session.add(order)
           db.session.commit()
           flash('zakup przebiegl pomyslnie :)')
-          return redirect('/dashboard')
+          return redirect(url_for('dashboard'))
         else:
           flash('nie ma tyle produktow')
           return redirect(url_for('buy', uid=uid))
