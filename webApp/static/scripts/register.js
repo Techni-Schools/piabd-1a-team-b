@@ -1,7 +1,6 @@
 $(document).ready(function () {
-  $(".submitBtn").prop("disabled", true)
+  $(".submitBtn").prop("disabled", true);
   var pageNumber = 1;
-  var validPoints = 0;
   //   first  page valid variables
 
   var data;
@@ -10,25 +9,29 @@ $(document).ready(function () {
   var lastnameValid = false;
   var emailValid = false;
   var phoneValid = false;
+  var dateValid = false;
   // second page valid variables
+
   var streetValid = false;
   var cityValid = false;
   var zipValid = false;
   var stateValid = false;
   var countryValid = false;
   var fajnie;
-  var animationButtonCount;
+  var jd;
+  var current_year;
+  var current_month;
+  var current_day;
+  // -------------------------------------------- texty do stron w formularzu rejestracji ------------------------------------------- //
 
-  const mini_text_1_page = "Witamy cie w 3 krokowej rejestracjim w tym kroku będziemy potrzebowac od ciebie: <b>Imienia</b>,<b>Nazwiska</b> <b>E-maila</b>, <b>daty urodzenia</b> i <b>Numeru Telefonu</b>"
-  const mini_text_2_page = "Super!, teraz mamy krok 2, tutaj bedziemy potrzebowac danych na temat twojego adresu zamieszkania!"
-  const mini_text_3_page = "No i mamy ostatni krok naszej rejestracji, teraz będziemy potrzebowac nazwy twojego konta i hasła"
-  var jd = 0;
+  const mini_text_1_page =
+    "Witamy cie w 3 krokowej rejestracjim w tym kroku będziemy potrzebowac od ciebie: <b>Imienia</b>,<b>Nazwiska</b> <b>E-maila</b>, <b>daty urodzenia</b> i <b>Numeru Telefonu</b>";
+  const mini_text_2_page =
+    "Super!, teraz mamy krok 2, tutaj bedziemy potrzebowac danych na temat twojego adresu zamieszkania!";
+  const mini_text_3_page =
+    "No i mamy ostatni krok naszej rejestracji, teraz będziemy potrzebowac nazwy twojego konta i hasła";
 
-
-  // -------------------------------------------- Data do errorów ------------------------------------------- // 
-
-
-
+  // --------------------------------------------------------------------------------------------------------------------------------- //
 
   function checkPage() {
     if (pageNumber == 1) {
@@ -36,27 +39,27 @@ $(document).ready(function () {
       $("#0-2").hide();
       $("#0-3").hide();
       $("#backButton").hide();
-      $(".register-step-text-mini").html(mini_text_1_page)
-      $(".ball1").css("background-color", "grey")
-      $(".ball2").css("background-color", "grey")
-      $(".ball3").css("background-color", "grey")
+      $(".register-step-text-mini").html(mini_text_1_page);
+      $(".ball1").css("background-color", "grey");
+      $(".ball2").css("background-color", "grey");
+      $(".ball3").css("background-color", "grey");
     } else if (pageNumber == 2) {
       $("#0-1").hide();
       $("#0-2").show();
       $("#0-3").hide();
       $("#backButton").show();
-      $(".register-step-text-mini").html(mini_text_2_page)
-      $(".ball1").css("background-color", "#64dd17")
-      $(".ball2").css("background-color", "grey")
-      $(".ball3").css("background-color", "grey")
+      $(".register-step-text-mini").html(mini_text_2_page);
+      $(".ball1").css("background-color", "#64dd17");
+      $(".ball2").css("background-color", "grey");
+      $(".ball3").css("background-color", "grey");
     } else if (pageNumber == 3) {
       $("#0-1").hide();
       $("#0-2").hide();
       $("#0-3").show();
-      $(".register-step-text-mini").html(mini_text_3_page)
-      $(".ball1").css("background-color", "#64dd17")
-      $(".ball2").css("background-color", "#64dd17")
-      $(".ball3").css("background-color", "grey")
+      $(".register-step-text-mini").html(mini_text_3_page);
+      $(".ball1").css("background-color", "#64dd17");
+      $(".ball2").css("background-color", "#64dd17");
+      $(".ball3").css("background-color", "grey");
     }
   }
 
@@ -67,7 +70,8 @@ $(document).ready(function () {
           firstValid == true &&
           lastnameValid == true &&
           emailValid == true &&
-          phoneValid == true
+          phoneValid == true &&
+          dateValid == true
         ) {
           pageNumber += 1;
         }
@@ -82,11 +86,10 @@ $(document).ready(function () {
         ) {
           pageNumber += 1;
         }
-      } else if (pageNumber == 3) {
-        setTimeout(function () {
-          $("#register-form").submit();
-        }, 1500)
-
+        // } else if (pageNumber == 3) {
+        //   setTimeout(function () {
+        //     $("#register-form").submit();
+        //   }, 1500)
       }
     }
     checkPage();
@@ -104,19 +107,18 @@ $(document).ready(function () {
   $("#backButton").click(pageBack);
 
   let lista = [];
-  const errorsList = [];
 
   function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
   }
 
   function showError(niewiem) {
-    dataCheck(niewiem)
+    dataCheck(niewiem);
     lista.push(data);
     lista = lista.filter(onlyUnique);
     let i;
     $(".errors").empty();
-    console.log("Lista po dodaniu", lista)
+    console.log("Lista po dodaniu", lista);
     for (i = 0; i < lista.length; i++) {
       $(".errors").append(lista[i]);
     }
@@ -140,25 +142,26 @@ $(document).ready(function () {
     } else if ($(inputName).attr("id") == "email") {
       if (errorType == "is") {
         if (!fajnie) {
-          clearError(this)
+          clearError(this);
         }
-        fajnie = true
+        fajnie = true;
         data =
           "<div class='siema yellow-div'>" +
           "<i class='fa-solid fa-triangle-exclamation'></i>" +
           "<h4>" +
           "Błąd przy " +
           $(inputName).attr("aria-label") +
-          " taki " + $(inputName).attr("aria-label") + " instnieje " +
+          " taki " +
+          $(inputName).attr("aria-label") +
+          " instnieje " +
           "</h4>" +
           "</div>" +
           "<br>";
-      }
-      else if (errorType == "none") {
+      } else if (errorType == "none") {
         if (fajnie) {
-          clearError(this)
+          clearError(this);
         }
-        fajnie = false
+        fajnie = false;
         data =
           "<div class='siema red-div'>" +
           "<i class='fa-solid fa-circle-xmark'></i>" +
@@ -170,29 +173,29 @@ $(document).ready(function () {
           "</div>" +
           "<br>";
       }
-    }
-    else if ($(inputName).attr("id") == "phone_number") {
+    } else if ($(inputName).attr("id") == "phone_number") {
       if (errorType == "is") {
         if (!fajnie) {
-          clearError(this)
+          clearError(this);
         }
-        fajnie = true
+        fajnie = true;
         data =
           "<div class='siema yellow-div'>" +
           "<i class='fa-solid fa-triangle-exclamation'></i>" +
           "<h4>" +
           "Błąd przy " +
           $(inputName).attr("aria-label") +
-          " taki " + $(inputName).attr("aria-label") + " instnieje " +
+          " taki " +
+          $(inputName).attr("aria-label") +
+          " instnieje " +
           "</h4>" +
           "</div>" +
           "<br>";
-      }
-      else if (errorType == "none") {
+      } else if (errorType == "none") {
         if (fajnie) {
-          clearError(this)
+          clearError(this);
         }
-        fajnie = false
+        fajnie = false;
         data =
           "<div class='siema red-div'>" +
           "<i class='fa-solid fa-circle-xmark'></i>" +
@@ -204,8 +207,7 @@ $(document).ready(function () {
           "</div>" +
           "<br>";
       }
-    }
-    else if (
+    } else if (
       $(inputName).attr("id") == "city" ||
       $(inputName).attr("id") == "state" ||
       $(inputName).attr("id") == "zip_code" ||
@@ -222,123 +224,157 @@ $(document).ready(function () {
         "</h4>" +
         "</div>" +
         "<br>";
+    } else if ($(inputName).attr("id") == "date_of_birth") {
+      data =
+        "<div class='siema red-div'>" +
+        "<i class='fa-solid fa-circle-xmark'></i>" +
+        "<h4>" +
+        "Błąd przy " +
+        $(inputName).attr("aria-label") +
+        " Oj byczku 18 latek trzeba miec" +
+        "</h4>" +
+        "</div>" +
+        "<br>";
     }
   }
 
-
   function clearError(niewiem) {
-    dataCheck(niewiem)
+    dataCheck(niewiem);
     var indesList = lista.indexOf(data);
     if (indesList > -1) {
       lista.splice(indesList, 1);
-      console.log("po usunieciu ")
+      console.log("po usunieciu ");
       $(".errors").empty();
       for (i = 0; i < lista.length; i++) {
-        console.log(lista[i])
+        console.log(lista[i]);
         $(".errors").append(lista[i]);
       }
     }
   }
+  function isOverEighteen(year, month, day) {
+    var now = parseInt(new Date().toISOString().slice(0, 10).replace(/-/g, ""));
+    var dob = year * 10000 + month * 100 + day * 1; // Coerces strings to integers
 
+    return now - dob > 180000;
+  }
   function checkLengthFirstPage(inputField) {
     var input = $(inputField);
-    if (input.val().length >= 1) {
-      if (input.attr("id") == "first_name") {
-        if (input.val().length >= 2) {
-          input.css("border-color", "green");
-          firstValid = true;
-          clearError(inputField);
-        } else {
-          showError(inputField);
-          firstValid = false;
-          input.css("border-color", "red");
-        }
-      } else if (input.attr("id") == "last_name") {
-        if (input.val().length >= 2) {
-          input.css("border-color", "green");
-          lastnameValid = true;
-          clearError(inputField);
-        } else {
-          showError(inputField);
-          lastnameValid = false;
-          lastnameValid = false;
-          input.css("border-color", "red");
-        }
-      } else if (input.attr("id") == "email") {
-        if (
-          input.val().length >= 6 &&
-          input.val().includes("@") &&
-          input.val().includes(".") &&
-          !input.val().includes(" ")
-        ) {
-          clearError(inputField);
-          // input.css("border-color", "green");
-          $.ajax({
-            method: "get",
-            url: "/profile/check",
-            data: { email: input.val() },
-            success: function (res) {
-              if (res == "true") { //jesli sie nie udało
-                errorType = "is"
-                console.log("nie")
-                showError(inputField);
-                emailValid = false;
-                input.css("border-color", "yellow");
-              }
-              else if (res == "false") {
-                // clearError(inputField);
-                errorType = "none"
-                input.css("border-color", "green")
-                clearError(inputField);
-                emailValid = true;
-              }
+
+    if (input.attr("id") == "first_name") {
+      if (input.val().length >= 2) {
+        input.css("border-color", "green");
+        firstValid = true;
+        clearError(inputField);
+      } else {
+        showError(inputField);
+        firstValid = false;
+        input.css("border-color", "red");
+      }
+    } else if (input.attr("id") == "last_name") {
+      if (input.val().length >= 2) {
+        input.css("border-color", "green");
+        lastnameValid = true;
+        clearError(inputField);
+      } else {
+        showError(inputField);
+        lastnameValid = false;
+        input.css("border-color", "red");
+      }
+    } else if (input.attr("id") == "email") {
+      if (
+        input.val().length >= 6 &&
+        input.val().includes("@") &&
+        input.val().includes(".") &&
+        !input.val().includes(" ")
+      ) {
+        clearError(inputField);
+        // input.css("border-color", "green");
+        $.ajax({
+          method: "post",
+          url: "/email_validity_checks",
+          data: { email: input.val() },
+          success: function (res) {
+            if (res == "Email is already taken") {
+              //jesli sie nie udało
+              errorType = "is";
+              console.log("nie");
+              showError(inputField);
+              emailValid = false;
+              input.css("border-color", "yellow");
+            } else {
+              // clearError(inputField);
+              errorType = "none";
+              input.css("border-color", "green");
+              clearError(inputField);
+              emailValid = true;
             }
-          })
-        } else {
-          if (errorType == "is") {
-            clearError(inputField);
-          }
-          errorType = "none"
-          showError(inputField);
-          emailValid = false;
-          input.css("border-color", "red");
-        }
-      } else if (input.attr("id") == "phone_number") {
-        if (input.val().length == 12) {
+          },
+        });
+      } else {
+        if (errorType == "is") {
           clearError(inputField);
-          // input.css("border-color", "green");
-          $.ajax({
-            method: "get",
-            url: "/profile/check",
-            data: { phone: input.val() },
-            success: function (res) {
-              if (res == "true") { //jesli sie nie udało
-                errorType = "is"
-                // data = "niewiem"
-                console.log("nie")
-                showError(inputField);
-                phoneValid = false;
-                input.css("border-color", "yellow");
-              }
-              else if (res == "false") {
-                // clearError(inputField);
-                errorType = "none"
-                console.log("niewiem")
-                input.css("border-color", "green")
-                clearError(inputField);
-                phoneValid = true;
-              }
-            }
-          })
-        } else {
-          if (errorType == "is") {
-            clearError(inputField);
-          }
-          errorType = "none"
-          showError(inputField);
-          phoneValid = false;
-          input.css("border-color", "red");
         }
+        errorType = "none";
+        showError(inputField);
+        emailValid = false;
+        input.css("border-color", "red");
+      }
+    } else if (input.attr("id") == "phone_number") {
+      if (input.val().length == 12) {
+        clearError(inputField);
+        // input.css("border-color", "green");
+        $.ajax({
+          method: "post",
+          url: "/phone_validity_checks",
+          data: { phone: input.val() },
+          success: function (res) {
+            if (res == "Phone number is invalid or already taken") {
+              //jesli sie nie udało
+              errorType = "is";
+              // data = "niewiem"
+              console.log("nie");
+              showError(inputField);
+              phoneValid = false;
+              input.css("border-color", "yellow");
+            } else {
+              // clearError(inputField);
+              errorType = "none";
+              console.log("niewiem");
+              input.css("border-color", "green");
+              clearError(inputField);
+              phoneValid = true;
+            }
+          },
+        });
+      } else {
+        if (errorType == "is") {
+          clearError(inputField);
+        }
+        errorType = "none";
+        showError(inputField);
+        phoneValid = false;
+        input.css("border-color", "red");
+      }
+    } else if (input.attr("id") == "date_of_birth") {
+      jd = $(input).val().split("-");
+      current_year = jd[0];
+      current_month = jd[1];
+      current_day = jd[2];
+      current_date = new Date(current_year, current_month, current_day);
+      current_date_minus_18 = new Date(
+        new Date().getFullYear() - 18,
+        new Date().getMonth(),
+        new Date().getDate()
+      );
+      console.log(current_date.getTime() - current_date_minus_18.getTime());
+      if (isOverEighteen(current_year, current_month, current_day)) {
+        input.css("border-color", "green");
+        dateValid = true;
+        clearError(inputField);
+      } else {
+        showError(inputField);
+        dateValid = false;
+        input.css("border-color", "red");
       }
     }
   }
@@ -414,27 +450,29 @@ $(document).ready(function () {
   // ------------------------------ LOGIN BUTTON DISABLED ------------------------------- //
 
   function buttonDisabled() {
-    if ($(".login-username-input").val().length >= 4 && $(".login-password-input").val().length >= 8) {
-      $(".submitBtn").prop("disabled", false)
-      console.log("siema")
-    }
-    else {
+    if (
+      $(".login-username-input").val().length >= 4 &&
+      $(".login-password-input").val().length >= 8
+    ) {
+      $(".submitBtn").prop("disabled", false);
+      console.log("siema");
+    } else {
       // if (animationButtonCount = 0) {
       //   $(".submitBtn").toggleClass("button-login-animation")
       // }
-      console.log("nie")
+      console.log("nie");
       // console.log($(".logi").val().length)
-      $(".submitBtn").prop("disabled", true)
+      $(".submitBtn").prop("disabled", true);
     }
   }
   setTimeout(function () {
-    $(".login-username-input").focus()
-  }, 300)
-  buttonDisabled()
-  $(".login-username-input").on('input', function () {
-    buttonDisabled()
-  })
-  $(".login-password-input").on('input', function () {
-    buttonDisabled()
-  })
+    $(".login-username-input").focus();
+  }, 300);
+  buttonDisabled();
+  $(".login-username-input").on("input", function () {
+    buttonDisabled();
+  });
+  $(".login-password-input").on("input", function () {
+    buttonDisabled();
+  });
 });

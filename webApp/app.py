@@ -156,13 +156,12 @@ def profile(username):
 @app.route("/email_validity_checks", methods=["POST"])
 def emailCheck():
   emailGet = request.form.get('email','WRONGEMAIL', type=str)
-  try:
-    emailObject = validate_email(emailGet)
-    emailObject.email
-  except:
-    return 'Email is invalid or already taken'
+    # return 'Email is invalid or already taken'
   q = users.query.filter(users.email == emailGet).first()
-  return '' if not q else 'Email is invalid or already taken'
+  if q:
+    return 'Email is already taken'
+  else:
+    return 'no'
 
 @app.route('/phone_validity_checks', methods=['POST'])
 def phoneCheck():
