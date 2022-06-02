@@ -53,6 +53,10 @@ function updateResult(data) {
                 total = value.count;
                 sorted++;
             });
+            if (data == `<div>`) {
+                data += `<div class='noresult'>Nie znaleziono wyników</div>`
+                console.log(data);
+            }
             data += "</div>";
             changeButtons();
             $('.result').html(data);
