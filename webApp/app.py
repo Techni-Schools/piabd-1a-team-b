@@ -173,7 +173,7 @@ def phoneCheck():
       return '' if not q else 'Phone number is invalid or already taken'
   except:
     pass
-  return 'Phone number is invalid or already taken'
+  return 'Nie ma takiego telefon wariacie'
 
 @app.route('/username_validity_checks', methods=['POST'])
 def usernameCheck():
