@@ -309,6 +309,9 @@ $(document).ready(function () {
       }
     }
     else if ($(inputName).attr('id') == "password") {
+      if (found) {
+        clearError(this)
+      }
       if (!found) {
         data =
           "<div class='siema red-div'>" +
@@ -613,6 +616,7 @@ $(document).ready(function () {
           showError(inputField);
           passwordValid = false;
         }
+        found = false
       }
       else {
         input.css("border-color", "red");
