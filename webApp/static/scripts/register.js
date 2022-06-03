@@ -1,15 +1,33 @@
 $(document).ready(function () {
   $(".submitBtn").prop("disabled", true);
-  var pageNumber = 1;
-  //   first  page valid variables
 
-  var data;
-  var errorType;
+  // jakies zmienne potrzebne do dzialania rejestracji // 
+
+
+  var pageNumber = 1; // numer strony na ktorej jest uzytkownik
+  var data; // text w errorach
+  var errorType; // jaki jes typ errora - uzywany w AJAX
+  var current_year; // lata wpisane w inpucie typu date
+  var current_month; // miesiace wpisane w inpucie typu date
+  var current_day; // dni wpisane w inpucie typu
+  var found = false; // znalezioy znak specialny w liscie znaków 
+  const listaZnaków = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ")", ":", "'", "{", "}", "|", "/", "<", ">", ",", ".", "?", "`", "~"] // znaki specialne uzywane przy sprawdzaniu hasla
+  var ableToSkip = false; // czy mozna isc dalej w rejestracji - uzywane w zlikwidowaniu błedu w pomijanoiu o 2 strony w wieloetapowej rejestracji
+
+
+  // ------------------------------------------------- // 
+
+
+
+  // first page valid variables
+
   var firstValid = false;
   var lastnameValid = false;
   var emailValid = false;
   var phoneValid = false;
   var dateValid = false;
+
+
   // second page valid variables
 
   var streetValid = false;
@@ -22,6 +40,16 @@ $(document).ready(function () {
   var current_year;
   var current_month;
   var current_day;
+  var ableToSkip = false;
+
+  // trzecia strona // 
+
+  var usernameValid = false;
+  var passwordValid = false;
+  var confirmPasswordValid = false;
+  var tosChecked = false
+
+
   // -------------------------------------------- texty do stron w formularzu rejestracji ------------------------------------------- //
 
   const mini_text_1_page =
@@ -71,9 +99,11 @@ $(document).ready(function () {
           lastnameValid == true &&
           emailValid == true &&
           phoneValid == true &&
-          dateValid == true
+          dateValid == true &&
+          ableToSkip == true
         ) {
           pageNumber += 1;
+          ableToSkip = false
         }
       }
       if (pageNumber == 2) {
@@ -82,14 +112,17 @@ $(document).ready(function () {
           cityValid == true &&
           zipValid == true &&
           stateValid == true &&
-          countryValid == true
+          countryValid == true &&
+          ableToSkip == true
         ) {
           pageNumber += 1;
         }
-        // } else if (pageNumber == 3) {
-        //   setTimeout(function () {
-        //     $("#register-form").submit();
-        //   }, 1500)
+      } else if (pageNumber == 3) {
+        if (usernameValid == true && passwordValid == true && confirmPasswordValid == true && tosChecked == true) {
+          setTimeout(function () {
+            $("#register-form").submit();
+          }, 1500)
+        }
       }
     }
     checkPage();
@@ -103,7 +136,11 @@ $(document).ready(function () {
     }
     checkPage();
   }
-  $("#nextButton").click(pageNext);
+  $("#nextButton").click(function () {
+    ableToSkip = true
+    pageNext()
+    // ableToSkip = false
+  });
   $("#backButton").click(pageBack);
 
   let lista = [];
@@ -236,6 +273,76 @@ $(document).ready(function () {
         "</div>" +
         "<br>";
     }
+    else if ($(inputName).attr('id') == "username") {
+      if (errorType == "is") {
+        if (!fajnie) {
+          clearError(this);
+        }
+        fajnie = true;
+        data =
+          "<div class='siema yellow-div'>" +
+          "<i class='fa-solid fa-triangle-exclamation'></i>" +
+          "<h4>" +
+          "Błąd przy " +
+          $(inputName).attr("aria-label") +
+          " taki,  " +
+          $(inputName).attr("aria-label") +
+          " instnieje " +
+          "</h4>" +
+          "</div>" +
+          "<br>";
+      } else if (errorType == "none") {
+        if (fajnie) {
+          clearError(this);
+        }
+        fajnie = false;
+        data =
+          "<div class='siema red-div'>" +
+          "<i class='fa-solid fa-circle-xmark'></i>" +
+          "<h4>" +
+          "Błąd przy " +
+          $(inputName).attr("aria-label") +
+          " Input musi zawierac 5 znaki ale nie wykraczac poza 50, nie moze zawierac spacji!" +
+          "</h4>" +
+          "</div>" +
+          "<br>";
+      }
+    }
+    else if ($(inputName).attr('id') == "password") {
+      if (!found) {
+        data =
+          "<div class='siema red-div'>" +
+          "<i class='fa-solid fa-circle-xmark'></i>" +
+          "<h4>" +
+          "Błąd przy " +
+          $(inputName).attr("aria-label") +
+          " Hasło musi zawierac 1 znak specialny!" +
+          "</h4>" +
+          "</div>"
+      }
+      else {
+        data =
+          "<div class='siema red-div'>" +
+          "<i class='fa-solid fa-circle-xmark'></i>" +
+          "<h4>" +
+          "Błąd przy " +
+          $(inputName).attr("aria-label") +
+          " moze kiedys wariacie" +
+          "</h4>" +
+          "</div>"
+      }
+    }
+    else if ($(inputName).attr('id') == "confirm") {
+      data =
+        "<div class='siema red-div'>" +
+        "<i class='fa-solid fa-circle-xmark'></i>" +
+        "<h4>" +
+        "Błąd przy " +
+        $(inputName).attr("aria-label") +
+        "Hasla sie nie zgadzają" +
+        "</h4>" +
+        "</div>"
+    }
   }
 
   function clearError(niewiem) {
@@ -339,7 +446,7 @@ $(document).ready(function () {
             } else {
               // clearError(inputField);
               errorType = "none";
-              console.log("niewiem");
+              // console.log("niewiem");
               input.css("border-color", "green");
               clearError(inputField);
               phoneValid = true;
@@ -378,6 +485,19 @@ $(document).ready(function () {
       }
     }
   }
+  function checkTOS() {
+    if ($("#accept_tos")[0].checked) {
+      console.log("zaznaczone")
+      tosChecked = true
+    }
+    else {
+      console.log("niezaznaczone")
+      tosChecked = false
+    }
+  }
+  $("#accept_tos").click(function () {
+    checkTOS()
+  })
 
   function checkLengthSecondPage(inputField) {
     var input = $(inputField);
@@ -438,12 +558,93 @@ $(document).ready(function () {
     }
   }
 
+
+
+  function checkLengthThirdPage(inputField) {
+    var input = $(inputField);
+    var inputId = $(inputField).attr("id");
+    var inputLength = $(inputField).val().length
+    if (inputId == "username") {
+      if (inputLength >= 4) {
+        clearError(inputField);
+        // input.css("border-color", "green");
+        $.ajax({
+          method: "post",
+          url: "/username_validity_checks",
+          data: { username: input.val() },
+          success: function (res) {
+            if (res == "Username is already taken") {
+              //jesli sie nie udało
+              errorType = "is";
+              console.log("nie");
+              showError(inputField);
+              usernameValid = false;
+              input.css("border-color", "yellow");
+            } else {
+              errorType = "none";
+              input.css("border-color", "green");
+              clearError(inputField);
+              usernameValid = true;
+            }
+          },
+        });
+      }
+      else {
+        showError(inputField);
+        usernameValid = false;
+        input.css("border-color", "red");
+      }
+    }
+    else if (inputId == "password") {
+      if (inputLength >= 8) {
+        for (var i = 0; i < listaZnaków.length; i++) {
+          console.log(listaZnaków[i])
+          if ($(input).val().includes(listaZnaków[i])) {
+            found = true
+            clearError(inputField)
+            input.css("border-color", "green")
+            passwordValid = true
+            console.log("jest znalezione")
+            break
+          }
+        }
+        if (!found) {
+          input.css("border-color", "red");
+          showError(inputField);
+          passwordValid = false;
+        }
+      }
+      else {
+        input.css("border-color", "red");
+        clearError($("#confirm"))
+        showError(inputField);
+        usernameValid = false;
+      }
+    }
+    else if (inputId == "confirm") {
+      console.log("wartosc z hasła", $("#password").val())
+      console.log("wartosc z powtórzonego hasła", $(input).val())
+      if ($("#password").val() == $(input).val()) {
+        input.css("border-color", "green");
+        confirmPasswordValid = true;
+        clearError(inputField);
+      }
+      else {
+        showError(inputField);
+        confirmPasswordValid = false;
+        input.css("border-color", "red");
+      }
+    }
+  }
   $("input").focusout(function () {
     if (pageNumber == 1) {
       checkLengthFirstPage(this);
     }
     if (pageNumber == 2) {
       checkLengthSecondPage(this);
+    }
+    if (pageNumber == 3) {
+      checkLengthThirdPage(this)
     }
   });
 
@@ -457,11 +658,7 @@ $(document).ready(function () {
       $(".submitBtn").prop("disabled", false);
       console.log("siema");
     } else {
-      // if (animationButtonCount = 0) {
-      //   $(".submitBtn").toggleClass("button-login-animation")
-      // }
       console.log("nie");
-      // console.log($(".logi").val().length)
       $(".submitBtn").prop("disabled", true);
     }
   }
