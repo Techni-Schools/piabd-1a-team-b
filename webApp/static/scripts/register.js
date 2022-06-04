@@ -1,8 +1,7 @@
 $(document).ready(function () {
   $(".submitBtn").prop("disabled", true);
 
-  // jakies zmienne potrzebne do dzialania rejestracji // 
-
+  // jakies zmienne potrzebne do dzialania rejestracji //
 
   var pageNumber = 1; // numer strony na ktorej jest uzytkownik
   var data; // text w errorach
@@ -10,14 +9,36 @@ $(document).ready(function () {
   var current_year; // lata wpisane w inpucie typu date
   var current_month; // miesiace wpisane w inpucie typu date
   var current_day; // dni wpisane w inpucie typu
-  var found = false; // znalezioy znak specialny w liscie znaków 
-  const listaZnaków = ['!', '@', '#', '$', '%', '^', '&', '*', '(', ")", ":", "'", "{", "}", "|", "/", "<", ">", ",", ".", "?", "`", "~"] // znaki specialne uzywane przy sprawdzaniu hasla
+  var found = false; // znalezioy znak specialny w liscie znaków
+  var niematakiegonumeru = false;
+  const listaZnaków = [
+    "!",
+    "@",
+    "#",
+    "$",
+    "%",
+    "^",
+    "&",
+    "*",
+    "(",
+    ")",
+    ":",
+    "'",
+    "{",
+    "}",
+    "|",
+    "/",
+    "<",
+    ">",
+    ",",
+    ".",
+    "?",
+    "`",
+    "~",
+  ]; // znaki specialne uzywane przy sprawdzaniu hasla
   var ableToSkip = false; // czy mozna isc dalej w rejestracji - uzywane w zlikwidowaniu błedu w pomijanoiu o 2 strony w wieloetapowej rejestracji
 
-
-  // ------------------------------------------------- // 
-
-
+  // ------------------------------------------------- //
 
   // first page valid variables
 
@@ -26,7 +47,6 @@ $(document).ready(function () {
   var emailValid = false;
   var phoneValid = false;
   var dateValid = false;
-
 
   // second page valid variables
 
@@ -42,13 +62,12 @@ $(document).ready(function () {
   var current_day;
   var ableToSkip = false;
 
-  // trzecia strona // 
+  // trzecia strona //
 
   var usernameValid = false;
   var passwordValid = false;
   var confirmPasswordValid = false;
-  var tosChecked = false
-
+  var tosChecked = false;
 
   // -------------------------------------------- texty do stron w formularzu rejestracji ------------------------------------------- //
 
@@ -103,7 +122,7 @@ $(document).ready(function () {
           ableToSkip == true
         ) {
           pageNumber += 1;
-          ableToSkip = false
+          ableToSkip = false;
         }
       }
       if (pageNumber == 2) {
@@ -118,10 +137,15 @@ $(document).ready(function () {
           pageNumber += 1;
         }
       } else if (pageNumber == 3) {
-        if (usernameValid == true && passwordValid == true && confirmPasswordValid == true && tosChecked == true) {
+        if (
+          usernameValid == true &&
+          passwordValid == true &&
+          confirmPasswordValid == true &&
+          tosChecked == true
+        ) {
           setTimeout(function () {
             $("#register-form").submit();
-          }, 1500)
+          }, 1500);
         }
       }
     }
@@ -137,8 +161,8 @@ $(document).ready(function () {
     checkPage();
   }
   $("#nextButton").click(function () {
-    ableToSkip = true
-    pageNext()
+    ableToSkip = true;
+    pageNext();
     // ableToSkip = false
   });
   $("#backButton").click(pageBack);
@@ -215,34 +239,66 @@ $(document).ready(function () {
         if (!fajnie) {
           clearError(this);
         }
-        fajnie = true;
-        data =
-          "<div class='siema yellow-div'>" +
-          "<i class='fa-solid fa-triangle-exclamation'></i>" +
-          "<h4>" +
-          "Błąd przy " +
-          $(inputName).attr("aria-label") +
-          " taki " +
-          $(inputName).attr("aria-label") +
-          " instnieje " +
-          "</h4>" +
-          "</div>" +
-          "<br>";
+        if (niematakiegonumeru) {
+          fajnie = true;
+          data =
+            "<div class='siema yellow-div'>" +
+            "<i class='fa-solid fa-triangle-exclamation'></i>" +
+            "<h4>" +
+            "Błąd przy " +
+            $(inputName).attr("aria-label") +
+            " taki " +
+            $(inputName).attr("aria-label") +
+            " nie instanieje" +
+            "</h4>" +
+            "</div>" +
+            "<br>";
+        } else {
+          fajnie = true;
+          data =
+            "<div class='siema yellow-div'>" +
+            "<i class='fa-solid fa-triangle-exclamation'></i>" +
+            "<h4>" +
+            "Błąd przy " +
+            $(inputName).attr("aria-label") +
+            " taki " +
+            $(inputName).attr("aria-label") +
+            " instnieje " +
+            "</h4>" +
+            "</div>" +
+            "<br>";
+        }
       } else if (errorType == "none") {
         if (fajnie) {
+          niematakiegonumeru = false;
           clearError(this);
         }
-        fajnie = false;
-        data =
-          "<div class='siema red-div'>" +
-          "<i class='fa-solid fa-circle-xmark'></i>" +
-          "<h4>" +
-          "Błąd przy " +
-          $(inputName).attr("aria-label") +
-          " Input musi zawierac 5 znaki ale nie wykraczac poza 50, nie moze zawierac spacji!" +
-          "</h4>" +
-          "</div>" +
-          "<br>";
+        if (niematakiegonumeru) {
+          fajnie = false;
+          data =
+            "<div class='siema yellow-div'>" +
+            "<i class='fa-solid fa-triangle-exclamation'></i>" +
+            "<h4>" +
+            "Błąd przy " +
+            $(inputName).attr("aria-label") +
+            " taki " +
+            $(inputName).attr("aria-label") +
+            " nie instanieje" +
+            "</h4>" +
+            "</div>" +
+            "<br>";
+        } else {
+          data =
+            "<div class='siema red-div'>" +
+            "<i class='fa-solid fa-circle-xmark'></i>" +
+            "<h4>" +
+            "Błąd przy " +
+            $(inputName).attr("aria-label") +
+            " Input musi zawierac 5 znaki ale nie wykraczac poza 50, nie moze zawierac spacji!" +
+            "</h4>" +
+            "</div>" +
+            "<br>";
+        }
       }
     } else if (
       $(inputName).attr("id") == "city" ||
@@ -272,8 +328,7 @@ $(document).ready(function () {
         "</h4>" +
         "</div>" +
         "<br>";
-    }
-    else if ($(inputName).attr('id') == "username") {
+    } else if ($(inputName).attr("id") == "username") {
       if (errorType == "is") {
         if (!fajnie) {
           clearError(this);
@@ -307,8 +362,10 @@ $(document).ready(function () {
           "</div>" +
           "<br>";
       }
-    }
-    else if ($(inputName).attr('id') == "password") {
+    } else if ($(inputName).attr("id") == "password") {
+      if (found) {
+        clearError(this);
+      }
       if (!found) {
         data =
           "<div class='siema red-div'>" +
@@ -318,9 +375,8 @@ $(document).ready(function () {
           $(inputName).attr("aria-label") +
           " Hasło musi zawierac 1 znak specialny!" +
           "</h4>" +
-          "</div>"
-      }
-      else {
+          "</div>";
+      } else {
         data =
           "<div class='siema red-div'>" +
           "<i class='fa-solid fa-circle-xmark'></i>" +
@@ -329,10 +385,9 @@ $(document).ready(function () {
           $(inputName).attr("aria-label") +
           " moze kiedys wariacie" +
           "</h4>" +
-          "</div>"
+          "</div>";
       }
-    }
-    else if ($(inputName).attr('id') == "confirm") {
+    } else if ($(inputName).attr("id") == "confirm") {
       data =
         "<div class='siema red-div'>" +
         "<i class='fa-solid fa-circle-xmark'></i>" +
@@ -341,7 +396,7 @@ $(document).ready(function () {
         $(inputName).attr("aria-label") +
         "Hasla sie nie zgadzają" +
         "</h4>" +
-        "</div>"
+        "</div>";
     }
   }
 
@@ -443,13 +498,19 @@ $(document).ready(function () {
               showError(inputField);
               phoneValid = false;
               input.css("border-color", "yellow");
-            } else {
+            } else if (res == "Nie ma takiego telefon wariacie") {
               // clearError(inputField);
+              errorType = "is";
+              niematakiegonumeru = true;
+              console.log("nie ma takiego numeru telefonu");
+              input.css("border-color", "red");
+              showError(inputField);
+              phoneValid = false;
+            } else {
               errorType = "none";
-              // console.log("niewiem");
-              input.css("border-color", "green");
-              clearError(inputField);
               phoneValid = true;
+              clearError(inputField);
+              input.css("border-color", "green");
             }
           },
         });
@@ -457,6 +518,7 @@ $(document).ready(function () {
         if (errorType == "is") {
           clearError(inputField);
         }
+        niematakiegonumeru = false;
         errorType = "none";
         showError(inputField);
         phoneValid = false;
@@ -487,17 +549,16 @@ $(document).ready(function () {
   }
   function checkTOS() {
     if ($("#accept_tos")[0].checked) {
-      console.log("zaznaczone")
-      tosChecked = true
-    }
-    else {
-      console.log("niezaznaczone")
-      tosChecked = false
+      console.log("zaznaczone");
+      tosChecked = true;
+    } else {
+      console.log("niezaznaczone");
+      tosChecked = false;
     }
   }
   $("#accept_tos").click(function () {
-    checkTOS()
-  })
+    checkTOS();
+  });
 
   function checkLengthSecondPage(inputField) {
     var input = $(inputField);
@@ -558,12 +619,10 @@ $(document).ready(function () {
     }
   }
 
-
-
   function checkLengthThirdPage(inputField) {
     var input = $(inputField);
     var inputId = $(inputField).attr("id");
-    var inputLength = $(inputField).val().length
+    var inputLength = $(inputField).val().length;
     if (inputId == "username") {
       if (inputLength >= 4) {
         clearError(inputField);
@@ -588,24 +647,22 @@ $(document).ready(function () {
             }
           },
         });
-      }
-      else {
+      } else {
         showError(inputField);
         usernameValid = false;
         input.css("border-color", "red");
       }
-    }
-    else if (inputId == "password") {
+    } else if (inputId == "password") {
       if (inputLength >= 8) {
         for (var i = 0; i < listaZnaków.length; i++) {
-          console.log(listaZnaków[i])
+          console.log(listaZnaków[i]);
           if ($(input).val().includes(listaZnaków[i])) {
-            found = true
-            clearError(inputField)
-            input.css("border-color", "green")
-            passwordValid = true
-            console.log("jest znalezione")
-            break
+            found = true;
+            clearError(inputField);
+            input.css("border-color", "green");
+            passwordValid = true;
+            console.log("jest znalezione");
+            break;
           }
         }
         if (!found) {
@@ -613,23 +670,21 @@ $(document).ready(function () {
           showError(inputField);
           passwordValid = false;
         }
-      }
-      else {
+        found = false;
+      } else {
         input.css("border-color", "red");
-        clearError($("#confirm"))
+        clearError($("#confirm"));
         showError(inputField);
         usernameValid = false;
       }
-    }
-    else if (inputId == "confirm") {
-      console.log("wartosc z hasła", $("#password").val())
-      console.log("wartosc z powtórzonego hasła", $(input).val())
+    } else if (inputId == "confirm") {
+      console.log("wartosc z hasła", $("#password").val());
+      console.log("wartosc z powtórzonego hasła", $(input).val());
       if ($("#password").val() == $(input).val()) {
         input.css("border-color", "green");
         confirmPasswordValid = true;
         clearError(inputField);
-      }
-      else {
+      } else {
         showError(inputField);
         confirmPasswordValid = false;
         input.css("border-color", "red");
@@ -644,7 +699,7 @@ $(document).ready(function () {
       checkLengthSecondPage(this);
     }
     if (pageNumber == 3) {
-      checkLengthThirdPage(this)
+      checkLengthThirdPage(this);
     }
   });
 
