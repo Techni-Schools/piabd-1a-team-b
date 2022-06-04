@@ -1,6 +1,6 @@
 from datetime import timedelta
 from lib import *
-from settings import app, login_manager, db
+from settings import app, login_manager, db, email_validation
 from model import products, users, orders, category, chat
 from forms import loginForm, registerForm, newProduct, addBalance, updateProduct, updateProfile, buyProduct
 
@@ -21,9 +21,9 @@ def favicon():
     return send_from_directory(os.path.join(app.root_path, 'static'),
                                'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
-@app.route("/livesearch",methods=["POST","GET"])
+@app.route('/livesearch',methods=['POST','GET'])
 def livesearch():
-  searchbox = request.form.get("text")
+  searchbox = request.form.get('text')
   allproducts = db.session.query(products.name, users.username, products.uuid_id).filter(products.name.like(searchbox + '%'), products.isDeleted == 0).join(users).order_by(products.id.desc()).limit(5).all()
   l = []
   for product in allproducts:
@@ -119,7 +119,7 @@ def delete():
     return render_template('404.html')
   return redirect(url_for('dashboard'))
 
-@app.route("/logout")
+@app.route('/logout')
 @login_required
 def logout():
     logout_user()
@@ -134,7 +134,7 @@ def profilenouser():
 def profile(username):
   # print(current_user.username)
   # if username == current_user.username:
-  #   return redirect("/dashboard")
+  #   return redirect('/dashboard')
   q = db.session.query(users.username, users.first_name, users.last_name, users.phone_number,users.email, users.country, users.date_of_birth).filter(users.username == username).first()
   if q:
     try:
@@ -153,15 +153,13 @@ def profile(username):
   return render_template('user.html', prd=cu, user=username, user_info=q, product=request.args.get('product', ''))
 
 
-@app.route("/email_validity_checks", methods=["POST"])
+@app.route('/email_validity_checks', methods=['POST'])
 def emailCheck():
   emailGet = request.form.get('email','WRONGEMAIL', type=str)
-    # return 'Email is invalid or already taken'
+  if email_validation(emailGet):
+    return 'Email is invalid or already taken'
   q = users.query.filter(users.email == emailGet).first()
-  if q:
-    return 'Email is already taken'
-  else:
-    return 'no'
+  return '' if not q else 'Email is invalid or already taken'
 
 @app.route('/phone_validity_checks', methods=['POST'])
 def phoneCheck():
@@ -187,7 +185,7 @@ def search():
     return render_template('404.html')
   return render_template('search.html')
 
-@app.route('/listing',methods=["POST","GET"])
+@app.route('/listing',methods=['POST','GET'])
 def listing():
   maxproductspersite = 10
   string = request.form.get('text', '', type=str)
@@ -223,7 +221,7 @@ def update():
   if cu is None:
     return render_template('404.html')
   path = r'%s' % (os.path.join('images', cu.image),)
-  path = path.replace("\\", "/")
+  path = path.replace('\\', '/')
   if request.method == 'POST' and form.validate():
     if form.image.data is not None:
       form.image.data.save(os.path.join(app.config['UPLOAD_FOLDER'], cu.image))
@@ -241,7 +239,7 @@ def profile_update():
   cu = db.session.query(users).filter(users.id == current_user.get_id()).first()
   cu.date_of_birth = cu.date_of_birth.strftime('%Y-%m-%d')
   # path = r'%s' % (os.path.join('images', cu.image),)
-  # path = path.replace("\\", "/")
+  # path = path.replace('\\', '/')
   if request.method == 'POST' and form.validate():
     # if form.image.data is not None:
       # form.image.data.save(os.path.join(app.config['UPLOAD_FOLDER'], cu.image))
