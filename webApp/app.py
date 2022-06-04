@@ -156,7 +156,7 @@ def profile(username):
 @app.route('/email_validity_checks', methods=['POST'])
 def emailCheck():
   emailGet = request.form.get('email','WRONGEMAIL', type=str)
-  if email_validation(emailGet):
+  if not email_validation(emailGet):
     return 'Email is invalid or already taken'
   q = users.query.filter(users.email == emailGet).first()
   return '' if not q else 'Email is invalid or already taken'

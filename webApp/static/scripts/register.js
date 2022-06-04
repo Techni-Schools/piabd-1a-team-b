@@ -334,18 +334,8 @@ $(document).ready(function () {
           clearError(this);
         }
         fajnie = true;
-        data =
-          "<div class='siema yellow-div'>" +
-          "<i class='fa-solid fa-triangle-exclamation'></i>" +
-          "<h4>" +
-          "Błąd przy " +
-          $(inputName).attr("aria-label") +
-          " taki,  " +
-          $(inputName).attr("aria-label") +
-          " instnieje " +
-          "</h4>" +
-          "</div>" +
-          "<br>";
+        data = `<div class='siema yellow-div'><i class='fa-solid fa-triangle-exclamation'></i>
+                <h4>Błąd przy ${$(inputName).attr("aria-label")} taki użytkownik istnieje </h4></div><br>`
       } else if (errorType == "none") {
         if (fajnie) {
           clearError(this);
