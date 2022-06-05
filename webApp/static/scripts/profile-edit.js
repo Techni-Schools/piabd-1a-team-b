@@ -1,6 +1,9 @@
 $(".tak").prop("disabled", true);
 $(".tak").css("pointer-events", "none");
-var cosie = 0;
+var animationCount = 0;
+var phone_number_copy;
+var respond;
+var isPossible = true;
 $(document).ready(function () {
   $(".tak").click(function () {
     setTimeout(function () {
@@ -14,7 +17,7 @@ $(document).ready(function () {
 
     $(this).prop("disabled", true);
     $(".nie").prop("disabled", false);
-    cosie += 1;
+    animationCount += 1;
   });
   $(".nie").click(function () {
     setTimeout(function () {
@@ -23,7 +26,7 @@ $(document).ready(function () {
       $(".tak").css("pointer-events", "auto");
       $(".nie").css("pointer-events", "none");
     }, 300);
-    if (cosie >= 1) {
+    if (animationCount >= 1) {
       $(".addres-book").toggleClass("siema2");
     }
     $(".about-information").toggleClass("siema");
@@ -36,6 +39,15 @@ $(document).ready(function () {
     var Array = $("dd").children(".niewiem");
     for (var x = 0; x < Array.length; x++) {
       var idOfInput = $("dd").children(".niewiem")[x].id;
+      if (idOfInput == "phone_number") {
+        phone_number_copy = $("dd").children(".niewiem")[x].value;
+        console.log(
+          "jest numer telefonu posiadany",
+          idOfInput,
+          "jego wartosc to: ",
+          phone_number_copy
+        );
+      }
       var newId = idOfInput + "-field";
       document.getElementById(newId).innerHTML =
         $("dd").children(".niewiem")[x].value;
@@ -47,6 +59,7 @@ $(document).ready(function () {
     var clickedInput = $(inputDate).attr("id");
     var id = clickedInput + "-field";
     document.getElementById(id).innerHTML = $(inputDate).val();
+    console.log(phone_number_copy);
   }
 
   $(".niewiem").keyup(function () {
@@ -70,24 +83,39 @@ $(document).ready(function () {
       checkLengthFirstPage(fajnie);
       checkLengthSecondPage(fajnie);
     }
-    if (
-      firstValid == true &&
-      lastnameValid == true &&
-      emailValid == true &&
-      phoneValid == true &&
-      streetValid == true &&
-      cityValid == true &&
-      zipValid == true &&
-      stateValid == true &&
-      countryValid == true
-    ) {
-      $("#form").submit();
-    }
-    else {
-      $(".error").empty()
-      var data = "<h3 style='color: red;'> Gdzieś masz Błąd, sprawdz dokladnie! </h3>"
-      $(".error").append(data)
-    }
+    setTimeout(function () {
+      if (
+        firstValid == true &&
+        lastnameValid == true &&
+        emailValid == true &&
+        streetValid == true &&
+        cityValid == true &&
+        zipValid == true &&
+        stateValid == true &&
+        countryValid == true &&
+        phoneValid == true
+      ) {
+        $("#form").submit();
+      } else {
+        console.log(phoneValid);
+        $(".error").empty();
+        console.log(isPossible);
+        if (!isPossible) {
+          if (respond == "Phone number is invalid or already taken") {
+            var data =
+              "<h3 style='color: red;'>Taki numer telefonu juz instnieje </h3>";
+          }
+          if (respond == "Nie ma takiego telefon wariacie") {
+            var data =
+              "<h3 style='color: red;'>Nie ma takiego numeru telefonu </h3>";
+          }
+        } else {
+          var data =
+            "<h3 style='color: red;'> Gdzieś masz Błąd, sprawdz dokladnie! </h3>";
+        }
+        $(".error").append(data);
+      }
+    }, 300);
   });
   $(document).on("keypress", function (key) {
     if (key.which == 13) {
@@ -101,19 +129,20 @@ $(document).ready(function () {
         firstValid == true &&
         lastnameValid == true &&
         emailValid == true &&
-        phoneValid == true &&
         streetValid == true &&
         cityValid == true &&
         zipValid == true &&
         stateValid == true &&
-        countryValid == true
+        countryValid == true &&
+        phoneValid == true
       ) {
         $("#form").submit();
-      }
-      else {
-        $(".error").empty()
-        var data = "<h3 style='color: red;'> Gdzieś masz Błąd, sprawdz dokladnie! </h3>"
-        $(".error").append(data)
+      } else {
+        $(".error").empty();
+        var data =
+          "<h3 style='color: red;'> Gdzieś masz Błąd, sprawdz dokladnie! </h3>";
+        console.log(phoneValid);
+        $(".error").append(data);
       }
     }
   });
@@ -147,19 +176,47 @@ $(document).ready(function () {
         input.css("border-color", "red");
       }
     } else if (input.attr("id") == "phone_number") {
-      if (
-        input.val().length >= 9 &&
-        input.val().length <= 12 &&
-        !isNaN(parseInt($(input).val()))
-      ) {
+      if ($("#phone_number").val() === phone_number_copy) {
+        console.log(phone_number_copy);
+        console.log($("#phone_number").val());
+        console.log("niesprawdzono");
         phoneValid = true;
+        isPossible = true;
+        input.css("border-color", "black");
       } else {
-        phoneValid = false;
-        input.css("border-color", "red");
+        console.log("sprawdzam... ");
+        if (input.val().length <= 12 && input.val().length >= 9) {
+          $.ajax({
+            method: "post",
+            url: "/phone_validity_checks",
+            data: { phone: input.val() },
+            success: function (res) {
+              console.log(input.val());
+              if (res == "Phone number is invalid or already taken") {
+                respond = "Phone number is invalid or already taken";
+                phoneValid = false;
+                input.css("border-color", "red");
+              } else if (res == "Nie ma takiego telefon wariacie") {
+                respond = "Nie ma takiego telefon wariacie";
+                isPossible = false;
+                phoneValid = false;
+                input.css("border-color", "red");
+              } else {
+                respond = "";
+                console.log("zgadza sie");
+                isPossible = true;
+                phoneValid = true;
+              }
+            },
+          });
+        } else {
+          isPossible = false;
+          phoneValid = false;
+          input.css("border-color", "green");
+        }
       }
     }
   }
-
   function checkLengthSecondPage(inputField) {
     var input = $(inputField);
     var inputId = $(inputField).attr("id");
