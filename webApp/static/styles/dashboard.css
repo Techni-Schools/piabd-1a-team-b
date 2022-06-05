@@ -18,8 +18,9 @@ body {
 }
 
 .yes {
-  -webkit-animation: tracking-in-expand 0.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
-  animation: tracking-in-expand 0.5s cubic-bezier(0.215, 0.610, 0.355, 1.000) both;
+  -webkit-animation: tracking-in-expand 0.5s cubic-bezier(0.215, 0.61, 0.355, 1)
+    both;
+  animation: tracking-in-expand 0.5s cubic-bezier(0.215, 0.61, 0.355, 1) both;
 }
 
 .account-data {
@@ -28,10 +29,13 @@ body {
   align-items: center;
   padding: 30px;
   flex-direction: column;
-  background: url("https://pkconstruction.eu/wp-content/uploads/2019/12/wood-2045379_1920.jpg") no-repeat;
+  background: url("https://pkconstruction.eu/wp-content/uploads/2019/12/wood-2045379_1920.jpg")
+    no-repeat;
   background-size: cover;
 }
-
+.copy {
+  cursor: pointer;
+}
 #delete {
   color: white;
   background-color: red;
@@ -309,7 +313,6 @@ body {
 }
 
 @media only screen and (max-width: 950px) {
-
   .informations-about-user,
   .information-row {
     height: auto;

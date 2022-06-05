@@ -202,10 +202,6 @@ $(document).ready(function () {
         "<br>";
     } else if ($(inputName).attr("id") == "email") {
       if (errorType == "is") {
-        if (!fajnie) {
-          clearError(this);
-        }
-        fajnie = true;
         data =
           "<div class='siema yellow-div'>" +
           "<i class='fa-solid fa-triangle-exclamation'></i>" +
@@ -219,10 +215,6 @@ $(document).ready(function () {
           "</div>" +
           "<br>";
       } else if (errorType == "none") {
-        if (fajnie) {
-          clearError(this);
-        }
-        fajnie = false;
         data =
           "<div class='siema red-div'>" +
           "<i class='fa-solid fa-circle-xmark'></i>" +
@@ -235,11 +227,7 @@ $(document).ready(function () {
       }
     } else if ($(inputName).attr("id") == "phone_number") {
       if (errorType == "is") {
-        if (!fajnie) {
-          clearError(this);
-        }
         if (niematakiegonumeru) {
-          fajnie = true;
           data =
             "<div class='siema yellow-div'>" +
             "<i class='fa-solid fa-triangle-exclamation'></i>" +
@@ -250,7 +238,6 @@ $(document).ready(function () {
             "</div>" +
             "<br>";
         } else {
-          fajnie = true;
           data =
             "<div class='siema yellow-div'>" +
             "<i class='fa-solid fa-triangle-exclamation'></i>" +
@@ -263,12 +250,10 @@ $(document).ready(function () {
             "<br>";
         }
       } else if (errorType == "none") {
-        if (fajnie) {
-          niematakiegonumeru = false;
+        if (!niematakiegonumeru) {
           clearError(this);
         }
         if (niematakiegonumeru) {
-          fajnie = false;
           data =
             "<div class='siema yellow-div'>" +
             "<i class='fa-solid fa-triangle-exclamation'></i>" +
@@ -319,19 +304,11 @@ $(document).ready(function () {
         "<br>";
     } else if ($(inputName).attr("id") == "username") {
       if (errorType == "is") {
-        if (!fajnie) {
-          clearError(this);
-        }
-        fajnie = true;
         data = `<div class='siema yellow-div'><i class='fa-solid fa-triangle-exclamation'></i>
                 <h4>Błąd przy ${$(inputName).attr(
                   "aria-label"
                 )} taki użytkownik istnieje </h4></div><br>`;
       } else if (errorType == "none") {
-        if (fajnie) {
-          clearError(this);
-        }
-        fajnie = false;
         data =
           "<div class='siema red-div'>" +
           "<i class='fa-solid fa-circle-xmark'></i>" +
@@ -344,30 +321,15 @@ $(document).ready(function () {
           "<br>";
       }
     } else if ($(inputName).attr("id") == "password") {
-      if (found) {
-        clearError(this);
-      }
-      if (!found) {
-        data =
-          "<div class='siema red-div'>" +
-          "<i class='fa-solid fa-circle-xmark'></i>" +
-          "<h4>" +
-          "Błąd przy " +
-          $(inputName).attr("aria-label") +
-          " Hasło musi zawierac 1 znak specialny!" +
-          "</h4>" +
-          "</div>";
-      } else {
-        data =
-          "<div class='siema red-div'>" +
-          "<i class='fa-solid fa-circle-xmark'></i>" +
-          "<h4>" +
-          "Błąd przy " +
-          $(inputName).attr("aria-label") +
-          " moze kiedys wariacie" +
-          "</h4>" +
-          "</div>";
-      }
+      data =
+        "<div class='siema red-div'>" +
+        "<i class='fa-solid fa-circle-xmark'></i>" +
+        "<h4>" +
+        "Błąd przy " +
+        $(inputName).attr("aria-label") +
+        " moze kiedys wariacie" +
+        "</h4>" +
+        "</div>";
     } else if ($(inputName).attr("id") == "confirm") {
       data =
         "<div class='siema red-div'>" +
@@ -633,25 +595,12 @@ $(document).ready(function () {
       }
     } else if (inputId == "password") {
       if (inputLength >= 8) {
-        for (var i = 0; i < listaZnaków.length; i++) {
-          console.log(listaZnaków[i]);
-          if ($(input).val().includes(listaZnaków[i])) {
-            errorType = "is";
-            found = true;
-            clearError(inputField);
-            input.css("border-color", "green");
-            passwordValid = true;
-            console.log("jest znalezione");
-            break;
-          }
-        }
-        if (!found) {
-          errorType = "none";
-          input.css("border-color", "red");
-          showError(inputField);
-          passwordValid = false;
-        }
-        found = false;
+        errorType = "is";
+        found = true;
+        clearError(inputField);
+        input.css("border-color", "green");
+        passwordValid = true;
+        console.log("jest znalezione");
       } else {
         input.css("border-color", "red");
         showError(inputField);

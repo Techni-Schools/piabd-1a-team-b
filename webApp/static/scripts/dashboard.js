@@ -24,18 +24,23 @@ setTimeout(function () {
 }, 600);
 
 $(".add-button").mouseenter(function () {
-  console.log("najechane")
-  data = "<h4 class='yes'>Dodaj Produkt</h4>"
+  console.log("najechane");
+  data = "<h4 class='yes'>Dodaj Produkt</h4>";
   timeout = setTimeout(function () {
-    console.log("najechane po 500")
-    $(".add-button").append(data)
-  }, 325)
-})
+    console.log("najechane po 500");
+    $(".add-button").append(data);
+  }, 325);
+});
 $(".add-button").mouseout(function () {
-  clearTimeout(timeout)
-  $(".add-button").children().remove(".yes")
-})
+  clearTimeout(timeout);
+  $(".add-button").children().remove(".yes");
+});
 // $(".fa-cart-plus").mouseout(function () {
 //   // clearTimeout(timeout)
 //   $(".add-button").children().remove(".yes")
 // })
+$(".copy").click(function () {
+  text = $(this)["context"].innerText;
+  console.log(text);
+  navigator.clipboard.writeText(text);
+});
