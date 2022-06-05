@@ -227,9 +227,8 @@ $(document).ready(function () {
           "<div class='siema red-div'>" +
           "<i class='fa-solid fa-circle-xmark'></i>" +
           "<h4>" +
-          "Błąd przy " +
           $(inputName).attr("aria-label") +
-          " Input musi zawierac 5 znaki ale nie wykraczac poza 50, nie moze zawierac spacji!" +
+          " musi zawierac 5 znaki ale nie wykraczac poza 50, nie moze zawierac spacji!" +
           "</h4>" +
           "</div>" +
           "<br>";
@@ -245,9 +244,6 @@ $(document).ready(function () {
             "<div class='siema yellow-div'>" +
             "<i class='fa-solid fa-triangle-exclamation'></i>" +
             "<h4>" +
-            "Błąd przy " +
-            $(inputName).attr("aria-label") +
-            " taki " +
             $(inputName).attr("aria-label") +
             " nie instanieje" +
             "</h4>" +
@@ -259,8 +255,6 @@ $(document).ready(function () {
             "<div class='siema yellow-div'>" +
             "<i class='fa-solid fa-triangle-exclamation'></i>" +
             "<h4>" +
-            "Błąd przy " +
-            $(inputName).attr("aria-label") +
             " taki " +
             $(inputName).attr("aria-label") +
             " instnieje " +
@@ -279,8 +273,6 @@ $(document).ready(function () {
             "<div class='siema yellow-div'>" +
             "<i class='fa-solid fa-triangle-exclamation'></i>" +
             "<h4>" +
-            "Błąd przy " +
-            $(inputName).attr("aria-label") +
             " taki " +
             $(inputName).attr("aria-label") +
             " nie instanieje" +
@@ -288,16 +280,13 @@ $(document).ready(function () {
             "</div>" +
             "<br>";
         } else {
-          data =
-            "<div class='siema red-div'>" +
-            "<i class='fa-solid fa-circle-xmark'></i>" +
-            "<h4>" +
-            "Błąd przy " +
-            $(inputName).attr("aria-label") +
-            " Input musi zawierac 5 znaki ale nie wykraczac poza 50, nie moze zawierac spacji!" +
-            "</h4>" +
-            "</div>" +
-            "<br>";
+          data = `<div class='siema red-div'> 
+            <i class='fa-solid fa-circle-xmark'></i> 
+            <h4>  
+            ${$(inputName).attr("aria-label")} musi zawierac od 9 do 12 liczb 
+            </h4> 
+            </div>
+            <br>`;
         }
       }
     } else if (
@@ -335,7 +324,9 @@ $(document).ready(function () {
         }
         fajnie = true;
         data = `<div class='siema yellow-div'><i class='fa-solid fa-triangle-exclamation'></i>
-                <h4>Błąd przy ${$(inputName).attr("aria-label")} taki użytkownik istnieje </h4></div><br>`
+                <h4>Błąd przy ${$(inputName).attr(
+                  "aria-label"
+                )} taki użytkownik istnieje </h4></div><br>`;
       } else if (errorType == "none") {
         if (fajnie) {
           clearError(this);
@@ -472,16 +463,14 @@ $(document).ready(function () {
         input.css("border-color", "red");
       }
     } else if (input.attr("id") == "phone_number") {
-      if (input.val().length == 12) {
+      if (input.val().length <= 12 && input.val().length >= 9) {
         clearError(inputField);
-        // input.css("border-color", "green");
         $.ajax({
           method: "post",
           url: "/phone_validity_checks",
           data: { phone: input.val() },
           success: function (res) {
             if (res == "Phone number is invalid or already taken") {
-              //jesli sie nie udało
               errorType = "is";
               // data = "niewiem"
               console.log("nie");
@@ -647,6 +636,7 @@ $(document).ready(function () {
         for (var i = 0; i < listaZnaków.length; i++) {
           console.log(listaZnaków[i]);
           if ($(input).val().includes(listaZnaków[i])) {
+            errorType = "is";
             found = true;
             clearError(inputField);
             input.css("border-color", "green");
@@ -656,6 +646,7 @@ $(document).ready(function () {
           }
         }
         if (!found) {
+          errorType = "none";
           input.css("border-color", "red");
           showError(inputField);
           passwordValid = false;
@@ -663,9 +654,8 @@ $(document).ready(function () {
         found = false;
       } else {
         input.css("border-color", "red");
-        clearError($("#confirm"));
         showError(inputField);
-        usernameValid = false;
+        passwordValid = false;
       }
     } else if (inputId == "confirm") {
       console.log("wartosc z hasła", $("#password").val());
