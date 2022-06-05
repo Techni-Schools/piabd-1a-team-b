@@ -1,7 +1,7 @@
 Wymagania funkcjonalne - systemowe
 1. Deepink będzie miał ekran z kupnem sprzętu wędkarskiego gdzie będą następujące funkcje:
     a. pole do wybrania ilości produktu 
-    b. przycisk "Włóż do koszyka"
+    b. przycisk "Kup teraz"
     c. cena
 2. Deepink będzie miał możliwość założenia konta a w tym następujące funkcje:
     a. pole do wpisania maila
