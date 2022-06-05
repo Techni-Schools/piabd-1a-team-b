@@ -192,6 +192,8 @@ def listing():
   page = request.form.get('page', 1, type=int)
   if page == 0: page = 1
   # print(string)
+  # usr = products.query.join(users,products.user == users.id).all()
+  # print(usr[0].__dict__)
   if request.form.get('o') == 'pd':
     prd = products.query.join(category, products.category == category.id).join(users, products.user == users.id).filter(products.name.like(string+'%')).filter(products.isDeleted == 0).order_by(products.price.desc()).paginate(page=page, per_page=maxproductspersite, error_out=False)
   elif request.form.get('o') == 'p':

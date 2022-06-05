@@ -51,7 +51,9 @@
       .list-group-item-action {
         margin: 0;
       }
-
+      .list-group {
+        z-index: 10000000000;
+      }
       .row {
         padding: 0;
         margin: 0;
@@ -136,10 +138,16 @@
       }
 
       #livebox {
+        width: 300px;
         position: relative;
+        transition: width 0.3s;
+      }
+      #livebox:focus {
+        width: 400px;
       }
 
       .navbar-expand-md {
+        padding: 10px;
         transition: 0.3s;
         -webkit-animation: puff-in-center 1s cubic-bezier(0.47, 0, 0.745, 0.715)
             both,
@@ -160,9 +168,10 @@
 
       #datalist {
         position: absolute;
-        width: 200px;
+        border-radius: 10px;
+        width: 400px;
         top: 72%;
-        z-index: 10000;
+        z-index: 10000000000;
       }
 
       #header {
@@ -294,11 +303,17 @@
       .phone-text-hide {
         transition: 0.2s;
       }
-
+      .aa {
+        z-index: 100000000000000000000000000000000000000000000;
+      }
+      .aa:hover {
+        text-decoration: none;
+        background-color: orange;
+      }
       .dropdown-menu {
         background-color: rgb(65, 65, 65);
         color: white;
-        width: 400px;
+        width: 300px;
         -webkit-animation: scale-up-center 0.1s
           cubic-bezier(0.39, 0.575, 0.565, 1) both;
         animation: scale-up-center 0.1s cubic-bezier(0.39, 0.575, 0.565, 1) both;
@@ -306,6 +321,20 @@
 
       .account-info-buttons button {
         color: white;
+      }
+      .hrefs-list-items {
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+      }
+      .hrefs-list {
+        padding: 10px;
+      }
+      .lfaslfasl {
+        z-index: 100000000000000000000000000000000000000000000000000000000000000000000000000000000;
+        height: 150px;
+        display: flex;
+        align-items: baseline;
       }
     </style>
     <div class="fsakjfj">
@@ -329,6 +358,10 @@
         </button>
         <div class="collapse navbar-collapse lfaslfasl" id="collapsibleNavbar">
           <ul class="navbar-nav">
+            <li class="nav-items hrefs-list-items">
+              <a class="hrefs-list" href="/search?page=1&string=">Produkty</a>
+              <a href="/profile_update" class="hrefs-list">Edytuj profil</a>
+            </li>
             <li class="nav-items">
               <div class="search">
                 <input
@@ -370,7 +403,7 @@
                       id="niepowiem"
                     >
                       <div class="account-info">
-                        {{ current_user.balance }}zł
+                        {{ current_user.balance }} zł
                         <h1 class="name">{{ current_user.username }}</h1>
                         <img
                           class="profile-img-mini"

@@ -34,19 +34,12 @@ $(document).ready(function () {
     $(this).prop("disabled", true);
     $(".tak").prop("disabled", false);
   });
-
   function startFieldProfile() {
     var Array = $("dd").children(".niewiem");
     for (var x = 0; x < Array.length; x++) {
       var idOfInput = $("dd").children(".niewiem")[x].id;
       if (idOfInput == "phone_number") {
         phone_number_copy = $("dd").children(".niewiem")[x].value;
-        console.log(
-          "jest numer telefonu posiadany",
-          idOfInput,
-          "jego wartosc to: ",
-          phone_number_copy
-        );
       }
       var newId = idOfInput + "-field";
       document.getElementById(newId).innerHTML =
@@ -107,12 +100,16 @@ $(document).ready(function () {
           }
           if (respond == "Nie ma takiego telefon wariacie") {
             var data =
-              "<h3 style='color: red;'>Nie ma takiego numeru telefonu </h3>";
+              "<h3 style='color: red;'>Nie ma takiego numeru telefonu < h3>";
+          } else {
+            var data =
+              "<h3 style='color: red;'> Masz za krótki numer telefonu wariacie</h3>";
           }
         } else {
           var data =
             "<h3 style='color: red;'> Gdzieś masz Błąd, sprawdz dokladnie! </h3>";
         }
+
         $(".error").append(data);
       }
     }, 300);
@@ -152,6 +149,7 @@ $(document).ready(function () {
     if (input.attr("id") == "first_name") {
       if (input.val().length >= 2) {
         firstValid = true;
+        input.css("border-color", "black");
       } else {
         firstValid = false;
         input.css("border-color", "red");
@@ -159,6 +157,7 @@ $(document).ready(function () {
     } else if (input.attr("id") == "last_name") {
       if (input.val().length >= 2) {
         lastnameValid = true;
+        input.css("border-color", "black");
       } else {
         lastnameValid = false;
         input.css("border-color", "red");
@@ -171,6 +170,7 @@ $(document).ready(function () {
         !input.val().includes(" ")
       ) {
         emailValid = true;
+        input.css("border-color", "black");
       } else {
         emailValid = false;
         input.css("border-color", "red");
@@ -197,12 +197,14 @@ $(document).ready(function () {
                 phoneValid = false;
                 input.css("border-color", "red");
               } else if (res == "Nie ma takiego telefon wariacie") {
+                console.log("Nie ma takiego telefon wariacie");
                 respond = "Nie ma takiego telefon wariacie";
                 isPossible = false;
                 phoneValid = false;
                 input.css("border-color", "red");
               } else {
                 respond = "";
+                input.css("border-color", "black");
                 console.log("zgadza sie");
                 isPossible = true;
                 phoneValid = true;
@@ -212,7 +214,7 @@ $(document).ready(function () {
         } else {
           isPossible = false;
           phoneValid = false;
-          input.css("border-color", "green");
+          input.css("border-color", "red");
         }
       }
     }
@@ -224,6 +226,7 @@ $(document).ready(function () {
     if ($(inputField).attr("id") == "street") {
       if (inputLength >= 5 && inputLength <= 50) {
         streetValid = true;
+        input.css("border-color", "black");
       } else {
         input.css("border-color", "red");
         streetValid = false;
@@ -231,6 +234,7 @@ $(document).ready(function () {
     } else if (inputId == "city") {
       if (inputLength >= 4 && inputLength <= 50) {
         cityValid = true;
+        input.css("border-color", "black");
       } else {
         cityValid = false;
         input.css("border-color", "red");
@@ -238,6 +242,7 @@ $(document).ready(function () {
     } else if (inputId == "zip_code") {
       if (inputLength == 6) {
         zipValid = true;
+        input.css("border-color", "black");
       } else {
         zipValid = false;
         input.css("border-color", "red");
@@ -245,6 +250,7 @@ $(document).ready(function () {
     } else if (inputId == "state") {
       if (inputLength >= 4 && inputLength <= 50) {
         stateValid = true;
+        input.css("border-color", "black");
       } else {
         stateValid = false;
         input.css("border-color", "red");
@@ -252,6 +258,7 @@ $(document).ready(function () {
     } else if (inputId == "country") {
       if (inputLength >= 4 && inputLength <= 50) {
         countryValid = true;
+        input.css("border-color", "black");
       } else {
         countryValid = false;
         input.css("border-color", "red");

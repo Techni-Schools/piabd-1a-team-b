@@ -16,7 +16,12 @@ body {
   width: 100%;
   text-align: center;
 }
-
+.search {
+  z-index: 1000000000;
+}
+.nav-items {
+  z-index: 1000000000000000000000;
+}
 .yes {
   -webkit-animation: tracking-in-expand 0.5s cubic-bezier(0.215, 0.61, 0.355, 1)
     both;

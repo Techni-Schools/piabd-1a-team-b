@@ -14,13 +14,14 @@
 }
 
 body {
-  overflow: hidden;
+  /* overflow: hidden; */
 }
 
 .addres-book {
   display: none;
   z-index: -1;
-  -webkit-animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  -webkit-animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    both;
   animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
@@ -40,7 +41,6 @@ body {
   outline: none;
   display: flex;
 }
-
 
 .zmien-button {
   width: 100%;
@@ -88,7 +88,8 @@ label {
 }
 
 .siema2 {
-  -webkit-animation: slide-out-left 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+  -webkit-animation: slide-out-left 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53)
+    both;
   animation: slide-out-left 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
 }
 
@@ -102,7 +103,8 @@ label {
 }
 
 .profile-siemanko {
-  -webkit-animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  -webkit-animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    both;
   animation: slide-in-right 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
@@ -113,7 +115,8 @@ label {
 
 .about-information {
   z-index: -1;
-  -webkit-animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+  -webkit-animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)
+    both;
   animation: slide-in-left 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
 }
 
@@ -135,7 +138,8 @@ label {
 }
 
 .siema {
-  -webkit-animation: slide-out-left 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
+  -webkit-animation: slide-out-left 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53)
+    both;
   animation: slide-out-left 0.3s cubic-bezier(0.55, 0.085, 0.68, 0.53) both;
 }
 
@@ -186,7 +190,8 @@ label {
 /*------- profile checker ---------*/
 .account-data {
   height: 230px;
-  background: url("https://pkconstruction.eu/wp-content/uploads/2019/12/wood-2045379_1920.jpg") no-repeat;
+  background: url("https://pkconstruction.eu/wp-content/uploads/2019/12/wood-2045379_1920.jpg")
+    no-repeat;
   display: flex;
   justify-content: center;
   align-items: center;
