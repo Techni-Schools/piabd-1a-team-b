@@ -1,9 +1,41 @@
-{% extends 'base.html' %}
-
-{% block title %} Produkt kupienie {% endblock %}
-
-{% block main %}
-
-{{product}}
+{% extends 'base.html' %} {% block title %} Produkt kupienie {% endblock %} {%
+block extrahead %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static',filename='styles/product.css') }}"
+/>
+{% endblock %}{% block main %}
+<div class="product-content">
+  <div class="parent-row">
+    <div class="row">
+      <div class="col col-image">
+        <img
+          class="image-product"
+          src="/static/images/{{product[0].image}}"
+          alt=""
+        />
+      </div>
+      <div class="col information-buy-div">
+        <h1>{{product[0].name}}</h1>
+        <h4>Sprzedaje: <a href="/profile/{{product[2]}}">{{product[2]}}</a></h4>
+        <h4 class="category-product">
+          Kategoria:
+          <a href="/search?page=1&string=&c={{product[0].category}}">
+            {{product[1]}}
+          </a>
+        </h4>
+        <h3 class="description-title">Opis</h3>
+        <div class="description-div">
+          <h5 class="description-text">{{product[0].description}}</h5>
+        </div>
+        <div class="button-buy-div">
+          <a href="/buy/{{product[0].uuid_id}}"
+            ><button class="button-buy">Kup teraz!</button></a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}
