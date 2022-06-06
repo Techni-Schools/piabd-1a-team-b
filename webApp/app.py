@@ -195,11 +195,11 @@ def listing():
   # usr = products.query.join(users,products.user == users.id).all()
   # print(usr[0].__dict__)
   if request.form.get('o') == 'pd':
-    prd = products.query.join(category, products.category == category.id).join(users, products.user == users.id).filter(products.name.like(string+'%')).filter(products.isDeleted == 0).order_by(products.price.desc()).paginate(page=page, per_page=maxproductspersite, error_out=False)
+    prd = products.query.join(category, products.category == category.id).join(users, products.user == users.id).filter(products.name.like(string+'%')).filter(products.isDeleted == 0).order_by(products.price.desc()).add_column(products.name).add_column(users.username).add_column(products.uuid_id).add_column(products.image).add_column(products.price).add_column(category.category_name).paginate(page=page, per_page=maxproductspersite, error_out=False)
   elif request.form.get('o') == 'p':
-    prd = products.query.join(category, products.category == category.id).join(users, products.user == users.id).filter(products.name.like(string+'%')).filter(products.isDeleted == 0).order_by(products.price).paginate(page=page, per_page=maxproductspersite, error_out=False)
+    prd = products.query.join(category, products.category == category.id).join(users, products.user == users.id).filter(products.name.like(string+'%')).filter(products.isDeleted == 0).order_by(products.price).add_column(products.name).add_column(users.username).add_column(products.uuid_id).add_column(products.image).add_column(products.price).add_column(category.category_name).paginate(page=page, per_page=maxproductspersite, error_out=False)
   else:
-    prd = products.query.join(category, products.category == category.id).join(users, products.user == users.id).filter(products.name.like(string+'%'), products.isDeleted == 0).paginate(page=page, per_page=maxproductspersite, error_out=False)
+    prd = products.query.join(category, products.category == category.id).join(users, products.user == users.id).filter(products.name.like(string+'%'), products.isDeleted == 0).add_column(products.name).add_column(users.username).add_column(products.uuid_id).add_column(products.image).add_column(products.price).add_column(category.category_name).paginate(page=page, per_page=maxproductspersite, error_out=False)
   # prd = products.query.join(category, products.category == category.id).join(users, products.user == users.id).filter(products.name.like(string+'%')).paginate(page=page, per_page=maxproductspersite, error_out=False)
   # prd = products.query.paginate(page=2, per_page=5, error_out=False)
   # return str([i.name for i in prd.items])
@@ -208,10 +208,11 @@ def listing():
   for product in prd.items:
     # print(product.uuid_id)
     # cena nazwa kategoria uzytkownik zdjecie
-    l.append({'name':product.name, 'user':product.user, 'image': product.uuid_id, 'category': product.category, 'price': product.price, 'count': count})
+    l.append({'name':product.name, 'user': product.username, 'uuid_id': product.uuid_id, 'image': product.image, 'price': product.price, 'count': count})
   l = tuple(l)
   return jsonify(l)
   # return str('sram')
+
 @app.route('/update', methods=['POST', 'GET'])
 @login_required
 def update():
