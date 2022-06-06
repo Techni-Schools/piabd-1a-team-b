@@ -125,6 +125,8 @@ def logout():
     logout_user()
     return redirect('/')
 
+short_desc = lambda desc : desc[:50]
+
 @app.route('/profile/<string:username>')
 def profile(username):
   if current_user.is_authenticated:
@@ -132,7 +134,7 @@ def profile(username):
       return redirect('/dashboard')
   q = users.query.filter(users.username == username).first_or_404()
   query = products.query.join(users).join(category).add_column(category.category_name).filter(products.isDeleted == 0).filter(users.username == username).all()
-  return render_template('user.html', user=q, query=query)
+  return render_template('user.html', user=q, query=query, short_desc = short_desc)
 
 @app.route('/product')
 def product():
