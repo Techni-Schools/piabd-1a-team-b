@@ -1,13 +1,56 @@
-{% extends 'base.html' %} 
-{% block title %} Profil - {{user.username}} {% endblock %} 
-{% block extrahead %}
-<link rel="stylesheet" href="{{ url_for('static',filename='styles/user.css') }}" />
+{% extends 'base.html' %} {% block title %} Profil - {{user.username}} {%
+endblock %} {% block extrahead %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static',filename='styles/user.css') }}"
+/>
 {% endblock %} {% block main %}
-{{user}}
-<br>
-{% for i in query %}
-  {{i}}
-  <br>
+<div class="header-profile">
+  <h1>Profil użytkownika <b>{{user.username}}</b></h1>
+</div>
+<div class="account-data">
+  <h1 class="username">{{user.username}}</h1>
+  <img
+    class="profile-img"
+    src="https://static.zakumaj.pl/data/store/2015/10/98d0a565-4d35-88fb-5557-3977dee48380/picture_large.jpg"
+    alt=""
+  />
+</div>
+<div class="informations-about-user">
+  <div class="row information-row">
+    <div class="col 0-2">
+      <div class="information-contact">
+        <h1 class="information-title">Kontakt:</h1>
+        <div class="border-like br-0-1"></div>
+        <h3 class="information-text">
+          <i class="fa-solid fa-envelope"></i>{{user.email}}
+        </h3>
+        <h3 class="information-text">
+          <i class="fa-solid fa-phone"></i>{{user.phone_number}}
+        </h3>
+      </div>
+    </div>
+    <div class="col 0-3">
+      <div class="information-contact">
+        <h1 class="information-title">O mnie</h1>
+        <div class="border-like br-0-1"></div>
+        <h3 class="information-text">
+          <i class="fa-solid fa-signature"></i> {{user.first_name}}
+          {{user.last_name}}
+        </h3>
+        <h3 class="information-text">
+          <i class="fa-solid fa-cake-candles"></i>{{user.date_of_birth}}
+        </h3>
+        <h3 class="information-text">
+          <i class="fa-solid fa-earth-europe"></i>{{user.country}}
+        </h3>
+      </div>
+    </div>
+  </div>
+</div>
+<br />
+{% for i in query %} {{i[0].uuid_id}}
+<br />
 {% endfor %}
 
 <script src="{{ url_for('static', filename='scripts/products.js') }}"></script>

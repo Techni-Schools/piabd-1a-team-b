@@ -1,5 +1,10 @@
 $(document).ready(function () {
-  // window.pageYOffset = 0;
+  window.setTimeout(function () {
+    window.scrollTo(0, 0);
+  }, 0);
+  $(function () {
+    $(this).scrollTop(0);
+  });
   window.scrollTo(0, 0);
   window.scroll(0, 0);
   var phone = window.matchMedia("(max-width: 768px)").matches;
