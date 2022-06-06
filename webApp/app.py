@@ -187,7 +187,7 @@ def search():
 
 @app.route('/listing',methods=['POST', 'GET'])
 def listing():
-  maxproductspersite = 10
+  maxproductspersite = 10 # also need to change it in search.js
   string = request.form.get('text', '', type=str)
   page = request.form.get('page', 1, type=int)
   if page == 0:

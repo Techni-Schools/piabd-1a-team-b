@@ -25,9 +25,10 @@ let url; // url to change to
 let isData = false; // if o in url ?
 let total = 0; // total products finded
 let sorted = 0; // products count on current page
+const maxproductspersite = 10; // also need to change it in python
 
 function changeButtons() {
-    if (10 * curpage - 9 <= (curpage-1)*10+sorted && (curpage-1)*10+sorted < 10 * curpage) {
+    if (maxproductspersite * curpage - 9 <= (curpage-1)*maxproductspersite+sorted && (curpage-1)*maxproductspersite+sorted < maxproductspersite * curpage) {
         $('#next').prop('disabled', true);
     } else {
         $('#next').prop('disabled', false);
@@ -122,7 +123,7 @@ $(document).ready(function () {
 
 
     $('#next').click(function () {
-        if (!(10 * curpage - 9 < total && total < 10 * curpage)) {
+        if (!(maxproductspersite * curpage - 9 < total && total < maxproductspersite * curpage)) {
             curpage++;
             url = '';
             data = parseURLParams(window.location.href);
