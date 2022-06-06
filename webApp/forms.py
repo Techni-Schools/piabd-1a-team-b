@@ -53,6 +53,9 @@ class updateProfile(Form):
     state = StringField('State', [validators.Length(min=4, max=50)], render_kw={'class': 'niewiem'})
     zip_code = StringField('Zip code', [validators.Length(min=4, max=10)], render_kw={'class': 'niewiem'})
     country = StringField('Country', [validators.Length(min=4, max=50)], render_kw={'class': 'niewiem'})
+    image = FileField('', validators=[FileAllowed(list(IMAGES), 'images only')], render_kw={'style': 'display: none;', 'accept': "image/*"})
+
+
 class buyProduct(Form):
     kurier = RadioField('', choices=[('fedex','Kurier FedEx'),('pocztex','Kurier Pocztex')], validators=[validators.DataRequired()])
     quantity = IntegerField('Ilość', [validators.DataRequired(), validators.NumberRange(min=1, max=999)], render_kw={'value': 1})

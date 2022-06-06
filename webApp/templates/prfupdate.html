@@ -34,6 +34,8 @@ block extrahead %}
                 <div class="phone_number">
                   {{ render_field(form.phone_number) }}
                 </div>
+                <div class="image">{{ render_field(form.image) }}</div>
+
               </div>
               <div class="addres-book">
                 <h1 class="page-title"> Książka adresowa</h1>
@@ -55,7 +57,7 @@ block extrahead %}
             <div class="account-data">
               <h1>Witaj {{ current_user.username }}!</h1>
               <img class="profile-img"
-                src="https://static.zakumaj.pl/data/store/2015/10/98d0a565-4d35-88fb-5557-3977dee48380/picture_large.jpg"
+                src="/static/images/{{current_user.get_image()}}"
                 alt="" />
               <!-- <h1 id="last_name-field"></h1>
             <h2 id="last_name-field"></h2>

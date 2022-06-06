@@ -221,7 +221,7 @@ def update():
 @app.route('/profile_update', methods=['POST', 'GET'])
 @login_required
 def profile_update():
-  form = updateProfile(request.form)
+  form = updateProfile(CombinedMultiDict((request.files, request.form)))
   cu = db.session.query(users).filter(users.id == current_user.get_id()).first()
   cu.date_of_birth = cu.date_of_birth.strftime('%Y-%m-%d')
   # path = r'%s' % (os.path.join('images', cu.image),)
@@ -237,6 +237,8 @@ def profile_update():
     except:
       flash('email lub numer telefonu juz uzywany :(')
       return redirect(url_for('profile_update'))
+    if form.image.data is not None:
+      form.image.data.save(os.path.join(app.config['UPLOAD_FOLDER'], cu.image))
     return redirect(url_for('dashboard'))
   return render_template('prfupdate.html', profile=cu, form=form)
 

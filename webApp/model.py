@@ -47,9 +47,10 @@ class users(UserMixin, db.Model):
     zip_code = db.Column(db.String(10), nullable=False)
     country = db.Column(db.String(50), nullable=False)
     balance = db.Column(db.Integer, nullable=False, default=0)
+    image = db.Column(db.String(40), default='0251db9d-e707-4d22-8a6d-dd260f243cf5')
     def __repr__(self):
         return '<User %r>' % self.username
-    def __init__(self, username, password, first_name, last_name, email, date_of_birth, phone_number, street, city, state, zip_code, country):
+    def __init__(self, username, password, first_name, last_name, email, date_of_birth, phone_number, street, city, state, zip_code, country, image):
         self.username = username
         self.password = password
         self.first_name = first_name
@@ -62,6 +63,7 @@ class users(UserMixin, db.Model):
         self.state = state
         self.zip_code = zip_code
         self.country = country
+        self.image = image
 
 
 class chat(db.Model):
@@ -98,32 +100,20 @@ class orders(db.Model):
 
 
 def create_app():
-    try:
-        db.create_all()
-    except:
-        pass
-    try:
-        l = ['splawik', 'wendka', 'przynenty', 'rzylki', 'akcesoria']
-        for i in l:
-            q = category(i)
-            db.session.add(q)
-            db.session.commit()
-    except:
-        pass
-    try:
-        arr = [users('edgzoah', '$2b$12$XYsagRDEW0nc2n6JUN2STuk/ZqYC1P4UOgS4wUAISGYJBYXOeWARS', 'adam', 'blady', 'adam@blady.com', '2006-09-14', '+48662272007', 'dobra 29a', 'warszawa', 'mazowieckie', '02-998', 'polska'), users('juki', '$2b$12$BNAs8ojiHcl/UUELO2m7XelIE/pAWDvom87NGMCHYAGrtgqobbSE2', 'tomasz', 'ogrodnik', 'tomasz@ogrodnik.com', '2007-09-22', '+48688964999', 'wladkow 88', 'warszawa', 'mazowieckie', '02-664', 'polska'), users('twojstary', '$2b$12$EIbZPXfBkfNUI3OPT/v/uOIB8OFfpw21bzoNbBddd1YubAEO1pNxu', 'aleksander', 'wiejak', 'ja@wiejaknakrula.com', '2006-09-24', '+48705758922', 'wladkow 88', 'warszawa', 'mazowieckie', '02-664', 'polska')]
-        for i in arr:
-            db.session.add(i)
-            db.session.commit()
-    except:
-        pass
-    try:
-        a = [products('fajny produtk', '9de07b85-877a-4a1f-8706-5ed31cdf6d41', 1, 22, 'fajne nawet no', 0, 37, 1), products('testowe', '9f4543c4-ee12-4929-a1b2-55c47a41698b', 2, 22, 'fajne nawet no', 0, 37, 2), products('spoko', '12ed12cf-c74b-4b84-a276-a45b19d115b5', 3, 22, 'fajne nawet no', 0, 37, 3), products('jest okej', '76bb4f6f-5ab7-464b-8f9d-f8c12c5a3e99', 4, 22, 'fajne nawet no', 0, 37, 3), products('ta?', '84a257c8-1f2f-4fbf-a2b1-38f998a271c0', 5, 22, 'fajne nawet no', 0, 37, 1), products('kpw', '23217cbb-ae35-4788-8c07-25303f068ec5', 1, 22, 'fajne nawet no', 0, 37, 2), products('tf', '420756e1-65ec-405c-908b-ab77514abf57', 2, 22, 'fajne nawet no', 0, 37, 3), products('fajnie', 'a1ecd196-e5c9-477f-b1f7-de5bf028cc35', 3, 22, 'fajne nawet no', 0, 37, 1), products('jd', 'c783472f-5427-4c13-9326-75f75e83ed95', 4, 22, 'fajne nawet no', 0, 37, 2), products('produkt', 'f9803e17-b490-4398-9132-864ea67c5ee7', 5, 22, 'fajne nawet no', 0, 37, 3)]
-        for i in a:
-            db.session.add(i)
-            db.session.commit()
-    except:
-        pass
+    db.create_all()
+    l = ['splawik', 'wendka', 'przynenty', 'rzylki', 'akcesoria']
+    for i in l:
+        q = category(i)
+        db.session.add(q)
+        db.session.commit()
+    arr = [users('edgzoah', '$2b$12$XYsagRDEW0nc2n6JUN2STuk/ZqYC1P4UOgS4wUAISGYJBYXOeWARS', 'adam', 'blady', 'adam@blady.com', '2006-09-14', '+48662272007', 'dobra 29a', 'warszawa', 'mazowieckie', '02-998', 'polska', '0251db9d-e707-4d22-8a6d-dd260f243cf5'), users('juki', '$2b$12$BNAs8ojiHcl/UUELO2m7XelIE/pAWDvom87NGMCHYAGrtgqobbSE2', 'tomasz', 'ogrodnik', 'tomasz@ogrodnik.com', '2007-09-22', '+48688964999', 'wladkow 88', 'warszawa', 'mazowieckie', '02-664', 'polska', '0251db9d-e707-4d22-8a6d-dd260f243cf5'), users('twojstary', '$2b$12$EIbZPXfBkfNUI3OPT/v/uOIB8OFfpw21bzoNbBddd1YubAEO1pNxu', 'aleksander', 'wiejak', 'ja@wiejaknakrula.com', '2006-09-24', '+48705758922', 'wladkow 88', 'warszawa', 'mazowieckie', '02-664', 'polska', '0251db9d-e707-4d22-8a6d-dd260f243cf5')]
+    for i in arr:
+        db.session.add(i)
+        db.session.commit()
+    a = [products('fajny produtk', '9de07b85-877a-4a1f-8706-5ed31cdf6d41', 1, 22, 'fajne nawet no', 0, 37, 1), products('testowe', '9f4543c4-ee12-4929-a1b2-55c47a41698b', 2, 22, 'fajne nawet no', 0, 37, 2), products('spoko', '12ed12cf-c74b-4b84-a276-a45b19d115b5', 3, 22, 'fajne nawet no', 0, 37, 3), products('jest okej', '76bb4f6f-5ab7-464b-8f9d-f8c12c5a3e99', 4, 22, 'fajne nawet no', 0, 37, 3), products('ta?', '84a257c8-1f2f-4fbf-a2b1-38f998a271c0', 5, 22, 'fajne nawet no', 0, 37, 1), products('kpw', '23217cbb-ae35-4788-8c07-25303f068ec5', 1, 22, 'fajne nawet no', 0, 37, 2), products('tf', '420756e1-65ec-405c-908b-ab77514abf57', 2, 22, 'fajne nawet no', 0, 37, 3), products('fajnie', 'a1ecd196-e5c9-477f-b1f7-de5bf028cc35', 3, 22, 'fajne nawet no', 0, 37, 1), products('jd', 'c783472f-5427-4c13-9326-75f75e83ed95', 4, 22, 'fajne nawet no', 0, 37, 2), products('produkt', 'f9803e17-b490-4398-9132-864ea67c5ee7', 5, 22, 'fajne nawet no', 0, 37, 3)]
+    for i in a:
+        db.session.add(i)
+        db.session.commit()
 
 if __name__ == '__main__':
     create_app()
