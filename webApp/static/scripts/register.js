@@ -399,7 +399,7 @@ $(document).ready(function () {
           url: "/email_validity_checks",
           data: { email: input.val() },
           success: function (res) {
-            if (res == "Email is already taken") {
+            if (res == "Email is invalid or already taken") {
               //jesli sie nie udało
               errorType = "is";
               console.log("nie");

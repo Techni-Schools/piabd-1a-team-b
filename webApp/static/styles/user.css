@@ -1,5 +1,5 @@
 .col-sm {
-  margin: 20px;
+  /* margin: 20px; */
   display: flex;
   justify-content: center;
 }
@@ -125,7 +125,8 @@ i {
   align-items: center;
   padding: 30px;
   flex-direction: column;
-  background: url("https://pkconstruction.eu/wp-content/uploads/2019/12/wood-2045379_1920.jpg") no-repeat;
+  background: url("https://pkconstruction.eu/wp-content/uploads/2019/12/wood-2045379_1920.jpg")
+    no-repeat;
   background-size: auto;
   background-size: cover;
   z-index: -1;
