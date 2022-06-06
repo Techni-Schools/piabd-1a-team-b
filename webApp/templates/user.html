@@ -1,83 +1,14 @@
 {% extends 'base.html' %} 
-{% block title %} {% if request.args.get('product') %} {{prd.name}} - {{user}} {% else %} Profil - {{user}} {% endif %} {% endblock %} 
+{% block title %} Profil - {{user.username}} {% endblock %} 
 {% block extrahead %}
 <link rel="stylesheet" href="{{ url_for('static',filename='styles/user.css') }}" />
-{% endblock %} {% block main %} {% if request.args.get('product')%}
-<div class="row">
-  <div class="col-sm">
-    <div class="buy-div-siema content-div">
-      <img class="product-image" src="{{url_for('static', filename='images/'+prd.image)}}" alt="{{prd.name}}" />
-    </div>
-  </div>
-  <div class="col-sm product">
-    <div class="buy-div">
-      <div class="product-informations">
-        <h1 class="product-name products-text">{{prd.name}}</h1>
-        <h3 class="category-name products-text">Kategoria: {{prd.category_name}}</h3>
-        <h4 class="product-quantity products-text">Ilość: {{prd.quantity}}</h4>
-        <h4 class="product-price products-text">Cena: {{prd.price}}zł</h4>
-        <div class="product-discription">
-          <div class="clickable-button">
-            <div class="content-cliclable-buttons">
-              <div class="discription-text">Opis</div>
-              <div class="discription-icon"></div>
-              <i class="fa-solid fa-arrow-down"></i>
-            </div>
-          </div>
-          <div class="product-discription-text">{{prd.description}}</div>
-        </div>
-      </div>
-      <div class="buy-buttons">
-        <div class="fewkofewko">
-          <a href="/buy/{{product}}">
-          <button class="buy-now">Kup Teraz</button>
-        </a>
-          <button class="add-cart">Dodaj do koszyka</button>
-        </div>
-      </div>
-    </div>
-  </div>
-  {% else %} {% if prd[0].name and prd[0].category_name %}
-  <div class="header-profile">
-    <h1> Profil użytkownika <b>{{user}}</b></h1>
-  </div>
-  <div class="account-data">
-    <h1 class="username">{{user}}</h1>
-    <img class="profile-img"
-      src="https://static.zakumaj.pl/data/store/2015/10/98d0a565-4d35-88fb-5557-3977dee48380/picture_large.jpg" alt="">
-  </div>
-  <div class="informations-about-user">
-    <div class="row information-row">
-      <div class="col 0-2">
-        <div class="information-contact">
-          <h1 class="information-title">O mnie</h1>
-          <div class="border-like br-0-1"></div>
-          <h3 class="information-text"><i class="fa-solid fa-envelope"></i>{{user_info.email}}</h3>
-          <h3 class="information-text"><i class="fa-solid fa-phone"></i>{{user_info.phone_number}}</h3>
-        </div>
-      </div>
-      <div class="col 0-3">
-        <div class="information-contact">
-          <h1 class="information-title">O mnie</h1>
-          <div class="border-like br-0-1"></div>
-          <h3 class="information-text"><i class="fa-solid fa-signature"></i> {{user_info.first_name}}
-            {{user_info.last_name}}</h3>
-          <h3 class="information-text"><i class="fa-solid fa-cake-candles"></i>{{user_info.date_of_birth}}</h3>
-          <h3 class="information-text"><i class="fa-solid fa-earth-europe"></i>{{user_info.country}}</h3>
-        </div>
-      </div>
-    </div>
-  </div>
-  {{user_info.last_name}} <br>
-  {% for i in prd %}
-  <a href="/profile/{{user}}?product={{i.name}}">{{i.name}} - {{i.category_name}}
-    <br />
-    <img src="{{url_for('static', filename='images/'+i.image)}}" alt="{{i.name}}" style="height: 20%; width: 20%" /></a>
-  <br />
-  <br />
-  {% endfor %}
-  <br />
-  {% else %} {{prd[0]}} {% endif %} {% endif %}
-</div>
+{% endblock %} {% block main %}
+{{user}}
+<br>
+{% for i in query %}
+  {{i}}
+  <br>
+{% endfor %}
+
 <script src="{{ url_for('static', filename='scripts/products.js') }}"></script>
 {% endblock %}

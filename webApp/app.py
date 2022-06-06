@@ -125,32 +125,16 @@ def logout():
     logout_user()
     return redirect('/')
 
-@app.route('/profile/')
-def profilenouser():
-  cu = ['nie znaleziono uzytkownika']
-  return render_template('user.html', prd=cu)
 
 @app.route('/profile/<string:username>')
 def profile(username):
-  # print(current_user.username)
-  # if username == current_user.username:
-  #   return redirect('/dashboard')
-  q = db.session.query(users.username, users.first_name, users.last_name, users.phone_number,users.email, users.country, users.date_of_birth).filter(users.username == username).first()
-  if q:
-    try:
-      cu = db.session.query(products.name, products.description, products.image, products.price, products.quantity, category.category_name).join(category).join(users).filter(users.username == username, products.isDeleted == 0).filter(products.uuid_id.like(request.args['product'])).first()
-      if request.args.get('product', '') == '':
-        if username == current_user.username:
-          return redirect(url_for('dashboard'))
-    except:
-      cu = db.session.query(products.name, products.image, category.category_name).join(category).join(users).filter(users.username == username, products.isDeleted == 0).all()
-    if cu:
-      pass
-    else:
-      cu = ['uzytkownik obecnie nic nie sprzedaje']
-  else:
-    cu = ['nie znaleziono uzytkownika']
-  return render_template('user.html', prd=cu, user=username, user_info=q, product=request.args.get('product', ''))
+  if username == current_user.username:
+    return redirect('/dashboard')
+  q = users.query.filter(users.username == username).first_or_404()
+  query = products.query.join(users).join(category).add_column(category.category_name).filter(products.isDeleted == 0).filter(users.username == username).all()
+  # query = products.query.join(users).join(category).add_column(users.username).add_column(users.first_name).add_column(users.last_name).add_column(users.phone_number).add_column(users.email).add_column(users.country).add_column(users.date_of_birth).add_column(category.category_name).filter(products.isDeleted == 0).filter(users.username == username).all()
+  print(query)
+  return render_template('user.html', user=q, query=query)
 
 
 @app.route('/email_validity_checks', methods=['POST'])
