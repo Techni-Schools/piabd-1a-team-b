@@ -125,17 +125,22 @@ def logout():
     logout_user()
     return redirect('/')
 
-
 @app.route('/profile/<string:username>')
 def profile(username):
-  if username == current_user.username:
-    return redirect('/dashboard')
+  if current_user.is_authenticated:
+    if username == current_user.username:
+      return redirect('/dashboard')
   q = users.query.filter(users.username == username).first_or_404()
   query = products.query.join(users).join(category).add_column(category.category_name).filter(products.isDeleted == 0).filter(users.username == username).all()
-  # query = products.query.join(users).join(category).add_column(users.username).add_column(users.first_name).add_column(users.last_name).add_column(users.phone_number).add_column(users.email).add_column(users.country).add_column(users.date_of_birth).add_column(category.category_name).filter(products.isDeleted == 0).filter(users.username == username).all()
-  print(query)
   return render_template('user.html', user=q, query=query)
 
+@app.route('/product')
+def product():
+  id = request.args.get('id', '')
+  if len(id) != 36:
+    return render_template('404.html')
+  query = products.query.join(users).join(category).add_column(category.category_name).add_column(users.username).filter(products.uuid_id == id).first_or_404()
+  return render_template('product.html', product=query)
 
 @app.route('/email_validity_checks', methods=['POST'])
 def emailCheck():
