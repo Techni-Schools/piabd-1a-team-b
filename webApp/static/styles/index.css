@@ -34,6 +34,14 @@ p {
   color: white;
 }
 
+.welcone {
+  height: 20%;
+}
+
+.welcone-row {
+  height: 100%row;
+}
+
 .hello-textmini-div {
   height: 25%;
   display: flex;
@@ -185,6 +193,14 @@ p {
   margin: 0;
   width: auto;
   height: auto;
+}
+
+.welcone-row {
+  display: flex;
+}
+
+.index-picture {
+  height: 100px;
 }
 
 @media only screen and (max-width: 776px) {

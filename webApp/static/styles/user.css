@@ -51,8 +51,9 @@ h1 {
 }
 
 .product-discription {
-  background-color: rgba(89, 255, 255, 0.5);
-  border: 2px solid rgb(0, 175, 175);
+  /* background-color: rgb(255, 165, 0); */
+  background-color: rgba(255, 165, 0, 0.8);
+  border: 2px solid rgba(96, 63, 0, 0.4);
   /* 0, 175, 175 */
   transition: height 0.5s;
   width: 100%;
