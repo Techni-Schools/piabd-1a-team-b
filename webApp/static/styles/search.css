@@ -1,0 +1,8 @@
+.row {  
+    justify-content: center;
+    align-items: center;
+}
+.col-sm {
+    display:flex;
+    justify-content: center;
+}
