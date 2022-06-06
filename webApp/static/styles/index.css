@@ -35,17 +35,21 @@ p {
 }
 
 .welcone {
-  display: flex;
+  display: none;
   /* align-items: center; */
   justify-content: center;
-  height: 40%;
+  height: 30%;
 }
 
 .niewiem-col h1 {
   text-align: left;
   font-weight: 900;
 }
-
+#welcome-text {
+  height: 100px;
+  text-align: center;
+  display: none;
+}
 .niewiem-col h2 {
   text-align: left;
   font-family: 'Open Sans', sans-serif;
@@ -242,7 +246,7 @@ p {
   }
 
   .welcone {
-    height: 80%;
+    height: 70%;
   }
   .niewiem-col h1 {
     font-size:40px;
@@ -255,11 +259,7 @@ p {
 @media only screen and (max-width: 578px) {
   .container-hello {
     height: 100%;
-  }
-
-  .welcone {
-    height: 80%;
-  }
+  } 
 
   .col-sm {
     margin-left: 0;

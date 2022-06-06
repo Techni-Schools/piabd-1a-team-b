@@ -40,7 +40,7 @@ href="{{ url_for('static',filename='styles/dashboard.css') }}"
     </div>
   </div>
 </div>
-<div class="account-data" style="z-index: -1;">
+<div class="account-data" style="z-index: 0;">
   <div class="background-image back-img"></div>
   {% if current_user.is_authenticated %}
   <h1 class="username">Hi {{ current_user.username }}!</h1>
@@ -48,6 +48,7 @@ href="{{ url_for('static',filename='styles/dashboard.css') }}"
     class="profile-img"
     src="https://static.zakumaj.pl/data/store/2015/10/98d0a565-4d35-88fb-5557-3977dee48380/picture_large.jpg"
   />
+  <a class="profile-edit-link" href="/profile_update"><button class="edit-profile-button"><i class="fa-solid fa-pencil"></i></button></a>
 </div>
 <div class="informations-about-user">
   <div class="row information-row">

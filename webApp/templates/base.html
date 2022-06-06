@@ -37,6 +37,7 @@
     }
 
     .list-group {
+      position: relative;
       z-index: 10000000000;
     }
 
@@ -57,6 +58,8 @@
     }
 
     .search {
+      position: relative;
+      z-index: 3;
       display: flex;
       align-items: center;
       flex-direction: column;
@@ -72,9 +75,9 @@
       border: none;
     }
 
-    .lfaslfasl {
+    /* .lfaslfasl {
       align-items: center;
-    }
+    } */
 
     .account-buttons {
       color: white;
@@ -149,7 +152,7 @@
       position: absolute;
       border-radius: 10px;
       width: 400px;
-      top: 72%;
+      top: 100%;
       z-index: 10000000000;
     }
 
@@ -284,6 +287,7 @@
     }
 
     .aa {
+      position: relative;
       z-index: 100000000000000000000000000000000000000000000;
     }
 
@@ -317,8 +321,16 @@
     .lfaslfasl {
       z-index: 100000000000000000000000000000000000000000000000000000000000000000000000000000000;
       /* height: 150px; */
-      display: flex;
-      align-items: center;
+    }
+    .edit-button, .profile-button-dropdown {
+      background-color: transparent;
+      color: white;
+      border: none;
+      transition: 0.1s all;
+      padding: 10px;
+    }
+    .edit-button:hover, .profile-button-dropdown:hover {
+      background-color: orange;
     }
   </style>
   <div class="fsakjfj">
@@ -366,10 +378,10 @@
                         alt="" />
                     </div>
                     <div class="account-info-buttons">
-                      <a href="{{url_for('profile_update')}}"><button class="dropdown-item" type="button">
+                      <a href="{{url_for('profile_update')}}"><button class="edit-button" type="button">
                           Edit
                         </button></a>
-                      <a href="/dashboard"><button class="dropdown-item" type="button">
+                      <a href="/dashboard"><button class="profile-button-dropdown" type="button">
                           Profile
                         </button></a>
                     </div>

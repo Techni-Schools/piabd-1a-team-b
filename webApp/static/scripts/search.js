@@ -67,9 +67,7 @@ function updateResult(data) {
                 description_mini += "..."
                 endOfDescription = false
                 }
-                // for(var i = 0; i<50; i++) {
-                // }
-                data += `<div class="col-sm"><div class="card" style="width: 18rem;"><img class="card-img-top" src="/static/images/${value.image}" alt="Card image cap"><div class="card-body"><h5 class="card-title"><a href='/profile/${value.user}?product=${value.uuid_id}'>${value.name}</a></h5><p class="card-text">${description_mini}</p><p class="card-text">${value.price}</p><a href="/profile/${value.user}?product=${value.uuid_id}" class="btn btn-primary">Do produktu</a></div></div></div>`;
+                data += `<div class="col-sm"><div class="card" style="width: 18rem;"><img class="card-img-top" src="/static/images/${value.image}" alt="Card image cap"><div class="card-body"><h5 class="card-title"><a href='/profile/${value.user}?product=${value.uuid_id}'>${value.name}</a></h5><p class="card-text">${description_mini}</p><p class="card-text">${value.price} zł</p><a href="/profile/${value.user}?product=${value.uuid_id}" class="btn btn-primary">Do produktu</a></div></div></div>`;
                 total = value.count;
                 sorted++;
             });

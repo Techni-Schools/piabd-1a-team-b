@@ -1,15 +1,17 @@
 $(document).ready(function () {
   var phone = window.matchMedia("(max-width: 768px)").matches;
   var animationIndexText = 250;
-  var animationIndexBlocks = 350;
+  var animationIndexBlocks = 450;
+  var animationIndexText2 = 700;
+  var animationIndexBlocks2 = 950;
 
   if (phone) {
     $("#profile-button").click(function () {
       document.getElementById("niepowiem").style.display = "none";
       location.href = "/dashboard";
     })
-    animationIndexText += 100;
-    animationIndexBlocks += 250;
+    animationIndexText2 += 500;
+    animationIndexBlocks2 += 650;
   }
   function chceckTa() {
     window.onscroll = function () {
@@ -24,16 +26,27 @@ $(document).ready(function () {
       }
       try {
         if (niewiem.x == "header") {
-          if (window.pageYOffset > animationIndexText) {
+          if (window.pageYOffset > animationIndexText2) {
             document.getElementById("news-text").className =
               "news-text start-animation";
             document.getElementById("news-text").style.display = "block";
           }
-          if (window.pageYOffset > animationIndexBlocks) {
+          if (window.pageYOffset > animationIndexBlocks2) {
             document.getElementById("row-1").style.display = "flex";
             document.getElementById("news-1").className =
               "news start-animation";
             $(".fajnie").css("height", "auto");
+          }
+          if (window.pageYOffset > animationIndexText) {
+            document.getElementById("welcome-text").className =
+              "welcome-text start-animation";
+            document.getElementById("welcome-text").style.display = "block";
+          }
+          if (window.pageYOffset > animationIndexBlocks) {
+            document.getElementById("welcone").style.display = "flex";
+            document.getElementById("welcone").className =
+              "welcone start-animation";
+            // $(".welcone").css("height", "auto");
           }
         }
       } catch (error) { }
