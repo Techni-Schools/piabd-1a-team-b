@@ -49,7 +49,7 @@ function updateResult(data) {
             sorted = 0;
             data = `<div>`;
             $.each(res, function (index, value) {
-                data += `<div class='card'>${value.name}</div>  ${value.price}, ${value.image}<br>`;
+                data += `<a href='/profile/${value.user}?product=${value.uuid_id}'><div class='card'>${value.name} ${value.price}</div> <img src="/static/images/${value.image}" /> </a><br>`;
                 total = value.count;
                 sorted++;
             });
