@@ -1,6 +1,9 @@
 {% extends 'base.html' %} {% block title %} Sklep wędkarski {% endblock %} {%
 block extrahead %}
 <link rel="stylesheet" href="{{ url_for('static',filename='styles/index.css') }}" />
+<link
+  href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;1,300&family=Raleway:wght@100&display=swap"
+  rel="stylesheet">
 <script type="text/javascript" src="{{ url_for('static', filename='scripts/index.js') }}"></script>
 {% endblock %} {% block main %}
 <div class="container-hello">
@@ -35,13 +38,13 @@ block extrahead %}
 </div>
 <div class="welcone">
   <div class="row welcone-row">
-    <div class="col">
+    <div class="col niewiem-col">
       <h1>Witamy w Wędkarsko</h1>
       <h2>Witamy w sklepie internetowym "Wędkarskowo", gdzie uzytkownicy decydują co wystawiaja i co kupują, chceilismy
         stworzyc aplikacje która pozwoli</h2>
     </div>
-    <div class="col"><img class="index-picture"
-        src="https://www.dictionary.com/e/wp-content/uploads/2018/06/greater-than-sign-2.jpg" alt="">
+    <div class="col icon-code">
+      <i class="fa-solid fa-code"></i>
     </div>
   </div>
 </div>
@@ -52,7 +55,7 @@ block extrahead %}
   <div class="cosiedzieje">
     <div class="news" id="news-1">
       <div class="row" id="row-1">
-        <div class="col">
+        <div class="col niewiem-col">
           <div class="content">
             <div class="image-col">
               <i class="fa-solid fa-people-group"></i>
@@ -66,7 +69,7 @@ block extrahead %}
             </div>
           </div>
         </div>
-        <div class="col">
+        <div class="col niewiem-col">
           <div class="content">
             <div class="image-col">
               <i class="fa-solid fa-shop"></i>
@@ -82,7 +85,7 @@ block extrahead %}
             </div>
           </div>
         </div>
-        <div class="col">
+        <div class="col niewiem-col">
           <div class="content">
             <div class="image-col">
               <i class="fa-solid fa-comment"></i>

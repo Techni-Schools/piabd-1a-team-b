@@ -9,17 +9,23 @@
     #next:disabled {
         border: 2px solid red;
     }
+    .content {
+        z-index: -1;
+        position: relative;
+    }
 </style>
 {% endblock %} 
 
 {% block main %}
-<select name="" id="orderby">
-<option value="">po niczym</option>
- <option value="p">po cenie rosnaco</option>
- <option value="pd">po cenie malejaco</option>
-</select>
-<button id="back"><</button>
-<button id="next">></button>
-<div class="result"></div>
+<div class="content">
+    <select name="" id="orderby">
+    <option value="">po niczym</option>
+    <option value="p">po cenie rosnaco</option>
+    <option value="pd">po cenie malejaco</option>
+    </select>
+    <button id="back"><</button>
+    <button id="next">></button>
+    <div class="result"></div>
+</div>
 <script src="{{url_for('static', filename='scripts/search.js')}}"></script>
 {% endblock %}

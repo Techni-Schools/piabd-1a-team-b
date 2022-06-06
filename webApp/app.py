@@ -204,6 +204,8 @@ def listing():
   # prd = products.query.paginate(page=2, per_page=5, error_out=False)
   # return str([i.name for i in prd.items])
   l = []
+  ok = products.query.join(category, products.category == category.id).add_columns(category.category_name).all()
+  print(ok[0])
   count = products.query.filter(products.name.like(string+'%'), products.isDeleted == 0).count()
   for product in prd.items:
     # print(product.uuid_id)
