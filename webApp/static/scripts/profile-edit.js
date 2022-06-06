@@ -96,18 +96,18 @@ $(document).ready(function () {
         if (!isPossible) {
           if (respond == "Phone number is invalid or already taken") {
             var data =
-              "<h3 style='color: red;'>Taki numer telefonu juz instnieje </h3>";
+              "<div class='error-banner'><i class='fa-solid fa-exclamation'></i><h3 Taki numer telefonu juz instnieje </h3></div>";
           }
           if (respond == "Nie ma takiego telefon wariacie") {
             var data =
-              "<h3 style='color: red;'>Nie ma takiego numeru telefonu < h3>";
+              "<div class='error-banner'><i class='fa-solid fa-exclamation'></i><h3>Nie ma takiego numeru telefonu <h3></div>";
           } else {
             var data =
-              "<h3 style='color: red;'> Masz za krótki numer telefonu wariacie</h3>";
+              "<div class='error-banner'><i class='fa-solid fa-exclamation'></i><h3> Masz za krótki numer telefonu wariacie</h3></div>";
           }
         } else {
           var data =
-            "<h3 style='color: red;'> Gdzieś masz Błąd, sprawdz dokladnie! </h3>";
+            "<div class='error-banner'><i class='fa-solid fa-exclamation'></i><h3> Gdzieś masz Błąd, sprawdz dokladnie! </h3></div>";
         }
 
         $(".error").append(data);

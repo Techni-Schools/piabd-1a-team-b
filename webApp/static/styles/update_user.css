@@ -18,7 +18,29 @@
 body {
   /* overflow: hidden; */
 }
-
+.error-banner {
+  padding: 10px;
+  background-color: rgba(255, 0, 0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.error-banner h3 {
+  font-size: 20px;
+  color: white;
+  margin: 0;
+  padding: 0;
+}
+.error-banner i {
+  font-size: 30px;
+  padding-right:20px ;
+}
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .addres-book {
   display: none;
   z-index: -1;
