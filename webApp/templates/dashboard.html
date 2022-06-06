@@ -15,7 +15,7 @@ href="{{ url_for('static',filename='styles/dashboard.css') }}"
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add your Product</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Dodaj swój produkt</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -43,7 +43,7 @@ href="{{ url_for('static',filename='styles/dashboard.css') }}"
 <div class="account-data" style="z-index: 0;">
   <div class="background-image back-img"></div>
   {% if current_user.is_authenticated %}
-  <h1 class="username">Hi {{ current_user.username }}!</h1>
+  <h1 class="username">Witaj {{ current_user.username }}!</h1>
   <img
     class="profile-img"
     src="https://static.zakumaj.pl/data/store/2015/10/98d0a565-4d35-88fb-5557-3977dee48380/picture_large.jpg"
@@ -54,7 +54,7 @@ href="{{ url_for('static',filename='styles/dashboard.css') }}"
   <div class="row information-row">
     <div class="col 0-1">
       <div class="information-state">
-        <h1 class="information-title">Addres Book</h1>
+        <h1 class="information-title">Książka adresowa</h1>
         <div class="border-like br-0-1"></div>
         <h3 class="information-text copy" data-toggle="tooltip" data-placement="top" title="Tooltip on top"><i class="fa-solid fa-flag-usa"></i> {{ current_user.state }}</h3>
         <h3 class="information-text copy"><i class="fa-solid fa-road"></i> {{ current_user.street }}</h3>
@@ -64,7 +64,7 @@ href="{{ url_for('static',filename='styles/dashboard.css') }}"
     </div>
     <div class="col 0-2">
       <div class="information-contact">
-        <h1 class="information-title">Contact me</h1>
+        <h1 class="information-title">Kontakt</h1>
         <div class="border-like br-0-2"></div>
         <h3 class="information-text copy"><i class="fa-solid fa-envelope"></i> {{ current_user.email }}</h3>
         <h3 class="information-text copy"><i class="fa-solid fa-phone"></i> {{ current_user.phone_number }}</h3>
@@ -72,7 +72,7 @@ href="{{ url_for('static',filename='styles/dashboard.css') }}"
     </div>
     <div class="col 0-3">
       <div class="information-contact">
-        <h1 class="information-title">About me</h1>
+        <h1 class="information-title">O mnie</h1>
         <div class="border-like br-0-3"></div>
         <h3 class="information-text copy"><i class="fa-solid fa-signature"></i> {{ current_user.first_name }} {{ current_user.last_name }}</h3>
         <h3 class="information-text copy"><i class="fa-solid fa-cake-candles"></i> {{ current_user.date_of_birth }}</h3>
@@ -82,9 +82,9 @@ href="{{ url_for('static',filename='styles/dashboard.css') }}"
 </div>
 </div>
 <div class="containder-main">
-<p class="text-i">Your products:</p>
+<p class="text-i">Twoje produkty:</p>
 {% if u == ['You dont have any products yet'] %}
-<h3>You dont have any products yet :(</h3>
+<h3>Nie masz jeszcze żadnych produktów :(</h3>
 {% endif %}
 {% with messages = get_flashed_messages() %} {% if messages %}
 <ul class="flashes">
@@ -111,7 +111,7 @@ href="{{ url_for('static',filename='styles/dashboard.css') }}"
         <p class="card-text" style="color: white;">{{i.description}}</p>
         <div class="buttons-card">
         <a href="/update?product={{i.uuid_id}}" class="btn btn-primary"
-        >Change Information</a
+        >Zaktualizuj informacje</a
         >
         <a href="/delete?product={{i.uuid_id}}" id="delete" class="btn btn-primary"><i class="fa-solid fa-trash"></i></a>
       </div>

@@ -43,10 +43,11 @@ function updateResult(data) {
     if (typeof data.o == 'undefined') { data.o = [''] };
     if (typeof data.string == 'undefined') { data.string = [0xFFFFFFFFFFFF] };
     if (typeof data.page == 'undefined') { data.page = ['1'] };
+    if (typeof data.c == 'undefined') { data.c = [''] };
     $.ajax({
         method: 'post',
         url: '/listing',
-        data: { 'page': data.page[0], 'text': data.string[0], 'o': data.o[0] },
+        data: { 'page': data.page[0], 'text': data.string[0], 'o': data.o[0], 'c': data.c[0] },
         success: function (res) {
             sorted = 0;
             data = `<div class="row">`;
@@ -156,6 +157,31 @@ $(document).ready(function () {
         }
     });
 
+    $('#cat').change(function () {
+        isData = false;
+        url = '';
+        data = parseURLParams(window.location.href);
+        for (let index in data) {
+            if (index == 'c') {
+                isData = true;
+                if ($(this).val() !== '') {
+                    url += `${index}=${$(this).val()}&`;
+                }
+            } else {
+                url += `${index}=${data[index]}&`;
+            }
+        }
+
+        if (isData) {
+            url = `/search?${url.substring(0, url.length - 1)}`;
+            window.history.pushState("", "", url);
+        } else {
+            url = `/search?${url.substring(0, url.length - 1)}&c=${$(this).val()}`;
+            window.history.pushState("", "", url);
+        }
+        updateResult(parseURLParams(window.location.href));
+    });
+
     $('#orderby').change(function () {
         isData = false;
         url = '';
@@ -169,7 +195,8 @@ $(document).ready(function () {
             } else {
                 url += `${index}=${data[index]}&`;
             }
-        };
+        }
+
         if (isData) {
             url = `/search?${url.substring(0, url.length - 1)}`;
             window.history.pushState("", "", url);
