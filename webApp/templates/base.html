@@ -376,7 +376,7 @@
                       Twój balans: {{ current_user.balance }} zł
                       <h1 class="name">{{ current_user.username }}</h1>
                       <img class="profile-img-mini"
-                        src="https://static.zakumaj.pl/data/store/2015/10/98d0a565-4d35-88fb-5557-3977dee48380/picture_large.jpg"
+                        src="{{ current_user.get_image() }}"
                         alt="" />
                     </div>
                     <div class="account-info-buttons">
