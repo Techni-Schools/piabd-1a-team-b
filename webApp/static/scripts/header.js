@@ -1,4 +1,7 @@
 $(document).ready(function () {
+  // window.pageYOffset = 0;
+  window.scrollTo(0, 0);
+  window.scroll(0, 0);
   var phone = window.matchMedia("(max-width: 768px)").matches;
   var animationIndexText = 250;
   var animationIndexBlocks = 450;
@@ -9,7 +12,7 @@ $(document).ready(function () {
     $("#profile-button").click(function () {
       document.getElementById("niepowiem").style.display = "none";
       location.href = "/dashboard";
-    })
+    });
     animationIndexText2 += 500;
     animationIndexBlocks2 += 650;
   }
@@ -49,7 +52,7 @@ $(document).ready(function () {
             // $(".welcone").css("height", "auto");
           }
         }
-      } catch (error) { }
+      } catch (error) {}
     };
   }
   chceckTa();
