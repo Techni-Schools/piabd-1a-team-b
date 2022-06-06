@@ -1,3 +1,5 @@
+var endOfDescription = false;
+
 function parseURLParams(url) {
     var queryStart = url.indexOf("?") + 1,
         queryEnd = url.indexOf("#") + 1 || url.length + 1,
@@ -47,9 +49,27 @@ function updateResult(data) {
         data: { 'page': data.page[0], 'text': data.string[0], 'o': data.o[0] },
         success: function (res) {
             sorted = 0;
-            data = `<div>`;
+            data = `<div class="row">`;
             $.each(res, function (index, value) {
-                data += `<a href='/profile/${value.user}?product=${value.uuid_id}'><div class='card'>${value.name} ${value.price}</div> <img src="/static/images/${value.image}" /> </a><br>`;
+                endOfDescription = false
+                var description_mini = ''
+                var selector = `${value.description}`;
+                for (var i = 0; i<50; i++) {    
+                    if (typeof(selector[i]) == "undefined" ) {  
+                        endOfDescription = true
+                        break   
+                    }
+                    else {
+                        description_mini = description_mini.concat(selector[i])
+                    }
+                };
+                if (!endOfDescription) {
+                description_mini += "..."
+                endOfDescription = false
+                }
+                // for(var i = 0; i<50; i++) {
+                // }
+                data += `<div class="col-sm"><div class="card" style="width: 18rem;"><img class="card-img-top" src="/static/images/${value.image}" alt="Card image cap"><div class="card-body"><h5 class="card-title"><a href='/profile/${value.user}?product=${value.uuid_id}'>${value.name}</a></h5><p class="card-text">${description_mini}</p><p class="card-text">${value.price}</p><a href="/profile/${value.user}?product=${value.uuid_id}" class="btn btn-primary">Do produktu</a></div></div></div>`;
                 total = value.count;
                 sorted++;
             });
@@ -65,7 +85,14 @@ function updateResult(data) {
 }
 
 let curpage = 1;
-
+// {/* <div class="card" style="width: 18rem;">
+//   <img class="card-img-top" src="..." alt="Card image cap">
+//   <div class="card-body">
+//     <h5 class="card-title">Card title</h5>
+//     <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+//     <a href="#" class="btn btn-primary">Go somewhere</a>
+//   </div>
+// </div> */}
 
 
 $(document).ready(function () {

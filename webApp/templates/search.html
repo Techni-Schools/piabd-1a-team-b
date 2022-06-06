@@ -1,7 +1,10 @@
 {% extends 'base.html' %}
 {% block title %} Wyszukiwanie frazy: {{request.args['string']}} {% endblock %} 
-
 {% block extrahead %}
+<link
+rel="stylesheet"
+href="{{ url_for('static',filename='styles/search.css') }}"
+/>
 <style>
     #back:disabled {
         border: 2px solid red;
@@ -10,7 +13,7 @@
         border: 2px solid red;
     }
     .content {
-        z-index: -1;
+        z-index: 1;
         position: relative;
     }
 </style>

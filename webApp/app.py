@@ -192,17 +192,17 @@ def listing():
   page = request.form.get('page', 1, type=int)
   page = 1 if page == 0 else 0
   if request.form.get('o') == 'pd':
-    prd = products.query.join(category, products.category == category.id).join(users, products.user == users.id).filter(products.name.like(string+'%')).filter(products.isDeleted == 0).order_by(products.price.desc()).add_column(products.name).add_column(users.username).add_column(products.uuid_id).add_column(products.image).add_column(products.price).add_column(category.category_name).paginate(page=page, per_page=maxproductspersite, error_out=False)
+    prd = products.query.join(category, products.category == category.id).join(users, products.user == users.id).filter(products.name.like(string+'%')).filter(products.isDeleted == 0).order_by(products.price.desc()).add_column(products.name).add_column(users.username).add_column(products.description).add_column(products.uuid_id).add_column(products.image).add_column(products.price).add_column(category.category_name).paginate(page=page, per_page=maxproductspersite, error_out=False)
   elif request.form.get('o') == 'p':
-    prd = products.query.join(category, products.category == category.id).join(users, products.user == users.id).filter(products.name.like(string+'%')).filter(products.isDeleted == 0).order_by(products.price).add_column(products.name).add_column(users.username).add_column(products.uuid_id).add_column(products.image).add_column(products.price).add_column(category.category_name).paginate(page=page, per_page=maxproductspersite, error_out=False)
+    prd = products.query.join(category, products.category == category.id).join(users, products.user == users.id).filter(products.name.like(string+'%')).filter(products.isDeleted == 0).order_by(products.price).add_column(products.name).add_column(users.username).add_column(products.description).add_column(products.uuid_id).add_column(products.image).add_column(products.price).add_column(category.category_name).paginate(page=page, per_page=maxproductspersite, error_out=False)
   else:
-    prd = products.query.join(category, products.category == category.id).join(users, products.user == users.id).filter(products.name.like(string+'%'), products.isDeleted == 0).add_column(products.name).add_column(users.username).add_column(products.uuid_id).add_column(products.image).add_column(products.price).add_column(category.category_name).paginate(page=page, per_page=maxproductspersite, error_out=False)
+    prd = products.query.join(category, products.category == category.id).join(users, products.user == users.id).filter(products.name.like(string+'%'), products.isDeleted == 0).add_column(products.name).add_column(users.username).add_column(products.description).add_column(products.uuid_id).add_column(products.image).add_column(products.price).add_column(category.category_name).paginate(page=page, per_page=maxproductspersite, error_out=False)
   l = []
   ok = products.query.join(category, products.category == category.id).add_columns(category.category_name).all()
   print(ok[0])
   count = products.query.filter(products.name.like(string+'%'), products.isDeleted == 0).count()
   for product in prd.items:
-    l.append({'name':product.name, 'user': product.username, 'uuid_id': product.uuid_id, 'image': product.image, 'price': product.price, 'count': count})
+    l.append({'name':product.name,'description':product.description, 'user': product.username, 'uuid_id': product.uuid_id, 'image': product.image, 'price': product.price, 'count': count})
   l = tuple(l)
   return jsonify(l)
 
