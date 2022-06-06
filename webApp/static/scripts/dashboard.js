@@ -41,6 +41,7 @@ $(".add-button").mouseout(function () {
 // })
 $(".copy").click(function () {
   text = $(this)["context"].innerText;
-  console.log(text);
   navigator.clipboard.writeText(text);
+
+  //  krótki opis //
 });

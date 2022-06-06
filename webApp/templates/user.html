@@ -49,7 +49,21 @@ endblock %} {% block extrahead %}
   </div>
 </div>
 <br />
-{% for i in query %} {{i[0].uuid_id}}
+<div class="row"></div>
+{% for i in query %}
+<div class="col-sm">
+  <div class="card" style="width: 18rem">
+    <img src="{{i[0].image}}" class="card-img-top" />
+    <div class="card-body">
+      <h5 class="card-title">{{i[0].name}}</h5>
+      <p class="card-text" id="description-mini">
+        {{short_desc(i[0].description)}}
+      </p>
+      <p class="card-text">Cena: {{i[0].price}} zł</p>
+      <a href="#" class="btn btn-primary">Go somewhere</a>
+    </div>
+  </div>
+</div>
 <br />
 {% endfor %}
 
