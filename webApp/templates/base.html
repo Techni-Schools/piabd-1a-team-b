@@ -376,7 +376,7 @@
                       Twój balans: {{ current_user.balance }} zł
                       <h1 class="name">{{ current_user.username }}</h1>
                       <img class="profile-img-mini"
-                        src="{{ current_user.get_image() }}"
+                        src="/static/images/{{ current_user.get_image() }}"
                         alt="" />
                     </div>
                     <div class="account-info-buttons">
