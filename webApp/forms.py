@@ -32,7 +32,7 @@ class newProduct(Form):
     quantity = IntegerField('Quantity', [validators.DataRequired(), validators.NumberRange(min=1, max=999)])
 
 class addBalance(Form):
-    balance = DecimalField('Add Balance', [validators.DataRequired(), validators.NumberRange(min=0, max=999)])
+    balance = DecimalField('', [validators.DataRequired(), validators.NumberRange(min=0, max=999)])
 
 class updateProduct(Form):
     name = StringField('Name', [validators.Length(min=1)])

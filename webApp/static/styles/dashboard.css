@@ -46,32 +46,105 @@ body {
 }
 .profile-edit-link {
   color: white;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 .profile-edit-link:hover {
-  color:white
+  color: white;
+}
+.add-balance-button .profile-edit-link,
+.edit-profile {
+  height: 50px;
+  width: 50px;
+  border-radius: 100%;
+}
+dd {
+  margin: 0;
+}
+dl {
+  margin: 0;
+}
+.add-money {
+  border: none;
+  background-color: transparent;
+  border-radius: 100%;
+  height: 50px;
+  width: 50px;
+  font-size: 20px;
+  color: white;
+}
+.add-money:hover {
+  background-color: rgba(116, 194, 0, 0.534);
+}
+.form-balance dl dt {
+  display: none;
+}
+.succes {
+  display: flex;
+  align-items: center;
+  width: 300px;
+  padding: 20px;
+  background-color: hsla(120, 100%, 35%, 0.357);
+  border: 2px solid #009e005b;
+}
+.succes p {
+  text-align: center;
+  margin: 0;
+}
+.succes i {
+  padding-right: 20px;
+  font-size: 20px;
+}
+#balance {
+  padding: 10px;
+  width: 400px;
+}
+.flashes {
+  padding: 0;
+}
+.edit-profile {
+  padding: 10px;
+  border: none;
+  background-color: transparent;
+  color: white;
+}
+.edit-profile:hover {
+  background-color: rgb(255, 166, 0, 0.4);
 }
 .edit-profile-button {
+  display: flex;
+  align-items: center;
   position: absolute;
   bottom: 0;
   right: 0;
-  padding: 20px;
+  /* padding: 20px; */
   margin: 10px;
-  border-radius: 100%;
+  /* border-radius: 100%; */
   background-color: transparent;
   border: none;
   color: white;
   z-index: 100000;
 }
-.edit-profile-button:hover {
-  background-color: rgba(255, 166, 0, 0.6);
+.add-balance {
+  height: 50px;
 }
-#delete {
+.form-balance {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.form-balance #delete {
   color: white;
   background-color: red;
   text-decoration: none;
   border: 1px solid red;
 }
-
+.btn-green {
+  background-color: rgb(4, 224, 4);
+}
+.btn-green:hover {
+  background-color: rgb(0, 105, 0);
+}
 .add-button:hover {
   width: 250px;
   background-color: rgb(2, 204, 2);
@@ -86,14 +159,19 @@ body {
   background-color: rgb(193, 0, 0);
 }
 
-form {
+.form-product {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   text-align: center;
 }
-
+.form-product dt {
+  text-align: center;
+}
+.form-balance {
+  display: flex;
+}
 dd {
   display: flex;
   justify-content: center;
@@ -300,7 +378,7 @@ body {
   border: none;
   height: auto;
   background-color: rgb(238, 238, 238);
-  color: black  ;
+  color: black;
 }
 .text {
   color: black;
@@ -336,7 +414,7 @@ body {
 
   .add-button {
     width: 60px;
-    height: 60px; 
+    height: 60px;
   }
 
   .card {

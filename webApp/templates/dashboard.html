@@ -22,7 +22,7 @@ href="{{ url_for('static',filename='styles/dashboard.css') }}"
       </div>
       <div class="modal-body">
         {% from "_formhelpers.html" import render_field %}
-    <form method="post" action="{{url_for('dashboard')}}" autocomplete="off" enctype="multipart/form-data">
+    <form class="form-product" method="post" action="{{url_for('dashboard')}}" autocomplete="off" enctype="multipart/form-data">
       <dl>
         {{ render_field(form.name) }}
         {{ render_field(form.image) }}
@@ -40,6 +40,30 @@ href="{{ url_for('static',filename='styles/dashboard.css') }}"
     </div>
   </div>
 </div>
+
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Dodawanie Pieniędzie</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form class="form-balance" method="post" action='{{url_for("balance")}}' autocomplete="off">
+          <dl>
+            {{ render_field(form1.balance, placeholder="Wpisz Ile chcesz pieniędzy") }}
+          </dl>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Zamknij</button>
+        <button type="submit" id="submit-form-balance" class="btn btn-green">Dodaj Pieniądze</button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
 <div class="account-data" style="z-index: 0;">
   <div class="background-image back-img"></div>
   {% if current_user.is_authenticated %}
@@ -48,7 +72,13 @@ href="{{ url_for('static',filename='styles/dashboard.css') }}"
     class="profile-img"
     src="/static/images/{{current_user.get_image()}}"
   />
-  <a class="profile-edit-link" href="/profile_update"><button class="edit-profile-button"><i class="fa-solid fa-pencil"></i></button></a>
+  <div class="edit-profile-button">
+    <div class="add-balance-button">
+      <button class="add-money" data-toggle="modal" data-target="#exampleModalLong"><i class="fa-solid fa-money-bill-1"></i></button>
+    </div>
+      <a class="profile-edit-link" href="/profile_update"><button class="edit-profile"><i class="fa-solid fa-pencil"></i></button></a>
+      </div>
+  </div>
 </div>
 <div class="informations-about-user">
   <div class="row information-row">
@@ -89,7 +119,7 @@ href="{{ url_for('static',filename='styles/dashboard.css') }}"
 {% with messages = get_flashed_messages() %} {% if messages %}
 <ul class="flashes">
   {% for message in messages %}
-  <p style="color: green">{{ message }}</p>
+  <div class="succes"><i class="fa-solid fa-check"></i><p style="color: green">{{ message }}</p></div>
   {% endfor %}
 </ul> 
 {% endif %} {% endwith %}
@@ -127,14 +157,5 @@ href="{{ url_for('static',filename='styles/dashboard.css') }}"
   <button class="add-button" data-toggle="modal" data-target="#exampleModal"><i class="fa-solid fa-cart-plus"></i></button>
 </div>
 <script src="{{ url_for('static', filename='scripts/dashboard.js') }}"></script>
-
-<form method="post" action='{{url_for("balance")}}' autocomplete="off">
-  <dl>
-    {{ render_field(form1.balance) }}
-  </dl>
-  </div>
-  <div class="modal-footer">
-    <input type="submit" value="dodaj balans">
-  </form>
 
 {% endblock %}

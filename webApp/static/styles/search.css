@@ -28,6 +28,15 @@
   background-color: rgb(231, 231, 231);
   height: 90vh;
 }
+@media only screen and (max-width: 776px) {
+  .side-menu {
+    height: auto;
+    width: 110%;
+    margin-left: 14px;
+    position: static;
+    top: 0;
+  }
+}
 .row-content {
   width: 100%;
 }
