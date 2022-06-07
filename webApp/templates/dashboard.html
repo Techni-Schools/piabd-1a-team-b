@@ -105,10 +105,10 @@ href="{{ url_for('static',filename='styles/dashboard.css') }}"
         style="height: 200px;"
         />
         <div class="card-body">
-        <h5 class="card-title"style="color: white;">{{i.name}}</h5>
-        <p class="text"style="color: white;">{{i.category_name}}</p>
-        <p class="price" style="color: white;">{{i.price}}zł</p>
-        <p class="card-text" style="color: white;">{{i.description}}</p>
+        <h5 class="card-title">{{i.name}}</h5>
+        <p class="text">{{i.category_name}}</p>
+        <p class="price" >{{i.price}}zł</p>
+        <p class="card-text" >{{i.description}}</p>
         <div class="buttons-card">
         <a href="/update?product={{i.uuid_id}}" class="btn btn-primary"
         >Zaktualizuj informacje</a

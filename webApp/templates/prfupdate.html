@@ -34,8 +34,13 @@ block extrahead %}
                 <div class="phone_number">
                   {{ render_field(form.phone_number) }}
                 </div>
+                <h1 class="change-image-text">Zdjęcie Profilowe</h1>
+                <div class="change-image">
+                  <div class="image-change" id="image-change">
+                    <img class="image-change-img" src="/static/images/{{current_user.get_image()}}  " alt="">
+                  </div>
+                </div>
                 <div class="image">{{ render_field(form.image) }}</div>
-
               </div>
               <div class="addres-book">
                 <h1 class="page-title"> Książka adresowa</h1>
@@ -45,7 +50,7 @@ block extrahead %}
                 <div class="zip_code">{{ render_field(form.zip_code) }}</div>
                 <div class="country">{{ render_field(form.country) }}</div>
               </div>
-            </dl>
+            </dl> 
           </form>
           <div class="zmien-button">
             <button id="form-subbmit" class="zmien-button1">Zmień</button>

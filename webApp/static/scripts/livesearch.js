@@ -8,7 +8,7 @@ $(document).ready(function () {
       success: function (res) {
         var data = "<div class='list-group'>";
         $.each(res, function (index, value) {
-          data += `<a class='aa' href='/profile/${value.user}?product=${value.id}'>
+          data += `<a class='aa' href='/product?id=${value.id}'>
             <p class='list-group-item list-group-item-action'>${value.name}</p></a>`;
         });
         data += "</div>";
@@ -29,7 +29,7 @@ $(document).ready(function () {
       success: function (res) {
         var data = "<div class='list-group'>";
         $.each(res, function (index, value) {
-          data += `<a class='aa' href='/profile/${value.user}?product=${value.id}'>
+          data += `<a class='aa' href='/product?id=${value.id}'>
             <p class='list-group-item list-group-item-action'>${value.name}</p></a>`;
         });
         data += "</div>";

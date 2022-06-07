@@ -180,6 +180,7 @@ body {
   animation-fill-mode: both;
   border-radius: 100%;
   height: 200px;
+  width: 200px;
 }
 
 .text {
@@ -298,9 +299,12 @@ body {
   width: 18rem;
   border: none;
   height: auto;
-  background-color: rgb(152, 152, 152);
+  background-color: rgb(238, 238, 238);
+  color: black  ;
 }
-
+.text {
+  color: black;
+}
 .buttons-card {
   display: flex;
   justify-content: space-between;

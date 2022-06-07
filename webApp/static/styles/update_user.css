@@ -32,6 +32,31 @@ body {
   margin: 0;
   padding: 0;
 }
+.change-image {
+  display: flex;
+  justify-content: left;
+  width: 334px;
+}
+.image-change { 
+  position: relative;
+  height: 200px;
+  width: 200px;
+  z-index: 0;
+  border-radius: 100%;
+}
+.change-image-text {
+  font-family: "Raleway", sans-serif;
+  font-size: 20px;
+}
+.image-change-img {
+  height: 200px;
+  width: 200px;
+  border-radius: 100%;
+}
+.image-change-img:hover {
+  /* background-color: black; */
+  border: 2px dotted black;
+}
 .error-banner i {
   font-size: 30px;
   padding-right:20px ;
@@ -257,6 +282,7 @@ label {
   animation-fill-mode: both;
   border-radius: 100%;
   height: 150px;
+  width: 150px;
 }
 
 @media only screen and (max-width: 1030px) {

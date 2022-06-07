@@ -49,7 +49,7 @@ endblock %} {% block extrahead %}
   </div>
 </div>
 <br />
-<div class="row"></div>
+<div class="row">
 {% for i in query %}
 <div class="col-sm">
   <div class="card" style="width: 18rem">
@@ -68,6 +68,7 @@ endblock %} {% block extrahead %}
 </div>
 <br />
 {% endfor %}
+</div>
 
 <script src="{{ url_for('static', filename='scripts/products.js') }}"></script>
 {% endblock %}

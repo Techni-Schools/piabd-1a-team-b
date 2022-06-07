@@ -8,12 +8,16 @@ $(document).ready(function () {
   $('.profile-img').click(function() {
     $('#image').click();
   });
+  $("#image-change").click(function() {
+    $('#image').click()
+  })
   $('#image').change(function() {
     var uploaded_images = '';
     const reader = new FileReader();
     reader.addEventListener('load', () => {
       uploaded_images = reader.result;
       $('.profile-img').attr('src', uploaded_images)
+      $('.image-change-img').attr('src', uploaded_images)
     })
     reader.readAsDataURL(this.files[0]);
   })

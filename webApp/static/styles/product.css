@@ -16,6 +16,9 @@
 .parent-row {
   width: 90%;
 }
+BODY {
+  overflow: hidden;
+}
 .description-div {
   height: 120px;
   overflow: auto;
