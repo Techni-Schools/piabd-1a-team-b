@@ -4,22 +4,11 @@
   rel="stylesheet"
   href="{{ url_for('static',filename='styles/search.css') }}"
 />
-<style>
-  #back:disabled {
-    border: 2px solid red;
-  }
-  #next:disabled {
-    border: 2px solid red;
-  }
-  .content {
-    z-index: 1;
-    position: relative;
-  }
-</style>
 {% endblock %} {% block main %}
 <div class="content">
     <div class="row row-content">
-        <div class="col-sm-">
+        <div class="col-sm- side-menu">
+            <h1>Sortowanie</h1>
             <select name="" id="orderby">
             <option value="">po niczym</option>
             <option value="p">po cenie rosnaco</option>
@@ -33,11 +22,14 @@
             <option value="4">rzylki</option>
             <option value="5">akcesoria</option>
             </select>
-            <button id="back"><</button>
-            <button id="next">></button>
         </div>
         <div class="col">
         <div class="result"></div>
+        <div class="buttons-next-back">
+            <button id="back"><</button>
+            <p>|</p>
+            <button id="next">></button>
+        </div>
         </div>
     </div>
   </div>

@@ -12,6 +12,12 @@ var fajnie;
 var clearTimeoutShow = 0;
 var isPossible = true;
 $(document).ready(function () {
+  function isOverEighteen(year, month, day) {
+    var now = parseInt(new Date().toISOString().slice(0, 10).replace(/-/g, ""));
+    var dob = year * 10000 + month * 100 + day * 1; // Coerces strings to integers
+
+    return now - dob > 180000;
+  }
   $(".profile-img").click(function () {
     $("#image").click();
   });
@@ -94,6 +100,7 @@ $(document).ready(function () {
   var zipValid = false;
   var stateValid = false;
   var countryValid = false;
+  var dateValid = false;
 
   $(".zmien-button1").click(function () {
     var Array = $("dd").children(".niewiem");
@@ -112,7 +119,8 @@ $(document).ready(function () {
         zipValid == true &&
         stateValid == true &&
         countryValid == true &&
-        phoneValid == true
+        phoneValid == true &&
+        dateValid == true
       ) {
         $("#form").submit();
       } else {
@@ -134,25 +142,30 @@ $(document).ready(function () {
         checkLengthFirstPage(fajnie);
         checkLengthSecondPage(fajnie);
       }
-      if (
-        firstValid == true &&
-        lastnameValid == true &&
-        emailValid == true &&
-        streetValid == true &&
-        cityValid == true &&
-        zipValid == true &&
-        stateValid == true &&
-        countryValid == true &&
-        phoneValid == true
-      ) {
-        $("#form").submit();
-      } else {
-        $(".error").empty();
-        var data =
-          "<h3 style='color: red;'> Gdzieś masz Błąd, sprawdz dokladnie! </h3>";
-        console.log(phoneValid);
-        $(".error").append(data);
-      }
+      setTimeout(function () {
+        if (
+          firstValid == true &&
+          lastnameValid == true &&
+          emailValid == true &&
+          streetValid == true &&
+          cityValid == true &&
+          zipValid == true &&
+          stateValid == true &&
+          countryValid == true &&
+          phoneValid == true &&
+          dateValid == true
+        ) {
+          $("#form").submit();
+        } else {
+          console.log(phoneValid);
+          $(".error").empty();
+          listOfErrors = [];
+          console.log(isPossible);
+          var data =
+            "<div class='error-banner'><i class='fa-solid fa-exclamation'></i><h3> Gdzieś masz bład!</h3></div>";
+          $(".error").append(data);
+        }
+      }, 300);
     }
   });
 
@@ -190,7 +203,6 @@ $(document).ready(function () {
             success: function (res) {
               if (res == "Email is invalid or already taken") {
                 //jesli sie nie udało
-                console.log("niue prawidlowy mail");
                 emailValid = false;
                 input.css("border-color", "yellow");
               } else {
@@ -245,6 +257,24 @@ $(document).ready(function () {
           phoneValid = false;
           input.css("border-color", "red");
         }
+      }
+    } else if (input.attr("id") == "date_of_birth") {
+      jd = $(input).val().split("-");
+      current_year = jd[0];
+      current_month = jd[1];
+      current_day = jd[2];
+      current_date = new Date(current_year, current_month, current_day);
+      current_date_minus_18 = new Date(
+        new Date().getFullYear() - 18,
+        new Date().getMonth(),
+        new Date().getDate()
+      );
+      console.log(isOverEighteen(current_year, current_month, current_day));
+      if (isOverEighteen(current_year, current_month, current_day)) {
+        dateValid = true;
+      } else {
+        dateValid = false;
+        input.css("border-color", "red");
       }
     }
   }
