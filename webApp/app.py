@@ -36,18 +36,6 @@ def livesearch():
 def index():
   return render_template('index.html')
     
-
-@app.route('/balance', methods=['POST', 'GET'])
-@login_required
-def balance():
-  form = addBalance(request.form)
-  if request.method == 'POST' and form.validate():
-    db.session.query(users).filter(users.id == current_user.get_id()).update({users.balance: users.balance+form.balance.data})
-    db.session.commit()
-    flash('balans dodany ez')
-    return redirect(url_for('dashboard'))
-  return render_template('balance.html', form=form)
-
 @app.route('/login' , methods=['GET' , 'POST'])
 def login():
   if current_user.is_authenticated:
@@ -92,10 +80,23 @@ def register():
     return redirect(url_for('login'))
   return render_template('login.html', form=form, form1=form1)
 
+@app.route('/dashboard/add_balance', methods=['POST'])
+@login_required
+def balance():
+  form1 = addBalance(request.form)
+  if form1.validate():
+    db.session.query(users).filter(users.id == current_user.get_id()).update({users.balance: users.balance+form1.balance.data})
+    db.session.commit()
+    flash('balans dodany ez')
+    return redirect(url_for('dashboard'))
+  else:
+    return render_template('404.html')
+
 @app.route('/dashboard', methods=['POST', 'GET'])
 @login_required
 def dashboard():
   form = newProduct(CombinedMultiDict((request.files, request.form)))
+  form1 = addBalance(request.form)
   if request.method == 'POST' and form.validate():
     myFile = str(uuid.uuid4())
     form.image.data.save(os.path.join(app.config['UPLOAD_FOLDER'], myFile))
@@ -109,7 +110,7 @@ def dashboard():
   else:
     u = db.session.query(products.uuid_id, products.name, products.image, category.category_name, products.quantity, products.price).join(category).join(users).filter(users.username == current_user.username, products.isDeleted == 0).all()
     if u == []: u = ['You dont have any products yet']
-    return render_template('dashboard.html', u=u, form=form)
+    return render_template('dashboard.html', u=u, form=form, form1=form1)
 
 @app.route('/delete')
 @login_required

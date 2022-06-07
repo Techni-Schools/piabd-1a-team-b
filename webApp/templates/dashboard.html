@@ -22,7 +22,7 @@ href="{{ url_for('static',filename='styles/dashboard.css') }}"
       </div>
       <div class="modal-body">
         {% from "_formhelpers.html" import render_field %}
-    <form method="post" autocomplete="off" enctype="multipart/form-data">
+    <form method="post" action="{{url_for('dashboard')}}" autocomplete="off" enctype="multipart/form-data">
       <dl>
         {{ render_field(form.name) }}
         {{ render_field(form.image) }}
@@ -127,5 +127,14 @@ href="{{ url_for('static',filename='styles/dashboard.css') }}"
   <button class="add-button" data-toggle="modal" data-target="#exampleModal"><i class="fa-solid fa-cart-plus"></i></button>
 </div>
 <script src="{{ url_for('static', filename='scripts/dashboard.js') }}"></script>
+
+<form method="post" action='{{url_for("balance")}}' autocomplete="off">
+  <dl>
+    {{ render_field(form1.balance) }}
+  </dl>
+  </div>
+  <div class="modal-footer">
+    <input type="submit" value="dodaj balans">
+  </form>
 
 {% endblock %}
