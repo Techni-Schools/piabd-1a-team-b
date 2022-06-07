@@ -1,42 +1,46 @@
-{% extends 'base.html' %}
-{% block title %} Wyszukiwanie frazy: {{request.args['string']}} {% endblock %} 
-{% block extrahead %}
+{% extends 'base.html' %} {% block title %} Wyszukiwanie frazy:
+{{request.args['string']}} {% endblock %} {% block extrahead %}
 <link
-rel="stylesheet"
-href="{{ url_for('static',filename='styles/search.css') }}"
+  rel="stylesheet"
+  href="{{ url_for('static',filename='styles/search.css') }}"
 />
 <style>
-    #back:disabled {
-        border: 2px solid red;
-    }
-    #next:disabled {
-        border: 2px solid red;
-    }
-    .content {
-        z-index: 1;
-        position: relative;
-    }
+  #back:disabled {
+    border: 2px solid red;
+  }
+  #next:disabled {
+    border: 2px solid red;
+  }
+  .content {
+    z-index: 1;
+    position: relative;
+  }
 </style>
-{% endblock %} 
-
-{% block main %}
+{% endblock %} {% block main %}
 <div class="content">
-    <select name="" id="orderby">
-    <option value="">po niczym</option>
-    <option value="p">po cenie rosnaco</option>
-    <option value="pd">po cenie malejaco</option>
-    </select>
-    <select name="" id="cat">
-    <option value="">bez</option>
-    <option value="1">splawik</option>
-    <option value="2">wendka</option>
-    <option value="3">przynenty</option>
-    <option value="4">rzylki</option>
-    <option value="5">akcesoria</option>
-    </select>
-    <button id="back"><</button>
-    <button id="next">></button>
-    <div class="result"></div>
+    <div class="row row-content">
+        <div class="col-sm-">
+            <select name="" id="orderby">
+            <option value="">po niczym</option>
+            <option value="p">po cenie rosnaco</option>
+            <option value="pd">po cenie malejaco</option>
+            </select>
+            <select name="" id="cat">
+            <option value="">bez</option>
+            <option value="1">splawik</option>
+            <option value="2">wendka</option>
+            <option value="3">przynenty</option>
+            <option value="4">rzylki</option>
+            <option value="5">akcesoria</option>
+            </select>
+            <button id="back"><</button>
+            <button id="next">></button>
+        </div>
+        <div class="col">
+        <div class="result"></div>
+        </div>
+    </div>
+  </div>
+  <script src="{{url_for('static', filename='scripts/search.js')}}"></script>
+  {% endblock %}
 </div>
-<script src="{{url_for('static', filename='scripts/search.js')}}"></script>
-{% endblock %}

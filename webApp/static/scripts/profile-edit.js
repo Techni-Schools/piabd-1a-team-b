@@ -1,26 +1,33 @@
 $(".tak").prop("disabled", true);
 $(".tak").css("pointer-events", "none");
+var phone = window.matchMedia("(max-width: 565px)").matches;
+console.log(phone);
 var animationCount = 0;
-var phone_number_copy;
+var phone_number_copy; // kopia numeru telefonu aby sprawdzic czy sa takie same jesli uzytkownik nie zzmieni tego
+var przypominajka_page = 1;
+var email_copy;
+var toggleClass = false; // uzywane do ładnego wysuniecia lewej strony menu
 var respond;
+var fajnie;
+var clearTimeoutShow = 0;
 var isPossible = true;
 $(document).ready(function () {
-  $('.profile-img').click(function() {
-    $('#image').click();
+  $(".profile-img").click(function () {
+    $("#image").click();
   });
-  $("#image-change").click(function() {
-    $('#image').click()
-  })
-  $('#image').change(function() {
-    var uploaded_images = '';
+  $("#image-change").click(function () {
+    $("#image").click();
+  });
+  $("#image").change(function () {
+    var uploaded_images = "";
     const reader = new FileReader();
-    reader.addEventListener('load', () => {
+    reader.addEventListener("load", () => {
       uploaded_images = reader.result;
-      $('.profile-img').attr('src', uploaded_images)
-      $('.image-change-img').attr('src', uploaded_images)
-    })
+      $(".profile-img").attr("src", uploaded_images);
+      $(".image-change-img").attr("src", uploaded_images);
+    });
     reader.readAsDataURL(this.files[0]);
-  })
+  });
   $(".tak").click(function () {
     setTimeout(function () {
       $(".about-information").show();
@@ -56,6 +63,9 @@ $(document).ready(function () {
       var idOfInput = $("dd").children(".niewiem")[x].id;
       if (idOfInput == "phone_number") {
         phone_number_copy = $("dd").children(".niewiem")[x].value;
+      }
+      if (idOfInput == "email") {
+        email_copy = $("dd").children(".niewiem")[x].value;
       }
       var newId = idOfInput + "-field";
       document.getElementById(newId).innerHTML =
@@ -108,24 +118,10 @@ $(document).ready(function () {
       } else {
         console.log(phoneValid);
         $(".error").empty();
+        listOfErrors = [];
         console.log(isPossible);
-        if (!isPossible) {
-          if (respond == "Phone number is invalid or already taken") {
-            var data =
-              "<div class='error-banner'><i class='fa-solid fa-exclamation'></i><h3 Taki numer telefonu juz instnieje </h3></div>";
-          }
-          if (respond == "Nie ma takiego telefon wariacie") {
-            var data =
-              "<div class='error-banner'><i class='fa-solid fa-exclamation'></i><h3>Nie ma takiego numeru telefonu <h3></div>";
-          } else {
-            var data =
-              "<div class='error-banner'><i class='fa-solid fa-exclamation'></i><h3> Masz za krótki numer telefonu wariacie</h3></div>";
-          }
-        } else {
-          var data =
-            "<div class='error-banner'><i class='fa-solid fa-exclamation'></i><h3> Gdzieś masz Błąd, sprawdz dokladnie! </h3></div>";
-        }
-
+        var data =
+          "<div class='error-banner'><i class='fa-solid fa-exclamation'></i><h3> Gdzieś masz bład!</h3></div>";
         $(".error").append(data);
       }
     }, 300);
@@ -185,8 +181,29 @@ $(document).ready(function () {
         input.val().includes(".") &&
         !input.val().includes(" ")
       ) {
-        emailValid = true;
-        input.css("border-color", "black");
+        if ($("#email").val() != email_copy) {
+          console.log("sprawdzam");
+          $.ajax({
+            method: "post",
+            url: "/email_validity_checks",
+            data: { email: input.val() },
+            success: function (res) {
+              if (res == "Email is invalid or already taken") {
+                //jesli sie nie udało
+                console.log("niue prawidlowy mail");
+                emailValid = false;
+                input.css("border-color", "yellow");
+              } else {
+                // clearError(inputField);
+                input.css("border-color", "green");
+                emailValid = true;
+              }
+            },
+          });
+        } else {
+          emailValid = true;
+          input.css("border-color", "black");
+        }
       } else {
         emailValid = false;
         input.css("border-color", "red");
@@ -197,7 +214,6 @@ $(document).ready(function () {
         console.log($("#phone_number").val());
         console.log("niesprawdzono");
         phoneValid = true;
-        isPossible = true;
         input.css("border-color", "black");
       } else {
         console.log("sprawdzam... ");
@@ -209,15 +225,12 @@ $(document).ready(function () {
             success: function (res) {
               console.log(input.val());
               if (res == "Phone number is invalid or already taken") {
-                respond = "Phone number is invalid or already taken";
                 phoneValid = false;
-                input.css("border-color", "red");
+                input.css("border-color", "yellow");
               } else if (res == "Nie ma takiego telefon wariacie") {
-                console.log("Nie ma takiego telefon wariacie");
-                respond = "Nie ma takiego telefon wariacie";
                 isPossible = false;
                 phoneValid = false;
-                input.css("border-color", "red");
+                input.css("border-color", "yellow");
               } else {
                 respond = "";
                 input.css("border-color", "black");
@@ -281,4 +294,71 @@ $(document).ready(function () {
       }
     }
   }
+
+  //rozwijanie przypominajki
+
+  $(".clickable-button").click(function () {
+    // zamykanie przypominajki
+    if (clearTimeoutShow >= 1) {
+      $(".clickable-button").css("pointer-events", "none");
+      $(".przypominajka-text").fadeOut();
+      setTimeout(function () {
+        $(".clickable-button").css("pointer-events", "auto");
+        $(".przypominajka").toggleClass("show_przypominajka");
+        $(".przypominajka-text").toggleClass("show_przypominajka-text");
+        $(".arrow-change").css("transform", "rotate(" + 0 + "deg)");
+      }, 300);
+      if (!phone) {
+        setTimeout(function () {
+          $(".side-menu").css("width", "200px"); // zmniejszanie side menu
+        }, 600);
+      }
+      clearTimeoutShow = 0;
+    } else {
+      $(".clickable-button").css("pointer-events", "none"); // otwieranie przypominajki
+      // $(".przypominajka").toggleClass("show_przypominajka");
+      if (!phone) {
+        setTimeout(function () {
+          $(".side-menu").css("width", "20vw"); // zwiekszanie side menu
+        }, 300);
+      }
+      setTimeout(function () {
+        $(".przypominajka").toggleClass("show_przypominajka");
+        $(".clickable-button").css("pointer-events", "auto");
+        $(".przypominajka-text").fadeIn();
+        $(".przypominajka-text").toggleClass("show_przypominajka-text");
+        $(".arrow-change").css("transform", "rotate(" + 180 + "deg)");
+        // toggleClass = true;
+      }, 600);
+      clearTimeoutShow++;
+    }
+  });
+
+  function checkPrzypomijakaPage() {
+    if (przypominajka_page == 1) {
+      $(".informacje-o-mnie-przypominajka").show();
+      $(".ksiazka-addresowa-przypominajka").hide();
+    } else {
+      $(".informacje-o-mnie-przypominajka").hide();
+      $(".ksiazka-addresowa-przypominajka").show();
+    }
+  }
+  checkPrzypomijakaPage();
+  //przewijanie stron przypominajki
+  $(".button-next").click(function () {
+    console.log("siema");
+    if (przypominajka_page < 2) {
+      przypominajka_page++;
+    }
+    console.log(przypominajka_page);
+    checkPrzypomijakaPage();
+  });
+  $(".button-back").click(function () {
+    console.log("siema");
+    if (przypominajka_page > 1) {
+      przypominajka_page--;
+    }
+    console.log(przypominajka_page);
+    checkPrzypomijakaPage();
+  });
 });

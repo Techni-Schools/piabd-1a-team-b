@@ -42,6 +42,4 @@ $(".add-button").mouseout(function () {
 $(".copy").click(function () {
   text = $(this)["context"].innerText;
   navigator.clipboard.writeText(text);
-
-  //  krótki opis //
 });

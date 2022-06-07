@@ -20,7 +20,7 @@ body {
 }
 .error-banner {
   padding: 10px;
-  background-color: rgba(255, 0, 0,0.5);
+  background-color: rgba(255, 0, 0, 0.5);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -32,12 +32,63 @@ body {
   margin: 0;
   padding: 0;
 }
+.przypominajka {
+  width: 100%;
+  height: 60px;
+  transition: height 0.2s;
+  background-color: orange;
+  position: relative;
+}
+.przypominajka-text {
+  display: none;
+}
+.przypominajka-text ul li {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.bolder {
+  font-weight: bolder;
+}
+.przypominajka-title {
+  text-align: center;
+  font-size: 20px;
+  padding: 10px;
+}
+.show_przypominajka {
+  height: 500px;
+}
+li {
+  font-size: 0.7vw;
+}
+.show_przypominajka-text {
+  display: block;
+}
+.buttons-next-back {
+  /* transform: translate(-50%, -50%); */
+  position: absolute;
+  /* right: 250px; */
+  left: 43%;
+  bottom: 0;
+  padding-bottom: 10px;
+}
+.clickable-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-left: 20px;
+  padding-right: 20px;
+  height: 60px;
+}
+.side-menu {
+  width: 200px;
+  transition: width 0.3s;
+}
 .change-image {
   display: flex;
   justify-content: left;
   width: 334px;
 }
-.image-change { 
+.image-change {
   position: relative;
   height: 200px;
   width: 200px;
@@ -59,7 +110,7 @@ body {
 }
 .error-banner i {
   font-size: 30px;
-  padding-right:20px ;
+  padding-right: 20px;
 }
 .error {
   display: flex;
@@ -122,7 +173,14 @@ body {
 .tak:disabled {
   background-color: orange;
 }
-
+@media only screen and (max-width: 565px) {
+  li {
+    font-size: 15px;
+  }
+  .side-menu {
+    width: 100%;
+  }
+}
 label {
   font-family: "Open Sans", sans-serif;
   font-family: "Raleway", sans-serif;
@@ -201,7 +259,14 @@ label {
   display: flex;
   transition: transform 0.2s, border-radius 0.1s;
 }
-
+.arrow-change {
+  transition: all 0.3s;
+}
+.button-bottom-przypominajka {
+  background-color: transparent;
+  border: none;
+  color: black;
+}
 .col-information:hover {
   border-radius: 10px;
   transform: scale(1.05);
@@ -391,5 +456,22 @@ label {
     -webkit-transform: translateX(0);
     transform: translateX(0);
     opacity: 1;
+  }
+}
+
+@-webkit-keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
   }
 }

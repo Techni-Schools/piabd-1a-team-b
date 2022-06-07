@@ -72,7 +72,7 @@ function updateResult(data) {
     },
     success: function (res) {
       sorted = 0;
-      data = `<div class="row">`;
+      data = `<div class="row product-row">`;
       $.each(res, function (index, value) {
         endOfDescription = false;
         var description_mini = "";
