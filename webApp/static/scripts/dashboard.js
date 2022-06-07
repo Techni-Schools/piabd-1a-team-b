@@ -22,7 +22,9 @@ $(".0-3").mouseleave(function () {
 setTimeout(function () {
   $(".containder-main").css("display", "flex");
 }, 600);
-
+// $("#submit-form-balance").click(function () {
+//   $(".form-balance").submit();
+// });
 $(".add-button").mouseenter(function () {
   console.log("najechane");
   data = "<h4 class='yes'>Dodaj Produkt</h4>";
