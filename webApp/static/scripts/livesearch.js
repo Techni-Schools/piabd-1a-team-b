@@ -42,4 +42,9 @@ $(document).ready(function () {
       $("#datalist").empty();
     }
   });
+  $('#livebox').keydown(function(e) {
+    if (e.keyCode == 13) {
+      window.location.href = `/search?page=1&string=${$('#livebox').val()}`      
+    }
+  })
 });

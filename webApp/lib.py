@@ -5,6 +5,7 @@ from sqlalchemy import func, or_
 import pymysql
 import os
 import uuid
+from shutil import copyfile
 from random import randint
 from werkzeug.utils import secure_filename
 from datetime import datetime

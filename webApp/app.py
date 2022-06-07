@@ -80,7 +80,9 @@ def register():
   form = loginForm(request.form)
   form1 = registerForm(request.form)
   if request.method == 'POST' and form1.validate():
-    u = users(username=form1.username.data, email=form1.email.data, password=bcrypt.hashpw((form1.password.data).encode(), bcrypt.gensalt()), first_name=form1.first_name.data, last_name=form1.last_name.data, date_of_birth=form1.date_of_birth.data, phone_number=form1.phone_number.data, street=form1.street.data, city=form1.city.data, state=form1.state.data, zip_code=form1.zip_code.data, country=form1.country.data)
+    image = uuid.uuid4()
+    copyfile(os.path.join(app.config['UPLOAD_FOLDER'], 'picture_large.jpg'), os.path.join(app.config['UPLOAD_FOLDER'], str(image)))
+    u = users(username=form1.username.data, email=form1.email.data, password=bcrypt.hashpw((form1.password.data).encode(), bcrypt.gensalt()), first_name=form1.first_name.data, last_name=form1.last_name.data, date_of_birth=form1.date_of_birth.data, phone_number=form1.phone_number.data, street=form1.street.data, city=form1.city.data, state=form1.state.data, zip_code=form1.zip_code.data, country=form1.country.data, image=str(image))
     try:
       db.session.add(u)
       db.session.commit()
@@ -224,13 +226,7 @@ def profile_update():
   form = updateProfile(CombinedMultiDict((request.files, request.form)))
   cu = db.session.query(users).filter(users.id == current_user.get_id()).first()
   cu.date_of_birth = cu.date_of_birth.strftime('%Y-%m-%d')
-  # path = r'%s' % (os.path.join('images', cu.image),)
-  # path = path.replace('\\', '/')
   if request.method == 'POST' and form.validate():
-    # if form.image.data is not None:
-      # form.image.data.save(os.path.join(app.config['UPLOAD_FOLDER'], cu.image))
-    # c = db.session.query(category.id).filter(category.category_name == form.category.data).first()
-    # c = c[0]
     try:
       db.session.query(users).filter(users.id == current_user.get_id()).update({users.first_name: form.first_name.data, users.last_name: form.last_name.data, users.email: form.email.data, users.date_of_birth: form.date_of_birth.data, users.phone_number: form.phone_number.data, users.street: form.street.data, users.city: form.city.data, users.state: form.state.data, users.zip_code: form.zip_code.data, users.country: form.country.data})
       db.session.commit()
