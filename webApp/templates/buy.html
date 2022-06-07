@@ -26,10 +26,9 @@
         {{ render_field(form.kurier) }}
         {{ render_field(form.quantity) }}
     </dl>
-    {{prd.price}}zł
+    {{str(prd.price)[:str(prd.price).index('.')+3]}}zł
 {{prd.name}}
 {{prd.category}}
-{{prd.price}}
 {{prd.description}}
 {{prd.quantity}}
 {{prd.user}}

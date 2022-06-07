@@ -28,6 +28,7 @@ def livesearch():
   l = []
   for product in allproducts:
     product = list(product)
+    print(product[2])
     l.append({'name':product[0], 'user':product[1], 'id': product[2]})
   l = tuple(l)
   return jsonify(l)
@@ -50,7 +51,7 @@ def login():
     password = form.password_login.data
     loggedUser = users.query.filter_by(username=username).first()
     if loggedUser:
-      if bcrypt.checkpw(password.encode(), (loggedUser.password).encode()):
+      if bcrypt.checkpw(password.encode(), (loggedUser.password)):
         login_user(loggedUser, remember=form.remember.data)
         return redirect(url_for('dashboard'))
       else:
@@ -71,9 +72,10 @@ def register():
     image = uuid.uuid4()
     copyfile(os.path.join(app.config['UPLOAD_FOLDER'], 'picture_large.jpg'), os.path.join(app.config['UPLOAD_FOLDER'], str(image)))
     u = users(username=form1.username.data, email=form1.email.data, password=bcrypt.hashpw((form1.password.data).encode(), bcrypt.gensalt()), first_name=form1.first_name.data, last_name=form1.last_name.data, date_of_birth=form1.date_of_birth.data, phone_number=form1.phone_number.data, street=form1.street.data, city=form1.city.data, state=form1.state.data, zip_code=form1.zip_code.data, country=form1.country.data, image=str(image))
+    db.session.add(u)
+    db.session.commit()
     try:
-      db.session.add(u)
-      db.session.commit()
+      pass
     except:
       flash('Username, Email or Phone number already used')
       return redirect(url_for('login'))
@@ -92,6 +94,7 @@ def balance():
   else:
     return render_template('404.html')
 
+
 @app.route('/dashboard', methods=['POST', 'GET'])
 @login_required
 def dashboard():
@@ -109,8 +112,8 @@ def dashboard():
     return redirect(url_for('dashboard'))
   else:
     u = db.session.query(products.uuid_id, products.name, products.image, category.category_name, products.quantity, products.price).join(category).join(users).filter(users.username == current_user.username, products.isDeleted == 0).all()
-    if u == []: u = ['You dont have any products yet']
-    return render_template('dashboard.html', u=u, form=form, form1=form1)
+    if u == []: u = ['You dont have any products yet'] 
+    return render_template('dashboard.html', u=u, form=form, form1=form1, str=str, index=index)
 
 @app.route('/delete')
 @login_required
@@ -226,11 +229,11 @@ def update():
 def profile_update():
   form = updateProfile(CombinedMultiDict((request.files, request.form)))
   cu = db.session.query(users).filter(users.id == current_user.get_id()).first()
-  cu.date_of_birth = cu.date_of_birth.strftime('%Y-%m-%d')
   if request.method == 'POST' and form.validate():
+    db.session.query(users).filter(users.id == current_user.get_id()).update({users.first_name: form.first_name.data, users.last_name: form.last_name.data, users.email: form.email.data, users.date_of_birth: form.date_of_birth.data, users.phone_number: form.phone_number.data, users.street: form.street.data, users.city: form.city.data, users.state: form.state.data, users.zip_code: form.zip_code.data, users.country: form.country.data})
+    db.session.commit()
     try:
-      db.session.query(users).filter(users.id == current_user.get_id()).update({users.first_name: form.first_name.data, users.last_name: form.last_name.data, users.email: form.email.data, users.date_of_birth: form.date_of_birth.data, users.phone_number: form.phone_number.data, users.street: form.street.data, users.city: form.city.data, users.state: form.state.data, users.zip_code: form.zip_code.data, users.country: form.country.data})
-      db.session.commit()
+      pass
     except:
       flash('email lub numer telefonu juz uzywany :(')
       return redirect(url_for('profile_update'))
@@ -269,5 +272,5 @@ def buy(uid):
           flash('nie ma tyle produktow')
           return redirect(url_for('buy', uid=uid))
           
-      return render_template('buy.html', prd=cu, adr=address, form=form)
+      return render_template('buy.html', prd=cu, adr=address, form=form, str=str, index=index)
   return render_template('404.html')

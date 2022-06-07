@@ -26,7 +26,7 @@ class registerForm(Form):
 class newProduct(Form):
     name = StringField('Name', [validators.Length(min=1)])
     image = FileField('Image', validators=[FileRequired(), FileAllowed(list(IMAGES), 'images only')])
-    category = SelectField('Category', choices=['Splawik', 'Wendka', 'Przynenty', 'Rzylki', 'Akcesoria'])
+    category = SelectField('Category', choices=['splawik', 'wendka', 'przynenty', 'rzylki', 'akcesoria'])
     price = DecimalField('Price', [validators.DataRequired(), validators.NumberRange(min=0, max=999)])
     description = TextAreaField('Description')
     quantity = IntegerField('Quantity', [validators.DataRequired(), validators.NumberRange(min=1, max=999)])

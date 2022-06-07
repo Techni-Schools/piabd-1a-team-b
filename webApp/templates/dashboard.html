@@ -107,7 +107,7 @@ href="{{ url_for('static',filename='styles/dashboard.css') }}"
         <div class="card-body">
         <h5 class="card-title">{{i.name}}</h5>
         <p class="text">{{i.category_name}}</p>
-        <p class="price" >{{i.price}}zł</p>
+        <p class="price" >{{str(i.price)[:str(i.price).index('.')+3]}}zł</p>
         <p class="card-text" >{{i.description}}</p>
         <div class="buttons-card">
         <a href="/update?product={{i.uuid_id}}" class="btn btn-primary"
