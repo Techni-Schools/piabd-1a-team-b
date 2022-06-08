@@ -40,6 +40,9 @@
 .row-content {
   width: 100%;
 }
+.result-div {
+  margin-top: 20px;
+}
 .buttons-next-back {
   display: flex;
   align-items: center;

@@ -1,5 +1,5 @@
 var endOfDescription = false;
-
+var price_mini
 function parseURLParams(url) {
   var queryStart = url.indexOf("?") + 1,
     queryEnd = url.indexOf("#") + 1 || url.length + 1,
@@ -89,7 +89,8 @@ function updateResult(data) {
           description_mini += "...";
           endOfDescription = false;
         }
-        data += `<div class="col-sm"><div class="card" style="width: 18rem;"><img class="card-img-top" src="/static/images/${value.image}" alt="Card image cap"><div class="card-body"><h5 class="card-title"><a href='/product?id=${value.uuid_id}'>${value.name}</a></h5><p class="card-text">${description_mini}</p><p class="card-text">${value.price} zł</p><p class='card-text seller-username'>Sprzedaje: <a href='/profile/${value.user}'>${value.user}</a></p> <a href="/product?id=${value.uuid_id}" class="btn btn-primary">Do produktu</a></div></div></div>`;
+        price_mini = `${value.price}`.indexOf(".") + 3 // znalesc gdzie sie znajduje kropka (.)
+        data += `<div class="col-sm"><div class="card" style="width: 18rem;"><img class="card-img-top" src="/static/images/${value.image}" alt="Card image cap"><div class="card-body"><h5 class="card-title"><a href='/product?id=${value.uuid_id}'>${value.name}</a></h5><p class="card-text">${description_mini}</p><p class="card-text">${value.price.substring(0, price_mini)} zł</p><p class='card-text seller-username'>Sprzedaje: <a href='/profile/${value.user}'>${value.user}</a></p> <a href="/product?id=${value.uuid_id}" class="btn btn-primary">Do produktu</a></div></div></div>`;
         total = value.count;
         sorted++;
       });

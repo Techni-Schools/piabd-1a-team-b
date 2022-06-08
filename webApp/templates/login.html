@@ -101,57 +101,59 @@ extrahead %}
   </div>
 </div>
 {% from "_formhelpers.html" import render_field %}
-<div class="allpage">
-  <div class="form-login">
-    <div class="nice-icon">
-      <div class="niezgadzam">
-        <div class="image-padding">
-          <i class="fa-solid fa-people-group image"></i>
+<div class="div-all-page">
+  <div class="allpage">
+    <div class="form-login">
+      <div class="nice-icon">
+        <div class="niezgadzam">
+          <div class="image-padding">
+            <i class="fa-solid fa-people-group image"></i>
+          </div>
         </div>
+        <h4 class="login-word">LOGIN</h4>
       </div>
-      <h4 class="login-word">LOGIN</h4>
-    </div>
-    <div class="form-login-2">
-      <form
-        method="post"
-        action="{{url_for('login')}}"
-        autocomplete="off"
-        autocapitalize="off"
-      >
-        <dl>
-          <div class="username_login">
-            <i class="fa-solid fa-user"></i>
-            {{ render_field(form.username_login, placeholder="Enter your
-            name")}}
-          </div>
-          <div class="password_login">
-            <i class="fa-solid fa-lock"></i>
-            {{ render_field(form.password_login, placeholder="Enter your
-            password") }}
-          </div>
-          <div class="form_remember">{{ render_field(form.remember) }}</div>
-        </dl>
-        <button type="submit" class="submitBtn">
-          Zaloguj <i class="fa-solid fa-arrow-right-to-bracket"></i>
-        </button>
-        <button
-          type="button"
-          id="register-button"
-          class="btn btn-primary"
-          data-bs-toggle="modal"
-          data-bs-target="#exampleModal"
+      <div class="form-login-2">
+        <form
+          method="post"
+          action="{{url_for('login')}}"
+          autocomplete="off"
+          autocapitalize="off"
         >
-          Register Your Account
-        </button>
-      </form>
+          <dl>
+            <div class="username_login">
+              <i class="fa-solid fa-user"></i>
+              {{ render_field(form.username_login, placeholder="Enter your
+              name")}}
+            </div>
+            <div class="password_login">
+              <i class="fa-solid fa-lock"></i>
+              {{ render_field(form.password_login, placeholder="Enter your
+              password") }}
+            </div>
+            <div class="form_remember">{{ render_field(form.remember) }}</div>
+          </dl>
+          <button type="submit" class="submitBtn">
+            Zaloguj <i class="fa-solid fa-arrow-right-to-bracket"></i>
+          </button>
+          <button
+            type="button"
+            id="register-button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
+            Register Your Account
+          </button>
+        </form>
+      </div>
+      {% with messages = get_flashed_messages() %} {% if messages %}
+      <ul class="flashes">
+        {% for message in messages %}
+        <p style="color: red">{{ message }}</p>
+        {% endfor %}
+      </ul>
+      {% endif %} {% endwith %}
     </div>
-    {% with messages = get_flashed_messages() %} {% if messages %}
-    <ul class="flashes">
-      {% for message in messages %}
-      <p style="color: red">{{ message }}</p>
-      {% endfor %}
-    </ul>
-    {% endif %} {% endwith %}
   </div>
 </div>
 <script src="{{ url_for('static',filename='scripts/register.js') }}"></script>

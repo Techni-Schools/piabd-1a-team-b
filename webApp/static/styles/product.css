@@ -1,6 +1,8 @@
 .image-product {
   height: 400px;
-  margin: 20px;
+  width: 600px;
+  padding: 30px;
+  /* margin: 20px; */
 }
 .product-content {
   display: flex;
@@ -18,6 +20,13 @@
 }
 BODY {
   overflow: hidden;
+}
+.col {
+  margin-left: 20px;
+  margin-right: 20px;
+  -webkit-box-shadow: 0px -1px 18px 0px rgba(66, 68, 90, 1);
+-moz-box-shadow: 0px -1px 18px 0px rgba(66, 68, 90, 1);
+box-shadow: 0px -1px 18px 0px rgba(66, 68, 90, 1);
 }
 .description-div {
   height: 120px;

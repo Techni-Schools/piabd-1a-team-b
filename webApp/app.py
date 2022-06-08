@@ -180,7 +180,7 @@ def usernameCheck():
 def search():
   if request.args.get('string') is None:
     return render_template('404.html')
-  return render_template('search.html')
+  return render_template('search.html', str=str, index=index)
 
 @app.route('/listing',methods=['POST', 'GET'])
 def listing():
