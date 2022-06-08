@@ -1,0 +1,18 @@
+.all-page-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 89vh;
+}
+.chose-dostawca {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    text-align: center;
+    color: grey;
+}
+.dobra {
+    text-align: center;
+}
+.bolder {
+    font-weight: 900;
+}
