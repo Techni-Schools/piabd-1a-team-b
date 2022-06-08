@@ -16,3 +16,6 @@
 .bolder {
     font-weight: 900;
 }
+.row {
+    width: 900px;
+}
