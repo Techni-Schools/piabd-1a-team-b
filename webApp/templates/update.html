@@ -9,22 +9,28 @@
 {% block main %} 
 
   {% if request.args['product']%}
-  <br>
-  <br>
-  produkt - {{prd.name}}
-  <br>
-  <br>
+  <h1 class="gigaprodukt">Produkt - ' {{prd.name}} '</h1>
   {% from "_formhelpers.html" import render_field %}
   <form method="post" enctype="multipart/form-data">
-    <dl>
-      {{ render_field(form.name) }}
-      {{ render_field(form.image) }}
-      {{ render_field(form.category) }}
-      {{ render_field(form.price) }}
-      {{ render_field(form.description) }}
-      {{ render_field(form.quantity) }}
+    <dl class="cialo">
+      <div class="infoProdutk">
+        <h2 class="produktTekst">Nazwa Produktu</h2>
+        {{ render_field(form.name) }}
+        <div class="selfie">
+          <h2 class="produktTekst">Zdjęcie</h2>
+          {{ render_field(form.image) }}
+        </div>
+        <h2 class="produktTekst">Kategoria</h2>
+        {{ render_field(form.category) }}
+        <h2 class="produktTekst">Cena</h2>
+        {{ render_field(form.price) }}
+        <h2 class="produktTekst">Opis</h2>
+        {{ render_field(form.description) }}
+        <h2 class="produktTekst">Ilość</h2>
+        {{ render_field(form.quantity) }}
+        <p><input type=submit value=Zaktualizuj class="udpatebutton4y645yyyyggggggggggggggggggg">
+        </div>
     </dl>
-    <p><input type=submit value=Zaktualizuj>
   </form>
   {% endif %}
 
