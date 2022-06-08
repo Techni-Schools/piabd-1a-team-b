@@ -3,40 +3,48 @@
 {% block title %} Kup produkt {% endblock %}
 
 {% block extrahead %}
+<link
+rel="stylesheet"
+href="{{ url_for('static',filename='styles/buy.css') }}"
+/>
 {% endblock %}
 
 {% block main %} 
 
-<div class="address">
-<h3>Twoje dane</h3>
-{{adr.street}}
-{{adr.zip_code}}
-<br>
-{{adr.state}}
-{{adr.city}}
-{{adr.country}}
-<br>
-<a href="{{url_for('profile_update')}}">Zmień adres</a>
+<div class="all-page-div">
+<div class="row">
+    <div class="col">
+        <div class="information-about-procudct">
+            {{str(prd.price)[:str(prd.price).index('.')+3]}}zł
+            {{prd.name}}
+            {{prd.category}}
+            {{prd.description}}
+            {{prd.quantity}}
+            {{prd.user}}
+            <img src="{{url_for('static', filename='images/'+prd.image)}}" style="height: 200px">
+        </div>
+    </div>
+    <div class="col">
+        <div class="dobra">
+        <div class="address">
+            <h3>Twoje dane</h3>
+            <h5><span class="bolder">Ulica: </span> {{adr.street}}</h5>
+            <h5><span class="bolder"> Kod Pocztowy:</span> {{adr.zip_code}}</h5>
+            <br>
+            <h5><span class="bolder">Województwo: </span> {{adr.state}}</h5>
+            <h5><span class="bolder">Miasto: </span> {{adr.city}}</h5>
+            <h5><span class="bolder">Kraj: </span> {{adr.country}}</h5>
+        {% from "_formhelpers.html" import render_field %}
+        <h4 class="chose-dostawca">Wybierz Dostawce</h4>
+        <form method="post" enctype="multipart/form-data">
+            <dl>
+                {{ render_field(form.kurier) }}
+                {{ render_field(form.quantity) }}
+            </dl>
+        <br>
+            <p><input type=submit value=Kup>
+            </form>
 </div>
-
-
-{% from "_formhelpers.html" import render_field %}
-<form method="post" enctype="multipart/form-data">
-    <dl>
-        {{ render_field(form.kurier) }}
-        {{ render_field(form.quantity) }}
-    </dl>
-    {{str(prd.price)[:str(prd.price).index('.')+3]}}zł
-{{prd.name}}
-{{prd.category}}
-{{prd.description}}
-{{prd.quantity}}
-{{prd.user}}
-<br>
-<img src="{{url_for('static', filename='images/'+prd.image)}}" style="height: 200px">
-    <p><input type=submit value=Kup>
-    </form>
-    
 {% with messages = get_flashed_messages() %} {% if
     messages %}
     <ul class="flashes">
@@ -45,5 +53,7 @@
       {% endfor %}
     </ul>
     {% endif %} {% endwith %}
-
+    </div>
+    </div>
+</div>
 {% endblock %}

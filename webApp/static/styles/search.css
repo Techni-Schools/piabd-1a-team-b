@@ -20,6 +20,15 @@
   display: flex;
   justify-content: center;
 }
+.card  {
+  transition: 0.2s all;
+}
+.card:hover {
+  -webkit-box-shadow: 0px 0px 15px 0px rgba(255, 255, 255, 1);
+  -moz-box-shadow: 0px 0px 15px 0px rgba(255, 255, 255, 1);
+  box-shadow: 0px 0px 15px 0px rgba(255, 255, 255, 1);
+  transform: scale(1.1);
+}
 .side-menu {
   position: sticky;
   z-index: 1;
@@ -41,7 +50,7 @@
   width: 100%;
 }
 .result-div {
-  margin-top: 20px;
+  margin-top: 40px;
 }
 .buttons-next-back {
   display: flex;

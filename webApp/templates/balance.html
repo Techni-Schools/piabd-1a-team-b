@@ -3,11 +3,6 @@
 {% block title %} Balans - {{current_user.username}} {% endblock %}
 
 {% block main %}
-<style>
-    .row {
-        margin: 0;
-    }
-</style>
 <div class="row">
     {% from "_formhelpers.html" import render_field %}
     <form method="post" enctype="multipart/form-data">

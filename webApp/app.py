@@ -105,7 +105,7 @@ def dashboard():
     form.image.data.save(os.path.join(app.config['UPLOAD_FOLDER'], myFile))
     c = db.session.query(category.id).filter(category.category_name == form.category.data).first()
     c = c[0]
-    q = products(form.name.data, myFile, c, form.price.data, form.description.data, 0, form.quantity.data, current_user.id)
+    q = products(form.name.data, myFile, c, form.price.data, form.description.data, 0, form.quantity.data, current_user.id, str(uuid.uuid4()))
     db.session.add(q)
     db.session.commit()
     flash('produkt dodany pomyślnie!')
@@ -148,7 +148,7 @@ def product():
   if len(id) != 36:
     return render_template('404.html')
   query = products.query.join(users).join(category).add_column(category.category_name).add_column(users.username).filter(products.uuid_id == id).first_or_404()
-  return render_template('product.html', product=query)
+  return render_template('product.html', product=query, str=str, index=index)
 
 @app.route('/email_validity_checks', methods=['POST'])
 def emailCheck():

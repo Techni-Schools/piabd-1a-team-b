@@ -210,7 +210,7 @@ $(document).ready(function () {
           $(inputName).attr("aria-label") +
           " taki " +
           $(inputName).attr("aria-label") +
-          " instnieje " +
+          " jest juz zajęty " +
           "</h4>" +
           "</div>" +
           "<br>";
@@ -244,7 +244,7 @@ $(document).ready(function () {
             "<h4>" +
             " taki " +
             $(inputName).attr("aria-label") +
-            " instnieje " +
+            " jest juz zajęty " +
             "</h4>" +
             "</div>" +
             "<br>";

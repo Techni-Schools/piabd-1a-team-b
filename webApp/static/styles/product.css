@@ -31,6 +31,7 @@ box-shadow: 0px -1px 18px 0px rgba(66, 68, 90, 1);
 .description-div {
   height: 120px;
   overflow: auto;
+  overflow-x: hidden;
 }
 .description-title {
   text-align: center;

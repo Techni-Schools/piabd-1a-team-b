@@ -24,6 +24,7 @@ block extrahead %}
             {{product[1]}}
           </a>
         </h4>
+        <h4 class="product-price">Cena: {{ str(product[0].price)[:str(product[0].price).index('.')+3]}} zł</h4>
         <h3 class="description-title">Opis</h3>
         <div class="description-div">
           <h5 class="description-text">{{product[0].description}}</h5>
