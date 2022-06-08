@@ -37,7 +37,7 @@ class addBalance(Form):
 class updateProduct(Form):
     name = StringField('Nazwa Produktu', [validators.Length(min=1)])
     image = FileField('Zdjęcie', validators=[FileAllowed(list(IMAGES), 'images only')])
-    category = SelectField('Kategoria', choices=['Splawik', 'Wendka', 'Przynenty', 'Rzylki', 'Akcesoria'])
+    category = SelectField('Kategoria', choices=['splawik', 'wendka', 'przynenty', 'rzylki', 'akcesoria'])
     price = DecimalField('Cena', [validators.DataRequired(), validators.NumberRange(min=0, max=99999)])
     description = TextAreaField('Opis')
     quantity = IntegerField('Ilość', [validators.DataRequired()])

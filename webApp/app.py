@@ -218,6 +218,7 @@ def update():
     if form.image.data is not None:
       form.image.data.save(os.path.join(app.config['UPLOAD_FOLDER'], cu.image))
     c = db.session.query(category.id).filter(category.category_name == form.category.data).first()
+    print(c)
     c = c[0]
     db.session.query(products).filter(products.uuid_id == str(request.args['product'])).update({products.name: form.name.data, products.category: c, products.price: form.price.data, products.description: form.description.data, products.quantity: form.quantity.data})
     db.session.commit()
