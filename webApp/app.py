@@ -28,7 +28,6 @@ def livesearch():
   l = []
   for product in allproducts:
     product = list(product)
-    print(product[2])
     l.append({'name':product[0], 'user':product[1], 'id': product[2]})
   l = tuple(l)
   return jsonify(l)
@@ -43,9 +42,6 @@ def login():
     return redirect('/')
   form = loginForm(request.form)
   form1 = registerForm(request.form)
-  # if request.method == 'POST' and form.validate():
-  #   print(form.first_name.data)
-  #   return redirect('/login')
   if request.method == 'POST' and form.validate():
     username = form.username_login.data
     password = form.password_login.data
@@ -278,8 +274,6 @@ def orders_list():
   if not current_user.is_authenticated:
     return render_template('404.html')
   if current_user.get_role() == 'admin':
-  # query = products.query.join(users).join(category).add_column(category.category_name).filter(products.isDeleted == 0).filter(users.username == username).all()
-
     all_orders = orders.query.all()
     return render_template('orders.html', orders=all_orders)
   return render_template('404.html')
