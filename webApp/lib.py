@@ -43,5 +43,11 @@ def get_address(self):
 
 TO TEZ
 
+def get_role(self):
+        try:
+            return str(self.role)
+        except AttributeError:
+            raise NotImplementedError("No `role` attribute - override `get_role`") from None
+
 
 """

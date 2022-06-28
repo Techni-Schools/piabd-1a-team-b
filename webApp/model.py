@@ -37,6 +37,7 @@ class users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(20), unique=True, nullable=False)
     password = db.Column(db.LargeBinary, nullable=False)
+    role = db.Column(db.String(20), nullable=False)
     first_name = db.Column(db.String(50), nullable=False)
     last_name = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(50), unique=True, nullable=False)
@@ -51,9 +52,10 @@ class users(UserMixin, db.Model):
     image = db.Column(db.String(40), nullable=False)
     def __repr__(self):
         return '<User %r>' % self.username
-    def __init__(self, username, password, first_name, last_name, email, date_of_birth, phone_number, street, city, state, zip_code, country, image):
+    def __init__(self, username, password, role, first_name, last_name, email, date_of_birth, phone_number, street, city, state, zip_code, country, image):
         self.username = username
         self.password = password
+        self.role = role
         self.first_name = first_name
         self.last_name = last_name
         self.email = email
@@ -101,16 +103,25 @@ class orders(db.Model):
 
 
 def create_app():
+    if os.path.exists('webApp/site.db'):
+        os.remove('webApp/site.db')
     db.create_all()
     l = ['splawik', 'wendka', 'przynenty', 'rzylki', 'akcesoria']
     for i in l:
         q = category(i)
         db.session.add(q)
         db.session.commit()
+    from datetime import date
+    from datetime import datetime
+    from datetime import timedelta
+    today = date.today()
+    today = datetime.combine(today, datetime.min.time())
+    today = today + timedelta(days=-7300)
+
+
+    q = users('admin', bcrypt.hashpw('adminadmin'.encode(), bcrypt.gensalt()), 'admin', 'admin', 'admin', 'email@email.email', today, 'phone', 'street', 'city', 'state', '02-222', 'country', 'image')
+    db.session.add(q)
+    db.session.commit()
 
 if __name__ == '__main__':
     create_app()
-
-#login - edgzoah haslo - dobra123
-#login - juki haslo - tomek9999@
-#login - twojstary - krulpolska 

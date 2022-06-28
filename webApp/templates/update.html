@@ -52,7 +52,7 @@ $(document).ready(function(){
   ff15.innerHTML += `<img class="zdjencie" src="{{url_for('static', filename=image)}}"></img>`;
   $('#name').val('{{prd.name}}');
   $('#category').val($('#category').children()['{{prd.category}}'-1].innerHTML);
-  $('#price').val('{{prd.price}}');
+  $('#price').val('{{ str(prd.price)[:str(prd.price).index(".")+3] }}');
   $('#description').val(`{{prd.description}}`);
   $('#quantity').val('{{prd.quantity}}');
 

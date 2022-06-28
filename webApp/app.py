@@ -1,7 +1,7 @@
 from datetime import timedelta
 from lib import *
 from settings import app, login_manager, db, email_validation
-from model import products, users, orders, category, chat
+from model import products, users, orders, category
 from forms import loginForm, registerForm, newProduct, addBalance, updateProduct, updateProfile, buyProduct
 
 @login_manager.user_loader  
@@ -71,7 +71,7 @@ def register():
   if request.method == 'POST' and form1.validate():
     image = uuid.uuid4()
     copyfile(os.path.join(app.config['UPLOAD_FOLDER'], 'picture_large.jpg'), os.path.join(app.config['UPLOAD_FOLDER'], str(image)))
-    u = users(username=form1.username.data, email=form1.email.data, password=bcrypt.hashpw((form1.password.data).encode(), bcrypt.gensalt()), first_name=form1.first_name.data, last_name=form1.last_name.data, date_of_birth=form1.date_of_birth.data, phone_number=form1.phone_number.data, street=form1.street.data, city=form1.city.data, state=form1.state.data, zip_code=form1.zip_code.data, country=form1.country.data, image=str(image))
+    u = users(username=form1.username.data, email=form1.email.data, password=bcrypt.hashpw((form1.password.data).encode(), bcrypt.gensalt()), first_name=form1.first_name.data, last_name=form1.last_name.data, date_of_birth=form1.date_of_birth.data, phone_number=form1.phone_number.data, street=form1.street.data, city=form1.city.data, state=form1.state.data, zip_code=form1.zip_code.data, country=form1.country.data, image=str(image), role='user')
     db.session.add(u)
     db.session.commit()
     try:
@@ -90,9 +90,7 @@ def balance():
     db.session.query(users).filter(users.id == current_user.get_id()).update({users.balance: users.balance+form1.balance.data})
     db.session.commit()
     flash('balans dodany ez')
-    return redirect(url_for('dashboard'))
-  else:
-    return render_template('404.html')
+  return redirect(url_for('dashboard'))
 
 
 @app.route('/dashboard', methods=['POST', 'GET'])
@@ -212,18 +210,17 @@ def update():
     return render_template('404.html')
   if cu is None:
     return render_template('404.html')
-  path = r'%s' % (os.path.join('images', cu.image),)
+  path = '%s' % (os.path.join('images', cu.image),)
   path = path.replace('\\', '/')
   if request.method == 'POST' and form.validate():
     if form.image.data is not None:
       form.image.data.save(os.path.join(app.config['UPLOAD_FOLDER'], cu.image))
     c = db.session.query(category.id).filter(category.category_name == form.category.data).first()
-    print(c)
     c = c[0]
     db.session.query(products).filter(products.uuid_id == str(request.args['product'])).update({products.name: form.name.data, products.category: c, products.price: form.price.data, products.description: form.description.data, products.quantity: form.quantity.data})
     db.session.commit()
     return redirect(url_for('dashboard'))
-  return render_template('update.html', prd=cu, form=form, image=path)
+  return render_template('update.html', prd=cu, form=form, image=path, str=str, index=index)
 
 @app.route('/profile_update', methods=['POST', 'GET'])
 @login_required
@@ -248,17 +245,16 @@ def profile_update():
 def buy(uid):
   form = buyProduct(request.form)
   if uid:
-    cu = db.session.query(products).filter(products.uuid_id == uid, products.isDeleted == 0).first()
+    cu = db.session.query(products.id, products.name, products.category, products.description, products.image, products.price, products.quantity, users.username, products.user).join(users).filter(products.uuid_id == uid, products.isDeleted == 0).first()
     if cu:
       address = current_user.get_address()
       if request.method == 'POST' and form.validate():
         if int(cu.user) == int(current_user.get_id()):
           flash('nie mozesz kupic swojego produktu :(')
           return redirect(url_for('buy', uid=uid))
-        if int(current_user.get_balance()) < int(cu.price):
+        if float(current_user.get_balance()) < float(cu.price)*form.quantity.data:
           flash('za malo kasy mordeczko :(')
           return redirect(url_for('buy', uid=uid))
-        db.session.query(users).filter(users.id == current_user.get_id()).update({users.balance: users.balance-cu.price*form.quantity.data})
         db.session.query(products).filter(products.id == cu.id).update({products.quantity: products.quantity-form.quantity.data})
         if cu.quantity >= 0:
           if cu.quantity == 0:
@@ -266,6 +262,7 @@ def buy(uid):
           else:
             order = orders(cu.id, current_user.get_id(), 'bought', datetime.now(), datetime.now()+timedelta(days=2), None, 'with account balance', form.quantity.data, form.kurier.data)
             db.session.add(order)
+          db.session.query(users).filter(users.id == current_user.get_id()).update({users.balance: users.balance-cu.price*form.quantity.data})
           db.session.commit()
           flash('zakup przebiegl pomyslnie :)')
           return redirect(url_for('dashboard'))
@@ -274,4 +271,15 @@ def buy(uid):
           return redirect(url_for('buy', uid=uid))
           
       return render_template('buy.html', prd=cu, adr=address, form=form, str=str, index=index)
+  return render_template('404.html')
+
+@app.route('/orders', methods=['POST', 'GET'])
+def orders_list():
+  if not current_user.is_authenticated:
+    return render_template('404.html')
+  if current_user.get_role() == 'admin':
+  # query = products.query.join(users).join(category).add_column(category.category_name).filter(products.isDeleted == 0).filter(users.username == username).all()
+
+    all_orders = orders.query.all()
+    return render_template('orders.html', orders=all_orders)
   return render_template('404.html')

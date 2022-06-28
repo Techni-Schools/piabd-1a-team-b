@@ -19,7 +19,7 @@ href="{{ url_for('static',filename='styles/buy.css') }}"
             <h4><span class="bolder"> Kategoria: </span>{{prd.category}}</h4>
             <h4><span class="bolder">Opis: </span> {{prd.description}}</h4>
             <h4><span class="bolder">Ilość: </span> {{prd.quantity}}</h4>
-            <h4><span class="bolder"> Sprzedaje: </span>{{prd.user}}</h4>
+            <h4><span class="bolder"> Sprzedaje: </span>{{prd.username}}</h4>
             <h4><span class="bolder">Cena: </span>{{str(prd.price)[:str(prd.price).index('.')+3]}}zł</h4>
             <img src="{{url_for('static', filename='images/'+prd.image)}}" style="height: 200px">
         </div>
