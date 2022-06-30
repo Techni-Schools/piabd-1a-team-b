@@ -25,8 +25,8 @@ class registerForm(Form):
 
 class newProduct(Form):
     name = StringField('Nazwa Produktu', [validators.Length(min=1)])
-    image = FileField('Zdjęcie', validators=[FileRequired(), FileAllowed(list(IMAGES), 'images only')])
-    category = SelectField('Kategoria', choices=['splawik', 'wendka', 'przynenty', 'rzylki', 'akcesoria'])
+    image = FileField('Zdjęcie', validators=[FileRequired(), FileAllowed(list(IMAGES), 'images only')], render_kw={'accept': "image/*"})
+    category = SelectField('Kategoria', choices=['splawik', 'wedka', 'przynety', 'zylki', 'akcesoria'])
     price = DecimalField('Cena', [validators.DataRequired(), validators.NumberRange(min=0, max=999)])
     description = TextAreaField('Opis')
     quantity = IntegerField('Ilość', [validators.DataRequired(), validators.NumberRange(min=1, max=999)])
@@ -37,7 +37,7 @@ class addBalance(Form):
 class updateProduct(Form):
     name = StringField('Nazwa Produktu', [validators.Length(min=1)])
     image = FileField('Zdjęcie', validators=[FileAllowed(list(IMAGES), 'images only')])
-    category = SelectField('Kategoria', choices=['splawik', 'wendka', 'przynenty', 'rzylki', 'akcesoria'])
+    category = SelectField('Kategoria', choices=['splawik', 'wedka', 'przynety', 'zylki', 'akcesoria'])
     price = DecimalField('Cena', [validators.DataRequired(), validators.NumberRange(min=0, max=99999)])
     description = TextAreaField('Opis')
     quantity = IntegerField('Ilość', [validators.DataRequired()])

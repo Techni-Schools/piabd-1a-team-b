@@ -106,7 +106,7 @@ def create_app():
     if os.path.exists('webApp/site.db'):
         os.remove('webApp/site.db')
     db.create_all()
-    l = ['splawik', 'wendka', 'przynenty', 'rzylki', 'akcesoria']
+    l = ['splawik', 'wedka', 'przynety', 'zylki', 'akcesoria']
     for i in l:
         q = category(i)
         db.session.add(q)
